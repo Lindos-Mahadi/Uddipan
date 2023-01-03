@@ -1,6 +1,0 @@
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\bin\Debug\Utility.dll
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\bin\Debug\Utility.pdb
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\obj\Debug\Utility.csproj.AssemblyReference.cache
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\obj\Debug\Utility.dll
-D:\Developments\GC\GrameenCommunications\Uddipan\Source\Utility\obj\Debug\Utility.pdb

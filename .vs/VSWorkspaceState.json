@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Source",
+    "\\Source\\gBanker.Web"
   ],
-  "SelectedNode": "\\D:\\Developments\\GC\\GrameenCommunications\\Uddipan",
+  "SelectedNode": "\\Source\\gBanker.Web\\Web.config",
   "PreviewInSolutionExplorer": false
 }
