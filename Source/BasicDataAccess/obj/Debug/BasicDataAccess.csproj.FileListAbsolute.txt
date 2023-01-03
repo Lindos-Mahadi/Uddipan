@@ -1,0 +1,9 @@
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\bin\Debug\BasicDataAccess.dll
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\bin\Debug\BasicDataAccess.pdb
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\bin\Debug\Utility.dll
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\bin\Debug\Utility.pdb
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\obj\Debug\BasicDataAccess.csproj.AssemblyReference.cache
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\obj\Debug\BasicDataAccess.csproj.CoreCompileInputs.cache
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\obj\Debug\BasicDataAccess.csproj.CopyComplete
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\obj\Debug\BasicDataAccess.dll
+D:\Developments\GC\GrameenCommunications\Uddipan\Source\BasicDataAccess\obj\Debug\BasicDataAccess.pdb
