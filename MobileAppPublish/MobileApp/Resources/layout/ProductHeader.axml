@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <TableLayout
+      android:layout_width="fill_parent"
+      android:padding="1dp"
+      android:layout_height="wrap_content">
+
+    <TableRow
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+                android:id="@+id/tblRwHeader"
+             >
+      <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="2dp"
+           android:textSize="9dp"
+            android:layout_weight="1"
+           android:text="Action"
+           android:textColor="#DEDEDC" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:textSize="9dp"
+          android:layout_weight="1"
+          android:text="Member"
+          android:textColor="#0000dd" />
+      <TextView
+         android:layout_height="wrap_content"
+         android:paddingLeft="5dp"
+         android:layout_marginRight="2dp"
+         android:id="@+id/txtProductHeader"
+         android:textSize="9dp"
+         android:layout_weight="1"
+         android:text="Product"
+         android:textColor="#0000dd"
+          android:textStyle="bold" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:text="Principal"
+        android:textColor="#0000dd"
+        android:textSize="9dp"         />
+      <TextView
+           android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginRight="10dp"
+         android:layout_weight="1"
+         android:text="S Charge"
+         android:textColor="#0000dd"
+         android:textSize="9dp" />
+      <TextView
+           android:layout_width="80dp"
+         android:layout_height="wrap_content"
+           android:paddingLeft="5dp"
+         android:layout_marginRight="5dp"
+         android:layout_weight="1"
+         android:text="GS"
+         android:textColor="#0000dd"
+         android:textSize="9dp"
+          />
+      <TextView
+          android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+          android:paddingLeft="5dp"
+        android:layout_weight="1"
+        android:text="VS"
+        android:textColor="#0000dd"
+        android:textSize="9dp"
+         />
+      <TextView
+           android:layout_width="80dp"
+         android:layout_height="wrap_content"
+         android:layout_marginRight="5dp"
+           android:paddingLeft="5dp"
+         android:textSize="9dp"
+         android:layout_weight="1"
+         android:text="LTS"
+         android:textColor="#0000dd" />
+      <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="2dp"
+        android:layout_weight="1"
+        android:textSize="9dp"
+      android:text="Inst.#"
+      android:textColor="#0000dd" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+          android:layout_weight="1"
+          android:textSize="9dp"
+        android:text="PBal"
+        android:textColor="#0000dd" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+          android:layout_weight="1"
+          android:textSize="9dp"
+        android:text="SBal"
+        android:textColor="#0000dd" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+          android:layout_weight="1"
+          android:textSize="9dp"
+        android:text="TBal"
+        android:textColor="#0000dd" />
+      <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="2dp"
+         android:layout_weight="1"
+         android:textSize="9dp"
+       android:text="NewDue"
+       android:textColor="#FF0000" />
+    </TableRow>
+  </TableLayout>
+    </LinearLayout>

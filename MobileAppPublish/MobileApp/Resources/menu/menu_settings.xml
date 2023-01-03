@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:title="Settings">
+    <menu>
+      <item android:id="@+id/syncMasterData"  android:icon="@drawable/Image_download" android:title="Download Master Data" />
+      <item android:id="@+id/setupUrl" android:icon="@drawable/Image_Url" android:title="Setup Url" />
+      <item android:id="@+id/aboutgBanker" android:icon="@drawable/Image_Url" android:title="About" />
+      <item android:id="@+id/exit" android:icon="@drawable/Image_Exit" android:title="Exit" />
+    </menu>
+  </item>
+</menu>

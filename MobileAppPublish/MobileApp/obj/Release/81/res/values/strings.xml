@@ -1,0 +1,1 @@
+<resources><string name="Hello">Hello World, Click Me!</string><string name="ApplicationName">PMS</string><string name="Option_prompt">Choose an OPtion</string><string name="scanned_info">Scanned Information</string><string name="scan">Scan</string><string-array name="Option_array"><item>net</item><item>tech</item><item>org</item></string-array></resources>

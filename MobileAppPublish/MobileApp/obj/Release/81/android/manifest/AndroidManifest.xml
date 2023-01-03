@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="gBankerPMS.gBankerPMS" android:versionName="118.6" android:installLocation="auto" android:versionCode="8">
+  <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="28" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <application android:label="gBanker" android:icon="@drawable/ic_launcher" android:name="android.app.Application" android:allowBackup="true">
+    <activity android:label="Read Member Passbook" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.BarcodeAutoReadActivity" />
+    <activity android:label="Collection" android:theme="@android:style/Theme.Light" android:name="crc648c8af281dd703c56.CollectionActivity" />
+    <activity android:label="Collection" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:windowSoftInputMode="stateUnspecified|adjustPan" android:name="crc648c8af281dd703c56.CollectionNewActivity" />
+    <activity android:label="Collection" android:screenOrientation="userLandscape" android:theme="@style/Theme.DesignDemo" android:windowSoftInputMode="stateUnspecified|adjustPan" android:name="crc648c8af281dd703c56.CollectionNewWithGrid" />
+    <activity android:label="Collections" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.CollectionReportActivity" />
+    <activity android:label="Collection Summary" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.CollectionSummaryActivity" />
+    <activity android:label="Back Data" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.DeletedCollectionActivity" />
+    <activity android:label="Download New Savings" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.DownloadNewSavingsActivity" />
+    <activity android:label="Loan Proposal" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.LoanProposalActivity" />
+    <activity android:icon="@drawable/icon" android:label="Login - gBanker" android:noHistory="true" android:screenOrientation="portrait" android:theme="@android:style/Theme.Light" android:name="crc648c8af281dd703c56.LoginActivity" />
+    <activity android:icon="@drawable/icon" android:label="gBanker" android:theme="@android:style/Theme.Light" android:name="crc648c8af281dd703c56.MainActivity" />
+    <activity android:label="GB PMS - Mobile Home" android:screenOrientation="portrait" android:theme="@android:style/Theme.Light" android:name="crc648c8af281dd703c56.MobileHomeActivity" />
+    <activity android:label="Select Office" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.SelectOffice" />
+    <activity android:label="Setup Organization" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.SetupOrganizationActivity" />
+    <activity android:label="Special Collection" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:windowSoftInputMode="stateUnspecified|adjustPan" android:name="crc648c8af281dd703c56.SpecialCollectionActivity" />
+    <activity android:label="Special Collection" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:windowSoftInputMode="stateUnspecified|adjustPan" android:name="crc648c8af281dd703c56.SpecialCollectionActivityParametered" />
+    <activity android:label="Emergency Export" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.ExportCollectionActivity" />
+    <activity android:label="Upload Collections" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.SyncCollectionActivity" />
+    <activity android:label="Sync Loan Proposal" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.SyncLoanProposalActivity" />
+    <activity android:label="Download Master Data" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.SyncMasterDataActivity" />
+    <activity android:label="Home" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.UserHomeActivity" />
+    <activity android:label="gBanker Plus" android:noHistory="true" android:screenOrientation="portrait" android:theme="@android:style/Theme.Light" android:name="crc648c8af281dd703c56.WelcomeActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:label="Withdrawal" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:windowSoftInputMode="stateUnspecified|adjustPan" android:name="crc648c8af281dd703c56.WithdrawalActivity" />
+    <activity android:label="Withdrawals" android:screenOrientation="portrait" android:theme="@style/Theme.DesignDemo" android:name="crc648c8af281dd703c56.WithdrawalReportActivity" />
+    <activity android:configChanges="keyboardHidden|orientation|screenLayout" android:label="Scanner" android:name="crc6480997b3ef81bf9b2.ZxingActivity" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="1999999999" android:authorities="gBankerPMS.gBankerPMS.mono.MonoRuntimeProvider.__mono_init__" />
+    <meta-data android:name="android.support.VERSION" android:value="25.4.0" />
+  </application>
+</manifest>

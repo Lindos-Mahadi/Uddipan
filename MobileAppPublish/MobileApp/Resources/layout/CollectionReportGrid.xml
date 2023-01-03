@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_selector"
+    android:orientation="vertical"
+    android:padding="2dp">
+  <TableLayout
+      android:layout_width="fill_parent"
+      android:padding="2dp"
+      android:layout_height="wrap_content">
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+      <TextView
+        android:id="@+id/lblMember"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="1dp"
+        android:layout_weight="3"
+        android:text="Member"
+        android:textColor="#0000dd"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+      <TextView
+          android:id="@+id/lblLoan"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="1dp"
+          android:layout_weight="1.75"
+          android:text="Loan"
+          android:textColor="#0000dd"
+          android:textSize="12dp"
+           />
+      <TextView
+       android:id="@+id/lblSavings"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="1dp"
+       android:layout_weight="1.50"
+       android:text="Savings"
+       android:textColor="#0000dd"
+       android:textSize="12dp"
+       />
+       <TextView
+       android:id="@+id/lblTotal"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="1dp"
+       android:layout_weight="1.75"
+       android:text="Total"
+       android:textColor="#0000dd"
+       android:textSize="12dp" />
+      <TextView
+         android:id="@+id/lblDue"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="1.50"
+         android:text="Due"
+         android:textColor="#0000dd"
+         android:textSize="12dp" />
+      <ImageView
+      android:id="@+id/lr_deleteBtnCollectionReport"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:src="@drawable/delete"
+      android:layout_alignParentRight="true"
+      android:clickable="true" />
+      <ImageView
+      android:id="@+id/lr_KDetailsBtnCollectionReport"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:src="@drawable/edit"
+      android:layout_alignParentRight="true"
+      android:clickable="true" />
+      
+    </TableRow>
+  </TableLayout>
+
+</RelativeLayout>
+

@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKashAPI", "BKashAPI\BKashAPI.csproj", "{E15F4ECD-7392-4DB7-9F14-E8CB2B89B1EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.ResponseModel", "API.ResponseModel\API.ResponseModel.csproj", "{8AB87E8F-48CC-45B9-86A0-C7404FAE25EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.DataModel", "API.DataModel\API.DataModel.csproj", "{E40E0FD7-76AE-4866-8B3B-8F41EA731329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Repository", "API.Repository\API.Repository.csproj", "{BC5FDCB0-97F6-4263-827A-AE31C39155A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E15F4ECD-7392-4DB7-9F14-E8CB2B89B1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15F4ECD-7392-4DB7-9F14-E8CB2B89B1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15F4ECD-7392-4DB7-9F14-E8CB2B89B1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15F4ECD-7392-4DB7-9F14-E8CB2B89B1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB87E8F-48CC-45B9-86A0-C7404FAE25EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB87E8F-48CC-45B9-86A0-C7404FAE25EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB87E8F-48CC-45B9-86A0-C7404FAE25EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB87E8F-48CC-45B9-86A0-C7404FAE25EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40E0FD7-76AE-4866-8B3B-8F41EA731329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40E0FD7-76AE-4866-8B3B-8F41EA731329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40E0FD7-76AE-4866-8B3B-8F41EA731329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40E0FD7-76AE-4866-8B3B-8F41EA731329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC5FDCB0-97F6-4263-827A-AE31C39155A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC5FDCB0-97F6-4263-827A-AE31C39155A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC5FDCB0-97F6-4263-827A-AE31C39155A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC5FDCB0-97F6-4263-827A-AE31C39155A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.192.192.119:8080/tfs/bkashapi
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = API.DataModel\\API.DataModel.csproj
+		SccProjectName1 = API.DataModel
+		SccLocalPath1 = API.DataModel
+		SccProjectUniqueName2 = API.Repository\\API.Repository.csproj
+		SccProjectName2 = API.Repository
+		SccLocalPath2 = API.Repository
+		SccProjectUniqueName3 = API.ResponseModel\\API.ResponseModel.csproj
+		SccProjectName3 = API.ResponseModel
+		SccLocalPath3 = API.ResponseModel
+		SccProjectUniqueName4 = BKashAPI\\BKashAPI.csproj
+		SccProjectName4 = BKashAPI
+		SccLocalPath4 = BKashAPI
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,350 @@
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\MobileApp.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\MobileApp.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\gBankerPMS.gBankerPMS.apk
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\gBankerPMS.gBankerPMS-Signed.apk
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Newtonsoft.Json.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.Design.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v4.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v7.AppCompat.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v7.RecyclerView.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Newtonsoft.Json.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csproj.CoreCompileInputs.cache
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csproj.CopyComplete
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\MobileApp.dll
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\MobileApp.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\bin\gBankerPMS.gBankerPMS.apk
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collection.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\loanproposal.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\mobilehome.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\custommessage.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\selectoffice.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\syncmasterdata.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\syncloanproposal.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\synccollection.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionsummary.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\setuporganizationurl.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\welcome.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\userhome.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\login.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionnew.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\specialcollection.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionreport.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\withdrawal.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\withdrawalreport.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionnewwithgrid.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectoinnewgvlayout.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\productchild.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\productheader.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\main.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\values\strings.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\icon.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\bullet_toggle_minus.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\bullet_toggle_plus.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\buttonsigninstyle.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\disabledstyle.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\edit.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\edittextstyle.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\flag.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\flagyellow.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\healthstatus.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\information.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\layout_bg.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_item_selector.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\login.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\logout.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\menustyle.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\minus.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\nirogicon.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\plus.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\progressbarstyle.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\rating_custom_bar.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\reload.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_blank.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_filled.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_off.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star2.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\star3.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\tw_btn_add.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\tw_btn_delete.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\syncproposalgridholder.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_selector_alternate.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_selector.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\delete.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_alternate.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_hover.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_hover_alternate.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_bg.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\input_shape.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\border.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\button_shape.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\cell_shape.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\loancollectionproductgridholder.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\synccollectiongridholder.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionsummarygrid.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\welcome.jpg
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\proposal.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\summary.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\synccollection.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\menu\menu.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\menu\option_menu.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\menu\popup_menu.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\iconmenu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\icon_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\values\styles.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\values\colors.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_dashboard.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_discuss.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_done.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_event.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_forum.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_headset.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\menu\menu_settings.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_dashboard.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_discuss.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_done.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_event.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_forum.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_headset.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_dashboard.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_discuss.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_done.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_event.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_forum.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_headset.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_dashboard.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_discuss.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_done.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_event.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_forum.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_headset.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxxhdpi\ic_done.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxxhdpi\ic_menu.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_exit.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_up_download.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_seleetion.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_download.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_url.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_collection.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\userhome.jpg
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_home.png
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionreportgrid.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\spiner_selectors.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\loancollectiongridnew.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\drawable\edittextstylecollection.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\res\layout\downloadnewsavings.xml
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\R.cs.flag
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\R.txt
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\uploadflags.txt
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csprojAssemblyReference.cache
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Mono.Android.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\mscorlib.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.Core.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.Net.Http.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.Xml.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.Xml.Linq.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.ComponentModel.Composition.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.Runtime.Serialization.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\System.ServiceModel.Internals.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Microsoft.CSharp.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\Mono.Security.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\Mono.Android.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\mscorlib.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Core.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Net.Http.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Xml.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Xml.Linq.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.ComponentModel.Composition.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Runtime.Serialization.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\System.ServiceModel.Internals.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\Microsoft.CSharp.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\Mono.Security.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\linksrc\MobileApp.dll.mdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\bin\Release\MobileApp.dll.mdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\MobileApp.dll.mdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\Microsoft.CSharp.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\Mono.Android.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\Mono.Security.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\mscorlib.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.Core.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.Net.Http.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.Runtime.Serialization.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.Xml.Linq.pdb
+D:\MahatabDEV\MobileAppPublish\MobileApp\obj\Release\android\assets\System.Xml.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\MobileApp.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\MobileApp.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\gBankerPMS.gBankerPMS.apk
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\gBankerPMS.gBankerPMS-Signed.apk
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Newtonsoft.Json.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.Design.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v4.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v7.AppCompat.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Xamarin.Android.Support.v7.RecyclerView.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Newtonsoft.Json.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csprojAssemblyReference.cache
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csproj.CoreCompileInputs.cache
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\gBankerPMS.csproj.CopyComplete
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\MobileApp.dll
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\MobileApp.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\android\bin\gBankerPMS.gBankerPMS.apk
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collection.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\loanproposal.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\mobilehome.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\custommessage.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\selectoffice.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\syncmasterdata.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\syncloanproposal.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\synccollection.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionsummary.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\setuporganizationurl.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\welcome.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\userhome.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\login.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionnew.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\specialcollection.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionreport.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\withdrawal.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\withdrawalreport.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionnewwithgrid.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectoinnewgvlayout.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\productchild.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\productheader.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\main.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\values\strings.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\icon.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\bullet_toggle_minus.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\bullet_toggle_plus.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\buttonsigninstyle.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\disabledstyle.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\edit.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\edittextstyle.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\flag.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\flagyellow.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\healthstatus.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\information.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\layout_bg.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_item_selector.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\login.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\logout.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\menustyle.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\minus.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\nirogicon.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\plus.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\progressbarstyle.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\rating_custom_bar.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\reload.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_blank.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_filled.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star_off.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star2.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\star3.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\tw_btn_add.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\tw_btn_delete.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\syncproposalgridholder.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_selector_alternate.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\list_selector.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\delete.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_alternate.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_hover.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg_hover_alternate.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_bg.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\input_shape.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\gradient_bg.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\border.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\button_shape.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\cell_shape.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\loancollectionproductgridholder.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\synccollectiongridholder.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionsummarygrid.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\welcome.jpg
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\proposal.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\summary.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\synccollection.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\menu\menu.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\menu\option_menu.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\menu\popup_menu.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\iconmenu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\icon_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\values\styles.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\values\colors.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_dashboard.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_discuss.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_done.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_event.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_forum.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_headset.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-hdpi\ic_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\menu\menu_settings.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_dashboard.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_discuss.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_done.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_event.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_forum.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_headset.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-mdpi\ic_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_dashboard.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_discuss.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_done.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_event.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_forum.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_headset.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xhdpi\ic_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_dashboard.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_discuss.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_done.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_event.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_forum.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_headset.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxhdpi\ic_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxxhdpi\ic_done.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable-xxxhdpi\ic_menu.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_exit.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_up_download.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_seleetion.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_download.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_url.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_collection.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\userhome.jpg
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\image_home.png
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\collectionreportgrid.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\spiner_selectors.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\loancollectiongridnew.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\drawable\edittextstylecollection.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\res\layout\downloadnewsavings.xml
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\R.cs.flag
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\R.txt
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\uploadflags.txt
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Microsoft.CSharp.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Mono.Android.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\Mono.Security.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\mscorlib.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.ComponentModel.Composition.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.Core.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.Net.Http.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.Runtime.Serialization.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.ServiceModel.Internals.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.Xml.Linq.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\bin\Release\System.Xml.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\Mono.Android.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\mscorlib.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Core.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Net.Http.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Xml.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Xml.Linq.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.ComponentModel.Composition.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.Runtime.Serialization.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\System.ServiceModel.Internals.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\Microsoft.CSharp.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\Mono.Security.pdb
+F:\khalid\MobileAppPublish - Copy\MobileAppPublish\MobileApp\obj\Release\linksrc\MobileApp.dll.mdb

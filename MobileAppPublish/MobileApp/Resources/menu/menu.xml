@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/nav_home"
+      android:icon="@drawable/Image_Home"
+      android:title="Home" />
+  </group>
+  <item android:title="Transactions">
+    <menu>
+      <item android:id="@+id/office" android:icon="@drawable/Image_Seleetion" android:title="Office" />
+      <item android:id="@+id/collectionEntry" android:icon="@drawable/Image_Collection" android:title="Collection" />
+      <item android:id="@+id/collectionEntryGrid" android:icon="@drawable/Image_Collection" android:title="Collection(New)" />
+      <item android:id="@+id/specialCollectionEntry" android:icon="@drawable/synccollection" android:title="Sp. Collection" />
+      <item android:id="@+id/withdrawalEntry" android:icon="@drawable/synccollection" android:title="Withdrawal" />
+      <!--<item android:id="@+id/proposalEntry" android:icon="@drawable/proposal" android:title="Proposal" />-->      
+    </menu>
+  </item>
+  <item android:title="Reports">
+    <menu>
+      <item android:id="@+id/rptCenterWiseCollectionList" android:icon="@drawable/summary" android:title="Collection List" />
+       <item android:id="@+id/rptCenterWiseWithdrawalList" android:icon="@drawable/summary" android:title="Withdrawal List" />
+      <item android:id="@+id/summary" android:icon="@drawable/summary" android:title="Coll. Summary" />      
+    </menu>
+  </item>
+  <item android:title="Upload Transaction">
+    <menu>
+      <item android:id="@+id/syncCollection" android:icon="@drawable/synccollection" android:title="Up Collection" />
+      <item android:id="@+id/exportCollection" android:icon="@drawable/synccollection" android:title="Emergency Export" />
+      <item android:id="@+id/DeletedCollection" android:icon="@drawable/synccollection" android:title="Back Data" />
+
+      <!-- <item android:id="@+id/syncProposal" android:icon="@drawable/Image_UP_download" android:title="Proposal" /> -->
+    </menu>
+  </item>
+  <item android:title="Online Entries">
+    <menu>
+      <item android:id="@+id/memberRegistrationWeb" android:icon="@drawable/Image_Seleetion" android:title="Member Create" />
+      <item android:id="@+id/savingsAccOpeningWeb" android:icon="@drawable/proposal" android:title="SA Opening" />
+      <item android:id="@+id/proposalWeb" android:icon="@drawable/Image_Collection" android:title="Proposal" />
+      <item android:id="@+id/miscCollectionWeb" android:icon="@drawable/synccollection" android:title="Misc. Collection" />
+      <item android:id="@+id/subsidiaryLedgerWeb" android:icon="@drawable/proposal" android:title="Member Balance" />
+      <item android:id="@+id/topSheetWeb" android:icon="@drawable/proposal" android:title="Top Sheet" />
+      <item android:id="@+id/loanLedgerWeb" android:icon="@drawable/proposal" android:title="Loan Ledger" />
+      <item android:id="@+id/savingsLedgerWeb" android:icon="@drawable/proposal" android:title="Savings Ledger" />
+    </menu>
+  </item>
+  <item android:title="Online Entries">
+    <menu>
+      <item android:id="@+id/barcodeReader" android:icon="@drawable/Image_Seleetion" android:title="Auto Barcode Read" />
+      
+    </menu>
+  </item>
+  
+  <item android:title="Settings">
+    <menu>
+      <item android:id="@+id/syncMasterData"  android:icon="@drawable/Image_download" android:title="Download Master Data" />
+      <item android:id="@+id/syncNewSavings"  android:icon="@drawable/Image_download" android:title="Download Savings" />
+      <item android:id="@+id/setupUrl" android:icon="@drawable/Image_Url" android:title="Setup Url" />
+       <item android:id="@+id/aboutgBanker" android:icon="@drawable/Image_Url" android:title="About" />
+      <item android:id="@+id/exit" android:icon="@drawable/Image_Exit" android:title="Exit" />
+    </menu>
+  </item>
+</menu>

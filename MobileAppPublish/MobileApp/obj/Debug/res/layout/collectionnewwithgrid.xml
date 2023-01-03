@@ -1,0 +1,133 @@
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:fitsSystemWindows="true" android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"><android.support.v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="?attr/actionBarSize" android:background="#33B86C" app:popupTheme="@style/ThemeOverlay.AppCompat.Light" app:layout_scrollFlags="scroll|enterAlways" /><android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout" android:layout_height="match_parent" android:fitsSystemWindows="true" android:layout_width="match_parent"><!--Content will go here...--><LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="#DEDEDC" android:weightSum="100" android:gravity="center_horizontal" android:minWidth="25px" android:minHeight="25px"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center_vertical" android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:orientation="vertical"><TableLayout android:layout_width="fill_parent" android:padding="3dp" android:layout_height="wrap_content"><TableRow android:layout_width="fill_parent" android:layout_height="wrap_content"><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="Samity:" android:textColor="#000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/spnCenterCollection" android:background="@drawable/border" android:spinnerMode="dropdown" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="TotM: " android:id="@+id/txtTotalMember" android:textColor="#000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginLeft="3dp" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/txtTotalCollectionMember" android:text="ColMem: " android:textColor="#FF0000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="RecL: " android:id="@+id/txtTotalRecoverable" android:textColor="#000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="ColL: " android:id="@+id/txtTotalLoanCollection" android:textColor="#FF0000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="GS: " android:id="@+id/txtTotalGSCollection" android:textColor="#FF0000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="2dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="VS: " android:id="@+id/txtTotalVSCollection" android:textColor="#FF0000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="LTS: " android:id="@+id/txtTotalLTSCollection" android:textColor="#FF0000" android:textSize="10dp" android:layout_gravity="left" android:layout_marginRight="2dp" android:layout_marginTop="5dp" /></TableRow></TableLayout></LinearLayout><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center_vertical" android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:orientation="vertical"><!--<TableLayout
+         android:layout_width="fill_parent"
+         android:padding="3dp"
+         android:layout_height="wrap_content">
+          <TableRow
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content">
+
+            <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="2dp"
+                 android:textSize="9dp"
+                  android:layout_weight="1"
+                 android:text="Action"
+                 android:textColor="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:textSize="9dp"
+                android:layout_weight="1"
+                android:text="Member"
+                android:textColor="#000" />
+            <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="2dp"
+               android:textSize="9dp"
+               android:layout_weight="1"
+               android:text="Product"
+               android:textColor="#000" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="10dp"
+              android:layout_weight="1"
+              android:text="Principal"
+              android:textColor="#0000dd"
+              android:textSize="9dp"
+              android:textStyle="bold" />
+            <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="10dp"
+               android:layout_weight="1"
+               android:text="S Charge"
+               android:textColor="#0000dd"
+               android:textSize="9dp"
+               android:textStyle="bold" />
+            <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="10dp"
+               android:layout_weight="1"
+               android:text="GS"
+               android:textColor="#0000dd"
+               android:textSize="9dp"
+               android:textStyle="bold" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="10dp"
+              android:layout_weight="1"
+              android:text="VS"
+              android:textColor="#0000dd"
+              android:textSize="9dp"
+              android:textStyle="bold" />
+            <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="2dp"
+               android:textSize="9dp"
+               android:layout_weight="1"
+               android:text="LTS"
+               android:textColor="#000" />
+
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+              android:layout_weight="1"
+              android:textSize="9dp"
+            android:text="Inst.#"
+            android:textColor="#000" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:textSize="9dp"
+              android:text="PBal"
+              android:textColor="#000" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:textSize="9dp"
+              android:text="SBal"
+              android:textColor="#000" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:textSize="9dp"
+              android:text="TBal"
+              android:textColor="#000" />
+            <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginRight="2dp"
+               android:layout_weight="1"
+               android:textSize="9dp"
+             android:text="NewDue"
+             android:textColor="#FF0000" />
+          </TableRow>
+        </TableLayout>--><!--<ListView 
+           android:id="@+id/loanProductCollectionListGrid"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/LoanCollectionGridNew"
+           android:layout_marginTop="0dp"
+           android:layout_weight="1"
+           android:clickable="true"
+           android:divider="#b5b5b5"
+           android:dividerHeight="1dp"
+           android:listSelector="@drawable/list_selector"
+           android:descendantFocusability="afterDescendants"
+           android:focusable="false" />--><ExpandableListView android:id="@+id/LoanCollectionGridNew" android:layout_height="match_parent" android:layout_width="match_parent" android:layout_margin="15dp" /></LinearLayout></LinearLayout><!--End content section--><android.support.design.widget.NavigationView android:id="@+id/nav_view" android:layout_height="match_parent" android:layout_width="230dp" android:layout_gravity="start" android:fitsSystemWindows="true" app:menu="@menu/menu" /></android.support.v4.widget.DrawerLayout></LinearLayout>

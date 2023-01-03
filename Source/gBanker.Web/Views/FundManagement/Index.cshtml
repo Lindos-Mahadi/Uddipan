@@ -1,0 +1,362 @@
+﻿@model gBanker.Web.ViewModels.FundLoanViewModel
+@{
+    ViewBag.Title = "Fund Loan Details";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+ 
+<script type="text/javascript">
+
+    const fundManagementManager = {
+        init: function () {
+            //this.initDatepicker();
+        },
+        initDatepicker: function () {
+            $("#grid .datepicker_mc").datepicker({
+                dateFormat: "dd-MM-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-10:+0'
+            });
+        },
+        initFundCalculation: function () {
+            //    $("#grid .fundCalculation").each(function (index, item) {
+            //        var value1 = $(this).closest('tr').children('td:eq(1)').find("#loanInstallmentAmount").val();
+            //        var value2 = $(this).closest('tr').children('td:eq(2)').find("#ServiceCharge").val();
+            //        $(this).closest('tr').children('td:eq(3)').find(".totalPayableAmount").text(parseInt(value1) + parseInt(value2));
+            //    });
+
+            $("#grid .fundCalculation").on('blur', function () {
+                let totalFundAmount = 0;
+                let $parentTr = $(this).closest('tr');
+
+                $parentTr.find(".fundCalculation").each(function () {
+                    try {
+                        let fundAmount = $(this).val();
+                        if (fundAmount && fundAmount.trim().length > 0 && parseInt(fundAmount) > 0) {
+                            totalFundAmount = totalFundAmount + parseInt(fundAmount);
+                        }
+                    }
+                    catch (err) {
+                        totalFundAmount = 0;
+                    }
+                });
+                console.log(totalFundAmount);
+                $parentTr.find('.totalPayableAmount').val(totalFundAmount);
+            })
+        }
+    }
+
+    $(document).ready(function () {
+        $('.showbtnUpdate').hide();
+        fundManagementManager.init();
+        $("#FundLoanCode").val();
+        $("#PrincipalAmount").val();
+        $("#LoanSanctionNo").val();
+        $("#LoanSanctionTerm").val();
+        $("#LoanSanctionApproveDate").val();
+        $("#LoanDisbursementDate").val();
+        $("#DisbursedAmount").val();
+        $("#InterestRate").val();
+        $("#LoanDuration").val();
+        $("#GracePeriod").val();
+        $("#TotalInstallmentNo").val();
+
+        $("#LoanSanctionApproveDate").datepicker(
+            {
+                dateFormat: "dd-M-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-10:+0'
+            });
+        $("#LoanDisbursementDate").datepicker(
+            {
+                dateFormat: "dd-M-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-10:+0'
+            });
+        $("#installmentDate").datepicker(
+            {
+                dateFormat: "dd-M-yy",
+                showAnim: "scale",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-10:+0'
+            });
+        $("#btnPreview").click(function () {
+            var FundLoanCode = $("#FundLoanCode").val();
+            var PrincipalAmount = $("#PrincipalAmount").val();
+            var LoanSanctionNo = $("#LoanSanctionNo").val();
+            var LoanSanctionTerm = $("#LoanSanctionTerm").val();
+            var LoanSanctionApproveDate = $("#LoanSanctionApproveDate").val();
+            var LoanDisbursementDate = $("#LoanDisbursementDate").val();
+            var DisbursedAmount = $("#DisbursedAmount").val();
+            var InterestRate = $("#InterestRate").val();
+            var LoanDuration = $("#LoanDuration").val();
+            var GracePeriod = $("#GracePeriod").val();
+            var TotalInstallmentNo = $("#TotalInstallmentNo").val();
+
+            var url = '/FundManagement/Preview?FundLoanCode=' + FundLoanCode + '&PrincipalAmount=' + PrincipalAmount + '&LoanSanctionNo=' + LoanSanctionNo + '&LoanSanctionTerm=' + LoanSanctionTerm + '&LoanSanctionApproveDate=' + LoanSanctionApproveDate + '&LoanDisbursementDate=' + LoanDisbursementDate + '&DisbursedAmount=' + DisbursedAmount + '&InterestRate=' + InterestRate + '&LoanDuration=' + LoanDuration + '&GracePeriod=' + GracePeriod + '&TotalInstallmentNo=' + TotalInstallmentNo;
+            window.open(url, 'mywindow','fullscreen=yes, scrollbars=auto');
+        });
+    });
+
+    function LoadLoanManagementData() {
+        $('.showbtnUpdate').show();
+        var FundLoanCode = $("#FundLoanCode").val();
+        var PrincipalAmount = $("#PrincipalAmount").val();
+        var LoanSanctionNo = $("#LoanSanctionNo").val();
+        var LoanSanctionTerm = $("#LoanSanctionTerm").val();
+        var LoanSanctionApproveDate = $("#LoanSanctionApproveDate").val();
+        var LoanDisbursementDate = $("#LoanDisbursementDate").val();
+        var DisbursedAmount = $("#DisbursedAmount").val();
+        var InterestRate = $("#InterestRate").val();
+        var LoanDuration = $("#LoanDuration").val();
+        var GracePeriod = $("#GracePeriod").val();
+        var TotalInstallmentNo = $("#TotalInstallmentNo").val();
+
+        if (FundLoanCode != "" && PrincipalAmount != "" && LoanSanctionNo != "" && LoanSanctionTerm != "" && LoanSanctionApproveDate != "" && LoanDisbursementDate != "" && DisbursedAmount != "" &&
+            InterestRate != "" && LoanDuration != "" && GracePeriod != "" && TotalInstallmentNo != "") {
+
+            var fundLoanObject = {
+                FundLoanCode: FundLoanCode,
+                PrincipalAmount: PrincipalAmount,
+                LoanSanctionNo: LoanSanctionNo,
+                LoanSanctionTerm: LoanSanctionTerm,
+                LoanSanctionApproveDate: LoanSanctionApproveDate,
+                LoanDisbursementDate: LoanDisbursementDate,
+                DisbursedAmount: DisbursedAmount,
+                InterestRate: InterestRate,
+                LoanDuration: LoanDuration,
+                GracePeriod: GracePeriod,
+                TotalInstallmentNo: TotalInstallmentNo
+            }
+
+            $('#grid').jtable({
+                paging: true,
+                pageSize: 999999,
+                sorting: false,
+                actions: {
+                    listAction: function (postData, jtParams) {
+                        return $.Deferred(function ($dfd) {
+                            $.ajax({
+                                url: '/FundManagement/GetFundManagementDetails?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting, /*+ '&fundLoanObject=' + fundLoanObject,*/
+                                type: 'POST',
+                                dataType: 'json',
+                                data: postData,
+                                success: function (data) {
+                                    $dfd.resolve(data);
+
+                                    //init Datepicker
+                                    fundManagementManager.initDatepicker();
+
+                                    //init fund calculation
+                                    fundManagementManager.initFundCalculation();
+                                },
+                                error: function () {
+                                    $dfd.reject();
+                                }
+                            });
+                        });
+                    }
+                },
+                fields: {
+                    FundLoanID: {
+                        key: true,
+                        list: false,
+                        create: false,
+                        edit: false
+                    },
+                    NoOfInstallment: {
+                        title: 'Installment No',
+                        width: '5%',
+                        create: false,
+                        edit: false
+                    },
+                    LoanInstallmentAmount: {
+                        title: 'Payable Principal Amount',
+                        create: false,
+                        edit: true,
+                        display: function (data) {
+                            var total = data.record.LoanInstallmentAmount;
+                            //return '<input class="fundCalculation form-control input-sm" type="text" onkeypress="return isNumber(event, 0,' + "'" + data.record.LoanInstallmentAmount + "'" + ' );" style="width:200px" ' + 'id="Total' + data.record.DailyLoanTrxID + '" LoanPaidProduct="Total' + data.record.ProductID + '" value="' + total + '" />';
+                            return `<input type='hidden' name='LoanRepaymentDetailList.Index' value='${data.record.FundLoanID}' />
+                                    <input type='hidden' id='LoanRepaymentDetailList[${data.record.FundLoanID}]_FundLoanID' name="LoanRepaymentDetailList[${data.record.FundLoanID}].FundLoanID" value="${data.record.FundLoanID}" />
+                                    <input class="fundCalculation form-control input-sm" name="LoanRepaymentDetailList[${data.record.FundLoanID}].loanInstallmentAmount" type="text" onkeypress="return isNumber(event, 0,' + "'" + data.record.LoanInstallmentAmount + "'" + ' );" style="width:200px" ' + 'id="Total' + data.record.DailyLoanTrxID + '" LoanPaidProduct="Total' + data.record.ProductID + '" value="${total}" />`;
+                        }
+                    },
+                    ServiceCharge: {
+                        title: 'Payable Service Charge',
+                        create: false,
+                        edit: true,
+                        display: function (data) {
+                            var total = data.record.ServiceCharge;
+                            return `<input type="number" id='LoanRepaymentDetailList[${data.record.FundLoanID}]_ServiceCharge' name="LoanRepaymentDetailList[${data.record.FundLoanID}].ServiceCharge" class="fundCalculation form-control input-sm " style="width:200px" id="ServiceCharge${data.record.FundLoanID}" value="${total}"/>`;
+                        }
+                    },
+                    TotalPayableAmount: {
+                        title: 'Total Payable Amount',
+                        create: false,
+                        edit: false,
+                        display: function (data) {
+                            var total = data.record.ServiceCharge + data.record.LoanInstallmentAmount;
+                            //return '<span class="form-control input-sm  totalPayableAmount" id="totalPayableAmount${data.record.FundLoanID}" Disabled = "true">' + total + '</span>';
+                            return `<input type="number" class="form-control input-sm  totalPayableAmount" id="totalPayableAmount${data.record.FundLoanID}" Disabled = "true" value="${total}" />`;
+                        }
+                    },
+                    InstallmentDate: {
+                        title: 'Installment Date',
+                        create: false,
+                        edit: true,
+                        display: function (data) {
+                            return `<input type="text" id='LoanRepaymentDetailList[${data.record.FundLoanID}]_InstallmentDate' name="LoanRepaymentDetailList[${data.record.FundLoanID}].InstallmentDate" class="form-control  datepicker_mc" style="width:200px" id="installmentDate${data.record.FundLoanID}" value="${data.record.InstallmentDate}"/>`;
+                        }
+                    },
+                },
+            });
+            $('#grid').jtable('load', { fundLoanObject: fundLoanObject });
+        }
+        else {
+            $.alert.open("Error", "Please insert all required fields")
+        }
+    }
+
+    ////InterestRate
+     
+    
+    function isAlphabet(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 8) {
+       //if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+<h2 class="page-title">Fund Loan Details</h2>
+@using (Html.BeginForm("Update", "FundManagement", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.FundLoanCode, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.FundLoanCode, Model.FundLoanCodeList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FundLoanCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PrincipalAmount, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.PrincipalAmount, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)" } })
+                @Html.ValidationMessageFor(model => model.PrincipalAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LoanSanctionNo, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.LoanSanctionNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LoanSanctionNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LoanSanctionTerm, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.LoanSanctionTerm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LoanSanctionTerm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LoanSanctionApproveDate, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.LoanSanctionApproveDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LoanDisbursementDate, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.LoanDisbursementDate, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DisbursedAmount, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.DisbursedAmount, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)" } })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.InterestRate, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.InterestRate, new {  htmlAttributes = new { @type = "number", @class = "form-control",
+               onkeypress = "return isAlphabet(event)" } })
+                @*@Html.EditorFor(model => model.InterestRate, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)" } })*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LoanDuration, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.LoanDuration, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.GracePeriod, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.GracePeriod, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalInstallmentNo, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.TotalInstallmentNo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="button" value="Loan Repayment Details" class="btn btn-primary" id="btnShowGrid" onclick="LoadLoanManagementData()" />
+            <input type="button" value="Preview" class="btn btn-primary" id="btnPreview" />
+        </div>        
+    </div>
+
+    <br />
+
+    <div id="grid"></div>
+
+    <div class="row showbtnUpdate">
+        <div class="col-md-6">
+            <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate" />
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jtable")
+    <script src="~/Assets/js/app.js"></script>
+}
+

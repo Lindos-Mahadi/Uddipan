@@ -1,0 +1,18 @@
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:fitsSystemWindows="true" android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"><android.support.v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="?attr/actionBarSize" android:background="#33B86C" app:popupTheme="@style/ThemeOverlay.AppCompat.Light" app:layout_scrollFlags="scroll|enterAlways" /><android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout" android:layout_height="match_parent" android:fitsSystemWindows="true" android:layout_width="match_parent"><!--Content will go here...--><!--<LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#DEDEDC"
+            android:weightSum="10"
+            android:gravity="center_horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px">--><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center_vertical" android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:orientation="vertical"><TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="Samity:" android:textColor="#000" android:textSize="15dp" android:layout_gravity="left" android:layout_marginRight="10dp" android:layout_marginTop="5dp" /><Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/spnCenterCollection" android:background="@drawable/border" android:spinnerMode="dropdown" /><!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical" />--><ListView android:id="@+id/loanCollectionList_SyncView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/SyncCollectionGridHolder" android:layout_marginTop="0dp" android:layout_weight="10" android:clickable="true" android:divider="#b5b5b5" android:dividerHeight="1dp" android:listSelector="@drawable/list_selector" /><!--</LinearLayout>--></LinearLayout><!--End content section--><android.support.design.widget.NavigationView android:id="@+id/nav_view" android:layout_height="match_parent" android:layout_width="230dp" android:layout_gravity="start" android:fitsSystemWindows="true" app:menu="@menu/menu" /></android.support.v4.widget.DrawerLayout></LinearLayout>

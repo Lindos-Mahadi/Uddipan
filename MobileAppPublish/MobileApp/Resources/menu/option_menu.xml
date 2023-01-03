@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+        android:id="@+id/collection"
+        android:title="Collection"
+        showAsAction="always"
+   />
+  <item
+      android:id="@+id/collectionsummary"
+      android:title="Collection Summary"
+      showAsAction="always"
+   />
+
+  <item
+         android:id="@+id/proposal"
+         android:title="Proposal"
+         showAsAction="ifRoom"
+         android:icon="@drawable/iconmenu"
+     />
+  <item
+          android:id="@+id/syncCollection"
+          android:title="Sync Collection"
+          showAsAction="ifRoom"
+          android:icon="@drawable/iconmenu"
+     />
+  <item
+    android:id="@+id/setupUrl"
+    android:title="Setup URL"
+    android:icon="@drawable/iconmenu"
+    showAsAction="ifRoom"
+      />
+  <item
+        android:id="@+id/syncMasterData"
+        android:title="Sync Master Data"
+        showAsAction="ifRoom"
+        android:icon="@drawable/iconmenu"
+        
+      />
+</menu>
