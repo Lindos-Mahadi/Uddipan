@@ -87,6 +87,7 @@
     <Compile Include="AccCategoryService.cs" />
     <Compile Include="AccChartService.cs" />
     <Compile Include="AccLastVoucherService.cs" />
+    <Compile Include="PortalMemberService.cs" />
     <Compile Include="ProductXEmploymentProductMappingService.cs" />
     <Compile Include="IPKSFFundLoanService.cs" />
     <Compile Include="IFamilyMemberSameHouseholdService.cs" />

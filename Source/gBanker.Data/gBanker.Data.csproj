@@ -386,6 +386,7 @@
     <Compile Include="Repository\AccCategoryRepository.cs" />
     <Compile Include="Repository\AccChartRepository.cs" />
     <Compile Include="Repository\AccLastVoucherRepository.cs" />
+    <Compile Include="Repository\PortalMemberRepository.cs" />
     <Compile Include="Repository\ProductXEmploymentProductMappingRepository.cs" />
     <Compile Include="Repository\IPKSFFundLoanRepository.cs" />
     <Compile Include="Repository\IFamilyMemberSameHouseholdRepository.cs" />

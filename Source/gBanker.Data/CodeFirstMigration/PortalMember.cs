@@ -75,5 +75,6 @@ namespace gBanker.Data.CodeFirstMigration
         public string UpdateUser { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+        public bool? HasRequestedApproval { get; set; }
     }
 }

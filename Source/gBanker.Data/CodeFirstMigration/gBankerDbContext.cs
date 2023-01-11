@@ -16,6 +16,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         {
         }
 
+        // Portal Member
         public virtual DbSet<PortalMember> PortalMembers { get; set; }
         public virtual DbSet<RDOffice> RDOffice { get; set; }
         public DbSet<BuroCenterInfo> BuroCenterInfos { get; set; }
