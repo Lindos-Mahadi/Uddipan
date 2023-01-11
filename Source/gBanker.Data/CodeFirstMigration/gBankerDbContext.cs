@@ -15,6 +15,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
             : base("name=gBankerDbContext")
         {
         }
+
+        public virtual DbSet<PortalMember> PortalMembers { get; set; }
         public virtual DbSet<RDOffice> RDOffice { get; set; }
         public DbSet<BuroCenterInfo> BuroCenterInfos { get; set; }
         // public DbSet<BuroCustomerInfo> BuroCustomerInfos { get; set; }
@@ -898,6 +900,55 @@ namespace gBanker.Data.CodeFirstMigration.Db
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.MemberCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Gender)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.MemberStatus)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.CreateUser)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.FirstName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.LastName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Occupation)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Address)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Photo)
+                .IsFixedLength();
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalMember>()
+                .Property(e => e.Status)
+                .IsFixedLength()
+                .IsUnicode(false);
+
             modelBuilder.Entity<ApproveCelling>()
                 .Property(e => e.MinRange)
                 .HasPrecision(18, 0);
