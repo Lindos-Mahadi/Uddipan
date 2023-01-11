@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /xentersolution/xentersolution.web/src/pages/Provider/Procedure/view/Ncdr-Report/PreProcedureAssesmentLeft.jsx
 /xentersolution/xentersolution.web/src/pages/Provider/Procedure/view/Ncdr-Report/PreProcedureAssesmentRight.jsx
+
+# visual studio
+.vs/
