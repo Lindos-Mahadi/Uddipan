@@ -156,6 +156,11 @@
                     title: "Approval",
                     sort:false,
                     display: function (data) {
+                        console.log('Member', data.record);
+                        if (data.record.IsPortalMember) {
+
+                            return "<div class='text-center'><a href='/Member/PortalMemberApproval/" + data.record.PortalMemberId + "'><i class='fa fa-caret-square-o-down'></i></a></div>";
+                        }
                         //return "<div class='text-center'><a href='/Member/EligibleMember?MemId=" + data.record.MemberID + "'><i class='fa fa-caret-square-o-down'></i></a></div>";
                         //return '<div class="text-center"><a href="/Member/EligibleMember?MemId=' + data.record.MemberID + '"' + '><i class="fa fa-caret-square-o-down"></i></a></div>';
                         return "<div class='text-center'><a href='/Member/EligibleCreate/" + data.record.MemberID + "'><i class='fa fa-caret-square-o-down'></i></a></div>";

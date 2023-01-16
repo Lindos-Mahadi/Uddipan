@@ -265,6 +265,9 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual Organization Organization { get; set; }
         public virtual Center Center { get; set; }
 
+        public bool? IsPortalMember { get; set; }
+        public long? PortalMemberId { get; set; }   
+
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual Group Group { get; set; }

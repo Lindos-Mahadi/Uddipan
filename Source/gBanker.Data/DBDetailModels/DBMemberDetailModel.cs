@@ -74,6 +74,8 @@ namespace gBanker.Data.DBDetailModels
         public int? FamilyMember { get; set; }
         public string SpouseName { get; set; }
         public string FamilyContactNo { get; set; }
+        public bool? IsPortalMember { get; set; }
+        public long? PortalMemberId { get; set; }
 
     }
 }

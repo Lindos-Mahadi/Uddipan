@@ -28,6 +28,7 @@ using System.Net.Http.Headers;
 using gBanker.Core.Common;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
+using gBanker.Data.CodeFirstMigration;
 
 namespace gBanker.Web.Controllers
 {
@@ -53,11 +54,29 @@ namespace gBanker.Web.Controllers
         private readonly ISavingSummaryService savingSummaryService;
         private readonly ISavingTrxService savingTrxService;
         private readonly IOrganizationService organizationService;
+        private readonly IPortalMemberService portalMemberService;
 
 
         private object receiver;
 
-        public MemberController(IOfficeService officeService, IGeoLocationService geoLocationService, IMemberService memberService, ICenterService centerService, IGroupService groupService, IMemberCategoryService memberCategoryService, IProductService productService, IMemberLastCodeService memberLastCodeService, ICountryService countryService, ILgVillageService lgVillageService, UserManager<ApplicationUser> userManager, IUltimateReportService ultimateReportService, IAccReportService accReportService, ISavingSummaryService savingSummaryService, ISavingTrxService savingTrxService, IOrganizationService organizationService)
+        public MemberController(
+            IOfficeService officeService, 
+            IGeoLocationService geoLocationService, 
+            IMemberService memberService, 
+            ICenterService centerService, 
+            IGroupService groupService, 
+            IMemberCategoryService memberCategoryService, 
+            IProductService productService, 
+            IMemberLastCodeService memberLastCodeService, 
+            ICountryService countryService, 
+            ILgVillageService lgVillageService, 
+            UserManager<ApplicationUser> userManager, 
+            IUltimateReportService ultimateReportService, 
+            IAccReportService accReportService, 
+            ISavingSummaryService savingSummaryService, 
+            ISavingTrxService savingTrxService, 
+            IOrganizationService organizationService,
+            IPortalMemberService portalMemberService)
         {
             this.memberService = memberService;
             this.officeService = officeService;
@@ -75,8 +94,7 @@ namespace gBanker.Web.Controllers
             this.savingSummaryService = savingSummaryService;
             this.savingTrxService = savingTrxService;
             this.organizationService = organizationService;
-
-
+            this.portalMemberService = portalMemberService;
         }
         #endregion
 
@@ -812,13 +830,15 @@ namespace gBanker.Web.Controllers
         {
             try
             {
+                List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
                 long TotCount;
 
                 var param1 = new { @EmpID = LoggedInEmployeeID };
                 var LoanInstallMent = ultimateReportService.GetCenterROleWise(param1);
                 var param2 = new { @orgID = LoggedInOrganizationID, @OfficeID = LoginUserOfficeID, @filterColumnName = filterColumn, @filterValue = filterValue, @TypeFilterColumn = "", @EmployeeID = Convert.ToInt16(LoggedInEmployeeID) };
                 var getMemberTolrecord = ultimateReportService.GetElegibleMemberDetailsasList(param2);
-                var getMember = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
+                //var getMember = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
+                var getMember = getMemberTolrecord;
                 TotCount = getMemberTolrecord.Count;
                 IEnumerable<DBMemberDetailModel> memberDetail;
                 if (LoanInstallMent != null)
@@ -828,7 +848,8 @@ namespace gBanker.Web.Controllers
                     {
                         var param3 = new { @orgID = LoggedInOrganizationID, @OfficeID = LoginUserOfficeID, @filterColumnName = filterColumn, @filterValue = filterValue, @TypeFilterColumn = "", @EmployeeID = Convert.ToInt16(LoggedInEmployeeID) };
                         var getMemberTolrecordEmp = ultimateReportService.GetElegibleMemberDetailsasListEmployeeWise(param2);
-                        var getMemberEmp = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
+                        //var getMemberEmp = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
+                        var getMemberEmp = getMemberTolrecord;
                         TotCount = getMemberTolrecordEmp.Count;
                         memberDetail = getMemberEmp;
                     }
@@ -837,7 +858,23 @@ namespace gBanker.Web.Controllers
                 }
                 else
                     memberDetail = getMember;
-                var detail = memberDetail.ToList();
+
+                EligibleMembers = memberDetail.ToList();
+
+                var portalMembers = portalMemberService.GetAll().ToList();
+
+                if(portalMembers != null)
+                {
+                    var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
+
+                    EligibleMembers.AddRange(mappedMembers);
+                }
+                
+
+                var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize).ToList();
+
+
+                //var detail = memberDetail.ToList();
                 var currentPageRecords = detail.ToList();
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = TotCount });
             }
@@ -4523,6 +4560,407 @@ namespace gBanker.Web.Controllers
             memberModel.PlaceOfBirth = member.PlaceOfBirth;
             return View(memberModel);
         }
+
+        public ActionResult PortalMemberApproval(int id)
+        {
+            try
+            {
+                var portamMember = portalMemberService.GetById(id);
+                var MemberViewModel = Mapper.Map<PortalMember, MemberViewModel>(portamMember);
+
+                //var model = new MemberViewModel();
+                MapDropDownList(MemberViewModel);
+                MemberViewModel.OfficeID = Convert.ToInt32(SessionHelper.LoginUserOfficeID);
+                var param = new { @OfficeID = SessionHelper.LoginUserOfficeID };
+                var allProducts = accReportService.GetLastInitialDate(param);
+                var detail = allProducts.ToString();
+                if (!IsDayInitiated)
+                {
+                    if (allProducts.Tables[0].Rows.Count > 0) // check if there is any data.
+                    {
+                        MemberViewModel.JoinDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1].ToString());
+                    }
+                }
+                else
+                {
+                    MemberViewModel.JoinDate = TransactionDate;
+                }
+                MemberViewModel.ServerCurrentDate = DateTime.Now;
+                var blnk_items = new List<SelectListItem>();
+                MemberViewModel.CenterList = blnk_items;
+                MemberViewModel.GroupList = blnk_items;
+
+                IEnumerable<SelectListItem> items = new SelectList(" ");
+                ViewData["comtype"] = items;
+
+                var OrgInfo = organizationService.GetById((int)SessionHelper.LoginUserOrganizationID);
+                //var v = OrgInfo.MemberAge;
+                var MemberAge = 60;
+
+                if (OrgInfo.MemberAge == null)
+                {
+
+                }
+                else
+                {
+                    MemberAge = (int)OrgInfo.MemberAge;
+                }
+                ViewData["MemberAge"] = MemberAge;
+
+                ViewData["LoggedInOrg"] = SessionHelper.LoginUserOrganizationID;
+                ViewBag.OrgId = LoggedInOrganizationID;
+                return View(MemberViewModel);
+            }
+            catch(Exception ex)
+            {
+                return GetErrorMessageResult();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PortalMemberApproval(
+            MemberViewModel model, 
+            string MemCode, 
+            string base64image, 
+            string base64imageFingerThumb)
+        {
+            //var portamMember = portalMemberService.GetById(id);
+            //var MemberViewModel = Mapper.Map<PortalMember, MemberViewModel>(portamMember);
+            //return View(MemberViewModel);
+            try
+            {
+                var entity = Mapper.Map<MemberViewModel, Member>(model);
+                if (ModelState.IsValid)
+                {
+                    entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
+                    var errors = memberService.IsValidMember(entity);
+
+                    if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != "") && (base64imageFingerThumb != null && base64imageFingerThumb != ""))
+                    {
+                        var t = base64image.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytes = Convert.FromBase64String(t);
+                        Image image;
+                        using (MemoryStream ms = new MemoryStream(bytes))
+                        {
+                            image = Image.FromStream(ms);
+                        }
+                        var randomFileName = Guid.NewGuid().ToString().Substring(0, 4) + ".png";
+                        entity.MemberImg = bytes;
+
+                        var tthumb = base64imageFingerThumb.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytesthumb = Convert.FromBase64String(tthumb);
+                        Image imagethumb;
+                        using (MemoryStream msa = new MemoryStream(bytesthumb))
+                        {
+                            imagethumb = Image.FromStream(msa);
+                        }
+                        var randomFileNamethumb = Guid.NewGuid().ToString().Substring(0, 6) + ".png";
+                        entity.ThumbImg = bytesthumb;
+                    }
+                    else if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != ""))
+                    {
+                        var t = base64image.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytes = Convert.FromBase64String(t);
+                        Image image;
+                        using (MemoryStream ms = new MemoryStream(bytes))
+                        {
+                            image = Image.FromStream(ms);
+                        }
+                        var randomFileName = Guid.NewGuid().ToString().Substring(0, 4) + ".png";
+                        entity.MemberImg = bytes;
+                    }
+                    else if (model.ImgFile == null && Session["CapturedImage"] == null && (base64imageFingerThumb != null && base64imageFingerThumb != ""))
+                    {
+                        var tthumb = base64imageFingerThumb.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytesthumb = Convert.FromBase64String(tthumb);
+                        Image imagethumb;
+                        using (MemoryStream msa = new MemoryStream(bytesthumb))
+                        {
+                            imagethumb = Image.FromStream(msa);
+                        }
+                        var randomFileNamethumb = Guid.NewGuid().ToString().Substring(0, 6) + ".png";
+                        entity.ThumbImg = bytesthumb;
+                    }
+                    else if (model.ImgFile == null && Session["CapturedImage"] != null)
+                    {
+                        var path = Server.MapPath("~/CapturedImages/");
+
+                        var FileLocation = path + Session["CapturedImage"].ToString();
+                        System.IO.File.Exists(FileLocation);
+                        System.IO.FileInfo file = new System.IO.FileInfo(FileLocation);
+
+                        using (System.Drawing.Image image = System.Drawing.Image.FromFile(file.FullName))
+                        {
+                            ImageConverter converter = new ImageConverter();
+                            byte[] data = (byte[])converter.ConvertTo(image, typeof(byte[]));
+                            entity.MemberImg = data;
+
+
+                            decimal size = Math.Round(((decimal)entity.MemberImg.Length / (decimal)1024), 2);
+                            if (size > 100)
+                            {
+                                errors = memberService.CheckImageSize();
+                                Response.StatusCode = 400;
+                            }
+                        }
+                        Array.ForEach(Directory.GetFiles(path), System.IO.File.Delete);
+
+                    }
+                    else if (model.ImgFile != null)
+                    {
+
+                        decimal size = Math.Round(((decimal)model.ImgFile.ContentLength / (decimal)1024), 2);
+                        if (size > 100)
+                        {
+                            errors = memberService.CheckImageSize();
+                            Response.StatusCode = 400;
+                            throw new System.InvalidOperationException("Image File is Big than 100 KB.");
+                        }
+
+                        byte[] data = new byte[model.ImgFile.ContentLength];
+                        if (data != null)
+                        {
+                            model.ImgFile.InputStream.Read(data, 0, model.ImgFile.ContentLength);
+                            entity.MemberImg = data;
+                        }
+                    }
+
+                    if (model.ThumbImgFile != null)
+                    {
+                        decimal size = Math.Round(((decimal)model.ThumbImgFile.ContentLength / (decimal)1024), 2);
+                        if (size > 100)
+                        {
+                            errors = memberService.CheckImageSize();
+                            Response.StatusCode = 400;
+                            throw new System.InvalidOperationException("Image File is Big than 100 KB.");
+                        }
+
+                        byte[] data = new byte[model.ThumbImgFile.ContentLength];
+                        if (data != null)
+                        {
+                            model.ThumbImgFile.InputStream.Read(data, 0, model.ThumbImgFile.ContentLength);
+                            entity.ThumbImg = data;
+                        }
+                    }
+
+
+                    if (model.DivisionCode != null)
+                    {
+                        if (model.DivisionCode != "0")
+                        {
+                            entity.DivisionCode = model.DivisionCode;
+                        }
+                        else
+                        {
+                            entity.DivisionCode = "";
+                        }
+                    }
+                    if (model.DistrictCode != null)
+                    {
+                        if (model.DistrictCode != "0")
+                        {
+                            entity.DistrictCode = model.DistrictCode;
+                        }
+                        else
+                        {
+                            entity.DistrictCode = "";
+                        }
+                    }
+                    if (model.UpozillaCode != null)
+                    {
+                        if (model.UpozillaCode != "0")
+                        {
+                            entity.UpozillaCode = model.UpozillaCode;
+                        }
+                        else
+                        {
+                            entity.UpozillaCode = "";
+                        }
+                    }
+                    if (model.UnionCode != null)
+                    {
+                        if (model.UnionCode != "0")
+                        {
+                            entity.UnionCode = model.UnionCode;
+                        }
+                        else
+                        {
+                            entity.UnionCode = "";
+                        }
+                    }
+                    if (model.VillageCode != null)
+                    {
+                        if (model.VillageCode != "0")
+                        {
+                            entity.VillageCode = model.VillageCode;
+                        }
+                        else
+                        {
+                            entity.VillageCode = "";
+                        }
+                    }
+                    if (model.PlaceOfBirth != null)
+                    {
+                        entity.PlaceOfBirth = model.PlaceOfBirth;
+
+                    }
+                    if (model.TotalWealth != null)
+                    {
+                        entity.TotalWealth = model.TotalWealth;
+
+                    }
+                    if (model.MotherName != null)
+                    {
+                        entity.MotherName = model.MotherName;
+
+                    }
+                    if (model.ExpireDate != null)
+                    {
+                        entity.ExpireDate = model.ExpireDate;
+
+                    }
+                    if (model.FatherName != null)
+                    {
+                        entity.FatherName = model.FatherName;
+
+                    }
+
+                    if (model.NationalID != null)
+                    {
+                        entity.NationalID = model.NationalID;
+                        if (LoggedInOrganizationID != 150)
+                        {
+                            if (entity.NationalID.Length != 17)
+                            {
+                                return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
+                            }
+                        }
+                    }
+                    if (model.NationalID == null)
+                    {
+                        entity.NationalID = "0";
+                    }
+                    if (model.SmartCard != null)
+                    {
+                        entity.SmartCard = model.SmartCard;
+                        if (LoggedInOrganizationID != 150)
+                        {
+                            if (entity.SmartCard.Length != 10)
+                            {
+                                return GetErrorMessageResult("SmartCard No cann't be less than 10 digits");
+                            }
+                        }
+
+                    }
+                    if (model.PhoneNo != null)
+                    {
+                        entity.PhoneNo = model.PhoneNo;
+
+                    }
+                    //if (entity.PhoneNo == null)
+                    //{
+                    //    return GetErrorMessageResult("PhoneNo cann't be null");
+                    //}
+
+                    if (LoggedInOrganizationID == 150)
+                        entity.GroupID = 1;
+
+                    entity.IsActive = true;
+                    entity.MemberStatus = "0";
+                    entity.PwdStatus = "D";
+                    entity.MemberType = 1;
+
+                    var param = new { @OfficeID = SessionHelper.LoginUserOfficeID };
+                    var allProducts = accReportService.GetLastInitialDate(param);
+
+                    var detail = allProducts.ToString();
+
+                    if (!IsDayInitiated)
+                    {
+                        if (allProducts.Tables[0].Rows.Count > 0) // check if there is any data.
+                        {
+                            entity.JoinDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1].ToString());
+                        }
+                    }
+                    else
+                    {
+                        entity.JoinDate = TransactionDate;
+                    }
+                    var vNatio = "";
+                    var vSmat = "";
+                    var vphone = "";
+                    if (entity.NationalID == null)
+                    {
+                        vNatio = "0";
+                    }
+                    else
+                    {
+                        vNatio = entity.NationalID;
+                    }
+                    if (entity.SmartCard == null)
+                    {
+                        vSmat = "0";
+                    }
+                    else
+                    {
+                        vSmat = entity.SmartCard;
+
+                    }
+                    if (entity.PhoneNo == null)
+                    {
+                        vphone = "0";
+                    }
+                    else
+                    {
+                        vphone = entity.PhoneNo;
+                    }
+                    var CheckDupli = new { @NationalID = vNatio, @SmartCard = vSmat, @PhoneNo = vphone, @Qtype = 1, @MemberCode = "0" };
+                    var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
+                    if (CheckMemberDupli.Tables[0].Rows.Count > 0)
+                    {
+                        var message = CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString();
+                        return GetDuplicateErrorMessageResult(message);
+                    }
+
+                    DataSet LoanInstallMent;
+                    var param1 = new { @OfficeID = LoginUserOfficeID };
+                    var param2 = new { @OfficeID = LoginUserOfficeID, @CenterID = entity.CenterID };
+                    if (LoggedInOrganizationID == 126)
+                    {
+                        LoanInstallMent = ultimateReportService.GenerateMemberLastCodeMemberSSS(param2);
+                        entity.MemberCode = LoanInstallMent.Tables[0].Rows[0]["LastCode"].ToString();
+                    }
+                    else
+                    {
+                        LoanInstallMent = ultimateReportService.GenerateMemberLastCodeMember(param1);
+                        entity.MemberCode = LoanInstallMent.Tables[0].Rows[0]["LastCode"].ToString();
+                    }
+
+                    memberService.Create(entity);
+                    var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };
+                    return Json(new { data = ent }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                    return GetErrorMessageResult();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+                //return GetErrorMessageResult(e);
+            }
+        }
+
         [HttpPost]
         public ActionResult EligibleCreate(MemberViewModelApproval model, List<string> ProdList)
         {
@@ -4546,7 +4984,14 @@ namespace gBanker.Web.Controllers
                             SS.ProductID = Convert.ToInt16(p);
                             savingSummaryService.Proc_Set_SavingOpeingWhenMemberEligible(Convert.ToInt32(SessionHelper.LoginUserOfficeID), Convert.ToInt32(entity.CenterID), entity.MemberID, Convert.ToInt16(p), 1, entity.JoinDate, 1, entity.JoinDate, Convert.ToInt32(entity.Center.EmployeeId), Convert.ToInt32(entity.MemberCategoryID), Convert.ToInt16(LoggedInOrganizationID), LoggedInEmployeeID.ToString(), System.DateTime.Now);
                         }
-                    
+
+                    var member = memberService.GetByMemberId(model.MemberID);
+                    if(member.PortalMemberId > 0)
+                    {
+                        var portalMember = portalMemberService.GetById((int)member.PortalMemberId);
+                        portalMember.ApprovalStatus = true;
+                        portalMemberService.Update(portalMember);
+                    }
                     return GetSuccessMessageResult();
                 }
                 else

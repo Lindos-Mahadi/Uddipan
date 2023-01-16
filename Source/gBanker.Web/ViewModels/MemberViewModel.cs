@@ -9,6 +9,9 @@ namespace gBanker.Web.ViewModels
 {
     public class MemberViewModel:BaseModel
     {
+        public long Id { get; set; }
+        public bool? IsPortalMember { get; set; } = false;
+        public long? PortalMemberId { get; set; }
         public long MemberID { get; set; }
         public string MemberCode { get; set; }
         [Display(Name = "Office")]

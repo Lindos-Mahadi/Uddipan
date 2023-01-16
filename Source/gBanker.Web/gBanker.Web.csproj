@@ -542,6 +542,7 @@
     <Compile Include="Infrastucture\Html\DropdownListHelper.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Mappings\MemberPortalModelToUddipanModel.cs" />
     <Compile Include="Mappings\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Mappings\Models\AccountModels.cs" />
     <Compile Include="Mappings\Models\clsConnection.cs" />
@@ -5949,6 +5950,7 @@
     <Content Include="Views\Department\ManageDepartment.cshtml" />
     <Content Include="Views\EmployeeHistoryUpdate\Edit.cshtml" />
     <Content Include="Views\EmployeeHistoryUpdate\Index.cshtml" />
+    <Content Include="Views\Member\PortalMemberApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,6 +10,7 @@ namespace gBanker.Web.Mappings
             {
                 x.AddProfile<DomainToViewModelMappingProfile>();
                 x.AddProfile<ViewModelToDomainMappingProfile>();
+                x.AddProfile<MemberPortalModelToUddipanModel>();
             });
         }
     }
