@@ -5952,6 +5952,7 @@
     <Content Include="Views\EmployeeHistoryUpdate\Index.cshtml" />
     <Content Include="Views\Member\PortalMemberApproval.cshtml" />
     <Content Include="Views\Member\EligiblePortalMembers.cshtml" />
+    <Content Include="Views\LoanApproval\PortalLoanProposalIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

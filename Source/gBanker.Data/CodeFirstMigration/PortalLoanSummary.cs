@@ -1,26 +1,18 @@
-namespace gBanker.Data.CodeFirstMigration.Db
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace gBanker.Data.CodeFirstMigration
 {
-    using gBankerCodeFirstMigration.Db;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    [Table("LoanSummary")]
-    public partial class LoanSummary
+    [Table("PortalLoanSummary")]
+    public partial class PortalLoanSummary
     {
-        public LoanSummary()
-        {
-            DailyLoanTrxes = new HashSet<DailyLoanTrx>();
-            LoanTrxes = new HashSet<LoanTrx>();
-        }
-
-        public long LoanSummaryID { get; set; }
+        [Key]
+        public long PortalLoanSummaryID { get; set; }
 
         public int OfficeID { get; set; }
 
-        public long MemberID { get; set; }
+        public long? MemberID { get; set; }
 
         public short ProductID { get; set; }
 
@@ -30,7 +22,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public byte LoanTerm { get; set; }
 
-        public short PurposeID { get; set; }
+        public short? PurposeID { get; set; }
 
         [StringLength(100)]
         public string LoanNo { get; set; }
@@ -99,6 +91,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public short EmployeeId { get; set; }
 
+        public byte? InvestorID { get; set; }
+
         [Column(TypeName = "numeric")]
         public decimal ExcessPay { get; set; }
 
@@ -117,9 +111,9 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "numeric")]
         public decimal? WriteOffInterest { get; set; }
 
-        public byte InvestorID { get; set; }
-
         public bool Posted { get; set; }
+
+        public int OrgID { get; set; }
 
         public bool? IsActive { get; set; }
 
@@ -132,47 +126,27 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         [Column(TypeName = "smalldatetime")]
         public DateTime CreateDate { get; set; }
-        public int OrgID { get; set; }
+
         [StringLength(50)]
         public string BankName { get; set; }
-
-        public string Remarks { get; set; }
 
         [StringLength(50)]
         public string ChequeNo { get; set; }
 
         public bool? IsApproved { get; set; }
 
-
-        public string LoanAccountNo { get; set; }
-        [StringLength(100)]
+        [StringLength(50)]
         public string CoApplicantName { get; set; }
 
         [StringLength(50)]
         public string Guarantor { get; set; }
 
         public long? MemberPassBookRegisterID { get; set; }
-        public string SecurityBankName { get; set; }
 
-        public string SecurityBankBranchName { get; set; }
-
-        public string SecurityBankCheckNo { get; set; }
         public DateTime? ChequeIssueDate { get; set; }
-        [Column(TypeName = "smalldatetime")]
-        public DateTime? FirstInstallmentStartDate { get; set; }
-        public virtual Organization Organization { get; set; }
-        public virtual Center Center { get; set; }
 
-        public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
-
-        public virtual Member Member { get; set; }
-
-        public virtual Office Office { get; set; }
-
-        public virtual Product Product { get; set; }
-      
-        public virtual ICollection<LoanTrx> LoanTrxes { get; set; }
-        public virtual ICollection<RepaymentSchedule> RepaymentSchedules { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal? CumIntDue { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal? ApprovedAmount { get; set; }
@@ -192,6 +166,44 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         [Column(TypeName = "date")]
         public DateTime? FirstInstallmentDate { get; set; }
-        public long PortalLoanSummaryID { get; set; }
+
+        public DateTime? FirstInstallmentStartDate { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CurIntPaid { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CurIntCharge { get; set; }
+
+        [StringLength(50)]
+        public string LoanAccountNo { get; set; }
+
+        [StringLength(70)]
+        public string SecurityBankName { get; set; }
+
+        [StringLength(70)]
+        public string SecurityBankBranchName { get; set; }
+
+        [StringLength(70)]
+        public string SecurityBankCheckNo { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CurLoanDue { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CurIntDue { get; set; }
+
+        public int? LastInstallmentNo { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CSFRate { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CSFAmount { get; set; }
+
+        [StringLength(50)]
+        public string Remarks { get; set; }
+        public bool? ApprovalStatus { get; set; }
     }
 }
+

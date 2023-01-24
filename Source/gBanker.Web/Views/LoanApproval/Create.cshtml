@@ -1244,6 +1244,7 @@
                                     @Html.TextBox("memberAutoComplete", "", new { @class = "form-control" })
                                     @Html.HiddenFor(model => model.MemberID)
                                     @Html.HiddenFor(model => model.MyGuid)
+                                    @Html.HiddenFor(model => model.PortalLoanSummaryID)
                                     @Html.TextBoxFor(model => model.MemberID, new { @style = "display:none" })
                                     @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
                                 </div>

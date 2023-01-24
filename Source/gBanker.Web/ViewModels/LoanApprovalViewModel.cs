@@ -140,7 +140,7 @@ namespace gBanker.Web.ViewModels
         public int?   txtMalePartTimeP3  { get; set; }
         public int?   txtFeMalePartTimeP3 { get; set; }
 
-
+        public long PortalLoanSummaryID { get; set; }
 
 
 

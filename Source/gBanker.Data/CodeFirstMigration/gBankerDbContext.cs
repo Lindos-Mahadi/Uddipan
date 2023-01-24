@@ -8,14 +8,14 @@ namespace gBanker.Data.CodeFirstMigration.Db
     using System.Data.Entity.Infrastructure;
     using gBankerCodeFirstMigration.Db;
 
-
     public partial class gBankerDbContext : DbContext
     {
         public gBankerDbContext()
             : base("name=gBankerDbContext")
         {
         }
-
+        //Portal Loan Summary
+        public virtual DbSet<PortalLoanSummary> PortalLoanSummaries { get; set; }
         // Portal Member
         public virtual DbSet<PortalMember> PortalMembers { get; set; }
         public virtual DbSet<RDOffice> RDOffice { get; set; }
@@ -901,6 +901,134 @@ namespace gBanker.Data.CodeFirstMigration.Db
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.IntCharge)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.IntPaid)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.LoanInstallment)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.IntInstallment)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.InterestRate)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.Balance)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.Advance)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.DueRecovery)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.ExcessPay)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CurLoan)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.PreLoan)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CumLoanDue)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.WriteOffLoan)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.WriteOffInterest)
+                .HasPrecision(9, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CreateUser)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.BankName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.ChequeNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CoApplicantName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.Guarantor)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CumIntDue)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.ApprovedAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.PartialAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CurIntPaid)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CurIntCharge)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.LoanAccountNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.SecurityBankName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.SecurityBankBranchName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.SecurityBankCheckNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CurLoanDue)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CurIntDue)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CSFRate)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<PortalLoanSummary>()
+                .Property(e => e.CSFAmount)
+                .HasPrecision(9, 2);
+
             modelBuilder.Entity<PortalMember>()
                 .Property(e => e.MemberCode)
                 .IsUnicode(false);
