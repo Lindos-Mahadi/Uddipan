@@ -830,15 +830,13 @@ namespace gBanker.Web.Controllers
         {
             try
             {
-                List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
                 long TotCount;
 
                 var param1 = new { @EmpID = LoggedInEmployeeID };
                 var LoanInstallMent = ultimateReportService.GetCenterROleWise(param1);
                 var param2 = new { @orgID = LoggedInOrganizationID, @OfficeID = LoginUserOfficeID, @filterColumnName = filterColumn, @filterValue = filterValue, @TypeFilterColumn = "", @EmployeeID = Convert.ToInt16(LoggedInEmployeeID) };
                 var getMemberTolrecord = ultimateReportService.GetElegibleMemberDetailsasList(param2);
-                //var getMember = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
-                var getMember = getMemberTolrecord;
+                var getMember = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
                 TotCount = getMemberTolrecord.Count;
                 IEnumerable<DBMemberDetailModel> memberDetail;
                 if (LoanInstallMent != null)
@@ -848,8 +846,7 @@ namespace gBanker.Web.Controllers
                     {
                         var param3 = new { @orgID = LoggedInOrganizationID, @OfficeID = LoginUserOfficeID, @filterColumnName = filterColumn, @filterValue = filterValue, @TypeFilterColumn = "", @EmployeeID = Convert.ToInt16(LoggedInEmployeeID) };
                         var getMemberTolrecordEmp = ultimateReportService.GetElegibleMemberDetailsasListEmployeeWise(param2);
-                        //var getMemberEmp = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
-                        var getMemberEmp = getMemberTolrecord;
+                        var getMemberEmp = getMemberTolrecord.Skip(jtStartIndex).Take(jtPageSize);
                         TotCount = getMemberTolrecordEmp.Count;
                         memberDetail = getMemberEmp;
                     }
@@ -858,25 +855,38 @@ namespace gBanker.Web.Controllers
                 }
                 else
                     memberDetail = getMember;
+                var detail = memberDetail.ToList();
+                var currentPageRecords = detail.ToList();
+                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = TotCount });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
 
-                EligibleMembers = memberDetail.ToList();
+        }
 
-                var portalMembers = portalMemberService.GetAll().ToList();
+        public JsonResult GetEligiblePortalMemberInfo(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
+        {
+            try
+            {
+                List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
 
-                if(portalMembers != null)
+                var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true).ToList();
+
+                if (portalMembers != null)
                 {
                     var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
-
                     EligibleMembers.AddRange(mappedMembers);
                 }
-                
+
 
                 var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize).ToList();
 
 
                 //var detail = memberDetail.ToList();
                 var currentPageRecords = detail.ToList();
-                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = TotCount });
+                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = portalMembers.Count });
             }
             catch (Exception ex)
             {
@@ -1153,6 +1163,13 @@ namespace gBanker.Web.Controllers
             //GetSuccessMessageResult();
             return View();
         }
+
+        public ActionResult EligiblePortalMembers()
+        {
+            //GetSuccessMessageResult();
+            return View();
+        }
+
         public ActionResult AdminMemberEdit()
         {
             //var member = memberService.GetByIdLong(id);

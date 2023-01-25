@@ -5955,6 +5955,8 @@
     <Content Include="Views\PortalSavingSummary\Index.cshtml" />
     <Content Include="Views\SavingSummary\GetPortalSavingSummary.cshtml" />
     <Content Include="Views\SavingsAccountOpening\PortalIndex.cshtml" />
+    <Content Include="Views\Member\EligiblePortalMembers.cshtml" />
+    <Content Include="Views\LoanApproval\PortalLoanProposalIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

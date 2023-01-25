@@ -43,9 +43,28 @@ namespace gBanker.Web.Controllers
         private readonly IOrganizationService organizationService;
         private readonly IApproveCellingService ApproveCellingService;
         private readonly IGroupwiseReportService groupwiseReportService;
+        private readonly IPortalLoanSummaryService portalLoanSummaService;
 
         // GET: LoanApproval
-        public LoanApprovalController(ILoanSummaryService loansSummaryService, IUltimateReportService ultimateReportService, ILoanApprovalService loanapprovalService, IProductService productService, IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService, IPurposeService purposeService, IMemberService memberService, IInvestorService investorService, IMemberPassBookRegisterService memberPassBookRegisterService, IWeeklyReportService weeklyReportService, IExpireInfoService expireInfoService, IOrganizationService organizationService, IEmployeeSPService employeeSPService, IApproveCellingService ApproveCellingService, IGroupwiseReportService groupwiseReportService)
+        public LoanApprovalController(
+            ILoanSummaryService loansSummaryService, 
+            IUltimateReportService ultimateReportService, 
+            ILoanApprovalService loanapprovalService, 
+            IProductService productService, 
+            IMemberCategoryService membercategoryService, 
+            IOfficeService officeService, 
+            ICenterService centerService, 
+            IPurposeService purposeService, 
+            IMemberService memberService,
+            IInvestorService investorService,
+            IMemberPassBookRegisterService memberPassBookRegisterService,
+            IWeeklyReportService weeklyReportService,
+            IExpireInfoService expireInfoService,
+            IOrganizationService organizationService,
+            IEmployeeSPService employeeSPService,
+            IApproveCellingService ApproveCellingService,
+            IGroupwiseReportService groupwiseReportService,
+            IPortalLoanSummaryService portalLoanSummaryService)
         {
             this.loansSummaryService = loansSummaryService;
             this.productService = productService;
@@ -64,6 +83,7 @@ namespace gBanker.Web.Controllers
             this.employeeSPService = employeeSPService;
             this.ApproveCellingService = ApproveCellingService;
             this.groupwiseReportService = groupwiseReportService;
+            this.portalLoanSummaService = portalLoanSummaryService;
         }
         #endregion
 
@@ -104,6 +124,24 @@ namespace gBanker.Web.Controllers
                 else
                     allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID));
                 var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(allSavingsummary);
+                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+
+        }
+
+        public JsonResult GetPortalLoanApprovals(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
+        {
+            try
+            {
+                var portalLoans = portalLoanSummaService.GetAll().Take(jtPageSize).Skip(jtStartIndex);
+                var totalCount = portalLoans.Count();
+
+                var currentPageRecords = Mapper.Map<IEnumerable<PortalLoanSummary>, List<LoanApprovalViewModel>>(portalLoans.ToList());
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
 
             }
@@ -573,6 +611,46 @@ namespace gBanker.Web.Controllers
             return View();
 
         }
+
+        public ActionResult PortalLoanProposalIndex()
+        {
+            return View();
+        }
+
+        public ActionResult ApprovePortalLoanRequest(int portalLoanId)
+        {
+            Guid id = Guid.NewGuid();
+            var MyGuid = id.ToString();
+
+            ViewData["MyGuid"] = MyGuid;
+
+            var OrgId = (int)LoggedInOrganizationID;
+            ViewData["OrgId"] = OrgId;
+
+            var portalLoanSummary = portalLoanSummaService.GetById(portalLoanId);
+            var model = Mapper.Map<PortalLoanSummary, LoanApprovalViewModel>(portalLoanSummary);
+            //var model = new LoanApprovalViewModel();
+            if (IsDayInitiated)
+                model.ApproveDate = TransactionDate;
+            MapDropDownList(model);
+
+
+            var OrgInfo = organizationService.GetById((int)SessionHelper.LoginUserOrganizationID);
+            //var v = OrgInfo.MemberAge;
+            var GuarantorAge = 60;
+
+            if (OrgInfo.GuarantorAge == null)
+            {
+
+            }
+            else
+            {
+                GuarantorAge = (int)OrgInfo.GuarantorAge;
+            }
+            ViewData["GuarantorAge"] = GuarantorAge;
+            return View("Create", model);
+
+        }
         // GET: LoanApproval/Details/5
         public ActionResult Details(int id)
         {
@@ -616,10 +694,10 @@ namespace gBanker.Web.Controllers
         {
             try
             {
-                if (!IsDayInitiated)
-                {
-                    return GetErrorMessageResult("Please run the start work process");
-                }
+                //if (!IsDayInitiated)
+                //{
+                //    return GetErrorMessageResult("Please run the start work process");
+                //}
                 if (LoggedInOrganizationID == 126)
                 {
                     int roleID = SessionHelper.LoginUserRoleId;
@@ -627,7 +705,6 @@ namespace gBanker.Web.Controllers
 
                     if (approveCellingInfo.MinRange > model.ApprovedAmount || approveCellingInfo.MaxRange < model.ApprovedAmount)
                         return GetErrorMessageResult($"The given Approved Ammount must be in {approveCellingInfo.MinRange} to {approveCellingInfo.MaxRange}");
-
                 }
 
                 if (model.txtMaleFullTimeP1 == null)
@@ -872,6 +949,15 @@ namespace gBanker.Web.Controllers
                             };
 
                             var empListEmploymentInfo = employeeSPService.GetDataWithParameter(paramEmploymentInfo, "SetEmploymentDetails");
+                        }
+                        if(model.PortalLoanSummaryID != null)
+                        {
+                            var portalLoanSummary = portalLoanSummaService.GetById((int)model.PortalLoanSummaryID);
+                            if(portalLoanSummary != null)
+                            {
+                                portalLoanSummary.ApprovalStatus = true;
+                                portalLoanSummaService.Update(portalLoanSummary);
+                            }
                         }
                         return GetSuccessMessageResult();
                     }

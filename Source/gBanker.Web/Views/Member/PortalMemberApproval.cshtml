@@ -1652,6 +1652,7 @@
 {
     <input type="hidden" id="hdnCameraDefine" value="0" />
     <input type="hidden" id="hdnMemberAge" value="0" />
+    @Html.HiddenFor(model => model.PortalMemberId);
 
     @Html.AntiForgeryToken()
     <div id="dialog-message" title="Message" style="display:none;">

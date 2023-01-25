@@ -23,8 +23,12 @@ namespace gBanker.Web.Mappings
             Mapper.CreateMap<PortalMember, DBMemberDetailModel>()
                 .ForMember(dest => dest.IsPortalMember, source => source.MapFrom(s => true))
                 .ForMember(dest => dest.PortalMemberId, option => option.MapFrom(src => src.Id));
-            Mapper.CreateMap<PortalMember , MemberViewModel>();
+            Mapper.CreateMap<PortalMember , MemberViewModel>()
+                .ForMember(dest => dest.IsPortalMember, source => source.MapFrom(s => true))
+                .ForMember(dest => dest.PortalMemberId, option => option.MapFrom(src => src.Id));
 
+            Mapper.CreateMap<PortalLoanSummary, LoanApprovalViewModel>()
+                .ForMember(dest => dest.PortalLoanSummaryID, option => option.MapFrom(src => src.PortalLoanSummaryID));
         }
     }
 }
