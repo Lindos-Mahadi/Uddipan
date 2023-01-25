@@ -245,10 +245,6 @@
       <Project>{f5231e48-d0c0-4ecb-b67a-1f6784e5e0fc}</Project>
       <Name>gBanker.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\gBanker.Data\gBanker.Data.csproj">
-      <Project>{4a5b6386-fdcf-4c77-9791-e9a63bcc1d2e}</Project>
-      <Name>gBanker.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\gBanker.Service\gBanker.Service.csproj">
       <Project>{7e0396f3-c297-4a3f-b7e2-89d16a266474}</Project>
       <Name>gBanker.Service</Name>

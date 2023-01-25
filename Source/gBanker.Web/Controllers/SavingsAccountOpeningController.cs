@@ -776,10 +776,10 @@ namespace gBanker.Web.Controllers
             return View("Create", memberModel);
         }
 
-        public JsonResult PortalSavingSummaryCreate()
-        {
-            return View();
-        }
+        //public JsonResult PortalSavingSummaryCreate()
+        //{
+        //    return View();
+        //}
         [HttpPost]
         public JsonResult PortalSavingSummaryCreate(List<SavingsAccountOpeningWithNomineeViewModel> obj)
         {

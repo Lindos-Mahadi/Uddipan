@@ -309,13 +309,13 @@
       <Project>{F5231E48-D0C0-4ECB-B67A-1F6784E5E0FC}</Project>
       <Name>gBanker.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gBanker.Data\gBanker.Data.csproj">
+      <Project>{4A5B6386-FDCF-4C77-9791-E9A63BCC1D2E}</Project>
+      <Name>gBanker.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{cadf45a9-a723-4e81-bae3-8b59da3dcb47}</Project>
       <Name>Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\gBanker.Data\gBanker.Data.csproj">
-      <Project>{4a5b6386-fdcf-4c77-9791-e9a63bcc1d2e}</Project>
-      <Name>gBanker.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

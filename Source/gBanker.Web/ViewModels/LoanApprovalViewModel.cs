@@ -142,7 +142,8 @@ namespace gBanker.Web.ViewModels
 
         public long PortalLoanSummaryID { get; set; }
 
-
+        public string MainProductCode { get; set; }
+        public string SubMainProductCode { get; set; }
 
 
     }
