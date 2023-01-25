@@ -131,7 +131,13 @@ namespace gBanker.Web.Mappings
             Mapper.CreateMap<AspNetUser, RegisterModel>();
             Mapper.CreateMap<StopInterest, StopInterestViewModel>();
             Mapper.CreateMap<LegalInfo, LegalInfoViewModel>();
-            Mapper.CreateMap<ProductXEmploymentProductMapping, ProductXEmploymentProductMappingViewModel>(); 
+            Mapper.CreateMap<ProductXEmploymentProductMapping, ProductXEmploymentProductMappingViewModel>();
+
+            // Portal Saving Summary View Modwlgb
+            Mapper.CreateMap<PortalSavingSummary, PortalSavingSummaryViewModel>();
+            Mapper.CreateMap<PortalSavingSummary, SavingSummaryViewModel>();
+            Mapper.CreateMap<PortalSavingSummary, SavingsAccountOpeningViewModel>();
+            
         }
     }
 }

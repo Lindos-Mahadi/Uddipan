@@ -2583,6 +2583,7 @@
     <Compile Include="ViewModels\LoanCodeXAccCodeMappingViewModel.cs" />
     <Compile Include="ViewModels\ManageOrgViewModel.cs" />
     <Compile Include="ViewModels\NominiSurveyViewModel.cs" />
+    <Compile Include="ViewModels\PortalSavingSummaryViewModel.cs" />
     <Compile Include="ViewModels\ProductXEmploymentProductMappingViewModel.cs" />
     <Compile Include="ViewModels\ProgramDataAddViewModel.cs" />
     <Compile Include="ViewModels\ImputedCost_HeaderInfoViewModel.cs" />
@@ -5951,6 +5952,9 @@
     <Content Include="Views\EmployeeHistoryUpdate\Edit.cshtml" />
     <Content Include="Views\EmployeeHistoryUpdate\Index.cshtml" />
     <Content Include="Views\Member\PortalMemberApproval.cshtml" />
+    <Content Include="Views\PortalSavingSummary\Index.cshtml" />
+    <Content Include="Views\SavingSummary\GetPortalSavingSummary.cshtml" />
+    <Content Include="Views\SavingsAccountOpening\PortalIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

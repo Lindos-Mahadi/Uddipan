@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "PortalIndex";
+    Layout = "~/Views/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<h2>PortalIndex</h2>
+
+<style type="text/css">
+    th {
+        height: 40px;
+        vertical-align: top;
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+
+    span.jtable-column-header-text {
+        margin-top: 0px !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+        function deleteConfirm(status) {
+            if (status == "true") {
+                return confirm('Are you sure you want to delete this record');
+            }
+            else {
+                alert("You cannot delete this record because it is already disabled.");
+                return false;
+            }
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#confirmDlg").dialog({
+            autoOpen: false,
+            height: 150,
+            width: 400,
+            modal: true,
+            title: 'Confirmation',
+            buttons: {
+                "Yes": function () {
+                    ledgerPost();
+                    $(this).dialog("close");
+                },
+                "No": function () {
+                    //alert("No Office selected. Employee office will be used.");
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $('#btnPost').click(function (e) {
+            e.preventDefault();
+            $("#confirmDlg").dialog('open');
+        });
+
+        //////////////////////////
+        $('#grid').jtable({
+           // title: 'SavingSummary List',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            defaultSorting: 'Name ASC',
+            actions: {
+
+                listAction: '/SavingsAccountOpening/GetPortalSavingSummary'
+
+            },
+            fields: {
+                PortalSavingSummaryID: {
+                    key: true,
+                    list: false,
+                    create: false,
+                    edit: false
+                },
+                OfficeID: {
+                    title: 'OfficeID',
+                    width: '6%'
+
+                },
+                MemberID: {
+                    title: 'MemberID',
+                    width: '6%'
+                },
+                ProductID: {
+                    title: 'ProductID',
+                    width: '6%'
+                },
+                CenterID: {
+                    title: 'CenterID',
+                    width: '6%'
+                },
+
+                NoOfAccount: {
+                    title: 'NoOfAccount',
+                    width: '4%'
+                },
+
+                TransactionDate: {
+                    title: 'TransactionDate',
+                    type: 'date',
+                    displayFormat: 'd-M-yy',
+                    width: '10%'
+                },
+                Deposit: {
+                    title: 'Deposit',
+                    width: '6%'
+                },
+                Withdrawal: {
+                    title: 'Withdrawal',
+                    width: '10%'
+                },
+                Balance: {
+                    title: 'Balance',
+                    width: '6%'
+                },
+                InterestRate: {
+                    title: 'InterestRate',
+                    width: '6%'
+                },
+                SavingInstallment: {
+                    title: 'SavingInstallment',
+                    width: '6%'
+                },
+                MonthlyInterest: {
+                    title: 'MonthlyInterest',
+                    width: '6%'
+                },
+                Penalty: {
+                    title: 'Penalty',
+                    width: '6%'
+                },
+
+                OpeningDate: {
+                    title: 'OpeningDate',
+                    type: 'date',
+                    displayFormat: 'd-M-yy',
+                    width: '12%'
+                },
+                MaturedDate: {
+                    title: 'MaturedDate',
+                    type: 'date',
+                    displayFormat: 'd-M-yy',
+                    width: '12%'
+                },
+                ClosingDate: {
+                    title: 'ClosingDate',
+                    type: 'date',
+                    displayFormat: 'd-M-yy',
+                    width: '12%'
+                },
+                TransType: {
+                    title: 'TransType',
+                    width: '6%'
+                },
+                SavingStatus: {
+                    title: 'SavingStatus',
+                    width: '6%'
+                },
+                ApprovalStutus: {
+                    title: 'ApprovalStutus',
+                    width: '6%'
+                },
+                Eligible: {
+                    title: "Approval",
+                    sort:false,
+                    display: function (data) {
+                        console.log('SavingsAccountOpening', data.record);
+                        if (data.record.PortalSavingSummaryID) {
+
+                            return "<div class='text-center'><a href='/SavingsAccountOpening/PortalSavingSummaryApproval/" + data.record.PortalSavingSummaryID + "'><i class='fa fa-caret-square-o-down'></i></a></div>";
+                        }
+                        //return "<div class='text-center'><a href='/Member/EligibleMember?MemId=" + data.record.MemberID + "'><i class='fa fa-caret-square-o-down'></i></a></div>";
+                        //return '<div class="text-center"><a href="/Member/EligibleMember?MemId=' + data.record.MemberID + '"' + '><i class="fa fa-caret-square-o-down"></i></a></div>';
+                        //return "<div class='text-center'><a href='/PortalSavingSummary/EligibleCreate/" + data.record.PortalSavingSummaryID + "'><i class='fa fa-caret-square-o-down'></i></a></div>";
+                    }
+                },
+            }
+        });
+        reloadGrid();
+        //////////////////////////
+    });
+
+    function reloadGrid() {
+        $('#grid').jtable('load', { filterColumn: $('#filterColumn').val(), filterValue: $('#filterValue').val() });
+    }
+</script>
+@Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-info btn-sm pull-right" })
+<h2 class="page-title">Portal Saving Summary List</h2>
+
+
+
+<div id="grid"></div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jtable")
+}
+
+<input id="btnPost" type="submit" value="PostToLedger" />

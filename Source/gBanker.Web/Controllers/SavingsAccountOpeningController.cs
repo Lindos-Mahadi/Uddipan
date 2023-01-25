@@ -28,8 +28,13 @@ namespace gBanker.Web.Controllers
         private readonly IUltimateReportService ultimateReportService;
         private readonly IAccReportService accReportService;
         private readonly IDailySavingTrxService dailySavingTrxService;
+        private readonly IPortalSavingSummaryService portalSavingSummaryService;
             // GET: SavingSummary
-        public SavingsAccountOpeningController(ISavingsAccountOpeningService savingsAccountOpeningService, IProductService productService, IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService, IPurposeService purposeService, IMemberService memberService,ISavingSummaryService savingsummaryService,IUltimateReportService ultimateReportService, IAccReportService accReportService, IDailySavingTrxService dailySavingTrxService,IEmployeeService employeeService)
+        public SavingsAccountOpeningController(ISavingsAccountOpeningService savingsAccountOpeningService, IProductService productService, 
+            IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService,
+            IPurposeService purposeService, IMemberService memberService,ISavingSummaryService savingsummaryService,
+            IUltimateReportService ultimateReportService, IAccReportService accReportService, IDailySavingTrxService dailySavingTrxService,
+            IEmployeeService employeeService, IPortalSavingSummaryService portalSavingSummaryService)
         {
             this.savingsAccountOpeningService = savingsAccountOpeningService;
             this.productService = productService;
@@ -43,6 +48,8 @@ namespace gBanker.Web.Controllers
             this.accReportService = accReportService;
             this.dailySavingTrxService = dailySavingTrxService;
             this.employeeService = employeeService;
+            this.portalSavingSummaryService = portalSavingSummaryService;
+
         }
         public JsonResult GetRate(int productid, long memberId, int centerID)
         {
@@ -730,6 +737,220 @@ namespace gBanker.Web.Controllers
                     
                 }
                 return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return GetErrorMessageResult(ex);
+            }
+        }
+
+        public ActionResult PortalIndex()
+        {
+            return View();
+        }
+        public JsonResult GetPortalSavingSummary(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
+        {
+            try
+            {
+                var totalLoanSummary = portalSavingSummaryService.GetAll();
+                long totalCount = totalLoanSummary.Count();
+                var allSavingsummary = totalLoanSummary.Take(jtPageSize).Skip(jtStartIndex);
+                var currentPageRecords = Mapper.Map<IEnumerable<PortalSavingSummary>, IEnumerable<PortalSavingSummaryViewModel>>(allSavingsummary);
+                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+
+        }
+
+        public ActionResult PortalSavingSummaryApproval(long id)
+        {
+            var member = portalSavingSummaryService.GetByIdLong(id);
+            var memberModel = Mapper.Map<PortalSavingSummary, SavingsAccountOpeningViewModel>(member);
+
+            // code here
+            MapDropDownList(memberModel);
+            memberModel.OpeningDate = TransactionDate;
+            return View("Create", memberModel);
+        }
+
+        public JsonResult PortalSavingSummaryCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult PortalSavingSummaryCreate(List<SavingsAccountOpeningWithNomineeViewModel> obj)
+        {
+            try
+            {
+                PortalSavingSummaryViewModel samodel = new PortalSavingSummaryViewModel();
+
+                if (obj == null)
+                    return GetErrorMessageResult();
+                else
+                {
+                    if (obj.Where(x => x.NAlocation <= 0).Any())
+                        return GetErrorMessageResult("Alocation 0 not allow");
+                    else
+                    {
+                        if (obj.Sum(x => x.NAlocation) != 100)
+                            return GetErrorMessageResult("Alocation required 100");
+                        else
+                        {
+
+
+
+
+                            SavingsAccountOpeningViewModel model = new SavingsAccountOpeningViewModel()
+                            {
+                                CenterID = obj[0].CenterID,
+                                MemberID = obj[0].MemberID,
+                                OfficeID = obj[0].OfficeID,
+                                ProductID = obj[0].ProductID,
+                                NoOfAccount = obj[0].NoOfAccount,
+                                InterestRate = obj[0].InterestRate,
+                                SavingInstallment = obj[0].SavingInstallment,
+
+                                Ref_EmployeeID = obj[0].Ref_EmployeeID,
+                            };
+                            var entity = Mapper.Map<SavingsAccountOpeningViewModel, SavingSummary>(model);
+
+                            var pbr = productService.GetById(entity.ProductID);
+                            var employee = GetEmployee(entity.CenterID);
+                            int employeeid = employee.EmployeeId;
+
+                            if (model.Ref_EmployeeID == 0)
+                            {
+                                model.Ref_EmployeeID = employeeid;
+                            }
+                            //if (!ModelState.IsValid)
+                            //    return GetErrorMessageResult();
+                            //else
+                            //{
+                            var member = GetMember(Convert.ToInt64(entity.MemberID));
+                            int membercaregoryid = member.MemberCategoryID;
+
+
+                            entity.EmployeeId = Convert.ToInt16(employeeid);
+                            entity.MemberCategoryID = Convert.ToByte(membercaregoryid);
+                            //var mbr=memberService.GetById(employeeid);
+
+
+                            entity.IsActive = true;
+                            entity.SavingStatus = 1;
+                            entity.TransType = 2;
+                            //entity.OpeningDate = mbr.JoinDate;
+                            entity.TransactionDate = TransactionDate;
+
+                            var param = new { @OfficeID = SessionHelper.LoginUserOfficeID, @MemberID = Convert.ToInt64(entity.MemberID), @ProductID = Convert.ToInt16(entity.ProductID) };
+                            var getDD = ultimateReportService.ValidateMainItemCode_21_list(param);
+                            if (getDD.Tables[0].Rows.Count > 0)
+                                return GetSuccessMessageResult();
+                            entity.OrgID = Convert.ToInt32(LoggedInOrganizationID);
+
+                            if (IsDayInitiated)
+                            {
+                                entity.OpeningDate = TransactionDate;
+                                if (pbr.PaymentFrequency == "W")
+                                    entity.MaturedDate = entity.OpeningDate.AddMonths(Convert.ToInt16((pbr.Duration / 52)) * 12);
+                                else
+                                    entity.MaturedDate = TransactionDate.AddMonths(Convert.ToInt16(pbr.Duration));
+                            }
+                            else
+                            {
+                                var param1 = new { @OfficeID = SessionHelper.LoginUserOfficeID };
+                                var allProducts = accReportService.GetLastInitialDate(param1);
+
+                                var detail = allProducts.ToString();
+
+                                if (!IsDayInitiated)
+                                {
+                                    if (allProducts.Tables[0].Rows.Count > 0) // check if there is any data.
+                                    {
+
+                                        entity.OpeningDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1].ToString());
+                                        entity.TransactionDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1].ToString());
+                                        if (pbr.PaymentFrequency == "W")
+                                            entity.MaturedDate = entity.OpeningDate.AddMonths(Convert.ToInt16((pbr.Duration / 52)) * 12);
+                                        else
+                                            entity.MaturedDate = entity.OpeningDate.AddMonths(Convert.ToInt16(pbr.Duration));
+                                    }
+                                    else
+                                    {
+                                        entity.OpeningDate = System.DateTime.Now;
+                                        entity.MaturedDate = entity.OpeningDate.AddMonths(Convert.ToInt16(pbr.Duration));
+                                    }
+                                }
+                                else
+                                {
+                                    model.OpeningDate = TransactionDate;
+                                    entity.MaturedDate = entity.OpeningDate.AddMonths(Convert.ToInt16(pbr.Duration));
+                                }
+
+
+                            }
+
+                            var errors = savingsAccountOpeningService.IsValidSaving(entity);
+                            if (errors.ToList().Count == 0)
+                            {
+                                if (LoggedInOrganizationID == 54)
+                                {
+                                    var LoanAccount = new { Qtype = 2, OfficeID = LoginUserOfficeID, MemberID = entity.MemberID, ProductID = entity.ProductID, loanTerm = entity.NoOfAccount };
+                                    var Loan_items = ultimateReportService.GenerateLoanAndSavingAccount(LoanAccount);
+                                    if (Loan_items.Tables[0].Rows.Count > 0)
+                                        entity.SavingAccountNo = Loan_items.Tables[0].Rows[0][0].ToString();
+
+                                }
+                                if (entity.NoOfAccount == 0)
+                                    return GetErrorMessageResult("Please Check Savings AccountNo.");
+                                if ((pbr.MaxLimit < entity.SavingInstallment))
+                                {
+                                    return GetErrorMessageResult("Please Check Savings Amount.");
+                                }
+
+                                if ((pbr.MinLimit > entity.SavingInstallment))
+                                {
+                                    return GetErrorMessageResult("Please Check Savings Amount.");
+                                }
+                                if (LoggedInOrganizationID != 54)
+                                {
+
+                                    entity.Ref_EmployeeID = Convert.ToInt16(employeeid);
+                                }
+                                if (LoggedInOrganizationID == 54)
+                                {
+                                    if (entity.Ref_EmployeeID == 0)
+                                    {
+                                        entity.Ref_EmployeeID = Convert.ToInt16(employeeid);
+                                    }
+                                }
+                                entity.Duration = Convert.ToInt16(pbr.Duration);
+                                entity.InstallmentNo = 1;
+                                savingsAccountOpeningService.Create(entity);
+
+                                if (LoggedInOrganizationID == 54)
+                                {
+                                    using (gBankerDbContext db = new gBankerDbContext())
+                                    {
+                                        foreach (var n in obj)
+                                        {
+                                            db.Database.ExecuteSqlCommand("INSERT INTO NomineeXSavingSummary VALUES(" + entity.SavingSummaryID +
+                                                ",'" + n.NomineeName + "','" + n.NFatherName + "','" + n.NRelationName + "','" + n.NAddressName + "'," + n.NAlocation + ")");
+                                        }
+                                    }
+                                }
+
+                                return GetSuccessMessageResult();
+                            }
+
+                            else
+                                return GetErrorMessageResult(errors);
+                            //}
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
