@@ -4952,7 +4952,16 @@ namespace gBanker.Web.Controllers
                         LoanInstallMent = ultimateReportService.GenerateMemberLastCodeMember(param1);
                         entity.MemberCode = LoanInstallMent.Tables[0].Rows[0]["LastCode"].ToString();
                     }
-
+                    if(model.PortalMemberId > 0)
+                    {
+                        entity.PortalMemberId = model.PortalMemberId;
+                        var portalMember = portalMemberService.GetById((int)model.PortalMemberId);
+                        portalMember.ApprovalStatus = true;
+                        portalMember.Email = entity.Email;
+                        portalMember.Phone = entity.PhoneNo;
+                        portalMember.CreateUser = LoggedInEmployeeID.ToString();
+                        portalMemberService.Update(portalMember);
+                    }
                     memberService.Create(entity);
                     var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };
                     return Json(new { data = ent }, JsonRequestBehavior.AllowGet);
