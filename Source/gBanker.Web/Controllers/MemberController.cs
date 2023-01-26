@@ -1698,7 +1698,7 @@ namespace gBanker.Web.Controllers
         {
             var member = memberService.GetById(id);
             var memberModel = Mapper.Map<Member, MemberViewModel>(member);
-            //            memberModel.OfficeID = 2;
+            // memberModel.OfficeID = 2;
             MapDropDownList(memberModel);
             var allCenter = centerService.GetByOfficeId(memberModel.OfficeID, Convert.ToInt16(LoggedInOrganizationID));
             var viewCenter = allCenter.Select(x => x).ToList().Select(x => new SelectListItem
@@ -1706,6 +1706,7 @@ namespace gBanker.Web.Controllers
                 Value = x.CenterID.ToString(),
                 Text = x.CenterCode.ToString() + "-" + x.CenterName.ToString()
             });
+
             memberModel.CenterList = viewCenter;
             var allGroup = groupService.GetByOfficeId(memberModel.OfficeID);
             var viewGroup = allGroup.Select(x => x).ToList().Select(x => new SelectListItem
@@ -4604,8 +4605,21 @@ namespace gBanker.Web.Controllers
                 }
                 MemberViewModel.ServerCurrentDate = DateTime.Now;
                 var blnk_items = new List<SelectListItem>();
+
                 MemberViewModel.CenterList = blnk_items;
                 MemberViewModel.GroupList = blnk_items;
+                MemberViewModel.DistrictList= blnk_items;
+                MemberViewModel.DivisionList= blnk_items;
+                MemberViewModel.UpozillaList = blnk_items;
+
+                //MemberViewModel.GroupList = viewGroup;
+                //MemberViewModel.GroupID = portamMember.GroupID;
+                MemberViewModel.Gender = portamMember.Gender;
+                //MemberViewModel.Location = portamMember.Location;
+                //MemberViewModel.PlaceOfBirth = portamMember.PlaceOfBirth;
+                MemberViewModel.ServerCurrentDate = DateTime.Now;
+                //MemberViewModel.ExpireDate = portamMember.ExpireDate;
+                MemberViewModel.AddressLine1 = portamMember.Address;
 
                 IEnumerable<SelectListItem> items = new SelectList(" ");
                 ViewData["comtype"] = items;

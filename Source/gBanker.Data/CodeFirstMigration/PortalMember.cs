@@ -8,6 +8,7 @@ namespace gBanker.Data.CodeFirstMigration
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    
     [Table("PortalMember")]
     public partial class PortalMember
     {
@@ -35,7 +36,6 @@ namespace gBanker.Data.CodeFirstMigration
 
         public int OrgID { get; set; }
 
-        [Required]
         [StringLength(15)]
         public string CreateUser { get; set; }
 
@@ -49,6 +49,12 @@ namespace gBanker.Data.CodeFirstMigration
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
+
+        [StringLength(200)]
+        public string FatherName { get; set; }
+
+        [StringLength(200)]
+        public string MotherName { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -68,6 +74,22 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(55)]
         public string Phone { get; set; }
 
+        [StringLength(50)]
+        public string DistrictCode { get; set; }
+
+        [StringLength(50)]
+        public string DivisionCode { get; set; }
+
+        [StringLength(50)]
+        public string UpozillaCode { get; set; }
+
+        public int? CountryID { get; set; }
+
+        public DateTime? DOB { get; set; }
+
+        [StringLength(50)]
+        public string PostCode { get; set; }
+
         [StringLength(1)]
         public string Status { get; set; }
 
@@ -75,8 +97,12 @@ namespace gBanker.Data.CodeFirstMigration
         public string UpdateUser { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+
         public bool? ApprovalStatus { get; set; }
-        public int? MemberAge{ get; set; }
+
+        public int? MemberAge { get; set; }
+
+        [StringLength(50)]
         public string EducationQualification { get; set; }
     }
 }
