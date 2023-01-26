@@ -94,7 +94,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public virtual Product Product { get; set; }
 
-        public bool? ApprovalStutus { get; set; }
+        public bool? ApprovalStatus { get; set; }
 
         public List<PortalMemberNominee> MemberNomines { get; set; }
     }

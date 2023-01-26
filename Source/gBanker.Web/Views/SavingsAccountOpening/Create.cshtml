@@ -8,6 +8,7 @@
     var branch = Model == null ? null : Model.officeListItems;
     var center = Model == null ? null : Model.centerListItems;
     var member = Model == null ? null : Model.memberListItems;
+    var memberName = String.IsNullOrEmpty(ViewBag.MemberName as string) ? "" : ViewBag.MemberName as string;
 
 }
 <style type="text/css">
@@ -67,6 +68,7 @@
         var viewBagNominees = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.Nominees))';
        // console.log(nominees);
         var nominees = JSON.parse(viewBagNominees);
+
         var markup = "";
         if (nominees != null) {
             for (let i = 0; i < nominees.length; i++)
@@ -415,6 +417,8 @@
             }
             else $.alert.open("Warning", "Required field check");
         });
+        $('#ProductID').trigger('blur')
+
     });
 
 
@@ -473,7 +477,7 @@
                 <div class="form-group">
                     @Html.Label("Member", htmlAttributes: new { @class = "control-label" })
 
-                    @Html.TextBox("memberAutoComplete", "", new { @class = "form-control" })
+                    @Html.TextBox("memberAutoComplete", memberName, new { @class = "form-control" })
                     @Html.HiddenFor(model => model.MemberID)
                     @Html.TextBoxFor(model => model.MemberID, new { @style = "display:none" })
                     @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
