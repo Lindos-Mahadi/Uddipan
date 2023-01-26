@@ -9,6 +9,8 @@
     var center = Model == null ? null : Model.centerListItems;
     var purpose = Model == null ? null : Model.purposeListItems;
     var member = Model == null ? null : Model.memberListItems;
+    var memberValue = String.IsNullOrEmpty(ViewBag.MemberName) ? "" : ViewBag.MemberName as string;
+    var purposeValue = String.IsNullOrEmpty(ViewBag.purposeList) ? "" : ViewBag.purposeList as string;
     var investor = Model == null ? null : Model.investorListItems;
     var pMode = Model == null ? null : Model.paymentMode;
     var mPassBook = Model == null ? null : Model.MemberPassBookNOListItems;
@@ -16,30 +18,32 @@
     var freqMode = Model == null ? null : Model.freqMode;
     // var vmaxLoanterm == null ? null : Model.vMaxLoanTerm.ToString();
 
+    var productMainCodeSub = Model.PortalLoanSummaryID > 0 ? "hide" : "";
+
 }
 <style type="text/css">
-     .modal {
-         display: none;
-         position: fixed;
-         z-index: 1000;
-         top: 0;
-         left: 0;
-         height: 100%;
-         width: 100%;
-         background: rgba( 255, 255, 255, .8 ) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
-     }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba( 255, 255, 255, .8 ) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+    }
 
-     /* When the body has the loading class, we turn
+    /* When the body has the loading class, we turn
     the scrollbar off with overflow:hidden */
-     body.loading {
-         overflow: hidden;
-     }
+    body.loading {
+        overflow: hidden;
+    }
 
-         /* Anytime the body has the loading class, our
+        /* Anytime the body has the loading class, our
     modal element will be visible */
-         body.loading .modal {
-             display: block;
-         }
+        body.loading .modal {
+            display: block;
+        }
 </style>
 
 
@@ -484,7 +488,7 @@
             var nationalId = $("#Guarantor").val();
             $("span[data-valmsg-for='Guarantor']").text('');
             //alert(nationalId.length);
-            if (nationalId != "") { 
+            if (nationalId != "") {
                 if (nationalId.length == 10 || nationalId.length == 17) {
                     // alert("OK");
                 }
@@ -740,7 +744,7 @@
                     $("#SecurityBankCheckNo").prop("readonly", true);
                 }
             }
-            
+
         });
 
 
@@ -1241,7 +1245,7 @@
                                 <div class="form-group">
                                     @Html.Label("Member", htmlAttributes: new { @class = "control-label" })
 
-                                    @Html.TextBox("memberAutoComplete", "", new { @class = "form-control" })
+                                    @Html.TextBox("memberAutoComplete", memberValue, new { @class = "form-control" })
                                     @Html.HiddenFor(model => model.MemberID)
                                     @Html.HiddenFor(model => model.MyGuid)
                                     @Html.HiddenFor(model => model.PortalLoanSummaryID)
@@ -1277,17 +1281,24 @@
                     @Html.ValidationMessageFor(model => model.frequencyMode, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="col-md-6">
+            <div class="col-md-6 @productMainCodeSub">
                 <div class="form-group">
                     <label class="control-label"> Product Main  </label>
                     <select class="form-control" id="MainProductCode"></select>
+                    @*@Html.DropDownListFor(model => model.MainProductCode, freqMode, new { @class = "form-control", onchange = "SetFreqid(this.value);" })*@
                 </div>
             </div>
 
+            <!--<div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label"> Product Main  </label>
+                    <select class="form-control" id="MainProductCode"></select>-->
+            @*@Html.DropDownListFor(model => model.MainProductCode, freqMode, new { @class = "form-control", onchange = "SetFreqid(this.value);" })*@
+            <!--</div>
+            </div>-->
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 @productMainCodeSub">
                 <div class="form-group">
                     <label class="control-label"> Sub Main Product </label>
                     <select class="form-control" id="SubMainProductCode"></select>
@@ -1326,7 +1337,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     @Html.Label("Purpose", htmlAttributes: new { @class = "control-label" })
-                    @Html.TextBox("PurposeAutoComplete", "", new { @class = "form-control" })
+                    @Html.TextBox("PurposeAutoComplete", purposeValue, new { @class = "form-control" })
                     @Html.HiddenFor(model => model.PurposeID)
                 </div>
             </div>
@@ -1615,44 +1626,44 @@
                     </tbody>
 
                     @*<thead>
-                        <tr>
-                            <th scope="col" colspan="4" class="bg-info"><center>Family Employment</center></th>
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th scope="col" colspan="2" class="bg-info"><center>Full Time</center></th>
-                            <th scope="col" colspan="2" class="bg-info"><center>Part time</center></th>
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th scope="col"><center>Male</center></th>
-                            <th scope="col"><center>Female</center></th>
+                            <tr>
+                                <th scope="col" colspan="4" class="bg-info"><center>Family Employment</center></th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="2" class="bg-info"><center>Full Time</center></th>
+                                <th scope="col" colspan="2" class="bg-info"><center>Part time</center></th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th scope="col"><center>Male</center></th>
+                                <th scope="col"><center>Female</center></th>
 
-                            <th scope="col"><center>Male</center></th>
-                            <th scope="col"><center>Female</center></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+                                <th scope="col"><center>Male</center></th>
+                                <th scope="col"><center>Female</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
 
-                            <td>
-                                @Html.EditorFor(model => model.txtMaleFullTimeP2, new { htmlAttributes = new { @class = "" } })
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => model.txtFeMaleFullTimeP2, new { htmlAttributes = new { @class = "" } })
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => model.txtMalePartTimeP2, new { htmlAttributes = new { @class = "" } })
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => model.txtFeMalePartTimeP2, new { htmlAttributes = new { @class = "" } })
-                            </td>
+                                <td>
+                                    @Html.EditorFor(model => model.txtMaleFullTimeP2, new { htmlAttributes = new { @class = "" } })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.txtFeMaleFullTimeP2, new { htmlAttributes = new { @class = "" } })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.txtMalePartTimeP2, new { htmlAttributes = new { @class = "" } })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.txtFeMalePartTimeP2, new { htmlAttributes = new { @class = "" } })
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    </tbody>*@
+                        </tbody>*@
 
                     <thead>
                         <tr>
@@ -1715,6 +1726,9 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/gbUtility")
     @Scripts.Render("~/bundles/jtable")
+
+
+
 }
 
 

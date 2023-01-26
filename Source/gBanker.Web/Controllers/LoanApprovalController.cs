@@ -629,6 +629,15 @@ namespace gBanker.Web.Controllers
 
             var portalLoanSummary = portalLoanSummaService.GetById(portalLoanId);
             var model = Mapper.Map<PortalLoanSummary, LoanApprovalViewModel>(portalLoanSummary);
+
+            var purposeSummary = portalLoanSummaService.GetById(portalLoanId);
+            var purposeModel = Mapper.Map<PortalLoanSummary, LoanApprovalViewModel>(purposeSummary);
+            model.PurposeID= purposeModel.PurposeID;
+
+            var product = productService.GetById(model.ProductID);
+
+            model.frequencyMode = product.PaymentFrequency;
+            model.MainProductCode= product.MainProductCode;
             //var model = new LoanApprovalViewModel();
             if (IsDayInitiated)
                 model.ApproveDate = TransactionDate;
@@ -648,6 +657,23 @@ namespace gBanker.Web.Controllers
                 GuarantorAge = (int)OrgInfo.GuarantorAge;
             }
             ViewData["GuarantorAge"] = GuarantorAge;
+
+            // for Member Name
+            var member = GetMember(Convert.ToInt64(model.MemberID));
+            ViewBag.MemberName = string.Format("{0} - {1}", member.MemberCode, member.FirstName);
+
+            var entity = Mapper.Map<LoanApprovalViewModel, LoanSummary>(model);
+            entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
+            
+            // for purpose 
+            var purpose = GetPurpose(Convert.ToInt32(model.PurposeID));
+            ViewBag.purposeList = string.Format("{0} - {1}", purpose.PurposeCode, purpose.PurposeName);
+
+            var mlt = loanapprovalService.getMaxLoanterm(entity);
+
+            model.LoanTerm = (byte)mlt;
+
+
             return View("Create", model);
 
         }
