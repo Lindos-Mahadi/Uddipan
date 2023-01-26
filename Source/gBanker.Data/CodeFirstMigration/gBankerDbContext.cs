@@ -180,6 +180,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual DbSet<PKSFFundLoan> PKSFFundLoan { get; set; }
         public virtual DbSet<ProductXEmploymentProductMapping> ProductXEmploymentProductMapping { get; set; }
         public virtual DbSet<PortalSavingSummary> PortalSavingSummary { get; set; }
+        public virtual DbSet<NomineeXPortalSavingSummary> NomineeXPortalSavingSummary { get; set; }
 
 
         #region Inventory
@@ -3269,8 +3270,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
                 .Property(e => e.CreateUser)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<PortalSavingSummary>()
-                        .HasMany(p => p.MemberNomines);
+          
         }
     }
 }

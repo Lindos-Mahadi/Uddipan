@@ -87,6 +87,7 @@
     <Compile Include="AccCategoryService.cs" />
     <Compile Include="AccChartService.cs" />
     <Compile Include="AccLastVoucherService.cs" />
+    <Compile Include="NomineeXPortalSavingSummaryService.cs" />
     <Compile Include="PortalLoanSummaryService.cs" />
     <Compile Include="PortalMemberService.cs" />
     <Compile Include="PortalSavingSummaryService.cs" />

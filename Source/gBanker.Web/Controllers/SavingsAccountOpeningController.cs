@@ -29,12 +29,14 @@ namespace gBanker.Web.Controllers
         private readonly IAccReportService accReportService;
         private readonly IDailySavingTrxService dailySavingTrxService;
         private readonly IPortalSavingSummaryService portalSavingSummaryService;
+        private readonly INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService;
             // GET: SavingSummary
         public SavingsAccountOpeningController(ISavingsAccountOpeningService savingsAccountOpeningService, IProductService productService, 
             IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService,
             IPurposeService purposeService, IMemberService memberService,ISavingSummaryService savingsummaryService,
             IUltimateReportService ultimateReportService, IAccReportService accReportService, IDailySavingTrxService dailySavingTrxService,
-            IEmployeeService employeeService, IPortalSavingSummaryService portalSavingSummaryService)
+            IEmployeeService employeeService, IPortalSavingSummaryService portalSavingSummaryService, 
+            INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService)
         {
             this.savingsAccountOpeningService = savingsAccountOpeningService;
             this.productService = productService;
@@ -49,6 +51,7 @@ namespace gBanker.Web.Controllers
             this.dailySavingTrxService = dailySavingTrxService;
             this.employeeService = employeeService;
             this.portalSavingSummaryService = portalSavingSummaryService;
+            this.nomineeXPortalSavingSummaryService = nomineeXPortalSavingSummaryService;
 
         }
         public JsonResult GetRate(int productid, long memberId, int centerID)
@@ -769,17 +772,21 @@ namespace gBanker.Web.Controllers
         {
             var member = portalSavingSummaryService.GetByIdLong(id);
             var memberModel = Mapper.Map<PortalSavingSummary, SavingsAccountOpeningViewModel>(member);
+            var memberNominee = nomineeXPortalSavingSummaryService.GetSavingSummaryNominee(id);
+            var  Name = GetMember(Convert.ToInt64(member.MemberID));
 
+            ViewBag.MemberName = string.Format("{0} - {1}", Name.MemberCode, Name.FirstName);
+            ViewBag.Nominees = memberNominee;
             // code here
             MapDropDownList(memberModel);
             memberModel.OpeningDate = TransactionDate;
             return View("Create", memberModel);
         }
 
-        public JsonResult PortalSavingSummaryCreate()
-        {
-            return View();
-        }
+        //public JsonResult PortalSavingSummaryCreate()
+        //{
+        //    return View();
+        //}
         [HttpPost]
         public JsonResult PortalSavingSummaryCreate(List<SavingsAccountOpeningWithNomineeViewModel> obj)
         {

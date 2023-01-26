@@ -1,4 +1,5 @@
 ﻿@model gBanker.Web.ViewModels.SavingsAccountOpeningViewModel
+@using Newtonsoft.Json;
 
 @{
     ViewBag.Title = "SavingsAccountOpening Create";
@@ -62,10 +63,32 @@
 
     $(document).ready(function () {
         ////
-        
+
+        var viewBagNominees = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.Nominees))';
+       // console.log(nominees);
+        var nominees = JSON.parse(viewBagNominees);
+        var markup = "";
+        if (nominees != null) {
+            for (let i = 0; i < nominees.length; i++)
+            {
+                var { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation   } = nominees[i];
+                markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
+                    "</td><td style='text-align: center;'> " + NomineeName +
+                    "</td><td style='text-align: center;'>" + NFatherName +
+                    "</td><td style='text-align: center;'>" + NRelationName +
+                    "</td><td style='text-align: center;'>" + NAddressName +
+                    "</td><td style='text-align: center;'>" + NAlocation + "</td><td></td></tr>";
+
+                $("#tblAdd tbody").append(markup);
+
+            }
+
+        }
+
+
         $(".add-row").click(function () {
             var status = 0;
-            
+
             if ($("#txtNomineeName").val() && $("#txtNomRelation").val()
                 && $("#txtNomAlocation").val()
                 && $("#txtNomAlocation").val() > 0 && $("#txtNomAlocation").val() <= 100) {
@@ -171,7 +194,10 @@
             }
         });
         $("#memberAutoComplete").blur(function () {
+            var memeberName = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.MemberName))';
+            console.log(memeberName);
             var member = $("#memberAutoComplete").val();
+            
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("GetMemberList", "SavingsAccountOpening", "http")',
@@ -533,6 +559,11 @@
         </div>
     </div>
     <br />
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table id="tblAdd">

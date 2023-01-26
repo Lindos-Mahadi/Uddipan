@@ -96,6 +96,6 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public bool? ApprovalStutus { get; set; }
 
-        public ICollection<PortalMemberNominee> MemberNomines { get; set; }
+        public List<PortalMemberNominee> MemberNomines { get; set; }
     }
 }
