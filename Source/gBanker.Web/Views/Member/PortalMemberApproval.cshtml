@@ -366,6 +366,12 @@
                     ddlDivisionPer.append($('<option></option>').val(option.Value).html(option.Text));
 
                 });
+                var divisionCode = '@Model.DivisionCode';
+                console.log('Division', divisionCode);
+                if (divisionCode) {
+                    $('#DivisionCode').val(divisionCode);
+                    $('#DivisionCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -390,6 +396,7 @@
                 $.each(data, function (id, option) {
                     ddlDivisionPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -419,6 +426,12 @@
                     //ddlDistrictPer.append($('<option></option>').val(option.Value).html(option.Text));
                     ddlPlaceOfBirth.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                var districtCode = '@Model.DistrictCode';
+                //console.log('Division', districtCode);
+                if (districtCode) {
+                    $('#DistrictCode').val(districtCode);
+                    $('#DistrictCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -443,6 +456,12 @@
                 $.each(data, function (id, option) {
                     ddlDistrictPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                @*var districtCode = '@Model.DistrictCode';
+                console.log('districtCode', districtCode);
+                if (districtCode) {
+                    $('#DistrictCode').val(districtCode);
+                    $('#DistrictCode').trigger('change');
+                }*@
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -470,6 +489,13 @@
                     ddlUpozilla.append($('<option></option>').val(option.Value).html(option.Text));
                     //ddlUpozillaPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+
+                var upozillaCode = '@Model.UpozillaCode';
+                console.log('UpozillaCode', upozillaCode);
+                if (upozillaCode) {
+                    $('#UpozillaCode').val(upozillaCode);
+                    $('#UpozillaCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -494,6 +520,14 @@
                 $.each(data, function (id, option) {
                     ddlUpozillaPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+
+                var upozillaCode = '@Model.UpozillaCode';
+                //console.log('upozillaCode', upozillaCode);
+                if (upozillaCode) {
+                    $('#UpozillaCode').val(upozillaCode);
+                    $('#UpozillaCode').trigger('change');
+                }
+
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -522,6 +556,12 @@
                     ddlUnion.append($('<option></option>').val(option.Value).html(option.Text));
                    // ddlUnionPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                var unionCode = '@Model.UnionCode';
+                console.log('UnionCode', unionCode);
+                if (unionCode) {
+                    $('#UnionCode').val(unionCode);
+                    $('#UnionCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -547,6 +587,12 @@
                 $.each(data, function (id, option) {
                     ddlUnionPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                var unionCode = '@Model.UnionCode';
+                //console.log('UnionCode', unionCode);
+                if (unionCode) {
+                    $('#UnionCode').val(unionCode);
+                    $('#UnionCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -576,6 +622,12 @@
                     ddlVillage.append($('<option></option>').val(option.Value).html(option.Text));
                    // ddlVillagePer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                var unionCode = '@Model.UnionCode';
+                console.log('UnionCode', unionCode);
+                if (unionCode) {
+                    $('#UnionCode').val(unionCode);
+                    $('#UnionCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -1640,6 +1692,9 @@
 
 
         });
+
+        //Write your Code
+
     });
 
 </script>
