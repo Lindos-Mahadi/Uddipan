@@ -1073,6 +1073,21 @@
 
 
 
+        $('#ProductID').trigger('change');
+        var loanAmount = '@Model.PrincipalLoan';
+        if (loanAmount) {
+            $('#PrincipalLoan').val(loanAmount);
+            $('#PrincipalLoan').trigger('blur');
+
+        }
+        $('#PhoneNo').trigger('change');
+        var phoneNo = '@Model.PhoneNo';
+        if (phoneNo) {
+            $('#PhoneNo').val(phoneNo);
+            $('#PhoneNo').trigger('blur');
+
+        }
+
 
     }); // END of Document Ready
 
