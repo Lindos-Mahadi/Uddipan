@@ -984,6 +984,9 @@ namespace gBanker.Web.Controllers
                                 portalLoanSummary.ApprovalStatus = true;
                                 portalLoanSummaService.Update(portalLoanSummary);
                             }
+
+                            // Redirect To Action
+                            return RedirectToAction("Index");
                         }
                         return GetSuccessMessageResult();
                     }
