@@ -51,5 +51,7 @@ namespace gBanker.Web.ViewModels
 
         public int MemberNomineeId { get; set; }
         public long SavingSummaryID { get; set; }
+
+        public long PortalSavingSummaryID { get; set; }
     }
 }

@@ -635,8 +635,17 @@ namespace gBanker.Web.Controllers
                                         }
                                     }
                                 }
+                                if (obj[0].PortalSavingSummaryID > 0)
+                                {
+                                    var portalLoanSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
+                                    if(portalSavingSummaryService != null)
+                                    {
+                                        portalLoanSummary.ApprovalStatus = true;
+                                        portalSavingSummaryService.Update(portalLoanSummary);
+                                    }
+                                }
                                    
-                                    return GetSuccessMessageResult();
+                                return GetSuccessMessageResult();
                                 }
 
                                 else

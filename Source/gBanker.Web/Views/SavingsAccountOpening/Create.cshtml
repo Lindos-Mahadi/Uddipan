@@ -375,6 +375,7 @@
                         item["SavingInstallment"] = $("#SavingInstallment").val();
                         item["NoOfAccount"] = $("#NoOfAccount").val();
                         item["Ref_EmployeeID"] = $("#Ref_EmployeeID").val();
+                        item["PortalSavingSummaryID"] = $("#PortalSavingSummaryID").val();
                         jsonObj.push(item);
                     });
                     /////////
@@ -449,6 +450,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => model.PortalSavingSummaryID)
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
