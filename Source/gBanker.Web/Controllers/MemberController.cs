@@ -903,12 +903,28 @@ namespace gBanker.Web.Controllers
         }
         public byte[] GetImageFromDataBase(Int64 Id)
         {
-            var memberDetail = memberService.GetByMemberId(Id);
-            var img = memberDetail.MemberImg;
-            //var q = from temp in  where temp.ID == Id select temp.Image;
-            byte[] cover = img;
-            return cover;
+            //var memberDetail = memberService.GetByMemberId(Id);
+            //var img = memberDetail.MemberImg;
+            ////var q = from temp in  where temp.ID == Id select temp.Image;
+            //byte[] cover = img;
+            //return cover;
 
+            try
+            {
+                var memberDetail = memberService.GetByMemberId(Id);
+                if (memberDetail == null)
+                {
+                   throw new NullReferenceException();
+                }
+                var img = memberDetail.MemberImg;
+                byte[] cover = img;
+                return cover;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
 
 
             ////Bitmap img;

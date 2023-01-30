@@ -86,7 +86,11 @@ namespace gBanker.Service
         public Member GetByMemberId(Int64 memId)
         {
             var entity = repository.Get(e => e.MemberID == memId);
-            return entity;
+            if (entity == null)
+            {
+                return entity;
+            }
+            return null;
         }
 
         public Member Create(Member objectToCreate)
