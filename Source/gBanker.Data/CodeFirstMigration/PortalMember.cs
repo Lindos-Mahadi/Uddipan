@@ -104,5 +104,9 @@ namespace gBanker.Data.CodeFirstMigration
 
         [StringLength(50)]
         public string EducationQualification { get; set; }
+
+        // ADDED NationalID
+        [StringLength(20)]
+        public string NationalID { get; set; }
     }
 }
