@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Source",
-    "\\Source\\gBanker.Web"
+    ""
   ],
-  "SelectedNode": "\\Source\\gBanker.Web\\Web.config",
+  "SelectedNode": "\\MobileApp.sln",
   "PreviewInSolutionExplorer": false
 }

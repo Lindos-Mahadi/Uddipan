@@ -193,5 +193,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "date")]
         public DateTime? FirstInstallmentDate { get; set; }
         public long? PortalLoanSummaryID { get; set; }
+        public long GuarantorNID { get; set; }
+        public long GuarantorImg { get; set; }
+        public string SupportingDocumentsId { get; set; }
     }
 }

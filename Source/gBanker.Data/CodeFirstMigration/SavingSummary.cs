@@ -84,6 +84,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public string SavingAccountNo { get; set; }
         public int Ref_EmployeeID { get; set; }
+        public string SupportingDocumentsId { get; set; }
 
         public virtual Organization Organization { get; set; }
         public virtual Center Center { get; set; }
