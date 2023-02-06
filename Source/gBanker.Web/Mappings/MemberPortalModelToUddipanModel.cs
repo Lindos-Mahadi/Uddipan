@@ -23,11 +23,20 @@ namespace gBanker.Web.Mappings
             Mapper.CreateMap<PortalMember, DBMemberDetailModel>()
                 .ForMember(dest => dest.IsPortalMember, source => source.MapFrom(s => true))
                 .ForMember(dest => dest.PortalMemberId, option => option.MapFrom(src => src.Id));
-            Mapper.CreateMap<PortalMember , MemberViewModel>()
+            Mapper.CreateMap<PortalMember, MemberViewModel>()
                 .ForMember(dest => dest.IsPortalMember, source => source.MapFrom(s => true))
                 .ForMember(dest => dest.PortalMemberId, option => option.MapFrom(src => src.Id))
                 .ForMember(dest => dest.BirthDate, option => option.MapFrom(src => src.DOB))
-                .ForMember(dest => dest.PhoneNo, option => option.MapFrom(src => src.Phone));
+                .ForMember(dest => dest.PhoneNo, option => option.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.ZipCode, option => option.MapFrom(src => src.PostCode))
+                .ForMember(dest => dest.PerDivisionCode, option => option.MapFrom(src => src.DivisionCode))
+                .ForMember(dest => dest.PerDistrictCode, option => option.MapFrom(src => src.DistrictCode))
+                .ForMember(dest => dest.PerUpozillaCode, option => option.MapFrom(src => src.UpozillaCode))
+                .ForMember(dest => dest.PerUnionCode, option => option.MapFrom(src => src.UnionCode))
+                .ForMember(dest => dest.PerVillageCode, option => option.MapFrom(src => src.VillageCode))
+                .ForMember(dest => dest.Education, option => option.MapFrom(src => src.EducationQualification))
+                .ForMember(dest => dest.PerZipCode, option => option.MapFrom(src => src.PostCode))
+                .ForMember(dest => dest.PerAddressLine1, option => option.MapFrom(src => src.Address));
 
             Mapper.CreateMap<PortalLoanSummary, LoanApprovalViewModel>()
                 .ForMember(dest => dest.PortalLoanSummaryID, option => option.MapFrom(src => src.PortalLoanSummaryID));
