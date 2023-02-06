@@ -373,6 +373,7 @@
                     $('#DivisionCode').val(divisionCode);
                     $('#DivisionCode').trigger('change');
                 }
+                $("#PerCountryID").trigger('change');
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -397,7 +398,12 @@
                 $.each(data, function (id, option) {
                     ddlDivisionPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
-
+                var perDivisionCode = '@Model.PerDivisionCode';
+                //console.log('perDivisionCode', perDivisionCode);
+                if (perDivisionCode) {
+                    $('#PerDivisionCode').val(perDivisionCode);
+                    $('#PerDivisionCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -457,12 +463,12 @@
                 $.each(data, function (id, option) {
                     ddlDistrictPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
-                @*var districtCode = '@Model.DistrictCode';
-                console.log('districtCode', districtCode);
-                if (districtCode) {
-                    $('#DistrictCode').val(districtCode);
-                    $('#DistrictCode').trigger('change');
-                }*@
+                var perDistrictCode = '@Model.PerDistrictCode';
+                //console.log('PerDistrictCode', perDistrictCode);
+                if (perDistrictCode) {
+                    $('#PerDistrictCode').val(perDistrictCode);
+                    $('#PerDistrictCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -522,11 +528,11 @@
                     ddlUpozillaPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
 
-                var upozillaCode = '@Model.UpozillaCode';
+                var perUpozillaCode = '@Model.PerUpozillaCode';
                 //console.log('upozillaCode', upozillaCode);
-                if (upozillaCode) {
-                    $('#UpozillaCode').val(upozillaCode);
-                    $('#UpozillaCode').trigger('change');
+                if (perUpozillaCode) {
+                    $('#PerUpozillaCode').val(perUpozillaCode);
+                    $('#PerUpozillaCode').trigger('change');
                 }
 
             },
@@ -588,11 +594,11 @@
                 $.each(data, function (id, option) {
                     ddlUnionPer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
-                var unionCode = '@Model.UnionCode';
-                //console.log('UnionCode', unionCode);
-                if (unionCode) {
-                    $('#UnionCode').val(unionCode);
-                    $('#UnionCode').trigger('change');
+                var perUnionCode = '@Model.PerUnionCode';
+                //console.log('PerUnionCode', perUnionCode);
+                if (perUnionCode) {
+                    $('#PerUnionCode').val(perUnionCode);
+                    $('#PerUnionCode').trigger('change');
                 }
             },
             error: function (request, status, error) {
@@ -623,11 +629,11 @@
                     ddlVillage.append($('<option></option>').val(option.Value).html(option.Text));
                    // ddlVillagePer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
-                var unionCode = '@Model.UnionCode';
+                var villageCode = '@Model.VillageCode';
                 //console.log('UnionCode', unionCode);
-                if (unionCode) {
-                    $('#UnionCode').val(unionCode);
-                    $('#UnionCode').trigger('change');
+                if (villageCode) {
+                    $('#VillageCode').val(villageCode);
+                    $('#VillageCode').trigger('change');
                 }
             },
             error: function (request, status, error) {
@@ -656,6 +662,12 @@
                 $.each(data, function (id, option) {
                     ddlVillagePer.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                var perVillageCode = '@Model.PerVillageCode';
+                //console.log('perVillageCode', perVillageCode);
+                if (perVillageCode) {
+                    $('#PerVillageCode').val(perVillageCode);
+                    $('#PerVillageCode').trigger('change');
+                }
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -769,9 +781,16 @@
     }
     function AsPresentAddress() {
 
+        //var ZipCode = $("#ZipCode").val();
+        //$("#PerZipCode").val(ZipCode);
 
         var AddressLine1 = $("#AddressLine1").val();
         $("#PerAddressLine1").val(AddressLine1);
+
+        //if (ZipCode = '') {
+        //    $("#PerZipCode").prop("checked", false);
+        //    return;
+        //}
         if (AddressLine1 == '')
         {
             alert("Please Give Present Address Details. ");
@@ -925,7 +944,6 @@
 
 
         LoadDivisionByCountry(18);
-
         $("#BirthDate").datepicker({
             dateFormat: "dd-M-yy",
             showAnim: "scale",
@@ -1228,6 +1246,10 @@
 
 
         $("#ZipCode").blur(function () {
+            //var ZipCode = $("#ZipCode").val();
+            //$("#PerZipCode").val(ZipCode);
+        });
+        $("#PerZipCode").blur(function () {
             //var ZipCode = $("#ZipCode").val();
             //$("#PerZipCode").val(ZipCode);
         });
@@ -1629,6 +1651,7 @@
                             $("#NationalID").val('');
                             $("#SmartCard").val('');
                             $("#PhoneNo").val('');
+                            //$("#PerZipCode").val('');
 
 
 
