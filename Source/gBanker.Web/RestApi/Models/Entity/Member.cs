@@ -84,5 +84,7 @@ namespace gBanker.Web.RestApi.Models.Entity
         public DateTime? CreateDate { get; set; }
 
         public string MemberStatus { get; set; }
+        public long MemberNID { get; set; }
+        public long Image { get; set; }
     }
 }
