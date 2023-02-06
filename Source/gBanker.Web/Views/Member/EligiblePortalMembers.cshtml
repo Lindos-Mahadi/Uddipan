@@ -66,7 +66,8 @@
                     edit: false,
                     display: function (data) {
                         //return "<div class='text-center'><img src='/images/blank-headshot.jpg' alt='No Image' height=50 width=50 class='img-circle' /></div>";
-                        return "<div class='text-center'><img src='/Member/RetrieveImage/" + data.record.MemberID + "' alt='No Image' height=50 width=50 class='img-circle' /></div>";
+                        console.log(data.record);
+                        return "<div class='text-center'><img src='/Member/GetPortalMemberImageFromDatabase/" + data.record.Image + "' alt='No Image' height=50 width=50 class='img-circle' /></div>";
                     }
                 },
                 MemberCode: {

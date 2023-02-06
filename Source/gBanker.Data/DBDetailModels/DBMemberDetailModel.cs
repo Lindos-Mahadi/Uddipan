@@ -77,6 +77,9 @@ namespace gBanker.Data.DBDetailModels
         public bool? IsPortalMember { get; set; }
         public long? PortalMemberId { get; set; }
 
+        public long? MemberNID { get; set; }
+        public long? Image { get; set; }
+
     }
 }
 

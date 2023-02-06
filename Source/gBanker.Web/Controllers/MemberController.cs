@@ -55,7 +55,7 @@ namespace gBanker.Web.Controllers
         private readonly ISavingTrxService savingTrxService;
         private readonly IOrganizationService organizationService;
         private readonly IPortalMemberService portalMemberService;
-
+        private readonly IFileService fileService;
 
         private object receiver;
 
@@ -76,7 +76,8 @@ namespace gBanker.Web.Controllers
             ISavingSummaryService savingSummaryService, 
             ISavingTrxService savingTrxService, 
             IOrganizationService organizationService,
-            IPortalMemberService portalMemberService)
+            IPortalMemberService portalMemberService,
+            IFileService fileService)
         {
             this.memberService = memberService;
             this.officeService = officeService;
@@ -95,6 +96,7 @@ namespace gBanker.Web.Controllers
             this.savingTrxService = savingTrxService;
             this.organizationService = organizationService;
             this.portalMemberService = portalMemberService;
+            this.fileService = fileService;
         }
         #endregion
 
@@ -949,6 +951,23 @@ namespace gBanker.Web.Controllers
             ////var q = from temp in  where temp.ID == Id select temp.Image;
             //// byte[] cover = img;
             //return img;
+        }
+
+        public ActionResult GetPortalMemberImageFromDatabase(Int64? Id)
+        {
+            try
+            {
+                if(Id != null)
+                {
+                    var uploadedImage = fileService.GetByIdLong((long)Id);
+                    return File(uploadedImage.File, "image/*");
+                }
+                throw new NullReferenceException();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ActionResult RetrieveImage(Int64 id)
         {
@@ -4991,6 +5010,8 @@ namespace gBanker.Web.Controllers
                         portalMember.Phone = entity.PhoneNo;
                         portalMember.CreateUser = LoggedInEmployeeID.ToString();
                         portalMemberService.Update(portalMember);
+
+                       // var memberNID = fileService.;
                     }
                     memberService.Create(entity);
                     var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };

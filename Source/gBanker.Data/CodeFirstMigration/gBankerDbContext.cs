@@ -16,6 +16,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         }
         //Portal Loan Summary
         public virtual DbSet<PortalLoanSummary> PortalLoanSummaries { get; set; }
+        public virtual DbSet<FileUploadTable> FileUploadTable { get; set; }
         // Portal Member
         public virtual DbSet<PortalMember> PortalMembers { get; set; }
         public virtual DbSet<RDOffice> RDOffice { get; set; }

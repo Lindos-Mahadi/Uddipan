@@ -267,8 +267,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public bool? IsPortalMember { get; set; }
         public long? PortalMemberId { get; set; }
 
-        public long MemberNID { get; set; }
-        public long Image { get; set; }
+        public long? MemberNID { get; set; }
+        public long? Image { get; set; }
 
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 

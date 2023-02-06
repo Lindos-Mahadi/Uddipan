@@ -108,5 +108,8 @@ namespace gBanker.Data.CodeFirstMigration
         // ADDED NationalID
         [StringLength(20)]
         public string NationalID { get; set; }
+
+        public long? MemberNID { get; set; }
+        public long? Image { get; set; }
     }
 }
