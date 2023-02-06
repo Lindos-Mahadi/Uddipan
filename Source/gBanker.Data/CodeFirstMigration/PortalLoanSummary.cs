@@ -204,6 +204,9 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(50)]
         public string Remarks { get; set; }
         public bool? ApprovalStatus { get; set; }
+
+        public long? GuarantorNID { get; set; }
+        public long? GuarantorImg { get; set; }
     }
 }
 

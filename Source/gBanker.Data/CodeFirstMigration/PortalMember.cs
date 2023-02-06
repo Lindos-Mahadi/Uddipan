@@ -82,6 +82,8 @@ namespace gBanker.Data.CodeFirstMigration
 
         [StringLength(50)]
         public string UpozillaCode { get; set; }
+        public string UnionCode { get; set; }
+        public string VillageCode { get; set; }
 
         public int? CountryID { get; set; }
 
