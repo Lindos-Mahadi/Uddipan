@@ -66,7 +66,6 @@ namespace gBanker.Data.CodeFirstMigration
         [Required]
         public string Address { get; set; }
 
-        [Required]
         [StringLength(10)]
         public string Photo { get; set; }
 

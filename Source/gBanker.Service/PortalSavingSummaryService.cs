@@ -91,9 +91,8 @@ namespace gBanker.Service
 
         public void Update(PortalSavingSummary objectToUpdate)
         {
-            //repository.Update(objectToUpdate);
-            //Save();
-            throw new NotImplementedException();
+            repository.Update(objectToUpdate);
+            Save();
         }
     }
 }
