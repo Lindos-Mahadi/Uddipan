@@ -24,6 +24,7 @@
     var memCat = Model == null ? null : Model.MemCategoryList;
     var pob = Model == null ? null : Model.PlaceOfBirthList;
     var phoneNumber = Model == null ? null : Model.PhoneNo;
+    var headerChange = Model.Id > 0 ? "hide" : "";
 }
 <script src="~/Scripts/jquery.form.min.js"></script>
 <style>
@@ -63,7 +64,7 @@
     function GetChoiseOptionsList() { // Load ddl
 
         var ddlChoseFinService = $("#ddlChoseFinService");
-        
+
 
        // var AnotherMFIMemberCheck = $("#AnotherMFIMemberCheck");
 
@@ -1734,7 +1735,17 @@
 
 @Html.ActionLink("Back to List", "Index", null, new { @class = "pull-right" })
 
-<h2 class="page-title">Member Create</h2>
+@if (Model.Id > 0)
+{
+    <h2 class="page-title">Member Create</h2>
+}
+else
+{
+    <h2 class="page-title">Member Create</h2>
+}
+
+
+
 <input type="hidden" id="LoggedInOrg" value="0" />
 @using (Html.BeginForm("PortalMemberApproval", "Member", FormMethod.Post, new { enctype = "multipart/form-data", id = "MemProfile" }))
 {
