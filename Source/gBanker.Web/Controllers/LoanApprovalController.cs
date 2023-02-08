@@ -982,11 +982,12 @@ namespace gBanker.Web.Controllers
                             if(portalLoanSummary != null)
                             {
                                 portalLoanSummary.ApprovalStatus = true;
+                                portalLoanSummary.LoanStatus = 2;
                                 portalLoanSummaService.Update(portalLoanSummary);
                             }
 
                             // Redirect To Action
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Index", "LoanApproval");
                         }
                         return GetSuccessMessageResult();
                     }

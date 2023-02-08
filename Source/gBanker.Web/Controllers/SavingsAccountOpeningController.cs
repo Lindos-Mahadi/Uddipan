@@ -641,6 +641,7 @@ namespace gBanker.Web.Controllers
                                     if(portalSavingSummaryService != null)
                                     {
                                         portalLoanSummary.ApprovalStatus = true;
+                                        portalLoanSummary.SavingStatus = 2;
                                         portalSavingSummaryService.Update(portalLoanSummary);
                                     }
                                 }
