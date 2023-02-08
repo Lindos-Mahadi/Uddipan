@@ -2,7 +2,7 @@
 @using Newtonsoft.Json;
 
 @{
-    ViewBag.Title = "SavingsAccountOpening Create";
+    ViewBag.Title = "Savings Account Opening";
     Layout = "~/Views/Shared/_LayoutMaster.cshtml";
     var product = Model == null ? null : Model.productListItems;
     var branch = Model == null ? null : Model.officeListItems;
@@ -199,7 +199,7 @@
             var memeberName = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.MemberName))';
             console.log(memeberName);
             var member = $("#memberAutoComplete").val();
-            
+
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 url: '@Url.Action("GetMemberList", "SavingsAccountOpening", "http")',
@@ -440,7 +440,16 @@
 
 @Html.ActionLink("Back to List", "Index", null, new { @class = "pull-right" })
 
-<h2 class="page-title">Add SavingsAccount</h2>
+@if (Model.PortalSavingSummaryID > 0)
+{
+    <h2 class="page-title">Portal Savings Account</h2>
+}
+else
+{
+    <h2 class="page-title">Add Savings Account</h2>
+}
+
+
 @using (Html.BeginForm("Create", "SavingsAccountOpening", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
