@@ -242,6 +242,9 @@ namespace gBanker.Web.ViewModels
         public string MemberImage64String { get; set; }
         public string MemberSignature64String { get; set; }
 
+        public long? MemberNID { get; set; }
+        public long? Image { get; set; }
+
         public IEnumerable<SelectListItem> OfficeList { get; set; }
         public IEnumerable<SelectListItem> CenterList { get; set; }
         public IEnumerable<SelectListItem> GroupList { get; set; }
