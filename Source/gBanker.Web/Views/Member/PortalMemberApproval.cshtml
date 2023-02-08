@@ -1352,6 +1352,7 @@
             var nationalId = $("#NationalID").val();
             $("span[data-valmsg-for='NationalID']").text('');
 
+            console.log("NID Length:", nationalId.length);
             if (nationalId != "") {//if (ddlIentityTypeId == 1) {
                 if (nationalId != ''  && nationalId.length != 17) { //&& nationalId.length != 13
                     //alert('National Id cannot be blank or less than 10,13&17 characters.');
@@ -2363,7 +2364,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <img id="thumbnil" src="~/Images/blank-headshot.jpg" alt="Member Image" class="img-responsive thumb-img" />
+                        <img id="thumbnil" src="/Member/GetPortalMemberImageFromDatabase/@Model.Image" alt="Member Image" class="img-responsive thumb-img" />
                     </div>
                 </div>
             </div>
