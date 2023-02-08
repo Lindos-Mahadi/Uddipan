@@ -115,5 +115,6 @@ namespace gBanker.Data.CodeFirstMigration
         public string PlaceOfBirth { get; set; }
         public string Cityzenship { get; set; }
         public string HomeType { get; set; }
+        public string MaritalStatus { get; set; }
     }
 }
