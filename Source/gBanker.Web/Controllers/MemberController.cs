@@ -4723,18 +4723,18 @@ namespace gBanker.Web.Controllers
                         var randomFileNamethumb = Guid.NewGuid().ToString().Substring(0, 6) + ".png";
                         entity.ThumbImg = bytesthumb;
                     }
-                    else if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != ""))
-                    {
-                        var t = base64image.Substring(22);  // remove data:image/png;base64,
-                        byte[] bytes = Convert.FromBase64String(t);
-                        Image image;
-                        using (MemoryStream ms = new MemoryStream(bytes))
-                        {
-                            image = Image.FromStream(ms);
-                        }
-                        var randomFileName = Guid.NewGuid().ToString().Substring(0, 4) + ".png";
-                        entity.MemberImg = bytes;
-                    }
+                    //else if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != ""))
+                    //{
+                    //    var t = base64image.Substring(22);  // remove data:image/png;base64,
+                    //    byte[] bytes = Convert.FromBase64String(t);
+                    //    Image image;
+                    //    using (MemoryStream ms = new MemoryStream(bytes))
+                    //    {
+                    //        image = Image.FromStream(ms);
+                    //    }
+                    //    var randomFileName = Guid.NewGuid().ToString().Substring(0, 4) + ".png";
+                    //    entity.MemberImg = bytes;
+                    //}
                     else if (model.ImgFile == null && Session["CapturedImage"] == null && (base64imageFingerThumb != null && base64imageFingerThumb != ""))
                     {
                         var tthumb = base64imageFingerThumb.Substring(22);  // remove data:image/png;base64,
