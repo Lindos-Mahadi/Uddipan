@@ -63,6 +63,7 @@
     function GetChoiseOptionsList() { // Load ddl
 
         var ddlChoseFinService = $("#ddlChoseFinService");
+        
 
        // var AnotherMFIMemberCheck = $("#AnotherMFIMemberCheck");
 
@@ -433,6 +434,14 @@
                     //ddlDistrictPer.append($('<option></option>').val(option.Value).html(option.Text));
                     ddlPlaceOfBirth.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+
+                var placeOfBirth = '@Model.PlaceOfBirth';
+                //console.log('PlaceOfBirth', placeOfBirth);
+                if (placeOfBirth) {
+                    $('#PlaceOfBirth').val(placeOfBirth);
+                    $('#PlaceOfBirth').trigger('change');
+                }
+
                 var districtCode = '@Model.DistrictCode';
                 //console.log('Division', districtCode);
                 if (districtCode) {

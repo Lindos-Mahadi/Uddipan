@@ -112,5 +112,8 @@ namespace gBanker.Data.CodeFirstMigration
 
         public long? MemberNID { get; set; }
         public long? Image { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public string Cityzenship { get; set; }
+        public string HomeType { get; set; }
     }
 }
