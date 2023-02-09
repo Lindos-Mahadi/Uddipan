@@ -5008,6 +5008,7 @@ namespace gBanker.Web.Controllers
                         portalMember.ApprovalStatus = true;
                         portalMember.Email = entity.Email;
                         portalMember.Phone = entity.PhoneNo;
+                        portalMember.MemberCode = entity.MemberCode;
                         portalMember.CreateUser = LoggedInEmployeeID.ToString();
                         portalMemberService.Update(portalMember);
 
