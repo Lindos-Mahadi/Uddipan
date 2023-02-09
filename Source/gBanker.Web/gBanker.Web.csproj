@@ -5952,7 +5952,7 @@
     <Content Include="Views\EmployeeHistoryUpdate\Edit.cshtml" />
     <Content Include="Views\EmployeeHistoryUpdate\Index.cshtml" />
     <Content Include="Views\Member\PortalMemberApproval.cshtml" />
-    <Content Include="Views\PortalSavingSummary\Index.cshtml" />
+    <!-- <Content Include="Views\PortalSavingSummary\Index.cshtml" /> -->
     <Content Include="Views\SavingSummary\GetPortalSavingSummary.cshtml" />
     <Content Include="Views\SavingsAccountOpening\PortalIndex.cshtml" />
     <Content Include="Views\Member\EligiblePortalMembers.cshtml" />
