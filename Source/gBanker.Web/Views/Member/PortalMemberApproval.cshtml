@@ -914,7 +914,6 @@
         var MemberAge =  @Html.Raw(Json.Encode(ViewData["MemberAge"]));
         $("#hdnMemberAge").val(MemberAge)
 
-
         GetIdentiyList();
         GetTransactionChoiceList();
         GetChoiseOptionsList();
@@ -965,10 +964,6 @@
                 memberManager.getAgeInfo();
                     }
         });
-
-
-
-
 
         //$("# Date").datepicker({
         //    dateFormat: "dd-M-yy",
@@ -1062,7 +1057,6 @@
 
             }
             //var trxType = "102";
-
         });
 
         //$("#BirthDate").datepicker(
@@ -1140,6 +1134,8 @@
             var MaritalStatus = $("#MaritalStatus option:selected").val();
             if (MaritalStatus == "Married") // THEN Hide and Clear Spouse Name
             {
+                
+
                 $("#fsSpouseName").show();
 
 
@@ -1152,6 +1148,8 @@
             }
 
         });
+
+        $('#MaritalStatus').trigger('change');
 
         $("#CenterID").change(function () {
             var center_id = $("#CenterID").val();
@@ -1569,6 +1567,7 @@
             {
                 var SpouseName = $("#RefereeName").val();//$("#SpouseName").val();
                 if (SpouseName == '') {
+
                     alert("Please Give Spouse Name ");
                     $("#RefereeName").focus();//$("#SpouseName").focus();
                     return;
