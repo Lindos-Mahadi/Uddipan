@@ -1168,6 +1168,50 @@
 
     }
 
+    function GetDocuments(ids) {
+        $("#loading").show();
+         $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("GetDocuments", "LoanApproval", "http")',
+             data: { Ids: ids },
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                $.each(data.Data, function (id, option) {
+                    var table = $('#documentsTable');
+                    table.empty();
+                    table.append('<tr>');
+                    table.append('<td>' + option.FileName);
+                    table.append('</td>');
+                    table.append('<td>' + option.Type);
+                    table.append('</td>');
+                    //var fileObject = new Blob(option.File);
+                    //console.log(fileObject);
+                    table.append(`<td><a href="#" onclick="downloadFile('${option.File }', '${option.FileName}', '${option.Type}')">Download`);
+                    table.append('</td>');
+                    table.append('</tr>');
+                });
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
+    }
+
+    function downloadFile(file, name, type) {
+        console.log(file, name, type);
+
+        var fileArray = file.split(',').map(Number);
+        var bytes = new Uint8Array(fileArray)
+        var blob = new Blob([bytes], { type: type });
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = name;
+        link.click();
+    }
 
 </script>
 <script type="text/javascript">
@@ -1180,7 +1224,31 @@
 @Html.ActionLink("Back to List", "Index", null, new { @class = "pull-right" })
 
 <h2 class="page-title">Add Loan Proposal</h2>
-
+<div class="dropdown">
+    <button 
+            class="btn btn-secondary dropdown-toggle" 
+            type="button" 
+            id="diocumentbtn" 
+            data-toggle="dropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            onclick="GetDocuments(@Model.SupportingDocumentsId)">
+        Documents
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">File Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="documentsTable">
+            </tbody>
+        </table>
+    </div>
+</div>
 @using (Html.BeginForm("Create", "LoanApproval", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
