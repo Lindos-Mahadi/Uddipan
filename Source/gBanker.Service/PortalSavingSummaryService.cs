@@ -61,8 +61,7 @@ namespace gBanker.Service
 
         public IEnumerable<PortalSavingSummary> GetMany(Expression<Func<PortalSavingSummary, bool>> where)
         {
-            var portalSaveing = repository.GetMany(where);
-            return portalSaveing;
+            throw new NotImplementedException();
         }
 
         public bool Inactivate(long id, DateTime? inactiveDate)

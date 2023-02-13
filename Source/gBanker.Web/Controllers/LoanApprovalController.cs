@@ -165,8 +165,7 @@ namespace gBanker.Web.Controllers
                 //var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(allSavingsummary);
                 //return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
 
-                //var portalLoans = portalLoanSummaService.GetAll().Take(jtPageSize).Skip(jtStartIndex);
-                var portalLoans = portalLoanSummaService.GetMany(x => x.ApprovalStatus == true && x.OfficeID == LoginUserOfficeID).Take(jtPageSize).Skip(jtStartIndex);
+                var portalLoans = portalLoanSummaService.GetAll().Take(jtPageSize).Skip(jtStartIndex);
                 var totalCount = portalLoans.Count();
 
                 var currentPageRecords = Mapper.Map<IEnumerable<PortalLoanSummary>, List<LoanApprovalViewModel>>(portalLoans.ToList());
