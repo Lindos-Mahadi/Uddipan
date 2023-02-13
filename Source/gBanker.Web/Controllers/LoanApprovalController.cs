@@ -19,6 +19,7 @@ using gBanker.Data.CodeFirstMigration;
 using System.Data.Entity.Validation;
 using gBanker.Service.StoredProcedure;
 using System.Text;
+using System.Web.ApplicationServices;
 using OfficeOpenXml.FormulaParsing.ExpressionGraph.FunctionCompilers;
 
 namespace gBanker.Web.Controllers
@@ -50,13 +51,13 @@ namespace gBanker.Web.Controllers
         // GET: LoanApproval
         public LoanApprovalController(
             ILoanSummaryService loansSummaryService, 
-            IUltimateReportService ultimateReportService, 
-            ILoanApprovalService loanapprovalService, 
-            IProductService productService, 
-            IMemberCategoryService membercategoryService, 
-            IOfficeService officeService, 
-            ICenterService centerService, 
-            IPurposeService purposeService, 
+            IUltimateReportService ultimateReportService,
+            ILoanApprovalService loanapprovalService,
+            IProductService productService,
+            IMemberCategoryService membercategoryService,
+            IOfficeService officeService,
+            ICenterService centerService,
+            IPurposeService purposeService,
             IMemberService memberService,
             IInvestorService investorService,
             IMemberPassBookRegisterService memberPassBookRegisterService,
@@ -104,6 +105,7 @@ namespace gBanker.Web.Controllers
                 return RedirectToAction("Request");
             }
         }
+
         public JsonResult GetLoanApprovals(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
         {
             try
@@ -142,6 +144,28 @@ namespace gBanker.Web.Controllers
         {
             try
             {
+                //long totalCount;
+
+                //var param1 = new { @EmpID = LoggedInEmployeeID };
+                //var LoanInstallMent = ultimateReportService.GetCenterROleWise(param1);
+
+                //IEnumerable<DBLoanApproveDetailModel> allSavingsummary;
+                //if (LoanInstallMent != null)
+                //{
+                //    var empType = LoanInstallMent.Tables[0].Rows[0]["Name"].ToString();
+                //    if (empType == "FO")
+                //    {
+                //        allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID), Convert.ToInt16(LoggedInEmployeeID));
+                //    }
+                //    else
+
+                //        allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID));
+                //}
+                //else
+                //    allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID));
+                //var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(allSavingsummary);
+                //return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
+
                 var portalLoans = portalLoanSummaService.GetAll().Take(jtPageSize).Skip(jtStartIndex);
                 var totalCount = portalLoans.Count();
 
@@ -620,7 +644,20 @@ namespace gBanker.Web.Controllers
         {
             return View();
         }
+        public ActionResult GetApprovePortalImageFromDatabase(long? Id)
+        {
+            try
+            {
+                var member = memberService.GetByIdLong((long)Id);
+                return View();
 
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public ActionResult ApprovePortalLoanRequest(int portalLoanId)
         {
             Guid id = Guid.NewGuid();
