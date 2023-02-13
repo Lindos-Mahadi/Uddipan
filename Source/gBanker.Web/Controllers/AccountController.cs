@@ -353,7 +353,8 @@ namespace gBanker.Web.Controllers
             LogRequest();
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                //var user = await UserManager.FindAsync(model.UserName, model.Password);
+                var user = await UserManager.FindByNameAsync(model.UserName);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);

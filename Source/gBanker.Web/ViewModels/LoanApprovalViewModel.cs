@@ -146,5 +146,10 @@ namespace gBanker.Web.ViewModels
         public string SubMainProductCode { get; set; }
 
 
+        public long? GuarantorNID { get; set; }
+        public long? GuarantorImg { get; set; }
+
+        public string SupportingDocumentsId { get; set; }
+
     }
 }

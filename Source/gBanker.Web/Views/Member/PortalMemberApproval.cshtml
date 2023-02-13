@@ -1520,7 +1520,8 @@
         //}
 
 
-
+        const getBase64StringFromDataURL = (dataURL) =>
+            dataURL.replace('data:', '').replace(/^.+,/, '');
 
         $("#btnSave").click(function (e) {
             e.preventDefault();
@@ -1599,6 +1600,24 @@
                 }
                 var base64image = file;
 
+                var image = document.getElementById("thumbnil");
+                const canvas = document.createElement('canvas');
+
+                // We use naturalWidth and naturalHeight to get the real image size vs the size at which the image is shown on the page
+                canvas.width = image.naturalWidth;
+                canvas.height = image.naturalHeight;
+
+                // We get the 2d drawing context and draw the image in the top left
+                canvas.getContext('2d').drawImage(image, 0, 0);
+
+                // Convert canvas to DataURL and log to console
+                const dataURL = canvas.toDataURL();
+                
+                // logs data:image/png;base64,wL2dvYWwgbW9yZ...
+
+                // Convert to Base64 string
+                base64image = getBase64StringFromDataURL(dataURL);
+                console.log(base64image);
 
                 var fileFingerThumbs = document.getElementById("FingerThumb").src;
                 var arr = fileFingerThumbs.split("/");
@@ -1723,7 +1742,7 @@
             }
 
             /////////////////
-
+           
 
         });
 
@@ -1746,6 +1765,8 @@
     <input type="hidden" id="hdnCameraDefine" value="0" />
     <input type="hidden" id="hdnMemberAge" value="0" />
     @Html.HiddenFor(model => model.PortalMemberId);
+    @Html.HiddenFor(model => model.Image);
+    @Html.HiddenFor(model => model.MemberNID);
 
     @Html.AntiForgeryToken()
     <div id="dialog-message" title="Message" style="display:none;">

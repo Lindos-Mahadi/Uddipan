@@ -20,6 +20,7 @@ using System.Data.Entity.Validation;
 using gBanker.Service.StoredProcedure;
 using System.Text;
 using System.Web.ApplicationServices;
+using OfficeOpenXml.FormulaParsing.ExpressionGraph.FunctionCompilers;
 
 namespace gBanker.Web.Controllers
 {
@@ -45,7 +46,7 @@ namespace gBanker.Web.Controllers
         private readonly IApproveCellingService ApproveCellingService;
         private readonly IGroupwiseReportService groupwiseReportService;
         private readonly IPortalLoanSummaryService portalLoanSummaService;
-        private readonly IFileService fileService;
+        private readonly IFileService fileUploadService;
 
         // GET: LoanApproval
         public LoanApprovalController(
@@ -67,7 +68,7 @@ namespace gBanker.Web.Controllers
             IApproveCellingService ApproveCellingService,
             IGroupwiseReportService groupwiseReportService,
             IPortalLoanSummaryService portalLoanSummaryService,
-            IFileService fileService)
+            IFileService fileUploadService)
         {
             this.loansSummaryService = loansSummaryService;
             this.productService = productService;
@@ -87,7 +88,7 @@ namespace gBanker.Web.Controllers
             this.ApproveCellingService = ApproveCellingService;
             this.groupwiseReportService = groupwiseReportService;
             this.portalLoanSummaService = portalLoanSummaryService;
-            this.fileService = fileService;
+            this.fileUploadService = fileUploadService;
         }
         #endregion
 
@@ -753,6 +754,26 @@ namespace gBanker.Web.Controllers
             }
             ViewData["GuarantorAge"] = GuarantorAge;
             return View(model);
+        }
+
+        [HttpGet]
+        public JsonResult GetDocuments(string Ids)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Ids))
+                {
+                    var idArray = Ids.Split(',');
+                    var idArrayLong = idArray.Select(x => long.Parse(x)).ToList();
+                    var files = fileUploadService.GetByListOfIds(idArrayLong);
+                    return Json(new { Result = "OK", Data = files }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { Result = "OK", Data = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return GetErrorMessageResult(ex);
+            }
         }
         // POST: LoanApproval/Create
         [HttpPost]
