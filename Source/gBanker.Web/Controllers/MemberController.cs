@@ -874,7 +874,8 @@ namespace gBanker.Web.Controllers
             {
                 List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
 
-                var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true && p.OfficeID == LoginUserOfficeID).ToList();
+                //var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true ).ToList();
+                var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus == true && p.OfficeID == LoginUserOfficeID).ToList();
 
                 if (portalMembers != null)
                 {

@@ -765,7 +765,8 @@ namespace gBanker.Web.Controllers
         {
             try
             {
-                var totalLoanSummary = portalSavingSummaryService.GetAll();
+                var totalLoanSummary = portalSavingSummaryService.GetMany(t => t.ApprovalStatus == true && t.OfficeID == LoginUserOfficeID);
+                //var totalLoanSummary = portalSavingSummaryService.GetAll();
                 long totalCount = totalLoanSummary.Count();
                 var allSavingsummary = totalLoanSummary.Take(jtPageSize).Skip(jtStartIndex);
                 var currentPageRecords = Mapper.Map<IEnumerable<PortalSavingSummary>, IEnumerable<PortalSavingSummaryViewModel>>(allSavingsummary);
