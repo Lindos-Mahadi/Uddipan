@@ -12,6 +12,7 @@ namespace gBanker.Service
 {
     public interface IFileService: IServiceBase<FileUploadTable>
     {
+        IEnumerable<FileUploadTable> GetByListOfIds(List<long> Ids);
     }
 
     public class FileService : IFileService
@@ -86,6 +87,11 @@ namespace gBanker.Service
             repository.Add(objectToCreate);
             Save();
             return objectToCreate;
+        }
+
+        public IEnumerable<FileUploadTable> GetByListOfIds(List<long> Ids)
+        {
+            return repository.GetByListOfIds(Ids);
         }
     }
 }

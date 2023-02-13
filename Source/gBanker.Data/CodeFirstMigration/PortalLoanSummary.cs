@@ -207,6 +207,8 @@ namespace gBanker.Data.CodeFirstMigration
 
         public long? GuarantorNID { get; set; }
         public long? GuarantorImg { get; set; }
+
+        public string SupportingDocumentsId { get; set; }
     }
 }
 
