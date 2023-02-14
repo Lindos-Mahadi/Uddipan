@@ -361,6 +361,7 @@
     <Compile Include="Controllers\EmploymentController.cs" />
     <Compile Include="Controllers\ExcelUploadController.cs" />
     <Compile Include="Controllers\FamilyMemberController.cs" />
+    <Compile Include="Controllers\FileHandlerController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\FundManagementController.cs" />
     <Compile Include="Controllers\IndXAccCodeMapController.cs" />
@@ -2560,6 +2561,7 @@
     <Compile Include="ViewModels\AccNoteViewModel.cs" />
     <Compile Include="ViewModels\AccountingInterfaceMasterViewModel.cs" />
     <Compile Include="ViewModels\AdminMemberViewModel.cs" />
+    <Compile Include="ViewModels\Base64File.cs" />
     <Compile Include="ViewModels\BasicDataAddViewModel.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
@@ -2722,6 +2724,7 @@
     <Compile Include="ViewModels\SSRSReportViewModel.cs" />
     <Compile Include="ViewModels\StatisticsReportDetailsViewModel.cs" />
     <Compile Include="ViewModels\StopInterestViewModel.cs" />
+    <Compile Include="ViewModels\SupportingDocumentUploadModel.cs" />
     <Compile Include="ViewModels\SurveyMemberMasterViewModel.cs" />
     <Compile Include="ViewModels\SurveyNomineeInfoViewModel.cs" />
     <Compile Include="ViewModels\SurveyViewModel.cs" />
@@ -5966,6 +5969,7 @@
     <Folder Include="Content\css\kendo\Bootstrap\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\CollectionAPI\" />
+    <Folder Include="Views\FileHandler\" />
     <Folder Include="Views\Forgot\" />
     <Folder Include="Views\PayNearMe\" />
     <Folder Include="Views\Reconcile\" />

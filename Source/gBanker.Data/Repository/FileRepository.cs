@@ -13,6 +13,7 @@ namespace gBanker.Data.Repository
     public interface IFileRepository: IRepository<FileUploadTable>
     {
         IEnumerable<FileUploadTable> GetByListOfIds(List<long> Ids);
+        IEnumerable<FileUploadTable> CreateMany(IEnumerable<FileUploadTable> files);
     }
 
     public class FileRepository: RepositoryBaseCodeFirst<FileUploadTable>, IFileRepository
@@ -29,5 +30,12 @@ namespace gBanker.Data.Repository
             var files = DataContext.FileUploadTable.Where(f => Ids.Contains(f.FileUploadId));
             return files;
         }
+
+        public IEnumerable<FileUploadTable> CreateMany(IEnumerable<FileUploadTable> files)
+        {
+            var uploadedFiles = DataContext.FileUploadTable.AddRange(files);
+            return uploadedFiles;
+        }
+
     }
 }
