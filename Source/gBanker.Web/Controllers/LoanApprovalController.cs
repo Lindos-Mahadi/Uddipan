@@ -755,25 +755,6 @@ namespace gBanker.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public JsonResult GetDocuments(string Ids)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(Ids))
-                {
-                    var idArray = Ids.Split(',');
-                    var idArrayLong = idArray.Select(x => long.Parse(x)).ToList();
-                    var files = fileUploadService.GetByListOfIds(idArrayLong);
-                    return Json(new { Result = "OK", Data = files }, JsonRequestBehavior.AllowGet);
-                }
-                return Json(new { Result = "OK", Data = "" }, JsonRequestBehavior.AllowGet);
-            }
-            catch(Exception ex)
-            {
-                return GetErrorMessageResult(ex);
-            }
-        }
         // POST: LoanApproval/Create
         [HttpPost]
         public ActionResult Create(LoanApprovalViewModel model, FormCollection form)

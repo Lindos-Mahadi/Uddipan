@@ -1174,7 +1174,7 @@
          $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("GetDocuments", "LoanApproval", "http")',
+            url: '@Url.Action("GetDocuments", "FileHandler", "http")',
             data: { Ids: supportingDocs },
             dataType: 'json',
             async: true,
@@ -1190,7 +1190,7 @@
                     table.append('</td>');
                     //var fileObject = new Blob(option.File);
                     //console.log(fileObject);
-                    table.append(`<td><a href="#" onclick="downloadFile('${option.File }', '${option.FileName}', '${option.Type}')">Download`);
+                    table.append(`<td><a href="#" onclick="downloadFile('${option.FileUploadId}')">Download`);
                     table.append('</td>');
                     table.append('</tr>');
                 });
@@ -1202,16 +1202,31 @@
         });
     }
 
-    function downloadFile(file, name, type) {
-        console.log(file, name, type);
+    function downloadFile(fileID) {
+        //console.log(file, name, type);
 
-        var fileArray = file.split(',').map(Number);
-        var bytes = new Uint8Array(fileArray)
-        var blob = new Blob([bytes], { type: type });
-        var link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = name;
-        link.click();
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("GetDocument", "FileHandler", "http")',
+            data: { Id: fileID },
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                //var fileArray = data.Data.split(',').map(Number);
+                var bytes = new Uint8Array(data.Data.File)
+                var blob = new Blob([bytes], { type: data.Data.Type });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = data.Data.FileName;
+                link.click();
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
     }
 
     async function uploadDocuments(){

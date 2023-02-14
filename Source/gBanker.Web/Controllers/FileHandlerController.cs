@@ -30,7 +30,34 @@ namespace gBanker.Web.Controllers
                     var idArray = Ids.Split(',');
                     var idArrayLong = idArray.Select(x => long.Parse(x)).ToList();
                     var files = fileUploadService.GetByListOfIds(idArrayLong);
-                    return Json(new { Result = "OK", Data = files }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Result = "OK", Data = files.Select(x => new
+                    {
+                        FileName = x.FileName,
+                        Type = x.Type,
+                        FileUploadId = x.FileUploadId
+                    }) }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { Result = "OK", Data = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return GetErrorMessageResult(ex);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetDocument(string Id)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Id))
+                {
+                    var file = fileUploadService.GetByIdLong(long.Parse(Id));
+                    return Json(new
+                    {
+                        Result = "OK",
+                        Data = file
+                    }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(new { Result = "OK", Data = "" }, JsonRequestBehavior.AllowGet);
             }
