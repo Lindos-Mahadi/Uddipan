@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gBanker.Data.CodeFirstMigration.Db;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -209,6 +210,8 @@ namespace gBanker.Data.CodeFirstMigration
         public long? GuarantorImg { get; set; }
 
         public string SupportingDocumentsId { get; set; }
+        public virtual Member Member { get; set; }
+        public virtual Office Office { get; set; }
     }
 }
 
