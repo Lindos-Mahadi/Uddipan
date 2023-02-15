@@ -66,20 +66,20 @@
         ////
 
         var viewBagNominees = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.Nominees))';
-       // console.log(nominees);
+        
         var nominees = JSON.parse(viewBagNominees);
-
+        console.log(nominees);
         var markup = "";
         if (nominees != null) {
             for (let i = 0; i < nominees.length; i++)
             {
-                var { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation   } = nominees[i];
+                var { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
                 markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
                     "</td><td style='text-align: center;'>" + NRelationName +
                     "</td><td style='text-align: center;'>" + NAddressName +
-                    "</td><td style='text-align: center;'>" + NAlocation + "</td><td></td></tr>";
+                    "</td><td style='text-align: center;'>" + NAlocation +"</td><td></td></tr>";
 
                 $("#tblAdd tbody").append(markup);
 
@@ -480,8 +480,6 @@
                 alert(request.statusText + "/" + request.statusText + "/" + error);
             }
         });
-
-        
     }
 
 
