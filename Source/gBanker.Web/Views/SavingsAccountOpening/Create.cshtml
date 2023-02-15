@@ -509,30 +509,176 @@ else
     <h2 class="page-title">Add Savings Account</h2>
 }
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="diocumentbtn"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            onclick="GetDocuments(@Model.SupportingDocumentsId)">
-        Documents
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody id="documentsTable">
-            </tbody>
-        </table>
+<div class="row">
+    <div class="col">
+        <div>
+            <span class="dropdown" style="margin-left: 10px;">
+                <button class="btn btn-primary dropdown-toggle"
+                        type="button"
+                        id="diocumentbtn"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        onclick="GetDocuments()">
+                    Documents
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">File Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="documentsTable">
+                        </tbody>
+                    </table>
+                </div>
+            </span>
+            <label for="SupportingDocumentsUpload" class="btn btn-primary" style="margin-left:30px; margin-right:30px;"> Chose a file</label>
+            <input type="file" id="SupportingDocumentsUpload" style="display:none;" />
+
+            <button class="btn btn-primary" onclick="uploadDocuments()" id="uploadDocumentsBtn">Upload Documents</button>
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    function GetDocuments() {
+        $("#loading").show();
+        var supportingDocs = $('#SupportingDocumentsId').val();
+         $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("GetDocuments", "FileHandler", "http")',
+            data: { Ids: supportingDocs },
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                var table = $('#documentsTable');
+                table.empty();
+                $.each(data.Data, function (id, option) {
+                    table.append('<tr>');
+                    table.append('<td>' + option.FileName);
+                    table.append('</td>');
+                    table.append('<td>' + option.Type);
+                    table.append('</td>');
+                    //var fileObject = new Blob(option.File);
+                    //console.log(fileObject);
+                    table.append(`<td><a href="#" onclick="downloadFile('${option.FileUploadId}')">Download`);
+                    table.append('</td>');
+                    table.append('</tr>');
+                });
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
+    }
+
+    function downloadFile(fileID) {
+        //console.log(file, name, type);
+
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("GetDocument", "FileHandler", "http")',
+            data: { Id: fileID },
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                //var fileArray = data.Data.split(',').map(Number);
+                var bytes = new Uint8Array(data.Data.File)
+                var blob = new Blob([bytes], { type: data.Data.Type });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = data.Data.FileName;
+                link.click();
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
+    }
+
+    async function uploadDocuments(){
+        var files = $('#SupportingDocumentsUpload').prop('files');
+        var fileUploadModel = [];
+        var supportingDocuments = '@Model.SupportingDocumentsId';
+        var filesArray = Object.values(files);
+        fileUploadModel = await Promise.all(filesArray.map(async (file) => {
+            var fileBase64Str = await toBase64(file);
+            //console.log(fileByteArray);
+            return {
+                FileName: file.name,
+                Type: file.type,
+                PropertyName: 'SupportingDocumentsId',
+                File: fileBase64Str
+            };
+        }));
+        console.log(JSON.stringify(JSON.stringify(fileUploadModel)));
+        $("#loading").hide();
+         $.ajax({
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UploadDocuments", "FileHandler", "http")',
+             data: JSON.stringify({ files: fileUploadModel }),
+            //dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                $.each(data.Data, function (id, option) {
+                    var supDocs = $('#SupportingDocumentsId').val();
+                    supDocs = supDocs + ',' + option.FileUploadId;
+                    $('#SupportingDocumentsId').val(supDocs);
+                    console.log($('#SupportingDocumentsId').val());
+                });
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
+
+    }
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+    function fileToByteArray(file) {
+        return new Promise((resolve, reject) => {
+            try {
+                let reader = new FileReader();
+                let fileByteArray = [];
+                reader.readAsArrayBuffer(file);
+                reader.onloadend = (evt) => {
+                    if (evt.target.readyState == FileReader.DONE) {
+                        let arrayBuffer = evt.target.result,
+                            array = new Uint8Array(arrayBuffer);
+                        for (byte of array) {
+                            fileByteArray.push(byte);
+                        }
+                    }
+                    resolve(fileByteArray);
+                }
+            }
+            catch (e) {
+                reject(e);
+            }
+        })
+    }
+
+</script>
 
 
 @using (Html.BeginForm("Create", "SavingsAccountOpening", FormMethod.Post, new { enctype = "multipart/form-data" }))
