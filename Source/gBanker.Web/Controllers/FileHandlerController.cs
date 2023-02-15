@@ -5,8 +5,11 @@ using gBanker.Web.ViewModels;
 using log4net.Util.TypeConverters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.ApplicationServices;
 using System.Web.Mvc;
 
 namespace gBanker.Web.Controllers
@@ -74,7 +77,7 @@ namespace gBanker.Web.Controllers
             {
                 var fileUploadModel = new List<FileUploadTable>();
                 foreach(var file in files)
-                {
+                {`
                     var base64FileInfo = GetFileDetails(file.File);
                     fileUploadModel.Add(new FileUploadTable
                     {
@@ -90,6 +93,33 @@ namespace gBanker.Web.Controllers
             catch(Exception ex)
             {
                 return GetErrorMessageResult(ex);
+            }
+        }
+
+        public ActionResult GetImage(Int64? Id)
+        {
+            try
+            {
+                if (Id != null)
+                {
+                    var uploadedImage = fileUploadService.GetByIdLong((long)Id);
+                    if (uploadedImage != null)
+                        return File(uploadedImage.File, "image/*");
+                }
+                string strImgPathAbsolute = HttpContext.Server.MapPath("~/images/blank-headshot.jpg");
+                Image img = Image.FromFile(strImgPathAbsolute);
+                byte[] blnk;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    blnk = ms.ToArray();
+                }
+
+                return File(blnk, "image/*");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
