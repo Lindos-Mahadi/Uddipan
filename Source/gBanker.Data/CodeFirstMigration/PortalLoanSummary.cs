@@ -211,6 +211,7 @@ namespace gBanker.Data.CodeFirstMigration
 
         public string SupportingDocumentsId { get; set; }
         public virtual Member Member { get; set; }
+
         public virtual Office Office { get; set; }
     }
 }
