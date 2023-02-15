@@ -48,6 +48,8 @@ namespace gBanker.Web.Mappings
                     src =>
                     src.MemberID.ToString() +'-' + src.Member.FirstName + '_' + src.Member.LastName))
                 .ForMember(dest => dest.OfficeCode, option => option.MapFrom( src =>src.OfficeID.ToString() + '-' + src.Office.OfficeName ))
+                .ForMember(dest => dest.CenterCode, option => option.MapFrom( src =>src.CenterID.ToString() + '-' + src.Center.CenterName ))
+                .ForMember(dest => dest.ProductCode, option => option.MapFrom( src =>src.ProductID.ToString() + '-' + src.Product.ProductName ))
                 .ForMember(dest => dest.PortalLoanSummaryID, option => option.MapFrom(src => src.PortalLoanSummaryID));
         }
     }

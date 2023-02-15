@@ -213,6 +213,8 @@ namespace gBanker.Data.CodeFirstMigration
         public virtual Member Member { get; set; }
 
         public virtual Office Office { get; set; }
+        public virtual Center Center { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
 
