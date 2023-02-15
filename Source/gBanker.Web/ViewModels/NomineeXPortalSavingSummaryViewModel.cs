@@ -1,18 +1,12 @@
-﻿using gBanker.Data.CodeFirstMigration.Db;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace gBanker.Data.CodeFirstMigration
+namespace gBanker.Web.ViewModels
 {
-    [Table("NomineeXPortalSavingSummary")]
-
-    public class NomineeXPortalSavingSummary
+    public class NomineeXPortalSavingSummaryViewModel
     {
         [Key]
         public long PortalMemberNomineeId { get; set; }
@@ -25,6 +19,5 @@ namespace gBanker.Data.CodeFirstMigration
         public long ImageId { get; set; }
         public long NIDId { get; set; }
         public long PortalSavingSummaryID { get; set; }
-        //public PortalSavingSummary PortalSavingSummary { get; set; }
     }
 }
