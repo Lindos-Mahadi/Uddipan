@@ -1032,6 +1032,10 @@ namespace gBanker.Data.CodeFirstMigration.Db
                 .Property(e => e.CSFAmount)
                 .HasPrecision(9, 2);
 
+            //modelBuilder.Entity<PortalLoanSummary>()
+                //.Property(O => O.Member);
+                //.HasPrecision(M => M.Member);
+
             modelBuilder.Entity<PortalMember>()
                 .Property(e => e.MemberCode)
                 .IsUnicode(false);

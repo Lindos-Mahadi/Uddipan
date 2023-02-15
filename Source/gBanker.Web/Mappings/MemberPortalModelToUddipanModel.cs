@@ -44,6 +44,10 @@ namespace gBanker.Web.Mappings
                 .ForMember(dest => dest.PerAddressLine1, option => option.MapFrom(src => src.Address));
 
             Mapper.CreateMap<PortalLoanSummary, LoanApprovalViewModel>()
+                .ForMember(dest => dest.MemberCode, option => option.MapFrom(
+                    src =>
+                    src.MemberID.ToString() +'-' + src.Member.FirstName + '_' + src.Member.LastName))
+                .ForMember(dest => dest.OfficeCode, option => option.MapFrom( src =>src.OfficeID.ToString() + '-' + src.Office.OfficeName ))
                 .ForMember(dest => dest.PortalLoanSummaryID, option => option.MapFrom(src => src.PortalLoanSummaryID));
         }
     }
