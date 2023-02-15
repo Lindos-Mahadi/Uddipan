@@ -77,7 +77,7 @@ namespace gBanker.Web.Controllers
             {
                 var fileUploadModel = new List<FileUploadTable>();
                 foreach(var file in files)
-                {`
+                {
                     var base64FileInfo = GetFileDetails(file.File);
                     fileUploadModel.Add(new FileUploadTable
                     {
