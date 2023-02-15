@@ -65,6 +65,10 @@
     $(document).ready(function () {
         ////
 
+        function printName(name) {
+            console.log(name)
+        }
+
         var viewBagNominees = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.Nominees))';
         
         var nominees = JSON.parse(viewBagNominees);
@@ -75,17 +79,21 @@
             {
                 var { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
                 markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
+                    `</td><td style='text-align: center;'><img style='cursor: pointer; height: 60%;width: 60%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')" />`+
+                    `</td><td style='text-align: center;'><img style='cursor: pointer; height: 50%;width: 50%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />`+
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
                     "</td><td style='text-align: center;'>" + NRelationName +
                     "</td><td style='text-align: center;'>" + NAddressName +
-                    "</td><td style='text-align: center;'>" + NAlocation +"</td><td></td></tr>";
+                    "</td><td style='text-align: center;'>" + NAlocation + `</td><td></td></tr>`;
 
                 $("#tblAdd tbody").append(markup);
 
             }
 
         }
+
+        
 
 
         $(".add-row").click(function () {
@@ -816,6 +824,8 @@ else
                 <thead>
                     <tr>
                         <th>Select</th>
+                        <th>Image</th>
+                        <th>NID</th>
                         <th>Nominee Name</th>
                         <th>Father's Name</th>
                         <th>Relation</th>
@@ -825,6 +835,7 @@ else
                     </tr>
                     <tr>
                         <th><input type="checkbox" id="chkAll" /></th>
+                        <th></th>
                         <th><input type="text" id="txtNomineeName" /></th>
                         <th><input type="text" id="txtNoFatherName"></th>
                         <th><input type="text" id="txtNomRelation"></th>
