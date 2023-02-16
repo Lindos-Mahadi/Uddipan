@@ -63,6 +63,7 @@ namespace gBanker.Web.ViewModels
         public bool IsActive { get; set; }
         [Display(Name = "Ref Employee")]
         public int Ref_EmployeeID { get; set; }
+        public string SupportingDocumentsId { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
 
         //[GlobalizedDisplayName("SavingSummaryID")]

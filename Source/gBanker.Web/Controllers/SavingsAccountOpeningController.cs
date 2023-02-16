@@ -631,7 +631,7 @@ namespace gBanker.Web.Controllers
                                         foreach (var n in obj)
                                         {
                                             db.Database.ExecuteSqlCommand("INSERT INTO NomineeXSavingSummary VALUES(" + entity.SavingSummaryID +
-                                                ",'" + n.NomineeName + "','" + n.NFatherName + "','" + n.NRelationName + "','" + n.NAddressName + "'," + n.NAlocation + ")");
+                                                ",'" + n.NomineeName + "','" + n.NFatherName + "','" + n.NRelationName + "','" + n.NAddressName + "'," + n.NAlocation + "'," + n.ImageId + "'," + n.NIDId + ")");
                                         }
                                     }
                                 }

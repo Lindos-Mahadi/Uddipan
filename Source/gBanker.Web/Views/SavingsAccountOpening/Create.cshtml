@@ -65,9 +65,6 @@
     $(document).ready(function () {
         ////
 
-        function printName(name) {
-            console.log(name)
-        }
 
         var viewBagNominees = '@Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.Nominees))';
         
@@ -77,10 +74,12 @@
         if (nominees != null) {
             for (let i = 0; i < nominees.length; i++)
             {
-                var { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
+                let { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
                 markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
-                    `</td><td style='text-align: center;'><img style='cursor: pointer; height: 60%;width: 60%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')" />`+
-                    `</td><td style='text-align: center;'><img style='cursor: pointer; height: 50%;width: 50%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />`+
+                    `</td><td style='text-align: center;' value="${ImageId}" title='Image'><img style='cursor: pointer; height: 80%;width: 80%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')"/> ` +
+                    `</td><td style='text-align: center;'> <i title='Upload' style='cursor: pointer;'  class="fa fa-plus"></i>` +
+                    `</td><td style='text-align: center;' value="${NIDId}"><img style='cursor: pointer; height: 90%;width: 90%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />` +
+                    `</td><td style='text-align: center;' title='NID'> <i title='Upload' style='cursor: pointer;' class="fa fa-plus"></i>` +
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
                     "</td><td style='text-align: center;'>" + NRelationName +
@@ -369,11 +368,13 @@
                 if ($("#tblAdd tbody tr").length > 0) {
                     $("#tblAdd tbody tr").each(function () {
                         item = {}
-                        item["NomineeName"] = $(this).closest('tr').find('td').eq(1).html();
-                        item["NFatherName"] = $(this).closest('tr').find('td').eq(2).html();
-                        item["NRelationName"] = $(this).closest('tr').find('td').eq(3).html();
-                        item["NAddressName"] = $(this).closest('tr').find('td').eq(4).html();;
-                        item["NAlocation"] = $(this).closest('tr').find('td').eq(5).html();
+                        item["NomineeName"] = $(this).closest('tr').find('td').eq(5).html();
+                        item["NFatherName"] = $(this).closest('tr').find('td').eq(6).html();
+                        item["NRelationName"] = $(this).closest('tr').find('td').eq(7).html();
+                        item["NAddressName"] = $(this).closest('tr').find('td').eq(8).html();
+                        item["NAlocation"] = $(this).closest('tr').find('td').eq(9).html();
+                      //  item["ImageId"] = $(this).closest('tr').find('td').eq(1).html().val();
+                       // item["NIDId"] = $(this).closest('tr').find('td').eq(3).html().val();
 
                         item["OfficeID"] = $("#OfficeID").val();
                         item["MemberID"] = $("#MemberID").val();
@@ -825,7 +826,9 @@ else
                     <tr>
                         <th>Select</th>
                         <th>Image</th>
+                        <th></th>
                         <th>NID</th>
+                        <th></th>
                         <th>Nominee Name</th>
                         <th>Father's Name</th>
                         <th>Relation</th>
@@ -835,6 +838,9 @@ else
                     </tr>
                     <tr>
                         <th><input type="checkbox" id="chkAll" /></th>
+                        <th id="TxtImageId"></th>
+                        <th></th>
+                        <th  id="TxtNIDId"></th>
                         <th></th>
                         <th><input type="text" id="txtNomineeName" /></th>
                         <th><input type="text" id="txtNoFatherName"></th>
@@ -852,7 +858,7 @@ else
                 <tbody></tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="7" style="text-align:right;">
+                        <td colspan="12" style="text-align:right;">
                             <button id="btnSave" type="button" class="btn btn-primary"><i class="fa fa-plus"></i>Save</button>
                         </td>
                     </tr>
