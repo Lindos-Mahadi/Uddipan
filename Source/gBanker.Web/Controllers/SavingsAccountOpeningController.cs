@@ -320,7 +320,7 @@ namespace gBanker.Web.Controllers
             var workingDt = workingDay.Tables[0].Rows[0]["BusinessDate"].ToString();
             return workingDt;
         }
-        // POST: SavingsAccountOpening/Create
+        // POST: SavingsAccountOpening/     
         [HttpPost]
         public ActionResult Create(SavingsAccountOpeningViewModel model)
         {

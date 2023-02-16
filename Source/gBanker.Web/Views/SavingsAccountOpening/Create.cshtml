@@ -76,9 +76,9 @@
             {
                 let { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
                 markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
-                    `</td><td style='text-align: center;' value="${ImageId}" title='Image'><img style='cursor: pointer; height: 80%;width: 80%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')"/> ` +
+                    `</td><td style='text-align: center;' id="${ImageId}" title='Image'><img style='cursor: pointer; height: 80%;width: 80%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')"/> ` +
                     `</td><td style='text-align: center;'> <i title='Upload' style='cursor: pointer;'  class="fa fa-plus"></i>` +
-                    `</td><td style='text-align: center;' value="${NIDId}"><img style='cursor: pointer; height: 90%;width: 90%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />` +
+                    `</td><td style='text-align: center;' id="${NIDId}"><img style='cursor: pointer; height: 90%;width: 90%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />` +
                     `</td><td style='text-align: center;' title='NID'> <i title='Upload' style='cursor: pointer;' class="fa fa-plus"></i>` +
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
@@ -373,8 +373,8 @@
                         item["NRelationName"] = $(this).closest('tr').find('td').eq(7).html();
                         item["NAddressName"] = $(this).closest('tr').find('td').eq(8).html();
                         item["NAlocation"] = $(this).closest('tr').find('td').eq(9).html();
-                      //  item["ImageId"] = $(this).closest('tr').find('td').eq(1).html().val();
-                       // item["NIDId"] = $(this).closest('tr').find('td').eq(3).html().val();
+                        item["ImageId"] = $(this).closest('tr').find('td').eq(1).attr('id');
+                        item["NIDId"] = $(this).closest('tr').find('td').eq(3).attr('id');
 
                         item["OfficeID"] = $("#OfficeID").val();
                         item["MemberID"] = $("#MemberID").val();
