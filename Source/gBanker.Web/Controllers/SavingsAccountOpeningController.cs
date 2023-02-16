@@ -622,6 +622,7 @@ namespace gBanker.Web.Controllers
                                     }
                                     entity.Duration = Convert.ToInt16(pbr.Duration);
                                     entity.InstallmentNo = 1;
+                                entity.SupportingDocumentsId = obj[0].SupportingDocumentsId;
                                     savingsAccountOpeningService.Create(entity);
 
                                 if (LoggedInOrganizationID == 54)

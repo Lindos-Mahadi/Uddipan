@@ -375,6 +375,7 @@
                         item["NAlocation"] = $(this).closest('tr').find('td').eq(9).html();
                         item["ImageId"] = $(this).closest('tr').find('td').eq(1).attr('id');
                         item["NIDId"] = $(this).closest('tr').find('td').eq(3).attr('id');
+                        item["SupportingDocumentsId"] = '@Model.SupportingDocumentsId';
 
                         item["OfficeID"] = $("#OfficeID").val();
                         item["MemberID"] = $("#MemberID").val();

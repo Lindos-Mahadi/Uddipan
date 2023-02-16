@@ -51,6 +51,7 @@ namespace gBanker.Web.ViewModels
         public long ImageId { get; set; }
         public long NIDId { get; set; }
 
+        public string SupportingDocumentsId { get; set; }
         public int MemberNomineeId { get; set; }
         public long SavingSummaryID { get; set; }
 
