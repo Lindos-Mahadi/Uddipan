@@ -48,6 +48,8 @@ namespace gBanker.Web.ViewModels
         public string NAddressName { get; set; }
         public int NAlocation { get; set; }
 
+        public long ImageId { get; set; }
+        public long NIDId { get; set; }
 
         public int MemberNomineeId { get; set; }
         public long SavingSummaryID { get; set; }
