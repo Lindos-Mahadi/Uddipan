@@ -31,7 +31,7 @@ namespace gBanker.Web.Controllers
                 if (!string.IsNullOrEmpty(Ids))
                 {
                     var idArray = Ids.Split(',');
-                    var idArrayLong = idArray.Select(x => long.Parse(x)).ToList();
+                    var idArrayLong = idArray.Select(x => long.Parse(string.IsNullOrEmpty(x) ? "0" : x)).ToList();
                     var files = fileUploadService.GetByListOfIds(idArrayLong);
                     return Json(new { Result = "OK", Data = files.Select(x => new
                     {
