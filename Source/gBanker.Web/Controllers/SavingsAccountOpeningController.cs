@@ -625,17 +625,15 @@ namespace gBanker.Web.Controllers
                                 entity.SupportingDocumentsId = obj[0].SupportingDocumentsId;
                                     savingsAccountOpeningService.Create(entity);
 
-                                if (LoggedInOrganizationID == 54)
-                                {
+                                
                                     using (gBankerDbContext db = new gBankerDbContext())
                                     {
                                         foreach (var n in obj)
                                         {
                                             db.Database.ExecuteSqlCommand("INSERT INTO NomineeXSavingSummary VALUES(" + entity.SavingSummaryID +
-                                                ",'" + n.NomineeName + "','" + n.NFatherName + "','" + n.NRelationName + "','" + n.NAddressName + "'," + n.NAlocation + "'," + n.ImageId + "'," + n.NIDId + ")");
+                                                ",'" + n.NomineeName + "','" + n.NFatherName + "','" + n.NRelationName + "','" + n.NAddressName + "','" + n.NAlocation + "'," + n.ImageId + "," + n.NIDId + ")");
                                         }
                                     }
-                                }
                                 if (obj[0].PortalSavingSummaryID > 0)
                                 {
                                     var portalSavingSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
