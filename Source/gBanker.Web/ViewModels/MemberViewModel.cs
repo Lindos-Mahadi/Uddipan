@@ -227,7 +227,7 @@ namespace gBanker.Web.ViewModels
         [Display(Name = "Thumb Image(Max Size 100 kb)")]
         public byte[] ThumbImg { get; set; }
         [Display(Name = "NID Image(Max Size 100 kb)")]
-        public byte[] MemberNIDImage { get; set; }
+        public HttpPostedFileBase MemberNIDImage { get; set; }
 
         [Display(Name = "Thumb Image(Max Size 100 kb)")]
         public HttpPostedFileBase ThumbImgFile { get; set; }
