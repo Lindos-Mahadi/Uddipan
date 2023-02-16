@@ -1292,7 +1292,13 @@ namespace gBanker.Web.Controllers
         }
         // POST: Member/Create
         [HttpPost]
-        public JsonResult Create(MemberViewModel model, string MemCode, string base64image, string base64imageFingerThumb)
+        public JsonResult Create(
+            MemberViewModel model, 
+            string MemCode, 
+            string base64image, 
+            string base64imageFingerThumb,
+            string MemberNidImage
+            )
         {
             try
             {
@@ -1301,7 +1307,29 @@ namespace gBanker.Web.Controllers
                 {
                     entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
                     var errors = memberService.IsValidMember(entity);
-
+                    if (!string.IsNullOrEmpty(MemberNidImage))
+                    {
+                        var nid = base64imageFingerThumb.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytesNid = Convert.FromBase64String(nid);
+                        //Image imageNid;
+                        //using (MemoryStream msa = new MemoryStream(bytesNid))
+                        //{
+                        //    imageNid = Image.FromStream(msa);
+                        //}
+                        if (bytesNid.Length > 0)
+                        {
+                            var imageUpload = new FileUploadTable
+                            {
+                                FileName = "memberNid.png",
+                                Type = "image/png",
+                                File = bytesNid,
+                            };
+                            if (entity.MemberNID > 0)
+                                fileService.Delete((int)entity.MemberNID);
+                            imageUpload = fileService.Create(imageUpload);
+                            entity.MemberNID = imageUpload.FileUploadId;
+                        }
+                    }
                     if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != "") && (base64imageFingerThumb != null && base64imageFingerThumb != ""))
                     {
                         var t = base64image.Substring(22);  // remove data:image/png;base64,
@@ -1602,7 +1630,20 @@ namespace gBanker.Web.Controllers
                         LoanInstallMent = ultimateReportService.GenerateMemberLastCodeMember(param1);
                         entity.MemberCode = LoanInstallMent.Tables[0].Rows[0]["LastCode"].ToString();
                     }
-
+                    if (entity.MemberImg.Length > 0)
+                    {
+                        var imageUpload = new FileUploadTable
+                        {
+                            FileName = "MemberImage.png",
+                            Type = "image/png",
+                            File = entity.MemberImg,
+                        };
+                        if (entity.Image > 0)
+                            fileService.Delete((int)entity.Image);
+                        imageUpload = fileService.Create(imageUpload);
+                        entity.Image = imageUpload.FileUploadId;
+                        entity.MemberImg = null;
+                    }
                     memberService.Create(entity);
                     var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };
                     return Json(new { data = ent }, JsonRequestBehavior.AllowGet);
@@ -4688,7 +4729,8 @@ namespace gBanker.Web.Controllers
             MemberViewModel model, 
             string MemCode, 
             string base64image, 
-            string base64imageFingerThumb)
+            string base64imageFingerThumb,
+            string MemberNidImage)
         {
             //var portamMember = portalMemberService.GetById(id);
             //var MemberViewModel = Mapper.Map<PortalMember, MemberViewModel>(portamMember);
@@ -4696,10 +4738,34 @@ namespace gBanker.Web.Controllers
             try
             {
                 var entity = Mapper.Map<MemberViewModel, Member>(model);
+                //byte[] memberNidByte;
                 if (ModelState.IsValid)
                 {
                     entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
                     var errors = memberService.IsValidMember(entity);
+                    if (!string.IsNullOrEmpty(MemberNidImage))
+                    {
+                        var nid = base64imageFingerThumb.Substring(22);  // remove data:image/png;base64,
+                        byte[] bytesNid = Convert.FromBase64String(nid);
+                        //Image imageNid;
+                        //using (MemoryStream msa = new MemoryStream(bytesNid))
+                        //{
+                        //    imageNid = Image.FromStream(msa);
+                        //}
+                        if (bytesNid.Length > 0)
+                        {
+                            var imageUpload = new FileUploadTable
+                            {
+                                FileName = "memberNid.png",
+                                Type = "image/png",
+                                File = bytesNid,
+                            };
+                            if (entity.MemberNID > 0)
+                                fileService.Delete((int)entity.MemberNID);
+                            imageUpload = fileService.Create(imageUpload);
+                            entity.MemberNID = imageUpload.FileUploadId;
+                        }
+                    }
 
                     if (model.ImgFile == null && Session["CapturedImage"] == null && (base64image != null && base64image != "") && (base64imageFingerThumb != null && base64imageFingerThumb != ""))
                     {
@@ -5001,7 +5067,21 @@ namespace gBanker.Web.Controllers
                         LoanInstallMent = ultimateReportService.GenerateMemberLastCodeMember(param1);
                         entity.MemberCode = LoanInstallMent.Tables[0].Rows[0]["LastCode"].ToString();
                     }
-                    if(model.PortalMemberId > 0)
+                    if(entity.MemberImg.Length > 0)
+                    {
+                        var imageUpload = new FileUploadTable
+                        {
+                            FileName = "MemberImage.png",
+                            Type = "image/png",
+                            File = entity.MemberImg,
+                        };
+                        if (entity.Image > 0)
+                            fileService.Delete((int)entity.Image);
+                        imageUpload = fileService.Create(imageUpload);
+                        entity.Image = imageUpload.FileUploadId;
+                        entity.MemberImg = null;
+                    }
+                    if (model.PortalMemberId > 0)
                     {
                         entity.PortalMemberId = model.PortalMemberId;
                         var portalMember = portalMemberService.GetById((int)model.PortalMemberId);

@@ -749,6 +749,37 @@
         }
     }
 
+    function showMyMembernid(fileinput) {
+        var files = fileinput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+
+            if (file.type.match(imageType)) {
+                //continue;
+                var size = Math.round(file.size / 1024);
+                if (size <= 10000) {
+                    var img = document.getElementById("MemberNidImg");
+                    img.file = file;
+                    var reader = new FileReader();
+                    reader.onload = (function (aImg) {
+                        return function (e) {
+                            aImg.src = e.target.result;
+                        };
+                    })(img);
+                    reader.readAsDataURL(file);
+                }
+                else
+                    alert('Image file cannot be greater than 100 KB.');
+            }
+            else {
+                $("#MemberNidImg").replacewith($("#MemberNidImg").clone(true));
+                alert('please select a valid image file');
+            }
+
+        }
+    }
+
     function ClearFileUpload() {
         document.getElementById("ImgFile").value = '';
     }
@@ -1134,7 +1165,7 @@
             var MaritalStatus = $("#MaritalStatus option:selected").val();
             if (MaritalStatus == "Married") // THEN Hide and Clear Spouse Name
             {
-                
+
 
                 $("#fsSpouseName").show();
 
@@ -1601,7 +1632,7 @@
                 var base64image = file;
 
                 var image = document.getElementById("thumbnil");
-                const canvas = document.createElement('canvas');
+                var canvas = document.createElement('canvas');
 
                 // We use naturalWidth and naturalHeight to get the real image size vs the size at which the image is shown on the page
                 canvas.width = image.naturalWidth;
@@ -1611,8 +1642,8 @@
                 canvas.getContext('2d').drawImage(image, 0, 0);
 
                 // Convert canvas to DataURL and log to console
-                const dataURL = canvas.toDataURL();
-                
+                var dataURL = canvas.toDataURL();
+
                 // logs data:image/png;base64,wL2dvYWwgbW9yZ...
 
                 // Convert to Base64 string
@@ -1629,12 +1660,29 @@
                 }
                 var base64imageFingerThumb = fileFingerThumb;
 
+                image = document.getElementById("MemberNidImg");
+                canvas = document.createElement('canvas');
+
+                // We use naturalWidth and naturalHeight to get the real image size vs the size at which the image is shown on the page
+                canvas.width = image.naturalWidth;
+                canvas.height = image.naturalHeight;
+
+                // We get the 2d drawing context and draw the image in the top left
+                canvas.getContext('2d').drawImage(image, 0, 0);
+
+                // Convert canvas to DataURL and log to console
+                dataURL = canvas.toDataURL();
+
+                // logs data:image/png;base64,wL2dvYWwgbW9yZ...
+
+                // Convert to Base64 string
+                var nidImage = getBase64StringFromDataURL(dataURL);
 
 
                 $('#MemProfile').ajaxSubmit({
                     type: "POST",
                     target: '#thumbnil',
-                    data: { MemCode: '', base64image: base64image, base64imageFingerThumb: base64imageFingerThumb },
+                    data: { MemCode: '', base64image: base64image, base64imageFingerThumb: base64imageFingerThumb, MemberNidImage: nidImage },
                     dataType: 'json',
                     processData: false,
                     contentType: false,
@@ -1742,7 +1790,7 @@
             }
 
             /////////////////
-           
+
 
         });
 
@@ -2417,6 +2465,24 @@
                             <input type="button" id="captureImageFingerThumb" data-type="thumb" value="Capture Thumb" class="btn btn-facebook" />
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MemberNIDImage, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.MemberNIDImage, new { type = "file", @onchange = "showMyMembernid(this);", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ThumbImg, "", new { @class = "text-danger" })
+                            <br />
+                            @*<input type="button" id="MemberNidImage" data-type="thumb" value="Capture NID" class="btn btn-facebook" />*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img id="MemberNidImg" src="/FileHandler/GetImage/@Model.MemberNID" alt="Thumb Image" class="img-responsive thumb-img" style="float: right;" />
                 </div>
             </div>
         </div>
