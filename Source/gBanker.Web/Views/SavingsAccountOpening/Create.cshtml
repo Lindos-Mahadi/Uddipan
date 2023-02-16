@@ -77,9 +77,9 @@
                 let { NomineeName, NFatherName, NRelationName, NAddressName, NAlocation , ImageId , NIDId    } = nominees[i];
                 markup = "<tr><td style=\"text-align: center;\"><input type='checkbox' name='record'>" +
                     `</td><td style='text-align: center;' id="${ImageId}" title='Image'><img style='cursor: pointer; height: 80%;width: 80%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')"/> ` +
-                    `</td><td style='text-align: center;'> <i title='Upload' style='cursor: pointer;'  class="fa fa-plus"></i>` +
+                    `</td><td style='text-align: center;'> ` +
                     `</td><td style='text-align: center;' id="${NIDId}"><img style='cursor: pointer; height: 90%;width: 90%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />` +
-                    `</td><td style='text-align: center;' title='NID'> <i title='Upload' style='cursor: pointer;' class="fa fa-plus"></i>` +
+                    `</td><td style='text-align: center;' title='NID'> ` +
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
                     "</td><td style='text-align: center;'>" + NRelationName +
