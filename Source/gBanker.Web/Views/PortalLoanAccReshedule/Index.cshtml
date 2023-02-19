@@ -1,0 +1,83 @@
+﻿
+
+@{
+    ViewBag.Title = "Portal Loan Account Reshedule List";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $('#grid').jtable({
+            //title: 'Member List',
+            paging: true,
+            pageSize: 20,
+            sorting: true,
+            defaultSorting: 'MemberCode ASC',
+            actions: {
+                //deleteAction: '/Member/Delete',
+                listAction: function (postData, jtParams) {
+                    console.log("Loading from custom function...");
+                    return $.Deferred(function ($dfd) {
+                        $.ajax({
+                            url: '/PortalLoanAccReshedule/PortalLoanAccResheduleInfo?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: postData,
+                            success: function (data) {
+                                $dfd.resolve(data);
+                            },
+                            error: function () {
+                                $dfd.reject();
+                            }
+                        });
+                    });
+                }
+
+            },
+            fields: {
+                MemberID: {
+                    key: true,
+                    list: false,
+                    create: false,
+                    edit: false
+                },
+                OfficeID: {
+                    title: 'OfficeID',
+                    create: false,
+                    edit: false
+                },
+                Status: {
+                    title: 'Status',
+                    create: false,
+                    edit: false
+                }
+            }
+        });
+        //$('#grid').jtable('load');
+        reloadGrid();
+    });
+
+    function reloadGrid() {
+        $("#loading").show();
+        $('#grid').jtable('load', { filterColumn: $('#filterColumn').val(), filterValue: $('#filterValue').val(), typeFilterColumn: $('#TypeFilterColumn').val(), DateFromValue: $('#DateFromValue').val(), DateToValue: $('#DateToValue').val() });
+        $("#loading").hide();
+    }
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        asdsad
+        <div id="grid"></div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jtable")
+}
