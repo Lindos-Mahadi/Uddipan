@@ -88,6 +88,7 @@
     <Compile Include="AccChartService.cs" />
     <Compile Include="AccLastVoucherService.cs" />
     <Compile Include="FileService.cs" />
+    <Compile Include="LoanAccRescheduleService.cs" />
     <Compile Include="NomineeXPortalSavingSummaryService.cs" />
     <Compile Include="PortalLoanSummaryService.cs" />
     <Compile Include="PortalMemberService.cs" />

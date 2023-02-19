@@ -104,6 +104,7 @@
     <Compile Include="CodeFirstMigration\AccLastVoucher.cs" />
     <Compile Include="CodeFirstMigration\ArchiveDbMapping.cs" />
     <Compile Include="CodeFirstMigration\FileUploadTable.cs" />
+    <Compile Include="CodeFirstMigration\LoanAccReschedule.cs" />
     <Compile Include="CodeFirstMigration\NomineeXPortalSavingSummary.cs" />
     <Compile Include="CodeFirstMigration\PortalLoanSummary.cs" />
     <Compile Include="CodeFirstMigration\PortalMember.cs" />
@@ -396,6 +397,7 @@
     <Compile Include="Repository\AccChartRepository.cs" />
     <Compile Include="Repository\AccLastVoucherRepository.cs" />
     <Compile Include="Repository\FileRepository.cs" />
+    <Compile Include="Repository\LoanAccRescheduleRepository.cs" />
     <Compile Include="Repository\NomineeXPortalSavingSummaryRepository.cs" />
     <Compile Include="Repository\PortalLoanSummaryRepository.cs" />
     <Compile Include="Repository\PortalSavingSummaryRepository.cs" />

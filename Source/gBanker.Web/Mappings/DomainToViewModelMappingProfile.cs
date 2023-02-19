@@ -139,6 +139,7 @@ namespace gBanker.Web.Mappings
             Mapper.CreateMap<PortalSavingSummary, SavingsAccountOpeningViewModel>();
 
             Mapper.CreateMap<SavingsAccClose , SavingsAccCloseViewModel>();
+            Mapper.CreateMap<LoanAccReschedule, LoanAccRescheduleViewModel>();
             
         }
     }

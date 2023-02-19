@@ -2582,6 +2582,7 @@
     <Compile Include="ViewModels\CollectionSheetViewModel.cs" />
     <Compile Include="ViewModels\DistrictThanaMappingViewModel.cs" />
     <Compile Include="ViewModels\IndicatorMappingViewModel.cs" />
+    <Compile Include="ViewModels\LoanAccRescheduleViewModel.cs" />
     <Compile Include="ViewModels\LoanCodeXAccCodeMappingViewModel.cs" />
     <Compile Include="ViewModels\ManageOrgViewModel.cs" />
     <Compile Include="ViewModels\NominiSurveyViewModel.cs" />
