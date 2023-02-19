@@ -182,6 +182,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual DbSet<ProductXEmploymentProductMapping> ProductXEmploymentProductMapping { get; set; }
         public virtual DbSet<PortalSavingSummary> PortalSavingSummary { get; set; }
         public virtual DbSet<NomineeXPortalSavingSummary> NomineeXPortalSavingSummary { get; set; }
+        public virtual DbSet<SavingsAccClose> SavingsAccClose { get; set; }
 
 
         #region Inventory

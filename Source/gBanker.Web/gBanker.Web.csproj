@@ -2599,6 +2599,7 @@
     <Compile Include="ViewModels\OLRSAccChartMappingViewModel.cs" />
     <Compile Include="ViewModels\LoanCodeXProductMappingViewModel.cs" />
     <Compile Include="ViewModels\RequsitionDisposeViewModel.cs" />
+    <Compile Include="ViewModels\SavingsAccCloseViewModel.cs" />
     <Compile Include="ViewModels\SearchMemberViewModel.cs" />
     <Compile Include="ViewModels\ServerLoginCredentialsViewModel.cs" />
     <Compile Include="ViewModels\ServiceMessageViewModel.cs" />

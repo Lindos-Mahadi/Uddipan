@@ -125,6 +125,7 @@
     <Compile Include="OLRS\OLRSService.cs" />
     <Compile Include="OLRS\IOLRSService.cs" />
     <Compile Include="ReportServies\UltimateReportServiceMemberPortal.cs" />
+    <Compile Include="SavingsAccCloseService.cs" />
     <Compile Include="SMSSenderServices\ISMSSenderService.cs" />
     <Compile Include="SMSSenderServices\Models\SMSSendRequest.cs" />
     <Compile Include="SMSSenderServices\Models\SMSSendResponse.cs" />

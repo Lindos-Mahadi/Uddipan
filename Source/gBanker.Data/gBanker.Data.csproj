@@ -151,6 +151,7 @@
     <Compile Include="CodeFirstMigration\ReportType.cs" />
     <Compile Include="CodeFirstMigration\ReportTypeMapping.cs" />
     <Compile Include="CodeFirstMigration\PortalSavingSummary.cs" />
+    <Compile Include="CodeFirstMigration\SavingsAccClose.cs" />
     <Compile Include="CodeFirstMigration\SMS_SentLog.cs" />
     <Compile Include="CodeFirstMigration\Area.cs" />
     <Compile Include="CodeFirstMigration\AspNetOrgModule.cs" />
@@ -447,6 +448,7 @@
     <Compile Include="Repository\BudgetRepository.cs" />
     <Compile Include="Repository\CategoryTransferRepository.cs" />
     <Compile Include="Repository\MemberOtherInfoRepository.cs" />
+    <Compile Include="Repository\SavingsAccCloseRepository.cs" />
     <Compile Include="Repository\SMSSendMessage.cs" />
     <Compile Include="Repository\CenterRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />

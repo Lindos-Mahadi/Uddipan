@@ -137,6 +137,8 @@ namespace gBanker.Web.Mappings
             Mapper.CreateMap<PortalSavingSummary, PortalSavingSummaryViewModel>();
             Mapper.CreateMap<PortalSavingSummary, SavingSummaryViewModel>();
             Mapper.CreateMap<PortalSavingSummary, SavingsAccountOpeningViewModel>();
+
+            Mapper.CreateMap<SavingsAccClose , SavingsAccCloseViewModel>();
             
         }
     }
