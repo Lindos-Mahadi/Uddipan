@@ -24,6 +24,9 @@ namespace gBanker.Data.CodeFirstMigration.Db
         // public DbSet<BuroCustomerInfo> BuroCustomerInfos { get; set; }
         public DbSet<BuroStaffInfo> BuroStaffInfos { get; set; }
         public DbSet<ReportSpName> ReportSpNames { get; set; }
+
+        
+
         public virtual DbSet<MobileErrorLog> MobileErrorLogs { get; set; }
         public virtual DbSet<MobileSyncLog> MobileSyncLogs { get; set; }
         public virtual DbSet<MobileSyncLogDetail> MobileSyncLogDetails { get; set; }
@@ -182,7 +185,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual DbSet<ProductXEmploymentProductMapping> ProductXEmploymentProductMapping { get; set; }
         public virtual DbSet<PortalSavingSummary> PortalSavingSummary { get; set; }
         public virtual DbSet<NomineeXPortalSavingSummary> NomineeXPortalSavingSummary { get; set; }
-        public virtual DbSet<SavingsAccClose> SavingsAccClose { get; set; }
+        public DbSet<LoanAccReschedule> LoanAccReschedule { get; set; }
+        public DbSet<SavingsAccClose> SavingsAccClose { get; set; }
 
 
         #region Inventory

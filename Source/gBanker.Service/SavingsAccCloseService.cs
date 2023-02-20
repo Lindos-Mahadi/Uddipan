@@ -43,6 +43,10 @@ namespace gBanker.Service
         public IEnumerable<SavingsAccClose> GetAll()
         {
             var pendingList = repository.GetMany(t=> t.Status == "P");
+            //if (pendingList !=null)
+            //{
+            //    return pendingList.Skip(0).Take(3);
+            //}
             return pendingList;
         }
 
