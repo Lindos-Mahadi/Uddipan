@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Portal Loan Account Reshedule";
+    ViewBag.Title = "Portal Savings Close Account";
     Layout = "~/Views/Shared/_LayoutMaster.cshtml";
 }
 
@@ -10,7 +10,7 @@
 
 
         $('#grid').jtable({
-            //title: 'Portal Loan Account Reshedule List',
+            //title: 'Portal Savings Close Account List',
             paging: true,
             pageSize: 20,
             sorting: true,
@@ -22,7 +22,7 @@
                     return $.Deferred(function ($dfd) {
                         console.log($dfd);
                         $.ajax({
-                            url: '/PortalLoanAccReshedule/PortalLoanAccResheduleInfo?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
+                            url: '/PortalSavingsAccClose/PortalSavingsAccCloseInfo?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
                             type: 'POST',
                             dataType: 'json',
                             data: '',
@@ -56,24 +56,24 @@
                     edit: false,
                     list: true
                 },
-                LoanID: {
-                    title: 'Loan',
+                SavingAccountID: {
+                    title: 'Savings Account',
                     create: false,
                     edit: false,
+                    list: true
                 },
                 Status: {
                     title: 'Status',
                     create: false,
                     edit: false,
                 },
-
                 CreateUser: {
                     title: 'Create User',
                     create: false,
                     edit: false,
                 },
                 //UpdateUser: {
-                //    title: 'Update User',
+                //    title: 'UpdateUser',
                 //    create: false,
                 //    edit: false,
                 //},
@@ -107,8 +107,7 @@
         $("#loading").hide();
     }
 </script>
-<h2>Portal Loan Account Reshedule List</h2>
-
+<h2>Portal Savings Close Account List</h2>
 <div class="row">
     <div class="col-md-12">
         <div id="grid"></div>
