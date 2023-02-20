@@ -96,6 +96,26 @@ namespace gBanker.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult UpdateDocument(SupportingDocumentUploadModel supportingDocumentUploadModel, long fileId)
+        {
+            try
+            {
+
+                var file = fileUploadService.GetByIdLong(fileId);
+                var base64FileInfo = GetFileDetails(supportingDocumentUploadModel.File);
+                file.FileName = supportingDocumentUploadModel.FileName;
+                file.Type = base64FileInfo.MimeType;
+                file.File = base64FileInfo.DataBytes;
+                fileUploadService.Update(file);
+                return Json(new { Result = "OK", Data = file }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return GetErrorMessageResult(ex);
+            }
+        }
+
         public ActionResult GetImage(Int64? Id)
         {
             try
