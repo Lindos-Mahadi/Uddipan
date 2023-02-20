@@ -16,5 +16,6 @@ namespace gBanker.Web.ViewModels
             public DateTime? CreateDate { get; set; } = DateTime.Now;
             public string UpdateUser { get; set; } = string.Empty;
             public DateTime? UpdateDate { get; set; }
+            public string MemberCode { get; set; }
     }
 }

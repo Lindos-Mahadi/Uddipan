@@ -44,14 +44,14 @@
 
             },
             fields: {
-                MemberID: {
-                    title: 'Member Code',
+                MemberCode: {
+                    title: 'Member',
                     create: false,
                     edit: false,
                     list: true
                 },
-                OfficeID: {
-                    title: 'Office Code',
+                OfficeCode: {
+                    title: 'Office',
                     create: false,
                     edit: false,
                     list: true
@@ -67,18 +67,18 @@
                     edit: false,
                 },
 
-                CreateUser: {
-                    title: 'Create User',
-                    create: false,
-                    edit: false,
-                },
+                //CreateUser: {
+                //    title: 'Create User',
+                //    create: false,
+                //    edit: false,
+                //},
                 //UpdateUser: {
                 //    title: 'Update User',
                 //    create: false,
                 //    edit: false,
                 //},
                 EditLink: {
-                    title: "Update User",
+                    title: "Update",
                     sort: false,
                     display: function (data) {
                         if (data.record.MemberStatus != '5')

@@ -32,11 +32,10 @@ namespace gBanker.Web.Controllers
                 if (savingsAccClose != null)
                 {
                     var savingsAccCloseMap = Mapper.Map<IEnumerable<SavingsAccClose>, List<SavingsAccCloseViewModel>>(savingsAccClose);
+                    var savingsAccCloseDetail = savingsAccClose.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                    return Json(new { Result = "OK", Records = savingsAccCloseMap, TotalCountRecord = savingsAccClose.Count() });
                 }
-
-                var savingsAccCloseDetail = savingsAccClose.Skip(jtStartIndex).Take(jtPageSize).ToList();
-                var currentPageRecords = savingsAccCloseDetail.ToList();
-                return Json(new { Result = "OK", Records = currentPageRecords, TotalCountRecord = savingsAccClose.Count() });
+                return Json(new { Result = "OK", TotalCountRecord = savingsAccClose.Count() });
             }
             catch (Exception ex)
             {

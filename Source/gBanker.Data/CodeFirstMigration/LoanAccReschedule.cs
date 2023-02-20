@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gBanker.Data.CodeFirstMigration.Db;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +22,7 @@ namespace gBanker.Data.CodeFirstMigration
         public string UpdateUser { get; set; } = string.Empty;
         public DateTime? UpdateDate { get; set; }
         public string Status { get; set; }
+        public virtual Member Member { get; set; }
+        //public virtual Office Office { get; set; }
     }
 }
