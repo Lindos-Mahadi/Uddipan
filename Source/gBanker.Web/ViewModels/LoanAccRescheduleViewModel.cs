@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace gBanker.Web.ViewModels
 {
+    [Table("LoanAccRescheduleViewModel")]
     public class LoanAccRescheduleViewModel
     {
+        [Key]
         public long Id { get; set; }
         public long MemberID { get; set; }
         public long OfficeID { get; set; }
