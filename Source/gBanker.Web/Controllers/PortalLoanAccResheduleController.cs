@@ -25,7 +25,7 @@ namespace gBanker.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+        //[HttpPost]
         public JsonResult PortalLoanAccResheduleInfo(int jtStartIndex, int jtPageSize, string jtSorting)
         {
             try
@@ -40,7 +40,7 @@ namespace gBanker.Web.Controllers
                 }
                 var loanAccResheduleDetail = loanAccReshedule.Skip(jtStartIndex).Take(jtPageSize).ToList();
                 var currentPageRecords = loanAccResheduleDetail.ToList();
-                return Json(new { Result = "Ok", Records = currentPageRecords, TotalRecordCount = loanAccReshedule.Count()});
+                return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = loanAccReshedule.Count()});
 
             }
             catch (Exception ex)
