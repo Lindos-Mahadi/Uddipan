@@ -370,7 +370,6 @@
     <Compile Include="Controllers\NewMemberController.cs" />
     <Compile Include="Controllers\POLoanXAccCodeMapController.cs" />
     <Compile Include="Controllers\PortalLoanAccResheduleController.cs" />
-    <Compile Include="Controllers\PortalSavingsAccCloseController.cs" />
     <Compile Include="Controllers\ProductXEmploymentProductMappingController.cs" />
     <Compile Include="Controllers\ProgramDataController.cs" />
     <Compile Include="Controllers\Inventory\CommonController.cs" />
@@ -5966,7 +5965,8 @@
     <Content Include="Views\LoanApproval\PortalLoanProposalIndex.cshtml" />
     <Content Include="Views\PortalLoanAccReshedule\PortalLoanAccReshedule.cshtml" />
     <Content Include="Views\PortalLoanAccReshedule\Index.cshtml" />
-    <Content Include="Views\PortalSavingsAccClose\Index.cshtml" />
+    <Content Include="Views\SpecialSavingCollection\PortalSavingsAccCloseIndex.cshtml" />
+    <Content Include="Views\SpecialSavingCollection\CreatePortalSavingsAccClose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

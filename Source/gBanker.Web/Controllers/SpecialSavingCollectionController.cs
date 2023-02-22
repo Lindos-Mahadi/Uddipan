@@ -37,13 +37,15 @@ namespace gBanker.Web.Controllers
         private readonly IApplicationSettingsService applicationSettingsService;
         private readonly IDailySavingTrxService dailySavingTrxService;
         private readonly IGroupwiseReportService groupwiseReportService;
+        private readonly ISavingsAccCloseService savingsAccCloseService;
         public SpecialSavingCollectionController(ISpecialSavingCollectionService specialSavingCollectionService, 
             IUltimateReportService ultimateReportService, ISavingSummaryService savingSummaryService, ICenterService centerService, 
             IProductService productService, IMemberCategoryService membercategoryService, IOfficeService officeService, 
             IPurposeService purposeService, IMemberService memberService, IAccTrxMasterService accMasterService, 
             IAccTrxDetailService accDetailService, ISavingCollectionService savingCollectionService, 
             IAccChartService accChartService, IApplicationSettingsService applicationSettingsService, 
-            IDailySavingTrxService dailySavingTrxService, IGroupwiseReportService groupwiseReportService)
+            IDailySavingTrxService dailySavingTrxService, IGroupwiseReportService groupwiseReportService, 
+            ISavingsAccCloseService savingsAccCloseService)
         {
             this.specialSavingCollectionService = specialSavingCollectionService;
             this.centerService = centerService;
@@ -61,6 +63,7 @@ namespace gBanker.Web.Controllers
             this.applicationSettingsService = applicationSettingsService;
             this.dailySavingTrxService = dailySavingTrxService;
             this.groupwiseReportService = groupwiseReportService;
+            this.savingsAccCloseService = savingsAccCloseService;
         }
         [HttpGet]
         public JsonResult GetMemberImageData(string MemberId)
@@ -228,7 +231,8 @@ namespace gBanker.Web.Controllers
 
                 @DailySavinInstallment = Convert.ToDecimal(entity.SavingInstallment),
                 @WithDrawal = Convert.ToDecimal(entity.Withdrawal),
-                @lcl_BusinessDate = TransactionDate,
+                //@lcl_BusinessDate = TransactionDate,
+                @lcl_BusinessDate = DateTime.UtcNow,
                 @TransType = Convert.ToInt16(entity.TransType)
 
             };
@@ -342,7 +346,7 @@ namespace gBanker.Web.Controllers
 
                 @DailySavinInstallment = Convert.ToDecimal(entity.SavingInstallment),
                 @WithDrawal = Convert.ToDecimal(entity.Withdrawal),
-                @lcl_BusinessDate = TransactionDate,
+                @lcl_BusinessDate = DateTime.UtcNow,
                 @TransType = Convert.ToInt16(entity.TransType)
 
             };
@@ -497,7 +501,8 @@ namespace gBanker.Web.Controllers
 
                 @DailySavinInstallment = Convert.ToDecimal(entity.SavingInstallment),
                 @WithDrawal = Convert.ToDecimal(entity.Withdrawal),
-                @lcl_BusinessDate = TransactionDate,
+                //@lcl_BusinessDate = TransactionDate,
+                @lcl_BusinessDate = DateTime.UtcNow,
                 @TransType = Convert.ToInt16(entity.TransType)
 
             };
@@ -723,13 +728,15 @@ namespace gBanker.Web.Controllers
         }
         // GET: SpecialSavingCollection/Create
         public ActionResult Create()
+        
         {
             // changed 17/08/2020
             var model = new SpecialSavingCollectionViewModel();
-            if (IsDayInitiated)
-                model.TransactionDate = TransactionDate;
+            //if (IsDayInitiated)
+            //model.TransactionDate = TransactionDate;
+            model.TransactionDate = DateTime.UtcNow;
             MapDropDownList(model);
-            specialSavingCollectionService.delVoucher(LoginUserOfficeID, TransactionDate, LoggedInOrganizationID);
+            specialSavingCollectionService.delVoucher(LoginUserOfficeID, model.TransactionDate, LoggedInOrganizationID);
             return View(model);
         }
         // POST: SpecialSavingCollection/Create
@@ -740,10 +747,10 @@ namespace gBanker.Web.Controllers
             {
                 int return_value = 1;
                 var return_msg = "";
-                if (!IsDayInitiated)
-                {
-                    return GetErrorMessageResult("Please run the start work process");
-                }
+                //if (!IsDayInitiated)
+                //{
+                //    return GetErrorMessageResult("Please run the start work process");
+                //}
 
                 var entity = Mapper.Map<SpecialSavingCollectionViewModel, DailySavingTrx>(model);
 
@@ -790,7 +797,23 @@ namespace gBanker.Web.Controllers
                 {
                     return GetErrorMessageResult("Negative Value are not allowed");
                 }
-                var param = new { OfficeID = LoginUserOfficeID, CenterID = entity.CenterID, MemberID = entity.MemberID, ProductID = entity.ProductID, NoOfAccount = entity.NoOfAccount, DailySavinInstallment = entity.SavingInstallment, WithDrawal = entity.Withdrawal, lcl_BusinessDate = TransactionDate, CreateUser = LoggedInEmployeeID, CreateDate = TransactionDate, TransType = entity.TransType, Penalty = entity.Penalty, BankName = entity.BankName, CheequekNo = entity.ChequeNo };
+                var param = 
+                    new { 
+                        OfficeID = LoginUserOfficeID,
+                        CenterID = entity.CenterID,
+                        MemberID = entity.MemberID,
+                        ProductID = entity.ProductID,
+                        NoOfAccount = entity.NoOfAccount,
+                        DailySavinInstallment = entity.SavingInstallment, 
+                        WithDrawal = entity.Withdrawal,
+                        //lcl_BusinessDate = TransactionDate, 
+                        lcl_BusinessDate = DateTime.UtcNow, 
+                        CreateUser = LoggedInEmployeeID,
+                        CreateDate = DateTime.UtcNow, 
+                        TransType = entity.TransType, 
+                        Penalty = entity.Penalty, 
+                        BankName = entity.BankName,
+                        CheequekNo = entity.ChequeNo };
                 var div_items = ultimateReportService.PenaltyWithDailySavingBank(param);
                 var getResult = div_items.Tables[0].AsEnumerable().Select(p => new SpecialSavingCollectionViewModel
                 {
@@ -902,6 +925,43 @@ namespace gBanker.Web.Controllers
 
             }
             return Json(new { result = result, message = message }, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: PortalSavingsAccClose
+        public ActionResult PortalSavingsAccCloseIndex()
+        {
+            return View();
+        }
+        public JsonResult PortalSavingsAccCloseInfo(int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            try
+            {
+                var savingsAccClose = savingsAccCloseService.GetAll();
+                if (savingsAccClose != null)
+                {
+                    var savingsAccCloseMap = Mapper.Map<IEnumerable<SavingsAccClose>, List<SavingsAccCloseViewModel>>(savingsAccClose);
+                    var savingsAccCloseDetail = savingsAccClose.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                    return Json(new { Result = "OK", Records = savingsAccCloseMap, TotalCountRecord = savingsAccClose.Count() });
+                }
+                return Json(new { Result = "OK", TotalCountRecord = savingsAccClose.Count() });
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { Result = "Error", Message = ex.Message });
+            }
+        }
+        // GET: PortalSavingsAccClose/Create
+        public ActionResult CreatePortalSavingsAccClose()
+        {
+            // changed 17/08/2020
+            var model = new SpecialSavingCollectionViewModel();
+            //if (IsDayInitiated)
+            //model.TransactionDate = TransactionDate;
+            model.TransactionDate = DateTime.UtcNow;
+            MapDropDownList(model);
+            specialSavingCollectionService.delVoucher(LoginUserOfficeID, model.TransactionDate, LoggedInOrganizationID);
+            return View(model);
         }
     }
 }
