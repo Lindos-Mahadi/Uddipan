@@ -693,7 +693,7 @@ namespace gBanker.Web.Controllers
                     MemberID = row.Field<long>("MemberID"),
                     MemberCode = row.Field<string>("MemberCode"),
                     FirstName = row.Field<string>("FirstName"),
-                    MiddleName = row.Field<string>("MiddleName"),
+                    //MiddleName = row.Field<string>("MiddleName"),
                     LastName= row.Field<string>("LastName")
                 }).ToList();
 
@@ -701,7 +701,15 @@ namespace gBanker.Web.Controllers
                 Session[MemberByCenterSessionKey] = List_MemberViewModel;
                 memberList = List_MemberViewModel;
             }
-            var members = memberList.Where(m => string.Format("{0} - {1}", m.MemberCode, (string.IsNullOrEmpty(m.FirstName) ? "" : m.FirstName) + ' ' + (string.IsNullOrEmpty(m.MiddleName) ? "" : m.MiddleName) + ' ' + (string.IsNullOrEmpty(m.LastName) ? "" : m.LastName)).ToLower().Contains(memberid.ToLower())).Select(m1 => new { m1.MemberID, MemberName = string.Format("{0} - {1}", m1.MemberCode, (string.IsNullOrEmpty(m1.FirstName) ? "" : m1.FirstName) + ' ' + (string.IsNullOrEmpty(m1.MiddleName) ? "" : m1.MiddleName) + ' ' + (string.IsNullOrEmpty(m1.LastName) ? "" : m1.LastName)) }).ToList();
+            var members = memberList.Where(m => 
+                    string.Format("{0} - {1}", m.MemberCode, 
+                    (string.IsNullOrEmpty(m.FirstName) ? "" : m.FirstName) + ' ' + 
+                    (string.IsNullOrEmpty(m.LastName) ? "" : m.LastName))
+                .ToLower().Contains(memberid.ToLower()))
+                .Select(m1 => new { m1.MemberID, MemberName = string
+                .Format("{0} - {1}", m1.MemberCode, 
+                (string.IsNullOrEmpty(m1.FirstName) ? "" : m1.FirstName) + ' ' + 
+                (string.IsNullOrEmpty(m1.LastName) ? "" : m1.LastName)) }).ToList();
 
             return Json(members, JsonRequestBehavior.AllowGet);
         }
@@ -963,6 +971,7 @@ namespace gBanker.Web.Controllers
             {
                 var getSavingSummaryId = portalSavingSummaryService.GetById(id);
                 var model = Mapper.Map<PortalSavingSummary, SpecialSavingCollectionViewModel>(getSavingSummaryId);
+                ViewBag.MemberName = string.Format("{0} - {1}", model.MemberCode, model.MemberName);
                 model.TransactionDate = DateTime.UtcNow;
                 MapDropDownList(model);
                 specialSavingCollectionService.delVoucher(LoginUserOfficeID, model.TransactionDate, LoggedInOrganizationID);

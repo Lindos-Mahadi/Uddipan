@@ -11,6 +11,7 @@
     var cashItem = Model == null ? null : Model.cashListItems;
     var BankNameList = Model == null ? null : Model.GetAccountCodeList;
     // var vmaxLoanterm == null ? null : Model.vMaxLoanTerm.ToString();
+    var memberValue = String.IsNullOrEmpty(ViewBag.MemberName) ? "" : ViewBag.MemberName as string;
 
 }
 
@@ -54,6 +55,7 @@
     }
     function GetProductList(Member_id, center_id) {
         var ddlproduct = $("#ProductID");
+        //console.log("Mahadi");
         $("#loading").show();
         $.ajax({
             type: 'GET',
@@ -68,6 +70,7 @@
                 $.each(data, function (id, option) {
                     ddlproduct.append($('<option></option>').val(option.Value).html(option.Text));
                 });
+                //console.log('Hello');
             },
             error: function (request, status, error) {
                 $("#loading").hide();
@@ -171,6 +174,7 @@
 
     function GetAccountCodeList() {
         var ddlproduct = $("#BankName");
+        //console.log("hello")
         $("#loading").show();
         $.ajax({
             type: 'GET',
@@ -201,6 +205,8 @@
 
         if (prodId > 0 && memId > 0 && officeId > 0 && centerId > 0) {
 
+            //console.log("Mahadi");
+
             $body.addClass("loading");
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -217,8 +223,7 @@
                     $("#NoOfAccount").val(result.LoanTerm);
                     $("#Balance").val(result.Balance);
                     $body.removeClass("loading");
-
-
+                    //console.log("Mahadi");
                 },
                 error: function (err) {
                     $body.removeClass("loading");
@@ -614,7 +619,11 @@
         });
 
         $("#memberAutoComplete").autocomplete({
+
             source: function (request, response) {
+
+                console.log('Hello');
+
                 $.ajax({
                     contentType: "application/json; charset=utf-8",
                     url: '@Url.Action("GetMemberList", "SpecialSavingCollection", "http")',
@@ -630,8 +639,14 @@
                                 label: item.MemberName
                             };
                             //response(data);
-                        }))
+                        }));
+                        var memberId = '@Model.MemberID';
+                        if (memberId) {
+                            $('#MemberID').val(memberId);
+                            $('#MemberID').trigger('change');
+                        }
                     }
+
                 })
             },
             messages: {
@@ -724,7 +739,7 @@
                                 <div class="form-group">
                                     @Html.Label("Member", htmlAttributes: new { @class = "control-label" })
 
-                                    @Html.TextBox("memberAutoComplete", "", new { @class = "form-control" })
+                                    @Html.TextBox("memberAutoComplete", memberValue, new { @class = "form-control" })
                                     @Html.HiddenFor(model => model.MemberID)
                                     @Html.TextBoxFor(model => model.MemberID, new { @style = "display:none" })
                                     @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
