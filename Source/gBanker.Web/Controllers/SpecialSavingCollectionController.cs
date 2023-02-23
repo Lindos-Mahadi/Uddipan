@@ -15,6 +15,8 @@ using System.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using gBanker.Service.ReportServies;
+using Antlr.Runtime;
+
 namespace gBanker.Web.Controllers
 {
 
@@ -38,6 +40,7 @@ namespace gBanker.Web.Controllers
         private readonly IDailySavingTrxService dailySavingTrxService;
         private readonly IGroupwiseReportService groupwiseReportService;
         private readonly ISavingsAccCloseService savingsAccCloseService;
+        private readonly IPortalSavingSummaryService portalSavingSummaryService;
         public SpecialSavingCollectionController(ISpecialSavingCollectionService specialSavingCollectionService, 
             IUltimateReportService ultimateReportService, ISavingSummaryService savingSummaryService, ICenterService centerService, 
             IProductService productService, IMemberCategoryService membercategoryService, IOfficeService officeService, 
@@ -45,7 +48,7 @@ namespace gBanker.Web.Controllers
             IAccTrxDetailService accDetailService, ISavingCollectionService savingCollectionService, 
             IAccChartService accChartService, IApplicationSettingsService applicationSettingsService, 
             IDailySavingTrxService dailySavingTrxService, IGroupwiseReportService groupwiseReportService, 
-            ISavingsAccCloseService savingsAccCloseService)
+            ISavingsAccCloseService savingsAccCloseService, IPortalSavingSummaryService portalSavingSummaryService)
         {
             this.specialSavingCollectionService = specialSavingCollectionService;
             this.centerService = centerService;
@@ -64,6 +67,7 @@ namespace gBanker.Web.Controllers
             this.dailySavingTrxService = dailySavingTrxService;
             this.groupwiseReportService = groupwiseReportService;
             this.savingsAccCloseService = savingsAccCloseService;
+            this.portalSavingSummaryService= portalSavingSummaryService;
         }
         [HttpGet]
         public JsonResult GetMemberImageData(string MemberId)
@@ -952,16 +956,29 @@ namespace gBanker.Web.Controllers
             }
         }
         // GET: PortalSavingsAccClose/Create
-        public ActionResult CreatePortalSavingsAccClose()
+        //[HttpPost]
+        public ActionResult CreatePortalSavingsAccClose(int id)
         {
-            // changed 17/08/2020
-            var model = new SpecialSavingCollectionViewModel();
-            //if (IsDayInitiated)
-            //model.TransactionDate = TransactionDate;
-            model.TransactionDate = DateTime.UtcNow;
-            MapDropDownList(model);
-            specialSavingCollectionService.delVoucher(LoginUserOfficeID, model.TransactionDate, LoggedInOrganizationID);
-            return View(model);
+            try
+            {
+                var getSavingSummaryId = portalSavingSummaryService.GetById(id);
+                var model = Mapper.Map<PortalSavingSummary, SpecialSavingCollectionViewModel>(getSavingSummaryId);
+                model.TransactionDate = DateTime.UtcNow;
+                MapDropDownList(model);
+                specialSavingCollectionService.delVoucher(LoginUserOfficeID, model.TransactionDate, LoggedInOrganizationID);
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+                //var model = new SpecialSavingCollectionViewModel();
+                //var model = new SpecialSavingCollectionViewModel();
+                //model.TransactionDate = DateTime.UtcNow;
+                //MapDropDownList(model);
+                //specialSavingCollectionService.delVoucher(LoginUserOfficeID, LoggedInOrganizationID);
         }
     }
 }

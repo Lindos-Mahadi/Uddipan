@@ -52,12 +52,14 @@ namespace gBanker.Service
 
         public SavingsAccClose GetById(int id)
         {
-            throw new NotImplementedException();
+            var getSavingSummaryId = repository.GetById(id);
+            return getSavingSummaryId;
         }
 
         public SavingsAccClose GetByIdLong(long id)
         {
-            throw new NotImplementedException();
+            var getPortalSavingId = repository.GetById(id);
+            return getPortalSavingId;
         }
 
         public IEnumerable<SavingsAccClose> GetMany(Expression<Func<SavingsAccClose, bool>> where)
