@@ -11,6 +11,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
     public partial class PortalSavingSummary
     {
         public long PortalSavingSummaryID { get; set; }
+        public long? SavingSummaryID { get; set; }
 
         public int OfficeID { get; set; }
 
