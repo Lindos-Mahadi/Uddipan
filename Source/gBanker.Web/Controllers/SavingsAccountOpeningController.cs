@@ -641,6 +641,8 @@ namespace gBanker.Web.Controllers
                                     {
                                         portalSavingSummary.ApprovalStatus = true;
                                         portalSavingSummary.SavingStatus = 2;
+                                        portalSavingSummary.SavingSummaryID = entity.SavingSummaryID;
+                                        portalSavingSummary.MaturedDate = entity.MaturedDate;
                                         portalSavingSummaryService.Update(portalSavingSummary);
                                     }
                                 }
