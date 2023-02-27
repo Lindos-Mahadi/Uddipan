@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Portal Savings Close Account";
+    ViewBag.Title = "Portal Loan Account Reshedule";
     Layout = "~/Views/Shared/_LayoutMaster.cshtml";
 }
 
@@ -10,7 +10,7 @@
 
 
         $('#grid').jtable({
-            //title: 'Portal Savings Close Account List',
+            //title: 'Portal Loan Account Reshedule List',
             paging: true,
             pageSize: 20,
             sorting: true,
@@ -22,7 +22,7 @@
                     return $.Deferred(function ($dfd) {
                         console.log($dfd);
                         $.ajax({
-                            url: '/SpecialSavingCollection/PortalSavingsAccCloseInfo?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
+                            url: '/SpecialLoanCollection/PortalLoanAccResheduleInfo?jtStartIndex=' + jtParams.jtStartIndex + '&jtPageSize=' + jtParams.jtPageSize + '&jtSorting=' + jtParams.jtSorting,
                             type: 'POST',
                             dataType: 'json',
                             data: '',
@@ -45,44 +45,33 @@
             },
             fields: {
                 MemberCode: {
-                    title: 'Member Code',
+                    title: 'Member',
                     create: false,
                     edit: false,
                     list: true
                 },
-                OfficeID: {
-                    title: 'Office Code',
+                Office: {
+                    title: 'Office',
                     create: false,
                     edit: false,
                     list: true
                 },
-                SavingAccountID: {
-                    title: 'Savings Account',
+                LoanID: {
+                    title: 'Loan',
                     create: false,
                     edit: false,
-                    list: true
                 },
                 Status: {
                     title: 'Status',
                     create: false,
                     edit: false,
                 },
-                //CreateUser: {
-                //    title: 'Create User',
-                //    create: false,
-                //    edit: false,
-                //},
-                //UpdateUser: {
-                //    title: 'UpdateUser',
-                //    create: false,
-                //    edit: false,
-                //},
                 EditLink: {
                     title: "Update",
                     sort: false,
                     display: function (data) {
                         if (data.record.MemberStatus != '5')
-                            return "<div class='text-center'><a href='/SpecialSavingCollection/CreatePortalSavingsAccClose/" + data.record.LoanID + "'><i class='fa fa-pencil-square-o'></i></a></div>";
+                            return "<div class='text-center'><a href='/SpecialLoanCollection/CreatePortalLoanAccReshedule/" + data.record.LoanID + "'><i class='fa fa-pencil-square-o'></i></a></div>";
                         else
                             return null;
                     }
@@ -107,7 +96,8 @@
         $("#loading").hide();
     }
 </script>
-<h2>Portal Savings Close Account List</h2>
+<h2>Portal Loan Account Reshedule List</h2>
+
 <div class="row">
     <div class="col-md-12">
         <div id="grid"></div>

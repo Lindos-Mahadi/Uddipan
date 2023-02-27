@@ -5967,6 +5967,8 @@
     <Content Include="Views\PortalLoanAccReshedule\Index.cshtml" />
     <Content Include="Views\SpecialSavingCollection\PortalSavingsAccCloseIndex.cshtml" />
     <Content Include="Views\SpecialSavingCollection\CreatePortalSavingsAccClose.cshtml" />
+    <Content Include="Views\SpecialLoanCollection\PortalLoanAccResheduleIndex.cshtml" />
+    <Content Include="Views\SpecialLoanCollection\CreatePortalLoanAccReshedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

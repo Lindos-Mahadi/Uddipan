@@ -37,12 +37,16 @@ namespace gBanker.Web.Controllers
         private readonly IUltimateReportService ultimateReportService;
         private readonly IAccChartService accChartService;
         private readonly IApplicationSettingsService applicationSettingsService;
+        private readonly IPortalLoanSummaryService portalLoanSummaryService;
+        private readonly ILoanAccRescheduleService loanAccRescheduleService;
 
         public SpecialLoanCollectionController(ISpecialLoanCollectionService specialLoanCollectionService,
             IUltimateReportService ultimateReportService, ILoanSummaryService LoanSummaryService,
             ICenterService centerService, IProductService productService, IMemberCategoryService membercategoryService,
-            IOfficeService officeService, IPurposeService purposeService, IMemberService memberService
-            , IAccChartService accChartService, IApplicationSettingsService applicationSettingsService)
+            IOfficeService officeService, IPurposeService purposeService, IMemberService memberService,
+            IAccChartService accChartService, IApplicationSettingsService applicationSettingsService, 
+            IPortalLoanSummaryService portalLoanSummaryService,
+            ILoanAccRescheduleService loanAccRescheduleService)
         {
             this.specialLoanCollectionService = specialLoanCollectionService;
             this.centerService = centerService;
@@ -55,6 +59,8 @@ namespace gBanker.Web.Controllers
             this.ultimateReportService = ultimateReportService;
             this.accChartService = accChartService;
             this.applicationSettingsService = applicationSettingsService;
+            this.portalLoanSummaryService = portalLoanSummaryService;
+            this.loanAccRescheduleService = loanAccRescheduleService;
         }
         // GET: SpecialLoanCollection
         public ActionResult Index()
@@ -426,14 +432,13 @@ namespace gBanker.Web.Controllers
         }
         public ActionResult Create()
         {
-            specialLoanCollectionService.delVoucher(LoginUserOfficeID, TransactionDate, LoggedInOrganizationID);
-
             var model = new SpecialLoanCollectionViewModel();
-           
-            if (IsDayInitiated)
-                model.TrxDate = TransactionDate;
-                MapDropDownList(model);
-                return View(model);
+            //if (IsDayInitiated)
+            //model.TrxDate = TransactionDate;
+            model.TrxDate = DateTime.UtcNow;
+            MapDropDownList(model);
+            specialLoanCollectionService.delVoucher(LoginUserOfficeID, model.TrxDate, LoggedInOrganizationID);
+            return View(model);
         }
         [HttpPost]
         public ActionResult Create(SpecialLoanCollectionViewModel Model)
@@ -534,17 +539,36 @@ namespace gBanker.Web.Controllers
                     {
                         entity.ChequeNo = "NA";
                     }
-                    var paramD = new { @LoansummaryID = vlOansummaryID, @LoanPaid = Model.LoanPaid, @IntPaid = Model.IntPaid,
-                        @TrxType = Model.TrxType, @lcl_BusinessDate = TransactionDate, @lcl_OfficeID = LoginUserOfficeID,
-                        @LoanDue = Model.LoanDue, @CumIntCharge = Model.CumIntCharge, @intCharge = Model.IntCharge,
-                        @intdue = Model.IntDue, @InstallmentNo = Model.InstallmentNo, @CreateUser = LoggedInEmployeeID,
-                        @BankName =entity.BankName, @CheckNo=entity.ChequeNo };
+                    var paramD = new {
+                        @LoansummaryID = vlOansummaryID,
+                        @LoanPaid = Model.LoanPaid, 
+                        @IntPaid = Model.IntPaid,
+                        @TrxType = Model.TrxType, 
+                        //@lcl_BusinessDate = TransactionDate,
+                        @lcl_BusinessDate = DateTime.UtcNow,
+                        @lcl_OfficeID = LoginUserOfficeID,
+                        @LoanDue = Model.LoanDue, 
+                        @CumIntCharge = Model.CumIntCharge,
+                        @intCharge = Model.IntCharge,
+                        @intdue = Model.IntDue, 
+                        @InstallmentNo = Model.InstallmentNo,
+                        @CreateUser = LoggedInEmployeeID,
+                        @BankName =entity.BankName,
+                        @CheckNo=entity.ChequeNo };
                     var loanser1 = ultimateReportService.DataInsertintoDailyLoanTrx(paramD);
 
-                    var param = new { @DailyLoanTrxID = 0, @OfficeId = SessionHelper.LoginUserOfficeID,
-                        @CenterId = Model.CenterID, @MemberID = Model.MemberID, @ProductID = Model.ProductID,
-                        @LOanterm = entity.LoanTerm, @LoanPaid = Model.LoanPaid, @IntPaid = Model.IntPaid,
-                        @TotalPaid = Model.TotalPaid, @TrxType = Model.TrxType, @orgID = SessionHelper.LoginUserOrganizationID };
+                    var param = new { 
+                        @DailyLoanTrxID = 0, 
+                        @OfficeId = SessionHelper.LoginUserOfficeID,
+                        @CenterId = Model.CenterID, 
+                        @MemberID = Model.MemberID, 
+                        @ProductID = Model.ProductID,
+                        @LOanterm = entity.LoanTerm, 
+                        @LoanPaid = Model.LoanPaid,
+                        @IntPaid = Model.IntPaid,
+                        @TotalPaid = Model.TotalPaid, 
+                        @TrxType = Model.TrxType, 
+                        @orgID = SessionHelper.LoginUserOrganizationID };
                     ultimateReportService.SetSpecialLoanCollection(param);
                     //return RedirectToAction("Create", new { name = Model.DueRecovery, desc = Model.DueRecovery });
                     return GetSuccessMessageResult();
@@ -557,6 +581,55 @@ namespace gBanker.Web.Controllers
             catch (Exception ex)
             {
                 return GetErrorMessageResult(ex);
+            }
+        }
+        // GET: PortalLoanAccReshedule
+        public ActionResult PortalLoanAccResheduleIndex()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        public JsonResult PortalLoanAccResheduleInfo(int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            try
+            {
+                //List<LoanAccReschedule> loAccReshedule = new List<LoanAccReschedule>();
+                var loanAccReshedule = loanAccRescheduleService.GetAll();
+                if (loanAccReshedule != null)
+                {
+                    var mapLoanAccReshedule = Mapper.Map<IEnumerable<LoanAccReschedule>, List<LoanAccRescheduleViewModel>>(loanAccReshedule);
+                    var loanAccResheduleDetail = mapLoanAccReshedule.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                    return Json(new { Result = "OK", Records = mapLoanAccReshedule, TotalRecordCount = loanAccReshedule.Count() });
+                }
+
+                return Json(new { Result = "OK", TotalCountRecord = loanAccReshedule.Count() });
+
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { Result = "Error", Message = ex.Message });
+            }
+
+        }
+        //[HttpPost]
+        public ActionResult CreatePortalLoanAccReshedule(int id) 
+        {
+            try
+            {
+                var getLoanSummaryId = portalLoanSummaryService.GetById(id);
+                var model = Mapper.Map<PortalLoanSummary, SpecialLoanCollectionViewModel>(getLoanSummaryId);
+                model.TrxDate = DateTime.UtcNow;
+                MapDropDownList(model);
+                specialLoanCollectionService.delVoucher(LoginUserOfficeID, model.TrxDate, LoggedInOrganizationID);
+                return View(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
         public ActionResult Edit(long id)

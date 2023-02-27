@@ -640,11 +640,7 @@
                             };
                             //response(data);
                         }));
-                        var memberId = '@Model.MemberID';
-                        if (memberId) {
-                            $('#MemberID').val(memberId);
-                            $('#MemberID').trigger('change');
-                        }
+                        
                     }
 
                 })
@@ -668,7 +664,7 @@
                 return false;
             }
         });
-
+        $('#memberAutoComplete').trigger('blur');
 
     });
 

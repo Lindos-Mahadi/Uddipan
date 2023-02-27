@@ -68,6 +68,9 @@ namespace gBanker.Web.Mappings
                 .ForMember(dest => dest.ProductName, option => option.MapFrom(src => src.Product.ProductName))
                 .ForMember(dest => dest.CenterCode, option => option.MapFrom(src => src.Center.CenterCode));
 
+            Mapper.CreateMap<PortalLoanSummary, SpecialLoanCollectionViewModel>()
+                .ForMember(dest => dest.GuarantorNID, option => option.MapFrom(src => src.GuarantorNID))
+                .ForMember(dest => dest.GuarantorImg, option => option.MapFrom(src => src.GuarantorImg));
 
 
 
