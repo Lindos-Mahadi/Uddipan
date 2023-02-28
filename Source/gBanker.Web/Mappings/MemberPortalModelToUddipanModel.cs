@@ -58,7 +58,22 @@ namespace gBanker.Web.Mappings
                  
             Mapper.CreateMap<SavingsAccClose, SavingsAccCloseViewModel>()
                 .ForMember(dest => dest.MemberCode, option => option.MapFrom(src => src.MemberID.ToString() + '-' + src.Member.FirstName + '-' + src.Member.LastName));
-                //.ForMember(dest => dest.OfficeCode, option => option.MapFrom(src => src.OfficeID.ToString() + '-' + src.Office.OfficeName));
+            //.ForMember(dest => dest.OfficeCode, option => option.MapFrom(src => src.OfficeID.ToString() + '-' + src.Office.OfficeName));
+
+            Mapper.CreateMap<PortalSavingSummary, SpecialSavingCollectionViewModel>()
+                .ForMember(dest => dest.OfficeCode, option => option.MapFrom(src => src.OfficeID))
+                .ForMember(dest => dest.MemberCode, option => option.MapFrom(src => src.Member.MemberCode))
+                .ForMember(dest => dest.MemberName, option => option.MapFrom(src => src.Member.FirstName + " " + src.Member.LastName))
+                .ForMember(dest => dest.ProductCode, option => option.MapFrom(src => src.Product.ProductCode))
+                .ForMember(dest => dest.ProductName, option => option.MapFrom(src => src.Product.ProductName))
+                .ForMember(dest => dest.CenterCode, option => option.MapFrom(src => src.Center.CenterCode));
+
+            Mapper.CreateMap<PortalLoanSummary, SpecialLoanCollectionViewModel>()
+                .ForMember(dest => dest.GuarantorNID, option => option.MapFrom(src => src.GuarantorNID))
+                .ForMember(dest => dest.GuarantorImg, option => option.MapFrom(src => src.GuarantorImg));
+
+
+
 
         }
     }

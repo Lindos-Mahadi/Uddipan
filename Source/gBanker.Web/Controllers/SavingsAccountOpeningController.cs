@@ -30,13 +30,16 @@ namespace gBanker.Web.Controllers
         private readonly IDailySavingTrxService dailySavingTrxService;
         private readonly IPortalSavingSummaryService portalSavingSummaryService;
         private readonly INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService;
-            // GET: SavingSummary
+        private readonly ISavingTrxService savingTrxService;
+        private readonly ISavingSummaryService savingSummaryService;
+        // GET: SavingSummary
         public SavingsAccountOpeningController(ISavingsAccountOpeningService savingsAccountOpeningService, IProductService productService, 
             IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService,
             IPurposeService purposeService, IMemberService memberService,ISavingSummaryService savingsummaryService,
             IUltimateReportService ultimateReportService, IAccReportService accReportService, IDailySavingTrxService dailySavingTrxService,
             IEmployeeService employeeService, IPortalSavingSummaryService portalSavingSummaryService, 
-            INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService)
+            INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService, ISavingTrxService savingTrxService,
+            ISavingSummaryService savingSummaryService)
         {
             this.savingsAccountOpeningService = savingsAccountOpeningService;
             this.productService = productService;
@@ -52,6 +55,8 @@ namespace gBanker.Web.Controllers
             this.employeeService = employeeService;
             this.portalSavingSummaryService = portalSavingSummaryService;
             this.nomineeXPortalSavingSummaryService = nomineeXPortalSavingSummaryService;
+            this.savingTrxService = savingTrxService;
+            this.savingSummaryService = savingSummaryService;
 
         }
         public JsonResult GetRate(int productid, long memberId, int centerID)
@@ -623,7 +628,8 @@ namespace gBanker.Web.Controllers
                                     entity.Duration = Convert.ToInt16(pbr.Duration);
                                     entity.InstallmentNo = 1;
                                 entity.SupportingDocumentsId = obj[0].SupportingDocumentsId;
-                                    savingsAccountOpeningService.Create(entity);
+                                entity.Posted = true;
+                                    entity = savingsAccountOpeningService.Create(entity);
 
                                 
                                     using (gBankerDbContext db = new gBankerDbContext())
@@ -636,11 +642,55 @@ namespace gBanker.Web.Controllers
                                     }
                                 if (obj[0].PortalSavingSummaryID > 0)
                                 {
+                                    var savingTrxModel = new SavingTrx()
+                                    {
+                                        SavingSummaryID = entity.SavingSummaryID,
+                                        OfficeID = entity.OfficeID,
+                                        MemberID = entity.MemberID,
+                                        ProductID = entity.ProductID,
+                                        CenterID = entity.CenterID,
+                                        NoOfAccount = entity.NoOfAccount,
+                                        TransactionDate = entity.TransactionDate,
+                                        Deposit = 0,
+                                        Withdrawal = 0,
+                                        Balance = 0,
+                                        Penalty = 0,
+                                        TransType = 0,
+                                        MonthlyInterest = 0,
+                                        PresenceInd = true,
+                                        TransferDeposit = 0,
+                                        TransferWithdrawal = 0,
+                                        EmployeeID= (short)LoggedInEmployeeID,
+                                        MemberCategoryID = entity.MemberCategoryID,
+                                        OrgID = entity.OrgID,
+                                        IsActive = 1,
+                                        CreateUser = entity.CreateUser,
+                                        CreateDate = entity.CreateDate,
+                                    };
+
+                                    //var savingTrxId = savingTrxService.GetById((int)obj[0].SavingSummaryID);
+                                    savingTrxService.Create(savingTrxModel);
+
+                                    savingSummaryService.updateSavingInstallment(
+                                        entity.OfficeID,
+                                        entity.MemberID, 
+                                        entity.ProductID, 
+                                        entity.OrgID, 
+                                        entity.CenterID, 
+                                        entity.TransactionDate, 
+                                        entity.OpeningDate,
+                                        entity.EmployeeId, 
+                                        entity.MemberCategoryID, 
+                                        entity.CreateUser
+                                        );
+
                                     var portalSavingSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
                                     if(portalSavingSummaryService != null)
                                     {
                                         portalSavingSummary.ApprovalStatus = true;
                                         portalSavingSummary.SavingStatus = 2;
+                                        portalSavingSummary.SavingSummaryID = entity.SavingSummaryID;
+                                        portalSavingSummary.MaturedDate = entity.MaturedDate;
                                         portalSavingSummaryService.Update(portalSavingSummary);
                                     }
                                 }

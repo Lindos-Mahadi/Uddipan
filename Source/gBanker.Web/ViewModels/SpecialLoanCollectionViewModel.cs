@@ -111,7 +111,8 @@ namespace gBanker.Web.ViewModels
         public decimal LoanBalSC { get; set; }
         [Display(Name = "Fine")]
         [Column(TypeName = "numeric")]
-        public decimal Fine { get; set; }
+        public string GuarantorImg { get; set; }
+        public string GuarantorNID { get; set; }
         public IEnumerable<SelectListItem> cashListItems { get; set; }
         public IEnumerable<SelectListItem> productListItems { get; set; }
 
