@@ -79,11 +79,11 @@
                     `</td><td style='text-align: center;' id="${ImageId}" title='Image'><img style='cursor: pointer; height: 80%;width: 80%; border-radius:50%;' src="/FileHandler/GetImage/${ImageId}" onclick="downloadFile('${ImageId}')"/> ` +
                     `</td><td style='text-align: center;'> <label for="${ImageId}_img" style="cursor: pointer;"> <i title='Update Image' class="fa fa-upload"></i>
                         </label>
-                        <input style="display: none;" type="file" onchange=updateFile("${ImageId}") id="${ImageId}_img" /> `+
+                        <input style="display: none;" type="file" onchange=updateImg("${ImageId}") id="${ImageId}_img" /> `+
                     `</td><td style='text-align: center;' id="${NIDId}"><img style='cursor: pointer; height: 80%;width: 80%; ' src="/FileHandler/GetImage/${NIDId}" onclick="downloadFile('${NIDId}')" />` +
                     `</td><td style='text-align: center;' title='NID'> <label for="${NIDId}_nid" style="cursor: pointer;"> <i title='Update NID' class="fa fa-upload"></i>
                         </label>
-                        <input style="display: none;" type="file" id="${NIDId}_nid" onchange=updateFile("${NIDId}") /> ` +
+                        <input style="display: none;" type="file" id="${NIDId}_nid" onchange=updateNID("${NIDId}") /> ` +
                     "</td><td style='text-align: center;'> " + NomineeName +
                     "</td><td style='text-align: center;'>" + NFatherName +
                     "</td><td style='text-align: center;'>" + NRelationName +
@@ -629,28 +629,29 @@ else
         });
     }
 
-    async function updateFile(id) {
-        console.log(id);
+    async function updateNID(id) {
         var files = $(`#${id}_nid`).prop('files');
         var fileUploadModel = [];
         var filesArray = Object.values(files);
+        console.log("files array", filesArray);
         fileUploadModel = await Promise.all(filesArray.map(async (file) => {
             var fileBase64Str = await toBase64(file);
             //console.log(fileByteArray);
             return {
                 FileName: file.name,
                 Type: file.type,
-                PropertyName: 'NomineeImage',
-                File: fileBase64Str
+                PropertyName: 'NomineeNID',
+                File: fileBase64Str,
+                EntityName: 'PortalSavingSummary'
             };
         }));
-        console.log(JSON.stringify(JSON.stringify(fileUploadModel)));
+        console.log(fileUploadModel[0]);
         $("#loading").hide();
          $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             url: '@Url.Action("UpdateDocument", "FileHandler", "http")',
-             data: JSON.stringify({ files: fileUploadModel, fileId: id }),
+             data: JSON.stringify({ supportingDocumentUploadModel: fileUploadModel[0], fileId: id }),
             //dataType: 'json',
             async: true,
             success: function (data) {
@@ -667,7 +668,47 @@ else
                 alert(request.statusText + "/" + request.statusText + "/" + error);
             }
         });
+    }
 
+    async function updateImg(id) {
+        var files = $(`#${id}_img`).prop('files');
+        var fileUploadModel = [];
+        var filesArray = Object.values(files);
+        console.log("files array", filesArray);
+        fileUploadModel = await Promise.all(filesArray.map(async (file) => {
+            var fileBase64Str = await toBase64(file);
+            //console.log(fileByteArray);
+            return {
+                FileName: file.name,
+                Type: file.type,
+                PropertyName: 'NomineeImage',
+                File: fileBase64Str,
+                EntityName: 'PortalSavingSummary'
+            };
+        }));
+        console.log(fileUploadModel[0]);
+        $("#loading").hide();
+         $.ajax({
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("UpdateDocument", "FileHandler", "http")',
+             data: JSON.stringify({ supportingDocumentUploadModel: fileUploadModel[0], fileId: id }),
+            //dataType: 'json',
+            async: true,
+            success: function (data) {
+                $("#loading").hide();
+                $.each(data.Data, function (id, option) {
+                    //var supDocs = $(`#${id}`).val();
+                    //supDocs = supDocs + ',' + option.FileUploadId;
+                    //$('#SupportingDocumentsId').val(supDocs);
+                    //console.log($('#SupportingDocumentsId').val());
+                });
+            },
+            error: function (request, status, error) {
+                $("#loading").hide();
+                alert(request.statusText + "/" + request.statusText + "/" + error);
+            }
+        });
     }
 
     async function uploadDocuments(){
