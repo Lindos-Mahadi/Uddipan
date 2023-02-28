@@ -206,8 +206,8 @@ namespace gBanker.Data.CodeFirstMigration
         public string Remarks { get; set; }
         public bool? ApprovalStatus { get; set; }
 
-        public long? GuarantorNID { get; set; }
-        public long? GuarantorImg { get; set; }
+        public long? GuarantorNIDId { get; set; }
+        public long? GuarantorImgId { get; set; }
 
         public string SupportingDocumentsId { get; set; }
         public virtual Member Member { get; set; }
@@ -215,6 +215,9 @@ namespace gBanker.Data.CodeFirstMigration
         public virtual Office Office { get; set; }
         public virtual Center Center { get; set; }
         public virtual Product Product { get; set; }
+
+        public int? TotalRepayment { get; set; }
+        public DateTime? NextPaymentDate { get; set; }
     }
 }
 
