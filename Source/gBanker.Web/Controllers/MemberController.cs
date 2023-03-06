@@ -29,6 +29,8 @@ using gBanker.Core.Common;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 using gBanker.Data.CodeFirstMigration;
+using Kendo.Mvc.UI;
+using Kendo.DynamicLinq;
 
 namespace gBanker.Web.Controllers
 {
@@ -876,12 +878,18 @@ namespace gBanker.Web.Controllers
 
                 var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true && p.OfficeID == LoginUserOfficeID).ToList();
 
+
                 if (portalMembers != null)
                 {
                     var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
                     EligibleMembers.AddRange(mappedMembers);
+                    if (!String.IsNullOrEmpty(filterValue))
+                    {
+                        mappedMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper()));
+                    }
                 }
-
+                
+                
 
                 var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize).ToList();
 
