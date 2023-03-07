@@ -879,8 +879,9 @@ namespace gBanker.Web.Controllers
                 var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true && p.OfficeID == LoginUserOfficeID).ToList();
                 if (!String.IsNullOrEmpty(filterValue))
                 {
-                    portalMembers = portalMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper())).ToList();
+                    portalMembers = portalMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper()) || t.MemberNID.ToString().ToUpper().Contains(filterValue.ToUpper()) || t.Phone.Contains(filterValue) ).ToList();
                 }
+
                 if (portalMembers != null)
                 {
                     var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
@@ -890,7 +891,7 @@ namespace gBanker.Web.Controllers
                 
                 
 
-                var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize);
 
 
                 //var detail = memberDetail.ToList();
