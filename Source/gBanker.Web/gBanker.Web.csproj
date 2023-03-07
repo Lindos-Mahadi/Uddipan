@@ -2567,6 +2567,7 @@
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeHistoryUpdateViewModel.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\FundLoanViewModel.cs" />
     <Compile Include="ViewModels\LegalInfoViewModel.cs" />
     <Compile Include="ViewModels\AccountCloseViewModel.cs" />
