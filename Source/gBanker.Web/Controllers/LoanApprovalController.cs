@@ -134,7 +134,7 @@ namespace gBanker.Web.Controllers
 
                 if (!String.IsNullOrEmpty(filterValue))
                 {
-                    allSavingsummary = allSavingsummary.Where(t => t.MemberCode.ToString().ToUpper().Contains(filterValue.ToUpper()) );
+                    allSavingsummary = allSavingsummary.Where(t => t.MemberCode.ToString().ToUpper().Trim().Contains(filterValue.ToUpper().Trim()) );
                 }
                 var loanAllSavingSummary = allSavingsummary.Skip(jtStartIndex).Take(jtPageSize);
                 var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(loanAllSavingSummary);
