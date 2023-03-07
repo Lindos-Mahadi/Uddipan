@@ -814,12 +814,33 @@ namespace gBanker.Web.Controllers
         {
             try
             {
-                //var totalLoanSummary = portalSavingSummaryService.GetAll();
-                var totalLoanSummary = portalSavingSummaryService.GetMany(x => x.ApprovalStatus != true && x.OfficeID == LoginUserOfficeID);
-                long totalCount = totalLoanSummary.Count();
-                var allSavingsummary = totalLoanSummary.Take(jtPageSize).Skip(jtStartIndex);
+                var totalLoanSummar = portalSavingSummaryService.GetMany(x => x.ApprovalStatus != true && x.OfficeID == LoginUserOfficeID);
+
+                if (!String.IsNullOrEmpty(filterValue))
+                {
+                    totalLoanSummar = totalLoanSummar.Where(t => t.MemberID == Convert.ToInt64(filterValue));
+                }
+                long totalCount = totalLoanSummar.Count();
+                var allSavingsummary = totalLoanSummar.Skip(jtStartIndex).Take(jtPageSize);
                 var currentPageRecords = Mapper.Map<IEnumerable<PortalSavingSummary>, IEnumerable<PortalSavingSummaryViewModel>>(allSavingsummary);
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
+
+
+
+
+
+
+
+
+
+
+
+                ////var totalLoanSummary = portalSavingSummaryService.GetAll();
+                //var totalLoanSummary = portalSavingSummaryService.GetMany(x => x.ApprovalStatus != true && x.OfficeID == LoginUserOfficeID);
+                //long totalCount = totalLoanSummary.Count();
+                //var allSavingsummary = totalLoanSummary.Take(jtPageSize).Skip(jtStartIndex);
+                //var currentPageRecords = Mapper.Map<IEnumerable<PortalSavingSummary>, IEnumerable<PortalSavingSummaryViewModel>>(allSavingsummary);
+                //return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
             }
             catch (Exception ex)
             {
@@ -827,7 +848,22 @@ namespace gBanker.Web.Controllers
             }
 
         }
+        //public JsonResult GetSavingSummary(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
+        //{
+        //    try
+        //    {
+        //        long totalCount;
+        //        var allSavingsummary = savingSummaryService.GetSavingSummarySavingInterestUpdate(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, out totalCount);
+        //        var currentPageRecords = Mapper.Map<IEnumerable<DBSavingSummaryDetails>, IEnumerable<SavingSummaryViewModel>>(allSavingsummary);
+        //        return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
 
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { Result = "ERROR", Message = ex.Message });
+        //    }
+
+        //}
         public ActionResult PortalSavingSummaryApproval(long id)
         {
             var member = portalSavingSummaryService.GetByIdLong(id);

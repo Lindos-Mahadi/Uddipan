@@ -142,6 +142,7 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(50)]
         public string Guarantor { get; set; }
 
+
         public long? MemberPassBookRegisterID { get; set; }
 
         public DateTime? ChequeIssueDate { get; set; }
@@ -206,8 +207,8 @@ namespace gBanker.Data.CodeFirstMigration
         public string Remarks { get; set; }
         public bool? ApprovalStatus { get; set; }
 
-        public long? GuarantorNID { get; set; }
-        public long? GuarantorImg { get; set; }
+        public long? GuarantorNIDId { get; set; }
+        public long? GuarantorImgId { get; set; }
 
         public string SupportingDocumentsId { get; set; }
         public virtual Member Member { get; set; }
