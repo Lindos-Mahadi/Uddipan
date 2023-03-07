@@ -877,16 +877,15 @@ namespace gBanker.Web.Controllers
                 List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
 
                 var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true && p.OfficeID == LoginUserOfficeID).ToList();
-
-
+                if (!String.IsNullOrEmpty(filterValue))
+                {
+                    portalMembers = portalMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper())).ToList();
+                }
                 if (portalMembers != null)
                 {
                     var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
                     EligibleMembers.AddRange(mappedMembers);
-                    if (!String.IsNullOrEmpty(filterValue))
-                    {
-                        mappedMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper()));
-                    }
+                    
                 }
                 
                 
