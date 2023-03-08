@@ -1533,7 +1533,7 @@ namespace gBanker.Web.Controllers
                         entity.NationalID = model.NationalID;
                         if(LoggedInOrganizationID != 150)
                         {
-                            if (entity.NationalID.Length != 17)
+                            if (entity.NationalID.Length != 10 || entity.NationalID.Length != 13 || entity.NationalID.Length != 17)
                             {
                                 return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
                             }
@@ -4970,7 +4970,7 @@ namespace gBanker.Web.Controllers
                         entity.NationalID = model.NationalID;
                         if (LoggedInOrganizationID != 150)
                         {
-                            if (entity.NationalID.Length != 17)
+                            if (entity.NationalID.Length != 10 || entity.NationalID.Length != 13 || entity.NationalID.Length != 17)
                             {
                                 return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
                             }
