@@ -1527,7 +1527,8 @@
 
             }
 
-
+            const getBase64StringFromDataURL = (dataURL) =>
+                dataURL.replace('data:', '').replace(/^.+,/, '');
 
             var _currentForm = $(this).closest('form');
             if (_currentForm.valid()) {
