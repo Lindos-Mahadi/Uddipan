@@ -115,6 +115,8 @@ namespace gBanker.Web.Controllers
                 var param1 = new { @EmpID = LoggedInEmployeeID };
                 var LoanInstallMent = ultimateReportService.GetCenterROleWise(param1);
 
+                
+
                 IEnumerable<DBLoanApproveDetailModel> allSavingsummary;
                 if (LoanInstallMent != null)
                 {
@@ -129,7 +131,13 @@ namespace gBanker.Web.Controllers
                 }
                 else
                     allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID));
-                var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(allSavingsummary);
+
+                if (!String.IsNullOrEmpty(filterValue))
+                {
+                    allSavingsummary = allSavingsummary.Where(t => t.MemberCode.ToString().ToUpper().Trim().Contains(filterValue.ToUpper().Trim()) );
+                }
+                var loanAllSavingSummary = allSavingsummary.Skip(jtStartIndex).Take(jtPageSize);
+                var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(loanAllSavingSummary);
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
 
             }
@@ -165,10 +173,16 @@ namespace gBanker.Web.Controllers
                 //    allSavingsummary = loansSummaryService.GetLoanApproveDetailPaged(SessionHelper.LoginUserOfficeID.Value, filterColumn, filterValue, jtStartIndex, jtPageSize, jtSorting, out totalCount, TransactionDate, Convert.ToInt16(LoggedInOrganizationID));
                 //var currentPageRecords = Mapper.Map<IEnumerable<DBLoanApproveDetailModel>, IEnumerable<LoanApprovalViewModel>>(allSavingsummary);
                 //return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
-                var portalLoans = portalLoanSummaService.GetMany(x => x.ApprovalStatus != true && x.OfficeID == LoginUserOfficeID).Take(jtPageSize).Skip(jtStartIndex);
-                var totalCount = portalLoans.Count();
+                var portalLoans = portalLoanSummaService.GetMany(x => x.ApprovalStatus != true && x.OfficeID == LoginUserOfficeID);
 
-                var currentPageRecords = Mapper.Map<IEnumerable<PortalLoanSummary>, List<LoanApprovalViewModel>>(portalLoans.ToList());
+                if (!String.IsNullOrEmpty(filterValue))
+                {
+                    portalLoans = portalLoans.Where(t => t.MemberID == Convert.ToInt64(filterValue));
+                }
+                
+                var totalCount = portalLoans.Count();
+                var allLoanApproval = portalLoans.Skip(jtStartIndex).Take(jtPageSize);
+                var currentPageRecords = Mapper.Map<IEnumerable<PortalLoanSummary>, List<LoanApprovalViewModel>>(allLoanApproval.ToList());
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
 
             }

@@ -29,6 +29,8 @@ using gBanker.Core.Common;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 using gBanker.Data.CodeFirstMigration;
+using Kendo.Mvc.UI;
+using Kendo.DynamicLinq;
 
 namespace gBanker.Web.Controllers
 {
@@ -875,15 +877,21 @@ namespace gBanker.Web.Controllers
                 List<DBMemberDetailModel> EligibleMembers = new List<DBMemberDetailModel>();
 
                 var portalMembers = portalMemberService.GetMany(p => p.ApprovalStatus != true && p.OfficeID == LoginUserOfficeID).ToList();
+                if (!String.IsNullOrEmpty(filterValue))
+                {
+                    portalMembers = portalMembers.Where(t => t.LastName.ToUpper().Contains(filterValue.ToUpper().Trim()) || t.FirstName.ToUpper().Contains(filterValue.ToUpper().Trim()) || t.MemberNID.ToString().ToUpper().Contains(filterValue.ToUpper()) || t.Phone.Contains(filterValue) ).ToList();
+                }
 
                 if (portalMembers != null)
                 {
                     var mappedMembers = Mapper.Map<IEnumerable<PortalMember>, List<DBMemberDetailModel>>(portalMembers);
                     EligibleMembers.AddRange(mappedMembers);
+                    
                 }
+                
+                
 
-
-                var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                var detail = EligibleMembers.Skip(jtStartIndex).Take(jtPageSize);
 
 
                 //var detail = memberDetail.ToList();
@@ -1525,9 +1533,13 @@ namespace gBanker.Web.Controllers
                         entity.NationalID = model.NationalID;
                         if(LoggedInOrganizationID != 150)
                         {
-                            if (entity.NationalID.Length != 17)
+                            //if (entity.NationalID.Length != 10 || entity.NationalID.Length != 13 || entity.NationalID.Length !=17 )
+                            //{
+                            //    return GetErrorMessageResult("NationalID  No cann't be less than 10 or 13 & 17 digits");
+                            //}
+                            if (entity.NationalID.Length !=10 && entity.NationalID.Length != 13 && entity.NationalID.Length !=17)
                             {
-                                return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
+                                return GetErrorMessageResult("NationalID  No cann't be less than 10, 13, 17 digits");
                             }
                         }
                     }
@@ -4962,9 +4974,13 @@ namespace gBanker.Web.Controllers
                         entity.NationalID = model.NationalID;
                         if (LoggedInOrganizationID != 150)
                         {
-                            if (entity.NationalID.Length != 17)
+                            //if (entity.NationalID.Length != 17)
+                            //{
+                            //    return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
+                            //}
+                            if (entity.NationalID.Length != 10 && entity.NationalID.Length != 13 && entity.NationalID.Length != 17)
                             {
-                                return GetErrorMessageResult("NationalID  No cann't be less than 17 digits");
+                                return GetErrorMessageResult("NationalID  No cann't be less than 10, 13, 17 digits");
                             }
                         }
                     }

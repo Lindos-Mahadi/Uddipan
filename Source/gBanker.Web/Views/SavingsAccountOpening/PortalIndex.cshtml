@@ -187,7 +187,28 @@
 </script>
 @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-info btn-sm pull-right" })
 <h2 class="page-title">Portal Saving Summary Opening List</h2>
-
+<div class="row">
+    <div class="col-md-1">
+        <label class="control-label" style="padding-top:8px;">Filter By:</label>
+    </div>
+    <div class="col-md-3">
+        <select id="filterColumn" class="form-control">
+            <option value="ViewAll">View All</option>
+            <option value="MemberCode">Member Code</option>
+            <option value="MemberName">Member Name</option>
+            <option value="CenterCode">Samity Code</option>
+            <option value="GroupCode">Group Code</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <input type="text" id="filterValue" placeholder="Type Search Text" class="form-control" />
+    </div>
+    <div class="col-md-5">
+        <input type="button" id="btnSearch" value="Search" class="btn btn-primary" onclick="reloadGrid();" />
+        &nbsp;
+        @*<input type="button" id="btnApprove" value="Approve All" class="btn btn-primary"  />*@
+    </div>
+</div>
 
 
 <div id="grid"></div>

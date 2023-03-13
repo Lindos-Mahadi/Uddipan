@@ -1393,10 +1393,10 @@
 
             console.log("NID Length:", nationalId.length);
             if (nationalId != "") {//if (ddlIentityTypeId == 1) {
-                if (nationalId != ''  && nationalId.length != 17) { //&& nationalId.length != 13
+                if (nationalId != '' && nationalId.length != 10 && nationalId.length != 13 && nationalId.length != 17) { //&& nationalId.length != 13
                     //alert('National Id cannot be blank or less than 10,13&17 characters.');
                     //data-valmsg-for="NationalID"
-                    $("span[data-valmsg-for='NationalID']").text('National Id cannot be blank or less than 17 characters.');
+                    $("span[data-valmsg-for='NationalID']").text('National Id cannot be blank or less than 10, 13 & 17 characters.');
                     //$("#NationalID").focus();
                     return false;
                 }

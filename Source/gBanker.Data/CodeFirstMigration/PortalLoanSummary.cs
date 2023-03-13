@@ -142,6 +142,7 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(50)]
         public string Guarantor { get; set; }
 
+
         public long? MemberPassBookRegisterID { get; set; }
 
         public DateTime? ChequeIssueDate { get; set; }
