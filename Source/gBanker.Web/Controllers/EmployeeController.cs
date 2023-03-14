@@ -330,7 +330,7 @@ namespace gBanker.Web.Controllers
             {
                 
                 var entity = Mapper.Map<EmployeeViewModel, Employee>(model);
-                var getEmployeeDetails = employeeService.GetById(entity.EmployeeID);
+                var getEmployeeDetails = employeeService.GetById((short)entity.EmployeeID);
                 //// TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
@@ -359,7 +359,7 @@ namespace gBanker.Web.Controllers
                     getEmployeeDetails.ReleaseDate = entity.ReleaseDate;
                     getEmployeeDetails.EmployeeCode = entity.EmployeeCode;
                     getEmployeeDetails.DesignationID = entity.DesignationID;
-                    var mem = employeeService.CheckDupliEmployee(entity.EmployeeCode,entity.EmployeeID);
+                    var mem = employeeService.CheckDupliEmployee(entity.EmployeeCode,(short)entity.EmployeeID);
                     if (mem.ToList().Count > 0)
                     {
                         return GetErrorMessageResult("EmployeeCode Already Exists");

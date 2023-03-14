@@ -73,7 +73,7 @@ namespace gBankerCodeFirstMigration.Db
 
         public byte[] OrgLOGO { get; set; }
         public int? MemberAge { get; set; }
-        public int? GuarantorAge { get; set; }
+        //public int? GuarantorAge { get; set; }
         //public virtual ICollection<AccChart> AccCharts { get; set; }
 
         //public virtual ICollection<AccNote> AccNotes { get; set; }

@@ -12,7 +12,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
     {
         public int EmployeeOfficeMappingID { get; set; }
 
-        public short EmployeeID { get; set; }
+        public long EmployeeID { get; set; }
 
         public int OfficeID { get; set; }
 

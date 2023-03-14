@@ -702,14 +702,14 @@ namespace gBanker.Web.Controllers
             //var v = OrgInfo.MemberAge;
             var GuarantorAge = 60;
 
-            if (OrgInfo.GuarantorAge == null)
-            {
+            //if (OrgInfo.GuarantorAge == null)
+            //{
 
-            }
-            else
-            {
-                GuarantorAge = (int)OrgInfo.GuarantorAge;
-            }
+            //}
+            //else
+            //{
+            //    GuarantorAge = (int)OrgInfo.GuarantorAge;
+            //}
             ViewData["GuarantorAge"] = GuarantorAge;
 
             // for Member Name
@@ -757,14 +757,14 @@ namespace gBanker.Web.Controllers
             //var v = OrgInfo.MemberAge;
             var GuarantorAge = 60;
 
-            if (OrgInfo.GuarantorAge == null)
-            {
+            //if (OrgInfo.GuarantorAge == null)
+            //{
 
-            }
-            else
-            {
-                GuarantorAge = (int)OrgInfo.GuarantorAge;
-            }
+            //}
+            //else
+            //{
+            //    GuarantorAge = (int)OrgInfo.GuarantorAge;
+            //}
             ViewData["GuarantorAge"] = GuarantorAge;
             return View(model);
         }

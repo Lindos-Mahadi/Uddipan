@@ -474,8 +474,8 @@ namespace gBanker.Web.Controllers
                     entity.SecondLevel = model.SecondLevel;
                     entity.ThirdLevel = model.ThirdLevel;
                     entity.FourthLevel = model.FourthLevel;
-                    entity.InvestorID = model.InvestorID;
-                    entity.UnionID = model.UnionID;
+                    entity.InvestorID = (byte)model.InvestorID;
+                    //entity.UnionID = model.UnionID;
                     officeService.Update(entity);
 
                     return GetSuccessMessageResult();

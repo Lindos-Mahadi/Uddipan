@@ -364,7 +364,7 @@ namespace gBanker.Web.Controllers.Inventory
                                         if (!string.IsNullOrEmpty(obj.Where(x => x.ItemID == b.ItemID).First().EmployeeCode))
                                         {
                                             var emp = iEmployeeService.GetByCode(obj.FirstOrDefault(x => x.ItemID == b.ItemID).EmployeeCode);
-                                            obj.Where(x => x.ItemID == b.ItemID).ToList().ForEach(x => x.EmployeeID = emp.EmployeeID);
+                                            obj.Where(x => x.ItemID == b.ItemID).ToList().ForEach(x => x.EmployeeID = (short)emp.EmployeeID);
                                         }
                                     }
                                     var sqty = iInvStoreService.GetMany(x => x.WarehouseID == b.WarehouseID && x.StockType == "I" && x.ItemID == b.ItemID && x.StockBalance > 0).OrderBy(x => x.ID);
@@ -603,7 +603,7 @@ namespace gBanker.Web.Controllers.Inventory
                                         if (!string.IsNullOrEmpty(obj.Where(x => x.ItemID == b.ItemID).First().EmployeeCode))
                                         {
                                             var emp = iEmployeeService.GetByCode(obj.FirstOrDefault(x => x.ItemID == b.ItemID).EmployeeCode);
-                                            obj.Where(x => x.ItemID == b.ItemID).ToList().ForEach(x => x.EmployeeID = emp.EmployeeID);
+                                            obj.Where(x => x.ItemID == b.ItemID).ToList().ForEach(x => x.EmployeeID = (int)emp.EmployeeID);
                                         }
                                     }
                                     var sqty = iInvStoreService.GetMany(x => x.WarehouseID == b.WarehouseID && x.StockType == "I"

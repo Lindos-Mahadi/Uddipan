@@ -10,7 +10,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
     [Table("Employee")]
     public partial class Employee
     {
-        public short EmployeeID { get; set; }
+        public long EmployeeID { get; set; }
 
         [Required]
         [StringLength(10)]

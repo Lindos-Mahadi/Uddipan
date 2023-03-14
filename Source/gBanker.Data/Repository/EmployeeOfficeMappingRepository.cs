@@ -45,7 +45,7 @@ namespace gBanker.Data.Repository
                     else
                     {
                         map.OrgID = OrgID;
-                        map.EmployeeID = employee.EmployeeID;
+                        map.EmployeeID = (short)employee.EmployeeID;
                         map.IsActive = true;
 
                         Add(map);

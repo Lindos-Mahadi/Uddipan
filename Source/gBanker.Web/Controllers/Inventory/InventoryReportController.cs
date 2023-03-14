@@ -330,7 +330,7 @@ namespace gBanker.Web.Controllers.Inventory
                         {
                             var emp = iEmployeeService.GetByCode(empCode);
                             if (emp != null)
-                                empID = emp.EmployeeID;
+                                empID = (short)emp.EmployeeID;
                         }
                         paramValues.Add(new gBanker.Service.ReportExecutionService.ParameterValue() { Name = "OrgName", Value = (SessionHelper.OrganizationName).ToString() });
                         paramValues.Add(new gBanker.Service.ReportExecutionService.ParameterValue() { Name = "empID", Value = empID.ToString() });

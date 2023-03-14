@@ -29,7 +29,7 @@ namespace gBanker.Data
 
         public int RoleId { get; set; }
 
-        public Int16? EmployeeID { get; set; }
+        public long? EmployeeID { get; set; }
         public string DisplayName
         {
             get { return FirstName + " " + LastName; }

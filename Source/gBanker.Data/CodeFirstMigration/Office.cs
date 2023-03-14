@@ -154,9 +154,9 @@ namespace gBanker.Data.CodeFirstMigration.Db
         //public virtual ICollection<EmployeeOfficeMapping> EmployeeOfficeMappings { get; set; }
         //public int? InvestorID { get; set; }
 
-        public int? InvestorID { get; set; }
+        public byte? InvestorID { get; set; }
         //public byte? InvestorID { get; set; }
 
-        public int? UnionID { get; set; }
+        //public int? UnionID { get; set; }
     }
 }
