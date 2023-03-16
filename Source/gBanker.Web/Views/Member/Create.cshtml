@@ -611,8 +611,10 @@
         });
     }
 
+    
 
     function showMyImage(fileInput) {
+        console.log(fileInput.files);
         var files = fileInput.files;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
@@ -1309,7 +1311,7 @@
             $("span[data-valmsg-for='NationalID']").text('');
 
             if (nationalId != "") {//if (ddlIentityTypeId == 1) {
-                if (nationalId != ''  && nationalId.length != 17) { //&& nationalId.length != 13
+                if (nationalId != '' &&  nationalId.length != 10 && nationalId.length != 13 && nationalId.length != 17) { //&& nationalId.length != 13
                     //alert('National Id cannot be blank or less than 10,13&17 characters.');
                     //data-valmsg-for="NationalID"
                     $("span[data-valmsg-for='NationalID']").text('National Id cannot be blank or less than 17 characters.');
@@ -1529,13 +1531,13 @@
 
             const getBase64StringFromDataURL = (dataURL) =>
                 dataURL.replace('data:', '').replace(/^.+,/, '');
-
+            //console.log('image', getBase64StringFromDataURL);
             var _currentForm = $(this).closest('form');
             if (_currentForm.valid()) {
                 $("#loading").show();
                 var file = "";
                 var fileFingerThumb = "";
-
+                //console.log('image', fileFingerThumb);
                 var files = document.getElementById("thumbnil").src;
                 var arr = files.split("/");
                 var pic = arr[arr.length - 1];
@@ -1545,8 +1547,8 @@
                     file = files;
                 }
                 var base64image = file;
-
                 var image = document.getElementById("thumbnil");
+                console.log('image', base64image);
                 var canvas = document.createElement('canvas');
 
                 // We use naturalWidth and naturalHeight to get the real image size vs the size at which the image is shown on the page
@@ -1575,6 +1577,7 @@
                 var base64imageFingerThumb = fileFingerThumb;
 
                 image = document.getElementById("MemberNidImg");
+                //console.log('image');
                 canvas = document.createElement('canvas');
 
                 // We use naturalWidth and naturalHeight to get the real image size vs the size at which the image is shown on the page
@@ -2338,13 +2341,13 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MemberImg, htmlAttributes: new { @class = "control-label" })
-                            @Html.TextBoxFor(model => model.ImgFile, new { type = "file", @onchange = "showMyImage(this);", @class = "form-control" })
+                            @Html.LabelFor(model => model.MemberImg, htmlAttributes: new { @class = "control-label" })<span style="color:red; font-size:15px;"> * </span>
+                            @Html.TextBoxFor(model => model.ImgFile, new { type = "file", @onchange = "showMyImage(this);", @class = "form-control", required = "required" })
                             @*<input type="file" accept="image/*" onchange="showMyImage(this)" id="imagedata"ImgFile />*@
                             @Html.ValidationMessageFor(model => model.MemberImg, "", new { @class = "text-danger" })
                             <br />
                             <input type="button" id="captureImage" data-type="image" value="Capture Image" class="btn btn-facebook" />
-
+                            @Html.ValidationMessageFor(model => model.MemberImg, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
