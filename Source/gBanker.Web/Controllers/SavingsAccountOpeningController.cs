@@ -344,7 +344,7 @@ namespace gBanker.Web.Controllers
                     int membercaregoryid = member.MemberCategoryID;
 
                     var employee = GetEmployee(entity.CenterID);
-                    int employeeid = employee.EmployeeId;
+                    int employeeid = (short)Convert.ToInt64(employee.EmployeeId);
                     entity.EmployeeId = Convert.ToInt16(employeeid);
 
 
@@ -518,7 +518,7 @@ namespace gBanker.Web.Controllers
 
                             var pbr = productService.GetById(entity.ProductID);
                             var employee = GetEmployee(entity.CenterID);
-                            int employeeid = employee.EmployeeId;
+                            int employeeid = (short)Convert.ToInt64(employee.EmployeeId);
                             
                             if (model.Ref_EmployeeID==0)
                             {
@@ -922,7 +922,7 @@ namespace gBanker.Web.Controllers
 
                             var pbr = productService.GetById(entity.ProductID);
                             var employee = GetEmployee(entity.CenterID);
-                            int employeeid = employee.EmployeeId;
+                            int employeeid = (short)Convert.ToInt64(employee.EmployeeId);
 
                             if (model.Ref_EmployeeID == 0)
                             {

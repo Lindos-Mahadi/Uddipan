@@ -1,6 +1,7 @@
 ﻿using gBanker.Data.CodeFirstMigration.Db;
 using gBanker.Data.CodeFirstMigration.InfrastructureBase;
 using gBanker.Data.DBDetailModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,15 +36,15 @@ namespace gBanker.Data.Repository
                     CenterAddress = s.CenterAddress,
                     CenterNameBng = s.CenterNameBng,
                     Organizer = s.Organizer,
-                    EmployeeId = s.EmployeeId,
-                    EmployeeFullName = s.Employee.EmployeeCode + ", " + s.Employee.EmpName,
+                    EmployeeId = (short)Convert.ToInt64(s.EmployeeId),
+                    //EmployeeFullName = s.Employee.EmployeeCode + ", " + s.Employee.EmpName,
                     CollectionDay = s.CollectionDay,
                     CollectionDate = s.CollectionDate,
                     GeoLocationID = s.GeoLocationID,
                     LocationName = s.GeoLocation.LocationName,
                     OperationStartDate = s.OperationStartDate,
                     CenterStatus = s.CenterStatus,
-                    CenterDistance = s.CenterDistance,
+                    //CenterDistance = s.CenterDistance,
                     IsActive = s.IsActive,
                     CenterTime = s.CenterTime
 
@@ -67,15 +68,15 @@ namespace gBanker.Data.Repository
                      CenterFullName = s.CenterCode + " " + s.CenterName,
                      CenterAddress = s.CenterAddress,
                      CenterNameBng = s.CenterNameBng,
-                     EmployeeId = s.EmployeeId,
-                     EmployeeFullName = s.Employee.EmployeeCode + ", " + s.Employee.EmpName,
+                     EmployeeId = (short)Convert.ToInt64(s.EmployeeId),
+                     //EmployeeFullName = s.Employee.EmployeeCode + ", " + s.Employee.EmpName,
                      CollectionDay = s.CollectionDay,
                      CollectionDate = s.CollectionDate,
                      GeoLocationID = s.GeoLocationID,
                      LocationName = s.GeoLocation.LocationName,
                      OperationStartDate = s.OperationStartDate,
                      CenterStatus = s.CenterStatus,
-                     CenterDistance = s.CenterDistance,
+                     //CenterDistance = s.CenterDistance,
                      IsActive = s.IsActive
 
                  });

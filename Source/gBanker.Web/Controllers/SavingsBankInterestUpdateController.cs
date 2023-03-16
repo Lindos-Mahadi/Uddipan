@@ -419,7 +419,7 @@ namespace gBanker.Web.Controllers
                     int membercaregoryid = member.MemberCategoryID;
 
                     var employee = GetEmployee(entity.CenterID);
-                    int employeeid = employee.EmployeeId;
+                    int employeeid = (short)Convert.ToInt64(employee.EmployeeId);
 
                     var prod = GetProduct(entity.ProductID);
                     decimal intrate = Convert.ToDecimal(prod.InterestRate);

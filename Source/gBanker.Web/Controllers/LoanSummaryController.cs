@@ -253,7 +253,7 @@ namespace gBanker.Web.Controllers
                     int membercaregoryid = member.MemberCategoryID;
 
                     var employee = GetEmployee(entity.CenterID);
-                    int employeeid = employee.EmployeeId;
+                    int employeeid = (short)Convert.ToInt64(employee.EmployeeId);
                     entity.EmployeeId = Convert.ToInt16(employeeid);
                     entity.MemberCategoryID = Convert.ToByte(membercaregoryid);
 

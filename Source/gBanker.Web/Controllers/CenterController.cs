@@ -641,18 +641,18 @@ namespace gBanker.Web.Controllers
                     entity.Organizer = model.Organizer;
                     entity.CenterTime = fullDate;
 
-                    entity.CountryID = model.CountryID;
-                    entity.DivisionCode = model.DivisionCode;
-                    entity.DistrictCode = model.DistrictCode;
-                    entity.UpozillaCode = model.UpozillaCode;
-                    entity.UnionCode = model.UnionCode;
-                    entity.VillageCode = model.VillageCode;
-                    entity.ZipCode = model.ZipCode;
-                    entity.AddressLine1 = model.AddressLine1;
+                    //entity.CountryID = model.CountryID;
+                    //entity.DivisionCode = model.DivisionCode;
+                    //entity.DistrictCode = model.DistrictCode;
+                    //entity.UpozillaCode = model.UpozillaCode;
+                    //entity.UnionCode = model.UnionCode;
+                    //entity.VillageCode = model.VillageCode;
+                    //entity.ZipCode = model.ZipCode;
+                    //entity.AddressLine1 = model.AddressLine1;
 
-                    entity.CenterChief = model.CenterChief;
-                    entity.AssoCenterChief = model.AssoCenterChief;
-                    entity.PanelMember = model.PanelMember;
+                    //entity.CenterChief = model.CenterChief;
+                    //entity.AssoCenterChief = model.AssoCenterChief;
+                    //entity.PanelMember = model.PanelMember;
 
                     //InsertCenterLog
 
@@ -747,17 +747,17 @@ namespace gBanker.Web.Controllers
                     entity.CenterStatus = model.CenterStatus;
                     entity.Organizer = model.Organizer;
                     entity.CenterTime = fullDate;
-                    entity.CountryID = model.CountryID;
-                    entity.DivisionCode = model.DivisionCode;
-                    entity.DistrictCode = model.DistrictCode;
-                    entity.UpozillaCode = model.UpozillaCode;
-                    entity.UnionCode = model.UnionCode;
-                    entity.VillageCode = model.VillageCode;
-                    entity.ZipCode = model.ZipCode;
-                    entity.AddressLine1 = model.AddressLine1;
-                    entity.CenterChief = model.CenterChief;
-                    entity.AssoCenterChief = model.AssoCenterChief;
-                    entity.PanelMember = model.PanelMember;
+                    //entity.CountryID = model.CountryID;
+                    //entity.DivisionCode = model.DivisionCode;
+                    //entity.DistrictCode = model.DistrictCode;
+                    //entity.UpozillaCode = model.UpozillaCode;
+                    //entity.UnionCode = model.UnionCode;
+                    //entity.VillageCode = model.VillageCode;
+                    //entity.ZipCode = model.ZipCode;
+                    //entity.AddressLine1 = model.AddressLine1;
+                    //entity.CenterChief = model.CenterChief;
+                    //entity.AssoCenterChief = model.AssoCenterChief;
+                    //entity.PanelMember = model.PanelMember;
 
                     //InsertCenterLog
 

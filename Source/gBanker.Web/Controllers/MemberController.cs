@@ -1576,7 +1576,9 @@ namespace gBanker.Web.Controllers
                     entity.MemberStatus = "0";
                     entity.PwdStatus = "D";
                     entity.MemberType = 1;
-                   
+                    // edit by mahadi
+                    entity.GroupID = 9674;
+
                     var param = new { @OfficeID = SessionHelper.LoginUserOfficeID };
                     var allProducts = accReportService.GetLastInitialDate(param);
 
@@ -1586,7 +1588,7 @@ namespace gBanker.Web.Controllers
                     {
                         if (allProducts.Tables[0].Rows.Count > 0) // check if there is any data.
                         {
-                            entity.JoinDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1].ToString());
+                            entity.JoinDate = Convert.ToDateTime(allProducts.Tables[0].Rows[0][1]);
                         }
                     }
                     else
@@ -1656,6 +1658,7 @@ namespace gBanker.Web.Controllers
                         entity.Image = imageUpload.FileUploadId;
                         entity.MemberImg = null;
                     }
+                    
                     memberService.Create(entity);
                     var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };
                     return Json(new { data = ent }, JsonRequestBehavior.AllowGet);
@@ -4595,7 +4598,13 @@ namespace gBanker.Web.Controllers
                         entity.PhoneNo = model.PhoneNo;
                     }
 
-                    var param = new { OfficeID = LoginUserOfficeID, CenterID = entity.CenterID, MemberID = entity.MemberID, CreateUser = LoggedInEmployeeID };
+                    var param = new 
+                    {
+                        OfficeID = LoginUserOfficeID, 
+                        CenterID = entity.CenterID, 
+                        MemberID = entity.MemberID, 
+                        CreateUser = LoggedInEmployeeID
+                    };
                     ultimateReportService.UpdateCenterIDInAllRelatedTable(param);
 
                     memberService.Update(entity);
@@ -5156,7 +5165,21 @@ namespace gBanker.Web.Controllers
                         {
                             SavingSummary SS = new SavingSummary();
                             SS.ProductID = Convert.ToInt16(p);
-                            savingSummaryService.Proc_Set_SavingOpeingWhenMemberEligible(Convert.ToInt32(SessionHelper.LoginUserOfficeID), Convert.ToInt32(entity.CenterID), entity.MemberID, Convert.ToInt16(p), 1, entity.JoinDate, 1, entity.JoinDate, Convert.ToInt32(entity.Center.EmployeeId), Convert.ToInt32(entity.MemberCategoryID), Convert.ToInt16(LoggedInOrganizationID), LoggedInEmployeeID.ToString(), System.DateTime.Now);
+                            savingSummaryService.Proc_Set_SavingOpeingWhenMemberEligible
+                            (
+                                Convert.ToInt32(SessionHelper.LoginUserOfficeID),
+                                Convert.ToInt32(entity.CenterID),
+                                entity.MemberID, 
+                                Convert.ToInt16(p),
+                                1, entity.JoinDate, 
+                                1, 
+                                entity.JoinDate, 
+                                Convert.ToInt32(entity.Center.EmployeeId), 
+                                Convert.ToInt32(entity.MemberCategoryID),
+                                Convert.ToInt16(LoggedInOrganizationID), 
+                                LoggedInEmployeeID.ToString(),
+                                System.DateTime.Now
+                                );
                         }
 
                     var member = memberService.GetByMemberId(model.MemberID);

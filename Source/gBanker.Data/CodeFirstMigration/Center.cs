@@ -38,7 +38,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public string CenterNameBng { get; set; }
         public string Organizer { get; set; }
 
-        public short EmployeeId { get; set; }
+        public long? EmployeeId { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -75,7 +75,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual Office Office { get; set; }
 
         public virtual ICollection<Holiday> Holidays { get; set; }
-        public virtual Employee Employee { get; set; }
+        //public virtual Employee Employee { get; set; }
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual ICollection<LoanSummary> LoanSummaries { get; set; }
@@ -88,31 +88,31 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual ICollection<RepaymentSchedule> RepaymentSchedules { get; set; }
         public DateTime? CenterTime { get; set; }
 
-        public string CenterDistance { get; set; }
+        //public string CenterDistance { get; set; }
 
         ///Address Fields
         ///
         // Address Added By KHALID ON 15 March, 2022
 
-        public int? CountryID { get; set; }
+        //public int? CountryID { get; set; }
 
-        public string DivisionCode { get; set; }
+        //public string DivisionCode { get; set; }
 
-        public string DistrictCode { get; set; }
+        //public string DistrictCode { get; set; }
 
-        public string UpozillaCode { get; set; }
+        //public string UpozillaCode { get; set; }
 
-        public string UnionCode { get; set; }
+        //public string UnionCode { get; set; }
 
-        public string VillageCode { get; set; }
+        //public string VillageCode { get; set; }
 
-        public string ZipCode { get; set; }
+        //public string ZipCode { get; set; }
 
-        public string AddressLine1 { get; set; }
+        //public string AddressLine1 { get; set; }
 
-        public long? CenterChief { get; set; }
-        public long? AssoCenterChief { get; set; }
-        public long? PanelMember { get; set; }
+        //public long? CenterChief { get; set; }
+        //public long? AssoCenterChief { get; set; }
+        //public long? PanelMember { get; set; }
 
         /*public virtual Member Member{ get; set; } *///CenterChief_dtl 
         //public virtual Member AssoCenterChief_dtl { get; set; }
