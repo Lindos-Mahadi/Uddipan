@@ -174,7 +174,7 @@ namespace gBanker.Web.Controllers
             //model.productListItems = proditems;
 
             List<ProductViewModel> List_ProductViewModel = new List<ProductViewModel>();
-            var param = new { Prodtype=0, OrgID=LoggedInOrganizationID, ItemType="S", OfficeID = LoginUserOfficeID };
+            var param = new { Prodtype=1, OrgID=LoggedInOrganizationID, ItemType="S", OfficeID = LoginUserOfficeID };
             var div_items = ultimateReportService.GetProductListAccordingToOffice(param);
 
             List_ProductViewModel = div_items.Tables[0].AsEnumerable()
