@@ -136,7 +136,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [StringLength(50)]
         public string BankName { get; set; }
 
-        public string Remarks { get; set; }
+       // public string Remarks { get; set; }
 
         [StringLength(50)]
         public string ChequeNo { get; set; }

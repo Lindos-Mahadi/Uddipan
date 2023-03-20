@@ -508,7 +508,7 @@ namespace gBanker.Web.Controllers
            // var entity = Mapper.Map<LoanApprovalEligibleViewModel, LoanSummary>(model);
             getLoanSummary.IsActive = false;
             getLoanSummary.InActiveDate = DateTime.Now;
-            getLoanSummary.Remarks = Remarks;
+            //getLoanSummary.Remarks = Remarks;
             loanapprovalService.Update(getLoanSummary);
             //loanapprovalService.Inactivate(LoanSummaryID, null);
             return Json(members, JsonRequestBehavior.AllowGet);
