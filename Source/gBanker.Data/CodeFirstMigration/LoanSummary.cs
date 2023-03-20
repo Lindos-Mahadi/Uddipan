@@ -196,5 +196,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public long? GuarantorNID { get; set; }
         public long? GuarantorImg { get; set; }
         public string SupportingDocumentsId { get; set; }
+        public decimal PreInterestPaid { get; set; } = 0;
+        public decimal PreInterestCharge { get; set; } = 0;
+
     }
 }
