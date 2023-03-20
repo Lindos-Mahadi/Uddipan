@@ -86,7 +86,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public short InstallmentNo { get; set; }
         public byte InvestorID { get; set; }
-        public short EmployeeID { get; set; }
+        public long EmployeeID { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal? TotalPaid { get; set; }

@@ -97,7 +97,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "date")]
         public DateTime? OverdueDate { get; set; }
 
-        public short EmployeeId { get; set; }
+        public long EmployeeId { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal ExcessPay { get; set; }
