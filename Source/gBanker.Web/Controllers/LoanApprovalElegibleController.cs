@@ -35,6 +35,7 @@ namespace gBanker.Web.Controllers
         private readonly IMemberPassBookRegisterService memberPassBookRegisterService;
         private readonly IApproveCellingService approveCellingService;
         private readonly ISMSSenderService smsSenderService;
+        private readonly IPortalLoanSummaryService portalLoanSummaryService;
 
         public LoanApprovalElegibleController(ILoanSummaryService loansSummaryService,
             IApproveCellingService approveCellingService,
@@ -43,7 +44,7 @@ namespace gBanker.Web.Controllers
             IMemberCategoryService membercategoryService, IOfficeService officeService, 
             ICenterService centerService, IPurposeService purposeService, 
             IMemberService memberService, IInvestorService investorService, 
-            IUltimateReportService ultimateReportService
+            IUltimateReportService ultimateReportService, IPortalLoanSummaryService portalLoanSummaryService
             , ILoanCollectionReportService loanCollectionReportService
             , ISMSSenderService smsSenderService
             )
@@ -62,6 +63,8 @@ namespace gBanker.Web.Controllers
                 this.memberPassBookRegisterService = memberPassBookRegisterService;
                 this.approveCellingService = approveCellingService;
                 this.smsSenderService = smsSenderService;
+            this.portalLoanSummaryService = portalLoanSummaryService;
+                
           }
         public JsonResult GetLoanApprovals(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
         {
@@ -429,7 +432,30 @@ namespace gBanker.Web.Controllers
 
 
                 //}// END Organaization id 10 sms send process
+                if(getLoanSummary?.PortalLoanSummaryID != null && getLoanSummary?.PortalLoanSummaryID != 0)
+                {
+                    var pprtalLoanMap = portalLoanSummaryService.GetById((int)getLoanSummary.PortalLoanSummaryID);
+                    pprtalLoanMap.IsApproved = true;
+                    pprtalLoanMap.Guarantor = entity.Guarantor;
+                    pprtalLoanMap.MemberPassBookRegisterID = entity.MemberPassBookRegisterID;
+                    pprtalLoanMap.FinalDisbursement = 0;
+                    pprtalLoanMap.PartialAmount = 0;
+                    pprtalLoanMap.PartialIntCharge = 0;
+                    pprtalLoanMap.PartialIntPaid = 0;
 
+                    pprtalLoanMap.LoanInstallment = entity.LoanInstallment;
+                    pprtalLoanMap.IntInstallment = entity.IntInstallment;
+                    pprtalLoanMap.PrincipalLoan = entity.PrincipalLoan;
+
+                    if (pprtalLoanMap.DisbursementType == 2)
+                    {
+                        pprtalLoanMap.PrincipalLoan = 0;
+                        pprtalLoanMap.LoanInstallment = 0;
+                        pprtalLoanMap.IntInstallment = 0;
+                    }
+
+                    portalLoanSummaryService.Update(pprtalLoanMap);
+                }
                 return GetSuccessMessageResult();
             }
             catch

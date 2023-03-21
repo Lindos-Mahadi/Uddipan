@@ -14,6 +14,7 @@ namespace gBanker.Data.CodeFirstMigration.InfrastructureBase
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
         T GetById(long id);
+        T GetByIdLong(long id);
         T GetById(string id);
         T Get(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();

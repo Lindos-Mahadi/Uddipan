@@ -39,6 +39,7 @@ namespace gBanker.Data.CodeFirstMigration.InfrastructureBase
         {
             dbset.Add(entity);
         }
+
         public virtual void Update(T entity)
         {
 
@@ -61,6 +62,11 @@ namespace gBanker.Data.CodeFirstMigration.InfrastructureBase
                 dbset.Remove(obj);
         }
         public virtual T GetById(long id)
+        {
+            return dbset.Find(id);
+        }
+
+        public virtual T GetByIdLong(long id)
         {
             return dbset.Find(id);
         }

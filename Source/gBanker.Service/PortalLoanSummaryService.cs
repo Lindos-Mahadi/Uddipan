@@ -52,7 +52,8 @@ namespace gBanker.Service
 
         public PortalLoanSummary GetByIdLong(long id)
         {
-            throw new NotImplementedException();
+            var entity = repository.GetByIdLong(id);
+            return entity;
         }
 
         public IEnumerable<PortalLoanSummary> GetMany(Expression<Func<PortalLoanSummary, bool>> where)
