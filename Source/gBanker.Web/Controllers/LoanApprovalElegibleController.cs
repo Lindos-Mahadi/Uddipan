@@ -447,8 +447,9 @@ namespace gBanker.Web.Controllers
                     pprtalLoanMap.IntInstallment = entity.IntInstallment;
                     pprtalLoanMap.PrincipalLoan = entity.PrincipalLoan;
 
-                    if (pprtalLoanMap.DisbursementType == 2)
+                    if (getLoanSummary.DisbursementType == 2)
                     {
+                        pprtalLoanMap.DisbursementType = 2;
                         pprtalLoanMap.PrincipalLoan = 0;
                         pprtalLoanMap.LoanInstallment = 0;
                         pprtalLoanMap.IntInstallment = 0;
