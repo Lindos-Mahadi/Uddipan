@@ -642,50 +642,50 @@ namespace gBanker.Web.Controllers
                                     }
                                 if (obj[0].PortalSavingSummaryID > 0)
                                 {
-                                    var savingTrxModel = new SavingTrx()
-                                    {
-                                        SavingSummaryID = entity.SavingSummaryID,
-                                        OfficeID = entity.OfficeID,
-                                        MemberID = entity.MemberID,
-                                        ProductID = entity.ProductID,
-                                        CenterID = entity.CenterID,
-                                        NoOfAccount = entity.NoOfAccount,
-                                        TransactionDate = entity.TransactionDate,
-                                        Deposit = 0,
-                                        Withdrawal = 0,
-                                        Balance = 0,
-                                        Penalty = 0,
-                                        TransType = 0,
-                                        MonthlyInterest = 0,
-                                        PresenceInd = true,
-                                        TransferDeposit = 0,
-                                        TransferWithdrawal = 0,
-                                        EmployeeID= (short)LoggedInEmployeeID,
-                                        MemberCategoryID = entity.MemberCategoryID,
-                                        OrgID = entity.OrgID,
-                                        IsActive = 1,
-                                        CreateUser = entity.CreateUser,
-                                        CreateDate = entity.CreateDate,
-                                    };
+                                    //var savingTrxModel = new SavingTrx()
+                                    //{
+                                    //    SavingSummaryID = entity.SavingSummaryID,
+                                    //    OfficeID = entity.OfficeID,
+                                    //    MemberID = entity.MemberID,
+                                    //    ProductID = entity.ProductID,
+                                    //    CenterID = entity.CenterID,
+                                    //    NoOfAccount = entity.NoOfAccount,
+                                    //    TransactionDate = entity.TransactionDate,
+                                    //    Deposit = 0,
+                                    //    Withdrawal = 0,
+                                    //    Balance = 0,
+                                    //    Penalty = 0,
+                                    //    TransType = 0,
+                                    //    MonthlyInterest = 0,
+                                    //    PresenceInd = true,
+                                    //    TransferDeposit = 0,
+                                    //    TransferWithdrawal = 0,
+                                    //    EmployeeID= (short)LoggedInEmployeeID,
+                                    //    MemberCategoryID = entity.MemberCategoryID,
+                                    //    OrgID = entity.OrgID,
+                                    //    IsActive = 1,
+                                    //    CreateUser = entity.CreateUser,
+                                    //    CreateDate = entity.CreateDate,
+                                    //};
 
-                                    //var savingTrxId = savingTrxService.GetById((int)obj[0].SavingSummaryID);
-                                    savingTrxService.Create(savingTrxModel);
+                                    ////var savingTrxId = savingTrxService.GetById((int)obj[0].SavingSummaryID);
+                                    //savingTrxService.Create(savingTrxModel);
 
-                                    savingSummaryService.updateSavingInstallment(
-                                        entity.OfficeID,
-                                        entity.MemberID, 
-                                        entity.ProductID, 
-                                        entity.OrgID, 
-                                        entity.CenterID, 
-                                        entity.TransactionDate, 
-                                        entity.OpeningDate,
-                                        entity.EmployeeId, 
-                                        entity.MemberCategoryID, 
-                                        entity.CreateUser
-                                        );
+                                    //savingSummaryService.updateSavingInstallment(
+                                    //    entity.OfficeID,
+                                    //    entity.MemberID, 
+                                    //    entity.ProductID, 
+                                    //    entity.OrgID, 
+                                    //    entity.CenterID, 
+                                    //    entity.TransactionDate, 
+                                    //    entity.OpeningDate,
+                                    //    entity.EmployeeId, 
+                                    //    entity.MemberCategoryID, 
+                                    //    entity.CreateUser
+                                    //    );
 
                                     var portalSavingSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
-                                    if(portalSavingSummaryService != null)
+                                    if(portalSavingSummary != null)
                                     {
                                         portalSavingSummary.ApprovalStatus = true;
                                         portalSavingSummary.SavingStatus = 2;

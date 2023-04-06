@@ -5059,12 +5059,12 @@ namespace gBanker.Web.Controllers
                         vphone = entity.PhoneNo;
                     }
                     var CheckDupli = new { @NationalID = vNatio, @SmartCard = vSmat, @PhoneNo = vphone, @Qtype = 1, @MemberCode = "0" };
-                    var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
-                    if (CheckMemberDupli.Tables[0].Rows.Count > 0)
-                    {
-                        var message = CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString();
-                        return GetDuplicateErrorMessageResult(message);
-                    }
+                    //var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
+                    //if (CheckMemberDupli.Tables[0].Rows.Count > 0)
+                    //{
+                    //    var message = CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString();
+                    //    return GetDuplicateErrorMessageResult(message);
+                    //}
 
                     DataSet LoanInstallMent;
                     var param1 = new { @OfficeID = LoginUserOfficeID };
