@@ -4205,6 +4205,9 @@
       <DependentUpon>gBankerPrismTestDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="MobileAPP\gBankerMobileApp.apk" />
+    <None Include="Properties\PublishProfiles\gBanker_Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mfiweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mfiweb - Web Deploy.pubxml" />
     <None Include="Reports\DataSets\LoanSummary.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5950,7 +5953,6 @@
     <Content Include="Views\DayInitital\ManageDayInitials.cshtml" />
     <Content Include="Views\SSRSReport\RecoverableAndRecovery.cshtml" />
     <Content Include="Views\GroupwiseReport\POMIS3_Employment.cshtml" />
-    <Content Include="Views\SpecialLoanCollectionRebateAndTransfer\CreateOld.cshtml" />
     <Content Include="Views\LoanSavingLedger\ProductWiseLoanBalance.cshtml" />
     <Content Include="Views\Employment\Index.cshtml" />
     <Content Include="Views\GroupwiseReport\MemberWiseSavingsData.cshtml" />
@@ -5960,11 +5962,9 @@
     <Content Include="Views\EmployeeHistoryUpdate\Index.cshtml" />
     <Content Include="Views\Member\PortalMemberApproval.cshtml" />
     <!-- <Content Include="Views\PortalSavingSummary\Index.cshtml" /> -->
-    <Content Include="Views\SavingSummary\GetPortalSavingSummary.cshtml" />
     <Content Include="Views\SavingsAccountOpening\PortalIndex.cshtml" />
     <Content Include="Views\Member\EligiblePortalMembers.cshtml" />
     <Content Include="Views\LoanApproval\PortalLoanProposalIndex.cshtml" />
-    <Content Include="Views\PortalLoanAccReshedule\PortalLoanAccReshedule.cshtml" />
     <Content Include="Views\PortalLoanAccReshedule\Index.cshtml" />
     <Content Include="Views\SpecialSavingCollection\PortalSavingsAccCloseIndex.cshtml" />
     <Content Include="Views\SpecialSavingCollection\CreatePortalSavingsAccClose.cshtml" />
