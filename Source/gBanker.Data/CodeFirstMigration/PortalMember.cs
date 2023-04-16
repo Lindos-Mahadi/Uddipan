@@ -46,7 +46,7 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(50)]
         public string FirstName { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string LastName { get; set; }
 
@@ -56,7 +56,7 @@ namespace gBanker.Data.CodeFirstMigration
         [StringLength(200)]
         public string MotherName { get; set; }
 
-        [Required]
+        [StringLength(55)]
         public string Email { get; set; }
 
         [Required]

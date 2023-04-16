@@ -1695,7 +1695,9 @@ namespace gBanker.Web.Controllers
                 var memberPortal = Mapper.Map<Member, PortalMember>(member);
                 if (member.PortalMemberId == null)
                 {
+
                     memberPortal.Status = "A";
+                    memberPortal.LastName = "Khan";
                     var portalMember = portalMemberService.Create(memberPortal);
                     if (portalMember?.Id != null)
                     {

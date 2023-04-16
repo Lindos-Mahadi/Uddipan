@@ -33,13 +33,13 @@
             url: '/Member/EnrollPortalMemberCreate?MemberId=' + MemberId,
             type: 'POST',
             dataType: 'json',
-            success: function () {
-                alert("Portal Member Created Successfully");
-                console.log("Success", MemberId);
+            success: function (data) {
+                alert(data);
+                console.log(data);
             },
-            error: function () {
-                alert("Portal Member has been already exist");
-                console.log("Failed", MemberId);
+            error: function (er) {
+                alert("Portal Member has been already exist", er);
+                console.log("Failed", er);
             }
         });
     }
