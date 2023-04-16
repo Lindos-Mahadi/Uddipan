@@ -27,6 +27,23 @@
 
 <script type="text/javascript">
 
+    
+    function PortalEnrollMemberCreate(MemberId) {
+        $.ajax({
+            url: '/Member/EnrollPortalMemberCreate?MemberId=' + MemberId,
+            type: 'POST',
+            dataType: 'json',
+            success: function () {
+                alert("Portal Member Created Successfully");
+                console.log("Success", MemberId);
+            },
+            error: function () {
+                alert("Portal Member has been already exist");
+                console.log("Failed", MemberId);
+            }
+        });
+    }
+
     $(document).ready(function () {
 
         var Organaization = @Html.Raw(Json.Encode(ViewData["LoggedInOrg"]));
@@ -39,7 +56,7 @@
             showAnim: "scale"
         });
         $("#DateFromValue").datepicker(
-       'setDate', new Date());
+        'setDate', new Date());
 
         $("#DateToValue").datepicker(
        {
@@ -47,7 +64,10 @@
            showAnim: "scale"
        });
         $("#DateToValue").datepicker(
-     'setDate', new Date());
+        'setDate', new Date());
+
+        
+
         var SrNo = 1;
         $('#grid').jtable({
             //title: 'Member List',
@@ -278,7 +298,18 @@
                             }
                             //return "<div class='text-center'><a href='/Survey/Form?MemberId=" + data.record.MemberID + "'><i title='Survey' class='fa fa-list-alt'></i></a></div>";                        
                     }
-                } // End Of display
+                },
+                EditLink3: {
+                    title: "Enroll",
+                    sort: false,
+                    display: function (data) {
+                        if (data.record.MemberStatus != '5')
+                            return `<div class='text-center'><button onclick='PortalEnrollMemberCreate(${data.record.MemberID})' class='btn btn-primary'>Enroll</button></div>`;
+                        else
+                            return null;
+                    }
+                }
+
             },
             recordsLoaded: function (event, data) {
                 var pagenumber = $('.jtable-goto-page select option:selected').val();
@@ -293,10 +324,13 @@
                 }
             }
         });
+        
+
         //$('#grid').jtable('load');
         reloadGrid();
     });
-    function reloadGridSubmit() {
+    function reloadGridSubmit(e) {
+       
 
         if ($("#DateFromValue").val() == "") {
             alert("Please Give FromDate Date.");
@@ -375,7 +409,7 @@
         <input type="text" id="filterValue" placeholder="Type Search Text" class="form-control" />
     </div>
     <div class="col-md-3">
-        <input type="button" id="btnSearch" value="Search" class="btn btn-primary" onclick="reloadGridSubmit();" />
+        <input type="button" id="btnSearch" value="Search" class="btn btn-primary" onclick="reloadGridSubmit(event);" />
     </div>
 </div>
 <div class="row">

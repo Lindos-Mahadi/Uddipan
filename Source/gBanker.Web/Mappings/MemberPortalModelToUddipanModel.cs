@@ -5,6 +5,7 @@ using gBanker.Data.DBDetailModels;
 using gBanker.Web.Models;
 using gBanker.Web.ViewModels;
 using gBankerCodeFirstMigration.Db;
+using System;
 
 namespace gBanker.Web.Mappings
 {
@@ -73,7 +74,17 @@ namespace gBanker.Web.Mappings
                 .ForMember(dest => dest.GuarantorImg, option => option.MapFrom(src => src.GuarantorImgId));
 
 
-
+            Mapper.CreateMap<Member, PortalMember>()
+                .ForMember(dest => dest.Address, option => option.MapFrom(src => src.AddressLine1))
+                .ForMember(dest => dest.DOB, option => option.MapFrom(src => src.BirthDate))
+                .ForMember(dest => dest.EducationQualification, option => option.MapFrom(src => src.Education))
+                .ForMember(dest => dest.MemberAge, option => option.MapFrom(src => Int16.Parse(src.AsOnDateAge.Substring(0,2))))
+                .ForMember(dest => dest.Occupation, option => option.MapFrom(src => src.EconomicActivity))
+                .ForMember(dest => dest.Phone, option => option.MapFrom(src => src.PhoneNo))
+                .ForMember(dest => dest.Photo, option => option.MapFrom(src => src.Image))
+                .ForMember(dest => dest.PostCode, option => option.MapFrom(src => src.ZipCode))
+                .ForMember(dest => dest.SpouseName, option => option.MapFrom(src => src.SpouseName))
+                ;
 
         }
     }

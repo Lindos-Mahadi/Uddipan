@@ -31,6 +31,7 @@ using System.Threading.Tasks;
 using gBanker.Data.CodeFirstMigration;
 using Kendo.Mvc.UI;
 using Kendo.DynamicLinq;
+using System.Web.Services.Description;
 
 namespace gBanker.Web.Controllers
 {
@@ -1622,12 +1623,12 @@ namespace gBanker.Web.Controllers
                         vphone = entity.PhoneNo;
                     }
                     var CheckDupli = new { @NationalID = vNatio, @SmartCard = vSmat, @PhoneNo = vphone, @Qtype = 1, @MemberCode = "0" };
-                    var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
-                    if (CheckMemberDupli.Tables[0].Rows.Count > 0)
-                    {
-                        var message = CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString();
-                        return GetDuplicateErrorMessageResult(message);
-                    }
+                    //var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
+                    //if (CheckMemberDupli.Tables[0].Rows.Count > 0)
+                    //{
+                    //    var message = CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString();
+                    //    return GetDuplicateErrorMessageResult(message);
+                    //}
 
                     DataSet LoanInstallMent;
                     var param1 = new { @OfficeID = LoginUserOfficeID };
@@ -1684,7 +1685,58 @@ namespace gBanker.Web.Controllers
             //    return GetErrorMessageResult(ex);
             //}
         }
+        public async Task<JsonResult> EnrollPortalMemberCreate(int memberId)
+        {
+            //var x = 12;
+            //return Json("dsd");
+            try
+            {
+                var member = memberService.GetById(memberId);
+                var memberPortal = Mapper.Map<Member, PortalMember>(member);
+                if (member.PortalMemberId == null)
+                {
+                    memberPortal.Status = "A";
+                    var portalMember = portalMemberService.Create(memberPortal);
+                    if (portalMember?.Id != null)
+                    {
+                        ApplicationUser user = new ApplicationUser()
+                        {
+                            UserName = portalMember.Phone,
+                            EmployeeID = 1,
+                            FirstName = portalMember.FirstName,
+                            LastName = portalMember.LastName,
+                            RoleId = 24,
+                            IsTemporaryPassword = false,
+                            Email = portalMember.Email,
+                            DateCreated = DateTime.Now,
+                            Activated = false,
+                            PhoneNumber = portalMember.Phone,
+                            PortalMemberID = portalMember.Id
+                        };
+                        var result = await userManager.CreateAsync(user, "123456");
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(user.Id, "PortalMember");
+                            return Json(result);
+                        }
+                    }
+                    member.PortalMemberId = portalMember.Id;
+                    memberService.Update(member);
 
+                    return Json("Portal member created successfully", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Portal member has been already Exist", JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public void Capture()
         {
             var stream = Request.InputStream;
@@ -2255,11 +2307,11 @@ namespace gBanker.Web.Controllers
                     vphone = entity.PhoneNo;
                 }
                 var CheckDupli = new { @NationalID = vNatio, @SmartCard = vSmat, @PhoneNo = vphone, @Qtype = 2, @MemberCode = entity.MemberCode };
-                var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
-                if (CheckMemberDupli.Tables[0].Rows.Count > 0)
-                {
-                    return GetErrorMessageResult(CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString());
-                }
+                //var CheckMemberDupli = ultimateReportService.CheckDuplicateMember(CheckDupli);
+                //if (CheckMemberDupli.Tables[0].Rows.Count > 0)
+                //{
+                //    return GetErrorMessageResult(CheckMemberDupli.Tables[0].Rows[0]["ErrorName"].ToString());
+                //}
 
                 memberService.Update(entity);
                 return GetSuccessMessageResult();
@@ -2271,6 +2323,8 @@ namespace gBanker.Web.Controllers
                 return GetErrorMessageResult(ex);
             }
         }
+
+
 
         public ActionResult IndexCIB()
         {
