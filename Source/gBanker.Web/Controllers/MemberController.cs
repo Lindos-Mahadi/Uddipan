@@ -1704,6 +1704,7 @@ namespace gBanker.Web.Controllers
                         ApplicationUser user = new ApplicationUser()
                         {
                             UserName = portalMember.Phone,
+                            NormalizedUserName = portalMember.Phone.ToUpper(),
                             EmployeeID = 1,
                             FirstName = portalMember.FirstName,
                             LastName = portalMember.LastName,
@@ -1713,7 +1714,8 @@ namespace gBanker.Web.Controllers
                             DateCreated = DateTime.Now,
                             Activated = false,
                             PhoneNumber = portalMember.Phone,
-                            PortalMemberID = portalMember.Id
+                            PortalMemberID = portalMember.Id,
+                            
                         };
                         var result = await userManager.CreateAsync(user, "123456");
                         if (result.Succeeded)

@@ -32,6 +32,7 @@ namespace gBanker.Data
         public Int16? EmployeeID { get; set; }
         public bool? IsTemporaryPassword { get; set; }
         public long? PortalMemberID { get; set; }
+        public string NormalizedUserName { get; set; }
         public string DisplayName
         {
             get { return FirstName + " " + LastName; }
