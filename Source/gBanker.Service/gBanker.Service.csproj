@@ -90,6 +90,7 @@
     <Compile Include="FileService.cs" />
     <Compile Include="LoanAccRescheduleService.cs" />
     <Compile Include="NomineeXPortalSavingSummaryService.cs" />
+    <Compile Include="NotificationTableService.cs" />
     <Compile Include="PortalLoanSummaryService.cs" />
     <Compile Include="PortalMemberService.cs" />
     <Compile Include="PortalSavingSummaryService.cs" />

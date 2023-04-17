@@ -97,6 +97,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual DbSet<DashBoard> DashBoards { get; set; }
         public virtual DbSet<AspNetOrgModule> AspNetOrgModules { get; set; }
         public virtual DbSet<MemberPassBookRegister> MemberPassBookRegisters { get; set; }
+        public virtual DbSet<NotificationTable> NotificationTable { get; set; }
         public virtual DbSet<CumAI> CumAIS { get; set; }
         public virtual DbSet<CumMi> CumMis { get; set; }
         public virtual DbSet<ApproveCelling> ApproveCellings { get; set; }
