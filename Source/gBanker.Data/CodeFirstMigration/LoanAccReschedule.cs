@@ -23,6 +23,9 @@ namespace gBanker.Data.CodeFirstMigration
         public DateTime? UpdateDate { get; set; }
         public string Status { get; set; }
         public virtual Member Member { get; set; }
-        //public virtual Office Office { get; set; }
+        public virtual Office Office { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual string OfficeName { get; set; }
     }
 }

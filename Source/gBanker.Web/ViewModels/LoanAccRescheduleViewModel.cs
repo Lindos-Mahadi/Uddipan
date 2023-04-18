@@ -20,7 +20,10 @@ namespace gBanker.Web.ViewModels
         public string UpdateUser { get; set; } = string.Empty;
         public DateTime? UpdateDate { get; set; }
         public string Status { get; set; }
-        public string MemberCode { get; set; }
         //public string OfficeCode { get; set; }
+        public string OfficeName { get; set; }
+        public string MemberCode { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

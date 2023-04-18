@@ -13,7 +13,7 @@ namespace gBanker.Service
 {
     public interface ILoanAccRescheduleService : IServiceBase<LoanAccReschedule>
     {
-      
+        IEnumerable<LoanAccReschedule> GetMemberOfficeNameList();
     }
     public class LoanAccRescheduleService : ILoanAccRescheduleService
     {
@@ -27,6 +27,8 @@ namespace gBanker.Service
         }
         public IEnumerable<LoanAccReschedule> GetAll()
         {
+            
+
             var entities = repository.GetMany(t => t.Status == "P");
             return entities;
         }
@@ -79,8 +81,19 @@ namespace gBanker.Service
 
         public IEnumerable<LoanAccReschedule> GetMany(Expression<Func<LoanAccReschedule, bool>> where)
         {
+            //var td = from s in repository.Entity_Product_Points
+            //         join r in dt.PlanMasters on s.Product_ID equals r.Product_ID
+            //         where s.Entity_ID == getEntity
+            //         select s;
+
             var entities = repository.GetMany(where).Where(b => b.Status == "P");
             return entities;
+        }
+
+        public  IEnumerable<LoanAccReschedule> GetMemberOfficeNameList()
+        {
+            var memberOfficelist = repository.GetMemberOfficeNameList();
+            return memberOfficelist;
         }
     }
 }

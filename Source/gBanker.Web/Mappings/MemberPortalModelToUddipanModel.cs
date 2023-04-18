@@ -6,6 +6,7 @@ using gBanker.Web.Models;
 using gBanker.Web.ViewModels;
 using gBankerCodeFirstMigration.Db;
 using System;
+using System.Collections.Generic;
 
 namespace gBanker.Web.Mappings
 {
@@ -83,8 +84,14 @@ namespace gBanker.Web.Mappings
                 .ForMember(dest => dest.Phone, option => option.MapFrom(src => src.PhoneNo))
                 .ForMember(dest => dest.Photo, option => option.MapFrom(src => src.Image))
                 .ForMember(dest => dest.PostCode, option => option.MapFrom(src => src.ZipCode))
-                .ForMember(dest => dest.SpouseName, option => option.MapFrom(src => src.SpouseName))
-                ;
+                .ForMember(dest => dest.SpouseName, option => option.MapFrom(src => src.SpouseName));
+
+            //Mapper.CreateMap<LoanAccReschedule, LoanAccRescheduleViewModel>()
+            //    .ForMember(dest => dest.MemberCode, option => option
+            //    .MapFrom(src => src.MemberID.ToString() + '-' + src.Member.MemberCode + '_' + src.Member.LastName));
+
+            //.ForMember(dest => dest.OfficeCode, option => option
+            //.MapFrom(src => src.OfficeID.ToString() + '-' + src.Office.OfficeName));
 
         }
     }
