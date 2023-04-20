@@ -21,6 +21,7 @@ using gBanker.Service.StoredProcedure;
 using System.Text;
 using System.Web.ApplicationServices;
 using OfficeOpenXml.FormulaParsing.ExpressionGraph.FunctionCompilers;
+using System.Web.Services.Protocols;
 
 namespace gBanker.Web.Controllers
 {
@@ -47,6 +48,7 @@ namespace gBanker.Web.Controllers
         private readonly IGroupwiseReportService groupwiseReportService;
         private readonly IPortalLoanSummaryService portalLoanSummaService;
         private readonly IFileService fileUploadService;
+        private readonly INotificationTableService notificationTableService;
 
         // GET: LoanApproval
         public LoanApprovalController(
@@ -68,7 +70,8 @@ namespace gBanker.Web.Controllers
             IApproveCellingService ApproveCellingService,
             IGroupwiseReportService groupwiseReportService,
             IPortalLoanSummaryService portalLoanSummaryService,
-            IFileService fileUploadService)
+            IFileService fileUploadService,
+            INotificationTableService notificationTableService)
         {
             this.loansSummaryService = loansSummaryService;
             this.productService = productService;
@@ -89,6 +92,7 @@ namespace gBanker.Web.Controllers
             this.groupwiseReportService = groupwiseReportService;
             this.portalLoanSummaService = portalLoanSummaryService;
             this.fileUploadService = fileUploadService;
+            this.notificationTableService = notificationTableService;
         }
         #endregion
 
@@ -1033,6 +1037,25 @@ namespace gBanker.Web.Controllers
                         }
                         if(model.PortalLoanSummaryID != null)
                         {
+                            // Create Notification for LoanSummary
+                            NotificationTable notification = new NotificationTable
+                            {
+                                Message = "Your Loan is Approved",
+                                SenderType = "LoanSummary",
+                                SenderID = (long)model.PortalLoanSummaryID,
+                                ReceiverType = "Good",
+                                ReceiverID = (long)model.MemberID,
+                                Email = true,
+                                SMS = true,
+                                Push = true,
+                                Status = "A",
+                                CreateDate = DateTime.UtcNow,
+                                UpdateDate = DateTime.UtcNow,
+                                CreateUser = "Admin",
+                                UpdateUser = "Admin"
+                            };
+                            notificationTableService.Create(notification);
+
                             var portalLoanSummary = portalLoanSummaService.GetById((int)model.PortalLoanSummaryID);
                             if(portalLoanSummary != null)
                             {
@@ -1040,7 +1063,6 @@ namespace gBanker.Web.Controllers
                                 portalLoanSummary.LoanStatus = 2;
                                 portalLoanSummaService.Update(portalLoanSummary);
                             }
-
                             // Redirect To Action
                             return RedirectToAction("Index", "LoanApproval");
                         }
