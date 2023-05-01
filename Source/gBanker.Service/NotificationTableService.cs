@@ -19,6 +19,11 @@ namespace gBanker.Service
         private readonly INotificationTableRepository repository;
         private readonly IUnitOfWorkCodeFirst unitOfWork;
 
+        public NotificationTableService(INotificationTableRepository repository, IUnitOfWorkCodeFirst unitOfWork)
+        {
+            this.repository = repository;
+            this.unitOfWork = unitOfWork;
+        }
         public NotificationTable Create(NotificationTable objectToCreate)
         {
             repository.Add(objectToCreate);
