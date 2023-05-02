@@ -1,4 +1,5 @@
-﻿using gBanker.Data.CodeFirstMigration.Db;
+﻿using gBanker.Data.CodeFirstMigration;
+using gBanker.Data.CodeFirstMigration.Db;
 using gBanker.Data.CodeFirstMigration.InfrastructureBase;
 using gBanker.Data.Repository;
 using System;
@@ -18,11 +19,13 @@ namespace gBanker.Service
     {
         private readonly IPortalSavingSummaryRepository repository;
         private readonly IUnitOfWorkCodeFirst unitOfWork;
+        private readonly INotificationTableService notificationTable;
 
-        public PortalSavingSummaryService(IPortalSavingSummaryRepository repository, IUnitOfWorkCodeFirst unitOfWork)
+        public PortalSavingSummaryService(IPortalSavingSummaryRepository repository, IUnitOfWorkCodeFirst unitOfWork, INotificationTableService notificationTable)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
+            this.notificationTable = notificationTable;
         }
 
         public PortalSavingSummary Create(PortalSavingSummary objectToCreate)
@@ -92,6 +95,32 @@ namespace gBanker.Service
 
         public void Update(PortalSavingSummary objectToUpdate)
         {
+           
+            if (objectToUpdate.ApprovalStatus == true && objectToUpdate.SavingStatus == 2)
+            {
+                NotificationTable notification = new NotificationTable
+                {
+                    Message = "Your Savings account is Approved",
+                    SenderType = "SavingAccountOpening",
+                    SenderID = (long)objectToUpdate.PortalSavingSummaryID,
+                    ReceiverType = "Approved",
+                    ReceiverID = (long)objectToUpdate.MemberID,
+                    Email = true,
+                    SMS = true,
+                    Push = true,
+                    Status = "A",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
+                    CreateUser = "Admin",
+                    UpdateUser = "Admin"
+                };
+                notificationTable.Create(notification);
+            }
+            //else
+            //{
+            //    notification.Message = "";
+            //    notificationTable.Create(notification);
+            //}
             repository.Update(objectToUpdate);
             Save();
         }

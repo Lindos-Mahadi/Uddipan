@@ -17,11 +17,13 @@ namespace gBanker.Service
     {
         private readonly IPortalLoanSummaryRepository repository;
         private readonly IUnitOfWorkCodeFirst unitOfWork;
+        private readonly INotificationTableService notificationTable;
 
-        public PortalLoanSummaryService(IPortalLoanSummaryRepository repository, IUnitOfWorkCodeFirst unitOfWork)
+        public PortalLoanSummaryService(IPortalLoanSummaryRepository repository, IUnitOfWorkCodeFirst unitOfWork, INotificationTableService notificationTable)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
+            this.notificationTable = notificationTable;
         }
 
         public PortalLoanSummary Create(PortalLoanSummary objectToCreate)
@@ -79,6 +81,31 @@ namespace gBanker.Service
 
         public void Update(PortalLoanSummary objectToUpdate)
         {
+            if (objectToUpdate.ApprovalStatus == true && objectToUpdate.LoanStatus == 2)
+            {
+                NotificationTable notification = new NotificationTable
+                {
+                    Message = "Your Loan is Approved",
+                    SenderType = "LoanApproval",
+                    SenderID = (long)objectToUpdate.PortalLoanSummaryID,
+                    ReceiverType = "Approved",
+                    ReceiverID = (long)objectToUpdate.MemberID,
+                    Email = true,
+                    SMS = true,
+                    Push = true,
+                    Status = "A",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
+                    CreateUser = "Admin",
+                    UpdateUser = "Admin"
+                };
+                notificationTable.Create(notification);
+            }
+            //else
+            //{
+            //    notification.Message = "";
+            //    notificationTable.Create(notification);
+            //}
             repository.Update(objectToUpdate);
             Save();
         }

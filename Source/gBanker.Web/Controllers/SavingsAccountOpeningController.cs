@@ -33,7 +33,6 @@ namespace gBanker.Web.Controllers
         private readonly INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService;
         private readonly ISavingTrxService savingTrxService;
         private readonly ISavingSummaryService savingSummaryService;
-        private readonly INotificationTableService notificationTableService;
         // GET: SavingSummary
         public SavingsAccountOpeningController(ISavingsAccountOpeningService savingsAccountOpeningService, IProductService productService, 
             IMemberCategoryService membercategoryService, IOfficeService officeService, ICenterService centerService,
@@ -41,7 +40,7 @@ namespace gBanker.Web.Controllers
             IUltimateReportService ultimateReportService, IAccReportService accReportService, IDailySavingTrxService dailySavingTrxService,
             IEmployeeService employeeService, IPortalSavingSummaryService portalSavingSummaryService,
             INomineeXPortalSavingSummaryService nomineeXPortalSavingSummaryService, ISavingTrxService savingTrxService,
-            ISavingSummaryService savingSummaryService, INotificationTableService notificationTableService)
+            ISavingSummaryService savingSummaryService)
         {
             this.savingsAccountOpeningService = savingsAccountOpeningService;
             this.productService = productService;
@@ -59,7 +58,6 @@ namespace gBanker.Web.Controllers
             this.nomineeXPortalSavingSummaryService = nomineeXPortalSavingSummaryService;
             this.savingTrxService = savingTrxService;
             this.savingSummaryService = savingSummaryService;
-            this.notificationTableService = notificationTableService;
         }
         public JsonResult GetRate(int productid, long memberId, int centerID)
         {
@@ -685,25 +683,6 @@ namespace gBanker.Web.Controllers
                                     //    entity.MemberCategoryID, 
                                     //    entity.CreateUser
                                     //    );
-
-                                    // Create Notification for SavingSummary
-                                    NotificationTable notification = new NotificationTable
-                                    {
-                                        Message = "Your Savings account is Approved",
-                                        SenderType = "SavingAccountOpening",
-                                        SenderID = (long)model.PortalSavingSummaryID,
-                                        ReceiverType = "Good",
-                                        ReceiverID = (long)model.MemberID,
-                                        Email = true,
-                                        SMS = true,
-                                        Push = true,
-                                        Status = "A",
-                                        CreateDate = DateTime.UtcNow,
-                                        UpdateDate = DateTime.UtcNow,
-                                        CreateUser = "Admin",
-                                        UpdateUser = "Admin"
-                                    };
-                                    notificationTableService.Create(notification);
 
                                     var portalSavingSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
                                     if(portalSavingSummary != null)

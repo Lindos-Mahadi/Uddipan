@@ -1037,25 +1037,6 @@ namespace gBanker.Web.Controllers
                         }
                         if(model.PortalLoanSummaryID != null)
                         {
-                            // Create Notification for LoanSummary
-                            NotificationTable notification = new NotificationTable
-                            {
-                                Message = "Your Loan is Approved",
-                                SenderType = "LoanSummary",
-                                SenderID = (long)model.PortalLoanSummaryID,
-                                ReceiverType = "Good",
-                                ReceiverID = (long)model.MemberID,
-                                Email = true,
-                                SMS = true,
-                                Push = true,
-                                Status = "A",
-                                CreateDate = DateTime.UtcNow,
-                                UpdateDate = DateTime.UtcNow,
-                                CreateUser = "Admin",
-                                UpdateUser = "Admin"
-                            };
-                            notificationTableService.Create(notification);
-
                             var portalLoanSummary = portalLoanSummaService.GetById((int)model.PortalLoanSummaryID);
                             if(portalLoanSummary != null)
                             {
