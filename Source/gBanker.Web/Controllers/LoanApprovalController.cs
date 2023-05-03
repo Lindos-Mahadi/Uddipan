@@ -1101,10 +1101,10 @@ namespace gBanker.Web.Controllers
         {
             try
             {
-                if (!IsDayInitiated)
-                {
-                    return GetErrorMessageResult("Please run the start work process");
-                }
+                //if (!IsDayInitiated)
+                //{
+                //    return GetErrorMessageResult("Please run the start work process");
+                //}
 
                 var entity = Mapper.Map<LoanApprovalViewModel, LoanSummary>(model);
 
