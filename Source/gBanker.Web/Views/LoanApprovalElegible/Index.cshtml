@@ -118,7 +118,8 @@
                 EditLink: {
                     title: "Approve",
                     display: function (data) {
-                        // return '<a href="/LoanApproval/Edit/' + data.record.LoanSummaryID + '">Edit</a>';
+                        return "<div class='text-center'><a href='/LoanApproval/Edit/" + data.record.LoanSummaryID + "'><i class='fa fa-pencil-square-o'></i></a></div>";
+                        //'<a href="/LoanApproval/Edit/' + data.record.LoanSummaryID + '">Approve</a>';
                         //return "<a href='/LoanApproval/Edit/" + data.record.LoanSummaryID + "'><img src='../../Scripts/jtable/themes/basic/edit.png' alt='Edit'/></a>";
                         if (data.record.RoleId == 0)
                         {
