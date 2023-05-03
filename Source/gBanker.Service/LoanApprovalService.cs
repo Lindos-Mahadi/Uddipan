@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using gBanker.Data.CodeFirstMigration;
 
 namespace gBanker.Service
 {
@@ -26,13 +27,17 @@ namespace gBanker.Service
         private readonly IProductRepository productRepository;
         private readonly ILoanCollectionRepository loanTrxRepository;
         private readonly IMemberRepository memberRepository;
-        public LoanApprovalService(ILoanSummaryRepository repository, IMemberRepository memberRepository, IProductRepository productRepository, ILoanCollectionRepository loanTrxRepository, IUnitOfWorkCodeFirst unitOfWork)
+        private readonly INotificationTableService notificationTable;
+        public LoanApprovalService(ILoanSummaryRepository repository, IMemberRepository memberRepository,
+            IProductRepository productRepository, ILoanCollectionRepository loanTrxRepository,
+            IUnitOfWorkCodeFirst unitOfWork, INotificationTableService notificationTable)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
             this.productRepository = productRepository;
             this.loanTrxRepository = loanTrxRepository;
             this.memberRepository = memberRepository;
+            this.notificationTable = notificationTable;
         }
         public IEnumerable<LoanSummary> GetAll()
         {
@@ -56,6 +61,23 @@ namespace gBanker.Service
 
         public void Update(LoanSummary objectToUpdate)
         {
+            NotificationTable notification = new NotificationTable
+            {
+                Message = "Your loan proposal updated successfully",
+                SenderType = "LoanApproval",
+                SenderID = (long)objectToUpdate.LoanSummaryID,
+                ReceiverType = "Approved",
+                ReceiverID = (long)objectToUpdate.MemberID,
+                Email = true,
+                SMS = true,
+                Push = true,
+                Status = "A",
+                CreateDate = DateTime.UtcNow,
+                UpdateDate = DateTime.UtcNow,
+                CreateUser = "Admin",
+                UpdateUser = "Admin"
+            };
+            notificationTable.Create(notification);
             repository.Update(objectToUpdate);
             Save();
         }

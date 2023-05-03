@@ -31,13 +31,16 @@ namespace gBanker.Service
         private readonly IUnitOfWorkCodeFirst unitOfWork;
         private readonly IProductRepository productRepository;
         private readonly ILoanTrxRepository loanTrxRepository;
+        private readonly INotificationTableService notificationTable;
        
-        public LoanDisburseService(ILoanSummaryRepository repository, IProductRepository productRepository, ILoanTrxRepository loanTrxRepository, IUnitOfWorkCodeFirst unitOfWork)
+        public LoanDisburseService(ILoanSummaryRepository repository, IProductRepository productRepository,
+            ILoanTrxRepository loanTrxRepository, IUnitOfWorkCodeFirst unitOfWork, INotificationTableService notificationTable)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
             this.productRepository = productRepository;
             this.loanTrxRepository = loanTrxRepository;
+            this.notificationTable = notificationTable;
         }
         public IEnumerable<LoanSummary> DisburseLoan()
         {
@@ -114,6 +117,31 @@ namespace gBanker.Service
 
         public void Update(LoanSummary objectToUpdate)
         {
+            //if (objectToUpdate.ApprovalStatus == true && objectToUpdate.SavingStatus == 2)
+            //{
+                NotificationTable notification = new NotificationTable
+                {
+                    Message = "Your Loan is disburse properly",
+                    SenderType = "LoanDisburse",
+                    SenderID = (long)objectToUpdate.LoanSummaryID,
+                    ReceiverType = "Approved",
+                    ReceiverID = (long)objectToUpdate.MemberID,
+                    Email = true,
+                    SMS = true,
+                    Push = true,
+                    Status = "A",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
+                    CreateUser = "Admin",
+                    UpdateUser = "Admin"
+                };
+                notificationTable.Create(notification);
+            //}
+            //else
+            //{
+            //    notification.Message = "";
+            //    notificationTable.Create(notification);
+            //}
             repository.Update(objectToUpdate);
             Save();
         }
