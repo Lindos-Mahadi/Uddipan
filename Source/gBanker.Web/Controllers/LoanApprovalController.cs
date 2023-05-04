@@ -1215,34 +1215,42 @@ namespace gBanker.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var errors = new { OfficeID = LoginUserOfficeID, MemberID = entity.MemberID, CenterID = entity.CenterID, MainProductCode = mProductCode, ProductId = entity.ProductID, PrincipalLoan = entity.PrincipalLoan, Duration = entity.Duration };
+                    var errors = new {
+                        OfficeID = LoginUserOfficeID, 
+                        MemberID = entity.MemberID,
+                        CenterID = entity.CenterID,
+                        MainProductCode = mProductCode,
+                        ProductId = entity.ProductID,
+                        PrincipalLoan = entity.PrincipalLoan,
+                        Duration = entity.Duration
+                    };
                     var div_items = ultimateReportService.validateLOanProposal(errors);
-                    if (div_items.Tables[0].Rows.Count > 0)
+                    //if (div_items.Tables[0].Rows.Count > 0)
+                    //{
+                    //string vErr = div_items.Tables[0].Rows[0]["ErrorCode"].ToString();
+                    //if (vErr == "1")
+                    //{
+                    if (model.PurposeID == 0)
                     {
-                        string vErr = div_items.Tables[0].Rows[0]["ErrorCode"].ToString();
-                        if (vErr == "1")
-                        {
-                            if (model.PurposeID == 0)
-                            {
-                                return GetErrorMessageResult("Please put the Purpose");
-                            }
-                            if (entity.Duration == 0)
-                            {
-                                return GetErrorMessageResult("Please put the Duration");
-                            }
-                            getLoanSummary.CoApplicantName = entity.CoApplicantName;
-                            getLoanSummary.Guarantor = entity.Guarantor;
-                            getLoanSummary.MemberPassBookRegisterID = entity.MemberPassBookRegisterID;
-                            loanapprovalService.Update(getLoanSummary);
-                            return GetSuccessMessageResult();
-                        }
-                        else
-                        {
-                            return GetErrorMessageResult(div_items.Tables[0].Rows[0]["ErrorName"].ToString());
-                        }
+                        return GetErrorMessageResult("Please put the Purpose");
                     }
-                    else
-                        return GetErrorMessageResult();
+                    if (entity.Duration == 0)
+                    {
+                        return GetErrorMessageResult("Please put the Duration");
+                    }
+                    getLoanSummary.CoApplicantName = entity.CoApplicantName;
+                    getLoanSummary.Guarantor = entity.Guarantor;
+                    getLoanSummary.MemberPassBookRegisterID = entity.MemberPassBookRegisterID;
+                    loanapprovalService.Update(getLoanSummary);
+                    return GetSuccessMessageResult();
+                    //}
+                    //else
+                    //{
+                    //    return GetErrorMessageResult(div_items.Tables[0].Rows[0]["ErrorName"].ToString());
+                    //}
+                    //}
+                    //else
+                    //    return GetErrorMessageResult();
                 }
                 return GetErrorMessageResult();
             }
