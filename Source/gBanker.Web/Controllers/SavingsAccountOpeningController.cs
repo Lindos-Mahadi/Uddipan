@@ -543,10 +543,23 @@ namespace gBanker.Web.Controllers
                                 //entity.OpeningDate = mbr.JoinDate;
                                 entity.TransactionDate = TransactionDate;
 
+                                
+
                                 var param = new { @OfficeID = SessionHelper.LoginUserOfficeID, @MemberID = Convert.ToInt64(entity.MemberID), @ProductID = Convert.ToInt16(entity.ProductID) };
                                 var getDD = ultimateReportService.ValidateMainItemCode_21_list(param);
                                 if (getDD.Tables[0].Rows.Count > 0)
+                                //{
+                                    //var portalSavingSummary = portalSavingSummaryService.GetById(0);
+                                    //if (portalSavingSummary != null)
+                                    //{
+                                    //    portalSavingSummary.ApprovalStatus = true;
+                                    //    portalSavingSummary.SavingStatus = 2;
+                                    //    portalSavingSummary.SavingSummaryID = entity.SavingSummaryID;
+                                    //    portalSavingSummaryService.Update(portalSavingSummary);
+                                    //}
                                     return GetSuccessMessageResult();
+                                //}
+
                                 entity.OrgID = Convert.ToInt32(LoggedInOrganizationID);
 
                                 if (IsDayInitiated)
@@ -627,8 +640,8 @@ namespace gBanker.Web.Controllers
                                     }
                                     entity.Duration = Convert.ToInt16(pbr.Duration);
                                     entity.InstallmentNo = 1;
-                                entity.SupportingDocumentsId = obj[0].SupportingDocumentsId;
-                                entity.Posted = true;
+                                    entity.SupportingDocumentsId = obj[0].SupportingDocumentsId;
+                                    entity.Posted = true;
                                     entity = savingsAccountOpeningService.Create(entity);
 
                                 
@@ -685,7 +698,7 @@ namespace gBanker.Web.Controllers
                                     //    );
 
                                     var portalSavingSummary = portalSavingSummaryService.GetById((int)obj[0].PortalSavingSummaryID);
-                                    if(portalSavingSummary != null)
+                                    if (portalSavingSummary != null)
                                     {
                                         portalSavingSummary.ApprovalStatus = true;
                                         portalSavingSummary.SavingStatus = 2;
@@ -695,7 +708,7 @@ namespace gBanker.Web.Controllers
                                     }
 
 
-                                    
+
 
                                 }
                                    
