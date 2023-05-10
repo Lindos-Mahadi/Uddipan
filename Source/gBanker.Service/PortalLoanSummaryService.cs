@@ -93,7 +93,7 @@ namespace gBanker.Service
                     Email = true,
                     SMS = true,
                     Push = true,
-                    Status = "A",
+                    Status = "P",
                     CreateDate = DateTime.UtcNow,
                     UpdateDate = DateTime.UtcNow,
                     CreateUser = "Admin",
