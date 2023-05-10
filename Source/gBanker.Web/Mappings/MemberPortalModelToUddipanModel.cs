@@ -52,6 +52,9 @@ namespace gBanker.Web.Mappings
                 .ForMember(dest => dest.OfficeCode, option => option.MapFrom( src =>src.OfficeID.ToString() + '-' + src.Office.OfficeName ))
                 .ForMember(dest => dest.CenterCode, option => option.MapFrom( src =>src.CenterID.ToString() + '-' + src.Center.CenterName ))
                 .ForMember(dest => dest.ProductCode, option => option.MapFrom( src =>src.ProductID.ToString() + '-' + src.Product.ProductName ))
+                .ForMember(dest => dest.GuarantorNID, option => option.MapFrom( src => src.GuarantorNIDId))
+                .ForMember(dest => dest.GuarantorImg, option => option.MapFrom( src => src.GuarantorImgId))
+                .ForMember(dest => dest.SupportingDocumentsId, option => option.MapFrom( src => src.SupportingDocumentsId))
                 .ForMember(dest => dest.PortalLoanSummaryID, option => option.MapFrom(src => src.PortalLoanSummaryID));
 
             Mapper.CreateMap<LoanAccReschedule, LoanAccRescheduleViewModel>()

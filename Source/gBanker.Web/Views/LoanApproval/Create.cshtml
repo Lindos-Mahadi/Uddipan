@@ -1353,6 +1353,8 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.SupportingDocumentsId)
+    @Html.HiddenFor(model => model.GuarantorImg)
+    @Html.HiddenFor(model => model.GuarantorNID)
     <div class="">
 
         <input type="hidden" id="OrgId" value="" />
