@@ -13,7 +13,7 @@ namespace gBanker.Service
 {
     public interface ILoanAccRescheduleService : IServiceBase<LoanAccReschedule>
     {
-        IEnumerable<LoanAccReschedule> GetMemberOfficeNameList();
+        IEnumerable<LoanAccRescheduleDTO> GetLoanReshedulList();
     }
     public class LoanAccRescheduleService : ILoanAccRescheduleService
     {
@@ -90,10 +90,10 @@ namespace gBanker.Service
             return entities;
         }
 
-        public  IEnumerable<LoanAccReschedule> GetMemberOfficeNameList()
+        public  IEnumerable<LoanAccRescheduleDTO> GetLoanReshedulList()
         {
-            var memberOfficelist = repository.GetMemberOfficeNameList();
-            return memberOfficelist;
+            var loanAccReschedules = repository.GetLoanReshedulList();
+            return loanAccReschedules;
         }
     }
 }

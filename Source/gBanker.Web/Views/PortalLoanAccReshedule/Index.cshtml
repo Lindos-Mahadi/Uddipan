@@ -8,7 +8,7 @@
 
     $(document).ready(function () {
 
-
+        let loandata;
         $('#grid').jtable({
             //title: 'Portal Loan Account Reshedule List',
             paging: true,
@@ -27,6 +27,7 @@
                             dataType: 'json',
                             data: '',
                             success: function (data) {
+                                loandata = data;
                                 console.log(data);
                                 try {
                                     $dfd.resolve(data);
@@ -45,16 +46,22 @@
             },
             fields: {
                 MemberID: {
-                    title: 'Member',
+                    title: `Member`,
                     create: false,
                     edit: false,
-                    list: true
+                    list: true,
+                    display: function (data) {
+                        return "<div class='text-left'>" + data.record.MemberID + " - " + data.record.FirstName+"</div>";
+                    }
                 },
                 OfficeID: {
                     title: 'Office',
                     create: false,
                     edit: false,
-                    list: true
+                    list: true,
+                    display: function (data) {
+                        return "<div class='text-left'>" + data.record.OfficeID + " - " + data.record.OfficeName + "</div>";
+                    }
                 },
                 LoanID: {
                     title: 'Loan',
