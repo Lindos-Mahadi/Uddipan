@@ -13,7 +13,7 @@ namespace gBanker.Service
 {
     public interface IPortalSavingSummaryService : IServiceBase<PortalSavingSummary>
     {
-
+        PortalSavingSummary GetBySavingSummaryId(long id);
     }
     public class PortalSavingSummaryService : IPortalSavingSummaryService
     {
@@ -59,6 +59,11 @@ namespace gBanker.Service
         public PortalSavingSummary GetByIdLong(long id)
         {
             var entity = repository.Get(w => w.PortalSavingSummaryID == id);
+            return entity;
+        }
+        public PortalSavingSummary GetBySavingSummaryId(long id)
+        {
+            var entity = repository.Get(w => w.SavingSummaryID == id);
             return entity;
         }
 

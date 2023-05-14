@@ -965,11 +965,11 @@ namespace gBanker.Web.Controllers
         }
         // GET: PortalSavingsAccClose/Create
         //[HttpPost]
-        public ActionResult CreatePortalSavingsAccClose(int id)
+        public ActionResult CreatePortalSavingsAccClose(long id)
         {
             try
             {
-                var getSavingSummaryId = portalSavingSummaryService.GetById(id);
+                var getSavingSummaryId = portalSavingSummaryService.GetByIdLong(id);
                 var model = Mapper.Map<PortalSavingSummary, SpecialSavingCollectionViewModel>(getSavingSummaryId);
                 ViewBag.MemberName = string.Format("{0} - {1}", model.MemberCode, model.MemberName);
                 model.TransactionDate = DateTime.UtcNow;
