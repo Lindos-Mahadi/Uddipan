@@ -32,12 +32,12 @@ namespace gBanker.Web.Controllers
             {
                 //List<LoanAccReschedule> loAccReshedule = new List<LoanAccReschedule>();
                 //var loanAccReshedule = loanAccRescheduleService.GetAll();
-                var loanAccReshedule = loanAccRescheduleService.GetMemberOfficeNameList();
+                var loanAccReshedule = loanAccRescheduleService.GetLoanReshedulList();
                 if (loanAccReshedule != null)
                 {
-                    var mapLoanAccReshedule = Mapper.Map<List<LoanAccReschedule>, List<LoanAccRescheduleViewModel>>((List<LoanAccReschedule>)loanAccReshedule);
-                    var loanAccResheduleDetail = mapLoanAccReshedule.Skip(jtStartIndex).Take(jtPageSize).ToList();
-                    return Json(new { Result = "OK", Records = mapLoanAccReshedule, TotalRecordCount = loanAccReshedule.Count() });
+                    //var mapLoanAccReshedule = Mapper.Map<IEnumerable<LoanAccReschedule>, IEnumerable<LoanAccRescheduleViewModel>>(loanAccReshedule);
+                    var loanAccResheduleDetail = loanAccReshedule.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                    return Json(new { Result = "OK", Records = loanAccResheduleDetail, TotalRecordCount = loanAccReshedule.Count() });
                 }
 
                 return Json(new { Result = "OK", TotalCountRecord = loanAccReshedule.Count() });
