@@ -38,6 +38,7 @@
                             dataType: 'json',
                             data: postData,
                             success: function (data) {
+                                console.log("Eligble Test",data);
                                 $dfd.resolve(data);
                             },
                             error: function () {

@@ -59,6 +59,7 @@ namespace gBanker.Web.Controllers
         private readonly IOrganizationService organizationService;
         private readonly IPortalMemberService portalMemberService;
         private readonly IFileService fileService;
+        private readonly INotificationTableService notificationTableService;
 
         private object receiver;
 
@@ -80,7 +81,7 @@ namespace gBanker.Web.Controllers
             ISavingTrxService savingTrxService, 
             IOrganizationService organizationService,
             IPortalMemberService portalMemberService,
-            IFileService fileService)
+            IFileService fileService, INotificationTableService notificationTableService)
         {
             this.memberService = memberService;
             this.officeService = officeService;
@@ -100,6 +101,7 @@ namespace gBanker.Web.Controllers
             this.organizationService = organizationService;
             this.portalMemberService = portalMemberService;
             this.fileService = fileService;
+            this.notificationTableService = notificationTableService;
         }
         #endregion
 
@@ -5162,7 +5164,25 @@ namespace gBanker.Web.Controllers
                         portalMember.CreateUser = LoggedInEmployeeID.ToString();
                         portalMemberService.Update(portalMember);
 
-                       // var memberNID = fileService.;
+                        // Create Notification for LoanSummary
+                        //NotificationTable notification = new NotificationTable
+                        //{
+                        //    Message = "Your account approved successfully",
+                        //    SenderType = "PortalMember",
+                        //    SenderID = (long)model.PortalMemberId,
+                        //    ReceiverType = "Good",
+                        //    ReceiverID = (long)model.MemberID,
+                        //    Email = true,
+                        //    SMS = true,
+                        //    Push = true,
+                        //    Status = "A",
+                        //    CreateDate = DateTime.UtcNow,
+                        //    UpdateDate = DateTime.UtcNow,
+                        //    CreateUser = "Admin",
+                        //    UpdateUser = "Admin"
+                        //};
+                        //notificationTableService.Create(notification);
+
                     }
                     memberService.Create(entity);
                     var ent = new { MemberID = entity.MemberID, MemberCode = entity.MemberCode };

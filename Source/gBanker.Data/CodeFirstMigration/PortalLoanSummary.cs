@@ -17,7 +17,7 @@ namespace gBanker.Data.CodeFirstMigration
 
         public short ProductID { get; set; }
 
-        public int CenterID { get; set; }
+        public int? CenterID { get; set; }
 
         public byte? MemberCategoryID { get; set; }
 
