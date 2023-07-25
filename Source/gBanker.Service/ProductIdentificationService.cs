@@ -68,6 +68,7 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
+
         public bool IsContinued(long id)
         {
             throw new NotImplementedException();
