@@ -11,6 +11,15 @@
     var insuranceList = Model == null ? null : Model.InsuranceItemList;
 }
 
+@{
+    // Create an instance of the Random class
+    Random random = new Random();
+
+    // Generate a random number between 1000 and 9999
+    int randomNumber = random.Next(1000, 10000);
+}
+
+
 
 <script type="text/javascript">
 
@@ -51,7 +60,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    
+
                     @Html.LabelFor(model => model.MainProductCode, htmlAttributes: new { @class = "control-label" })
 
                     @Html.DropDownListFor(model => model.MainProductCode, mProductCode, new { @class = "form-control" })
@@ -72,7 +81,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ProductCode,  new { htmlAttributes = new  { @class = "form-control", Value = @randomNumber } })
                     @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -125,14 +134,14 @@
         </div>
         <div class="row">
             @*<div class="col-md-4">
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label" })
 
-                @Html.DropDownListFor(model => model.ProductType, investor, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-            
+                        @Html.DropDownListFor(model => model.ProductType, investor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
             <div class="col-md-6">
                 <div class="form-group">
 
@@ -154,21 +163,21 @@
         </div>
         <div class="row">
             @*<div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.MainProductCode, htmlAttributes: new { @class = "control-label" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MainProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.MainProductCode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MainProductCode, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                        @Html.EditorFor(model => model.MainProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MainProductCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
             @*<div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.MainItemName, htmlAttributes: new { @class = "control-label" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MainItemName, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.MainItemName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MainItemName, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                        @Html.EditorFor(model => model.MainItemName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MainItemName, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -233,19 +242,19 @@
                 </div>
             </div>
             @*<div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                        @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
             <div class="col-md-4">
                 <div class="form-group">
                     @*@Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
-        @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })*@
+                        @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })*@
                     @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
                     @Html.DropDownListFor(model => model.InsuranceItemCode, insuranceList, new { @class = "form-control" })
@@ -260,7 +269,7 @@
                     @Html.ValidationMessageFor(model => model.InsuranceItemRate, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
