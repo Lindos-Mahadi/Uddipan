@@ -1,4 +1,5 @@
-﻿using gBanker.Web.Filters;
+﻿using gBanker.Data.DBDetailModels;
+using gBanker.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -62,7 +63,7 @@ namespace gBanker.Web.ViewModels
         
         [Display(Name = "Late Fee Percentage")]
         public decimal LateFeePercentage { get; set; }
-
+        public string ChildProduct { get; set; }
 
         [Required(ErrorMessage = "Loan Installment is required")]
         //[Range(0, 9999999999999999.99999)]
@@ -110,5 +111,7 @@ namespace gBanker.Web.ViewModels
         public IEnumerable<SelectListItem> PFrequencyListItems { get; set; }
         public IEnumerable<SelectListItem> PCalcuationMethodListItems { get; set; }
         public List<SelectionViewModel> MemberCategoryList { get; set; }
+        public IEnumerable<SelectListItem> MainProductList { get; set; }
+        public IEnumerable<SelectListItem> InsuranceItemList { get; set; }
     }
 }

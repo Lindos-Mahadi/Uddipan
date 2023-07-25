@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using gBanker.Data.CodeFirstMigration.Db;
+using System.Security.Cryptography.Xml;
 
 namespace gBanker.Web.Controllers
 {
@@ -21,6 +22,7 @@ namespace gBanker.Web.Controllers
         private readonly IInvestorService investorService;
         private readonly IMemberCategoryService memberCategoryService;
         private readonly IProductReportService productReportService;
+        //private readonly 
         public NewProductController(IProductService productService, IInvestorService investorService, IMemberCategoryService memberCategoryService, IProductReportService productReportService)
         {
             this.productService = productService;
@@ -86,24 +88,6 @@ namespace gBanker.Web.Controllers
             //ReportHelper.PrintReport("rptProductInfo.rpt", allproducts.Tables[0], new Dictionary<string, object>());
             //return Content(string.Empty); ;
         }
-        public void UpdateMethod(int Id, DateTime newValue)
-        {
-            //using (gBankerEntities ctx = new gBankerEntities())
-            //{
-            //    var query = (from q in ctx.Products
-            //                 where q.ProductID == Id
-            //                 select q).First();
-            //    query.IsActive = false;
-            //    query.InActiveDate  = newValue;
-            //    ctx.SaveChanges();
-
-            //}
-        }
-        // GET: Product/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
         // GET: Product/Create
         public ActionResult Create()
         {
@@ -121,39 +105,16 @@ namespace gBanker.Web.Controllers
 
 
         }
-        private void MapDropDownList(ProductViewModelEditMode model)
-        {
-            var frequency = new List<SelectListItem>();
-            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W", Selected = true });
-            frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
-            frequency.Add(new SelectListItem() { Text = "Fortnightly", Value = "F" });
-
-            var calcList = new List<SelectListItem>();
-            calcList.Add(new SelectListItem() { Text = "Flat", Value = "F" });
-            calcList.Add(new SelectListItem() { Text = "Declined", Value = "D", Selected = true });
-            calcList.Add(new SelectListItem() { Text = "Amortaization", Value = "A" });
-            calcList.Add(new SelectListItem() { Text = "Amortaization-Fixed", Value = "E" });
-            calcList.Add(new SelectListItem() { Text = "Abasan", Value = "H" });
-            calcList.Add(new SelectListItem() { Text = "Variance", Value = "V" });
-            var prodType = new List<SelectListItem>();
-            prodType.Add(new SelectListItem() { Text = "Savings", Value = "0" });
-            prodType.Add(new SelectListItem() { Text = "Loan", Value = "1", Selected = true });
-
-            //var allinvestor = investorService.SearchInvestor();
-
-            // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
-
-            model.PInvestorListItems = prodType;
-            model.PCalcuationMethodListItems = calcList.AsEnumerable();
-            model.PFrequencyListItems = frequency.AsEnumerable();
-            model.MemberCategoryList = memberCategoryService.GetAll().Where(m => m.OrgID == LoggedInOrganizationID).Select(s => new SelectionViewModel() { Code = s.MemberCategoryCode, Id = s.MemberCategoryID, DisplayName = string.Format("{0} - {1}", s.MemberCategoryCode, s.CategoryName), IsSelected = false }).ToList();
-        }
         private void MapDropDownListCreate(ProductViewModel model)
         {
             var frequency = new List<SelectListItem>();
             frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W", Selected = true });
             frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
 
+            var insuranceList = new List<SelectListItem>();
+            insuranceList.Add(new SelectListItem() { Text = "Yes", Value = "Y", Selected = true });
+            insuranceList.Add(new SelectListItem() { Text = "No", Value = "No" });
+
             var calcList = new List<SelectListItem>();
             calcList.Add(new SelectListItem() { Text = "Flat", Value = "F" });
             calcList.Add(new SelectListItem() { Text = "Declined", Value = "D", Selected = true });
@@ -165,6 +126,12 @@ namespace gBanker.Web.Controllers
             prodType.Add(new SelectListItem() { Text = "Savings", Value = "0" });
             prodType.Add(new SelectListItem() { Text = "Loan", Value = "1", Selected = true });
 
+         
+            var mProductList = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
+            {
+                Text = t.MainProductCode,
+                Value = t.MainItemName
+            });
             //var allinvestor = investorService.SearchInvestor();
 
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
@@ -172,11 +139,14 @@ namespace gBanker.Web.Controllers
             model.PInvestorListItems = prodType;
             model.PCalcuationMethodListItems = calcList.AsEnumerable();
             model.PFrequencyListItems = frequency.AsEnumerable();
+
+            model.MainProductList = mProductList;
+            model.InsuranceItemList = insuranceList.AsEnumerable();
             model.MemberCategoryList = memberCategoryService.GetAll().Where(m => m.OrgID == LoggedInOrganizationID).Select(s => new SelectionViewModel() { Code = s.MemberCategoryCode, Id = s.MemberCategoryID, DisplayName = string.Format("{0} - {1}", s.MemberCategoryCode, s.CategoryName), IsSelected = false }).ToList();
         }
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(ProductViewModel model)
+        public ActionResult Create(NewProductViewModel model)
         {
             try
             {
@@ -184,7 +154,7 @@ namespace gBanker.Web.Controllers
                 model.IsActive = true;
                 //var selectedMemberCategory = model.MemberCategoryList.Where(w => w.IsSelected).ToList();
 
-                var entity = Mapper.Map<ProductViewModel, Product>(model);
+                var entity = Mapper.Map<NewProductViewModel, Product>(model);
                 //Add Validlation Logic.
                 if (ModelState.IsValid)
                 {
@@ -210,68 +180,5 @@ namespace gBanker.Web.Controllers
                 return GetErrorMessageResult(ex);
             }
         }
-        // GET: Product/Edit/5
-        public ActionResult Edit(int id)
-        {
-            if (productService.IsContinued(id))
-            {
-                var product = productService.GetById(id);
-                var entity = Mapper.Map<Product, ProductViewModelEditMode>(product);
-
-
-                MapDropDownList(entity);
-                return View(entity);
-            }
-            else
-                ModelState.AddModelError("Validation", "Discontinued Product, please enter a diferent product id and name.");
-            return RedirectToAction("Index");
-        }
-        // POST: Product/Edit/5
-        [HttpPost]
-        public ActionResult Edit(ProductViewModel model)
-        {
-            try
-            {
-                model.IsActive = true;
-                var entity = Mapper.Map<ProductViewModel, Product>(model);
-                var getproduct = productService.GetById(entity.ProductID);
-                //// TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    getproduct.Duration = entity.Duration;
-                    getproduct.InsuranceItemCode = entity.InsuranceItemCode;
-                    getproduct.InsuranceItemRate = entity.InsuranceItemRate;
-                    getproduct.InterestCalculationMethod = entity.InterestCalculationMethod;
-                    getproduct.InterestInstallment = entity.InterestInstallment;
-                    getproduct.InterestRate = entity.InterestRate;
-                    getproduct.LoanInstallment = entity.LoanInstallment;
-                    getproduct.MainItemName = entity.MainItemName;
-                    getproduct.MainProductCode = entity.MainProductCode;
-                    getproduct.MaxLimit = entity.MaxLimit;
-                    getproduct.MinLimit = entity.MinLimit;
-                    getproduct.PaymentFrequency = entity.PaymentFrequency;
-                    getproduct.ProductCode = entity.ProductCode;
-                    getproduct.ProductFullNameBng = entity.ProductFullNameBng;
-                    getproduct.ProductFullNameEng = entity.ProductFullNameEng;
-                    getproduct.ProductName = entity.ProductName;
-                    getproduct.ProductShortNameBng = entity.ProductShortNameBng;
-                    getproduct.ProductType = entity.ProductType;
-                    getproduct.SavingsInstallment = entity.SavingsInstallment;
-                    getproduct.GracePeriod = entity.GracePeriod;
-                    getproduct.SubMainCategory = entity.SubMainCategory; //Khalid Added.
-                    getproduct.LateFeePercentage = entity.LateFeePercentage;
-
-                    productService.Update(getproduct);
-                    return GetSuccessMessageResult();
-
-                }
-                return GetErrorMessageResult();
-            }
-            catch (Exception ex)
-            {
-                return GetErrorMessageResult(ex);
-            }
-        }
-
     }
 }
