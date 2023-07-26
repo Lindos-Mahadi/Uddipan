@@ -103,6 +103,7 @@
     <Compile Include="CodeFirstMigration\AccCorrection.cs" />
     <Compile Include="CodeFirstMigration\AccLastVoucher.cs" />
     <Compile Include="CodeFirstMigration\ArchiveDbMapping.cs" />
+    <Compile Include="CodeFirstMigration\DurationTable.cs" />
     <Compile Include="CodeFirstMigration\FileUploadTable.cs" />
     <Compile Include="CodeFirstMigration\LoanAccReschedule.cs" />
     <Compile Include="CodeFirstMigration\NomineeXPortalSavingSummary.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="CodeFirstMigration\PortalLoanSummary.cs" />
     <Compile Include="CodeFirstMigration\PortalMember.cs" />
     <Compile Include="CodeFirstMigration\PortalMemberNominee.cs" />
+    <Compile Include="CodeFirstMigration\ProductIdentification.cs" />
     <Compile Include="CodeFirstMigration\ProductXEmploymentProductMapping.cs" />
     <Compile Include="CodeFirstMigration\ConsentForm.cs" />
     <Compile Include="CodeFirstMigration\FamilyMemberSameHousehold.cs" />
@@ -397,6 +399,7 @@
     <Compile Include="Repository\AccCategoryRepository.cs" />
     <Compile Include="Repository\AccChartRepository.cs" />
     <Compile Include="Repository\AccLastVoucherRepository.cs" />
+    <Compile Include="Repository\DurationRepository.cs" />
     <Compile Include="Repository\FileRepository.cs" />
     <Compile Include="Repository\LoanAccRescheduleRepository.cs" />
     <Compile Include="Repository\NomineeXPortalSavingSummaryRepository.cs" />
@@ -404,6 +407,7 @@
     <Compile Include="Repository\PortalLoanSummaryRepository.cs" />
     <Compile Include="Repository\PortalSavingSummaryRepository.cs" />
     <Compile Include="Repository\PortalMemberRepository.cs" />
+    <Compile Include="Repository\ProductIdentificationRepository.cs" />
     <Compile Include="Repository\ProductXEmploymentProductMappingRepository.cs" />
     <Compile Include="Repository\IPKSFFundLoanRepository.cs" />
     <Compile Include="Repository\IFamilyMemberSameHouseholdRepository.cs" />
