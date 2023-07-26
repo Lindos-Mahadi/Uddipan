@@ -69,28 +69,30 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ChildProduct, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.ChildProduct, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ChildProduct, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.ProductCode,  new { htmlAttributes = new  { @class = "form-control", Value = @randomNumber } })
-                    @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.PaymentFrequency, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.PaymentFrequency, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.MainItemName, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.MainItemName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MainItemName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -131,35 +133,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row">
-            @*<div class="col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label" })
-
-                        @Html.DropDownListFor(model => model.ProductType, investor, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
-
-            <div class="col-md-6">
-                <div class="form-group">
-
-                    @Html.LabelFor(model => model.PaymentFrequency, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { @class = "form-control" })
-
-                    @Html.ValidationMessageFor(model => model.PaymentFrequency, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
-                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
         <div class="row">
             @*<div class="col-md-6">

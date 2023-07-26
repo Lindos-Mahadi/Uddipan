@@ -129,7 +129,7 @@ namespace gBanker.Web.Controllers
          
             var mProductList = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
             {
-                Text = t.MainProductCode,
+                Text = t.MainProductCode + " - " + t.MainItemName,
                 Value = t.MainItemName
             });
             //var allinvestor = investorService.SearchInvestor();
