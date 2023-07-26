@@ -7,12 +7,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Service
 {
     public interface IDurationService : IServiceBase<DurationTable>
     {
-
+        IEnumerable<DurationTableModel> getDurationItemList();
     }
     public class DurationService : IDurationService
     {
@@ -76,6 +77,16 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
-
+        public IEnumerable<DurationTableModel> getDurationItemList()
+        {
+            try
+            {
+                return repository.getDurationItemList();
+            }
+            catch (Exception ex)
+            {
+                return new List<DurationTableModel>();
+            }
+        }
     }
 }

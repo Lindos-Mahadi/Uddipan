@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gBanker.Data.CodeFirstMigration
+namespace gBanker.Data.DBDetailModels
 {
-    public class DurationTable
+    public class DurationTableModel
     {
-        public int ID { get; set; }
         public string Frequency { get; set; }
         public string Duration { get; set; }
     }
