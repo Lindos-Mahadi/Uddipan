@@ -135,10 +135,12 @@ namespace gBanker.Web.Controllers
                 Value = t.MainItemName
             });
 
+            var asd = durationService.getDurationItemList();
+
             var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.Duration +" - "+ t.Frequency,
-                Value = t.Frequency
+                Value = t.ProductPaymentFrequency
             });
 
             model.DurationItemList = durationList;

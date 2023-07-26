@@ -25,7 +25,7 @@ namespace gBanker.Data.Repository
         {
             try
             {
-                var sqlCommand = "select Frequency, Duration from DurationTable ";
+                var sqlCommand = "select Frequency, Duration, ProductPaymentFrequency from DurationTable ";
                 var results = DataContext.Database.SqlQuery<DurationTableModel>(sqlCommand).ToList();
 
                 return results;
@@ -40,7 +40,7 @@ namespace gBanker.Data.Repository
         {
             try
             {
-                var sqlCommand = "select Frequency, Duration from DurationTable ";
+                var sqlCommand = "select Frequency, Duration, ProductPaymentFrequency from DurationTable ";
                 var results = DataContext.Database.SqlQuery<DurationTable>(sqlCommand).ToList();
 
                 return results;

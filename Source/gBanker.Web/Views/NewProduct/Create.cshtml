@@ -25,30 +25,29 @@
 
 <script type="text/javascript">
 
-
+    let durationList;
     $(document).ready(function () {
         gBankerDatePicker("CreateDate");
-
+        durationList =@Html.Raw(Json.Encode(@duratoinList));
     });
 
     function onpaymentFrequencyChanged() {
         let paymentFrequencyType = $("#PaymentFrequency option:selected").val();
+        //alert('durationList');
         var filteredDuration = [];
         if (paymentFrequencyType == "M") {
-            filteredDuration = durationList.filter(item => item.Value == "Month");
+            filteredDuration = durationList.filter(item => item.Value == "M");
         } else {
-            filteredDuration = durationList.filter(item => item.Value == "Week");
+            filteredDuration = durationList.filter(item => item.Value == "W");
         }
+        //alert(filteredDuration);
         console.log("paymentFrequencyType ", filteredDuration);
-        $("#duration").empty();
-
-        // Add new options based on the filteredDuration
-        filteredDuration.forEach(item => {
-            $("#duration").append($('<option>', {
-                value: item.Value,
-                text: item.Text
-            }));
+        var option = '<option value="">Select One</option>';
+        $.each(filteredDuration, function (index, value) {
+            option += '<option value="' + value.Value + '">' + value.Text +'</option>';
         });
+        $('#duration').empty().append(option);
+        //duratoinListMasterData = filteredDuration;
     }
 </script>
 
@@ -327,9 +326,9 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/gbUtility")
 }
-@*<script type="text/javascript">
+<script type="text/javascript">
 
-    let durationList =  @Html.Raw(Json.Encode(duratoinListMasterData));
+    
 
     $(document).ready(function () {
 
@@ -337,5 +336,5 @@
 
     });
 
-</script>*@
+</script>
 

@@ -101,6 +101,7 @@ namespace gBanker.Web.ViewModels
         public decimal InsuranceItemRate { get; set; }
         [GlobalizedDisplayName("GracePeriod")]
         public int GracePeriod { get; set; }
+        public string ProductPaymentFrequency { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
 

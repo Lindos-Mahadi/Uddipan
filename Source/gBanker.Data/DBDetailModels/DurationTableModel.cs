@@ -10,5 +10,6 @@ namespace gBanker.Data.DBDetailModels
     {
         public string Frequency { get; set; }
         public string Duration { get; set; }
+        public string ProductPaymentFrequency { get; set; }
     }
 }
