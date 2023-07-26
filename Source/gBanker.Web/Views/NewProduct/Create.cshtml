@@ -9,6 +9,8 @@
     var calcMethod = Model == null ? null : Model.PCalcuationMethodListItems;
     var mProductCode = Model == null ? null : Model.MainProductList;
     var insuranceList = Model == null ? null : Model.InsuranceItemList;
+    var duratoinListMasterData = "";
+    var duratoinList = Model == null ? null : Model.DurationItemList;
 }
 
 @{
@@ -28,6 +30,26 @@
         gBankerDatePicker("CreateDate");
 
     });
+
+    function onpaymentFrequencyChanged() {
+        let paymentFrequencyType = $("#PaymentFrequency option:selected").val();
+        var filteredDuration = [];
+        if (paymentFrequencyType == "M") {
+            filteredDuration = durationList.filter(item => item.Value == "Month");
+        } else {
+            filteredDuration = durationList.filter(item => item.Value == "Week");
+        }
+        console.log("paymentFrequencyType ", filteredDuration);
+        $("#duration").empty();
+
+        // Add new options based on the filteredDuration
+        filteredDuration.forEach(item => {
+            $("#duration").append($('<option>', {
+                value: item.Value,
+                text: item.Text
+            }));
+        });
+    }
 </script>
 
 @Html.ActionLink("Back to List", "Index", null, new { @class = "pull-right" })
@@ -82,16 +104,21 @@
 
                     @Html.LabelFor(model => model.PaymentFrequency, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { onchange = "onpaymentFrequencyChanged()", id = "PaymentFrequency", @class = "form-control" })
 
                     @Html.ValidationMessageFor(model => model.PaymentFrequency, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    @*@Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
+                        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })*@
                     @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
+                    @Html.DropDownListFor(model => model.Duration, duratoinList, new { id = "duration", @class = "form-control" })
+
                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -300,5 +327,15 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/gbUtility")
 }
+@*<script type="text/javascript">
 
+    let durationList =  @Html.Raw(Json.Encode(duratoinListMasterData));
+
+    $(document).ready(function () {
+
+
+
+    });
+
+</script>*@
 

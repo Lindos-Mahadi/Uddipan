@@ -22,13 +22,15 @@ namespace gBanker.Web.Controllers
         private readonly IInvestorService investorService;
         private readonly IMemberCategoryService memberCategoryService;
         private readonly IProductReportService productReportService;
-        //private readonly 
-        public NewProductController(IProductService productService, IInvestorService investorService, IMemberCategoryService memberCategoryService, IProductReportService productReportService)
+        private readonly IDurationService durationService;
+        public NewProductController(IProductService productService, IInvestorService investorService,
+            IMemberCategoryService memberCategoryService, IProductReportService productReportService, IDurationService durationService)
         {
             this.productService = productService;
             this.investorService = investorService;
             this.memberCategoryService = memberCategoryService;
             this.productReportService = productReportService;
+            this.durationService = durationService;
         }
         public ActionResult ExportData()
         {
@@ -132,8 +134,14 @@ namespace gBanker.Web.Controllers
                 Text = t.MainProductCode + " - " + t.MainItemName,
                 Value = t.MainItemName
             });
-            //var allinvestor = investorService.SearchInvestor();
 
+            var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
+            {
+                Text = t.Duration +" - "+ t.Frequency,
+                Value = t.Frequency
+            });
+
+            model.DurationItemList = durationList;
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
 
             model.PInvestorListItems = prodType;
@@ -144,6 +152,7 @@ namespace gBanker.Web.Controllers
             model.InsuranceItemList = insuranceList.AsEnumerable();
             model.MemberCategoryList = memberCategoryService.GetAll().Where(m => m.OrgID == LoggedInOrganizationID).Select(s => new SelectionViewModel() { Code = s.MemberCategoryCode, Id = s.MemberCategoryID, DisplayName = string.Format("{0} - {1}", s.MemberCategoryCode, s.CategoryName), IsSelected = false }).ToList();
         }
+
         // POST: Product/Create
         [HttpPost]
         public ActionResult Create(NewProductViewModel model)
