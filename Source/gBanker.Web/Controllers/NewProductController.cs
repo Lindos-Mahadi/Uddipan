@@ -15,6 +15,7 @@ using gBanker.Data.CodeFirstMigration.Db;
 using System.Security.Cryptography.Xml;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using gBanker.Data.CodeFirstMigration;
+using System.Web.Http.Results;
 
 namespace gBanker.Web.Controllers
 {
@@ -82,6 +83,23 @@ namespace gBanker.Web.Controllers
 
 
         }
+        public ActionResult GetProductMainCodeList()
+        {
+            try
+            {
+                var allproduct = productService.GetProductMainCodeList().ToList();
+                //return Json(new { });
+                var result = new { Result = "OK", Records = allproduct, TotalRecordCount = allproduct.Count() };
+                var json = new JsonResult() { Data = result, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return json;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
         public ActionResult GenerateReport(string fromDate, string toDate)
         {
             var param = new { Status = 1 };
@@ -116,7 +134,7 @@ namespace gBanker.Web.Controllers
         {
             var frequency = new List<SelectListItem>();
             frequency.Add(new SelectListItem() { Text = "Select One", Value = "", Selected = true });
-            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W"  });
+            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W" });
             frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
 
             //var insuranceList = new List<SelectListItem>();
@@ -134,14 +152,15 @@ namespace gBanker.Web.Controllers
             prodType.Add(new SelectListItem() { Text = "Savings", Value = "0" });
             prodType.Add(new SelectListItem() { Text = "Loan", Value = "1", Selected = true });
 
-         
+
             var mProductList = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.MainProductCode + " - " + t.MainItemName,
                 Value = t.MainItemName
             });
 
-            var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem { 
+            var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem
+            {
                 Text = p.IdentificationName,
                 Value = p.IdentificationName
             }).ToList();
@@ -150,10 +169,10 @@ namespace gBanker.Web.Controllers
 
             var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
             {
-                Text = t.Duration +" - "+ t.Frequency,
-                Value = t.ProductPaymentFrequency
+                Text = t.ProductPaymentFrequency + " - " + t.Duration.ToString(),
+                Value = t.Duration.ToString()
             }).ToList();
-            durationList.Insert(0, new SelectListItem { Text = "Select Duration", Value = "", Selected=true });
+            durationList.Insert(0, new SelectListItem { Text = "Select Duration", Value = "", Selected = true });
 
             model.DurationItemList = durationList;
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
@@ -169,7 +188,7 @@ namespace gBanker.Web.Controllers
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(NewProductViewModel model)
+        public ActionResult Create(ProductViewModel model)
         {
             try
             {
@@ -177,7 +196,7 @@ namespace gBanker.Web.Controllers
                 model.IsActive = true;
                 //var selectedMemberCategory = model.MemberCategoryList.Where(w => w.IsSelected).ToList();
 
-                var entity = Mapper.Map<NewProductViewModel, Product>(model);
+                var entity = Mapper.Map<ProductViewModel, Product>(model);
                 //Add Validlation Logic.
                 if (ModelState.IsValid)
                 {

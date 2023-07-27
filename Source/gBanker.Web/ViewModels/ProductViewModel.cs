@@ -108,7 +108,8 @@ namespace gBanker.Web.ViewModels
         public bool IsSelected { get; set; }
 
         public bool? IsInsurance { get; set; }
-
+        public int? ProductIdentificationID { get; set; }
+        public int? DurationTableID { get; set; }
 
 
 

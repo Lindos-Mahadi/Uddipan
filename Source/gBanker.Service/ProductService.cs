@@ -24,7 +24,7 @@ namespace gBanker.Service
         IEnumerable<Product> SearchAllProduct(int OrgID);
         IEnumerable<Product> GetProductDetailPaged(string filterColumnName, string filterValue, int startRowIndex, string jtSorting, int pageSize, out long totalCount, int? OrgID);
         //IEnumerable<ProcessDayEnd_Result> ProcessDayEnd(DateTime dayend, string user);
-       // bool IsContinued(int id);
+        // bool IsContinued(int id);
     }
     public  class ProductService : IProductService
     {
@@ -224,6 +224,6 @@ namespace gBanker.Service
         {
             var entities = repository.GetMany(where).Where(b => b.IsActive == true);
             return entities;
-        }       
+        }
     }
 }

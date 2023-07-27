@@ -10,7 +10,7 @@ namespace gBanker.Data.CodeFirstMigration
     {
         public int ID { get; set; }
         public string Frequency { get; set; }
-        public string Duration { get; set; }
+        public int Duration { get; set; }
         public string ProductPaymentFrequency { get; set; }
     }
 }

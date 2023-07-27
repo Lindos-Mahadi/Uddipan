@@ -86,7 +86,6 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public int OrgID { get; set; }
         public int GracePeriod { get; set; }
         public bool? IsActive { get; set; }
-        public string ChildProduct { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? InActiveDate { get; set; }
@@ -101,7 +100,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public bool? IsInsurance { get; set; }
 
-
+        public int? ProductIdentificationID { get; set; }
+        public int? DurationTableID { get; set; }
 
 
 

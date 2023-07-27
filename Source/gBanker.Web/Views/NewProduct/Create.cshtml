@@ -60,11 +60,12 @@
     function onpaymentFrequencyChanged() {
         let paymentFrequencyType = $("#PaymentFrequency option:selected").val();
         //alert('durationList');
+        console.log("paymentFrequencyType ", paymentFrequencyType)
         var filteredDuration = [];
         if (paymentFrequencyType == "M") {
-            filteredDuration = durationList.filter(item => item.Value == "M");
+            filteredDuration = durationList.filter(item => item.Text.split("-")[0].trim() == "M");
         } else {
-            filteredDuration = durationList.filter(item => item.Value == "W");
+            filteredDuration = durationList.filter(item => item.Text.split("-")[0].trim() == "W");
         }
         //alert(filteredDuration);
         console.log("paymentFrequencyType ", filteredDuration);
@@ -75,8 +76,38 @@
         $('#duration').empty().append(option);
         //duratoinListMasterData = filteredDuration;
 
-
+    }
+    function onDurationChanged() {
+        //console.log((Number)($("#duration option:selected").text()));
+        //$("#duration").val((Number)($("#duration option:selected").text()));
         
+        //console.log($("#duration option:selected").val());
+    }
+    function onMainProductChanged() {
+        let mainProduct = $("#MainProduct option:selected").val();
+        let newProductCode;
+        $.ajax({
+            url: '/NewProduct/GetProductMainCodeList',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let currentProducts = data.Records.filter(item => item.MainItemName == mainProduct);
+                let currentProducrsCode = [];
+                currentProducts.map(item => {
+                    currentProducrsCode.push(Number(item.MainProductCode));
+                });
+                currentProducrsCode.sort();
+                newProductCode = currentProducrsCode[currentProducrsCode.length - 1] + 0.01;
+                //console.log("newProductCode ", newProductCode);
+                $("#ProductCode").val(newProductCode)
+            },
+            error: function () {
+
+            }
+        });
+       
+
+
     }
 </script>
 
@@ -113,7 +144,7 @@
 
                     @Html.LabelFor(model => model.MainProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.DropDownListFor(model => model.MainProductCode, mProductCode, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.MainProductCode, mProductCode, new { id = "MainProduct", onchange = "onMainProductChanged()", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MainProductCode, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -121,7 +152,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new {id= "ProductCode", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -145,7 +176,7 @@
                         @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })*@
                     @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.DropDownListFor(model => model.Duration, duratoinList, new { id = "duration", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Duration, duratoinList, new { id = "duration", onchange="onDurationChanged()", @class = "form-control" })
 
                     @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                 </div>
@@ -272,7 +303,7 @@
 
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.InterestRate, htmlAttributes: new { @class = "control-label" })
 
@@ -280,30 +311,32 @@
                     @Html.ValidationMessageFor(model => model.InterestRate, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IsInsurance, htmlAttributes: new { @class = "control-label" })
-                    <div class="checkbox">
-                        <div>
-                            @Html.RadioButtonFor(model => model.IsInsurance, true, new { @class = "form-check-input mr-0", id = "isInsuranceYes" })
-                            <label class="" for="isInsuranceYes" style="padding-left:0px;">Yes</label> &nbsp;&nbsp;&nbsp;
-                            @Html.RadioButtonFor(model => model.IsInsurance, false, new { @class = "form-check-input", id = "isInsuranceNo" })
-                            <label class="" for="isInsuranceNo" style="padding-left:0px;">No</label>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsInsurance, htmlAttributes: new { @class = "control-label" })
+                            <div class="checkbox">
+                                <div>
+                                    @Html.RadioButtonFor(model => model.IsInsurance, true, new { @class = "form-check-input mr-0", id = "isInsuranceYes" })
+                                    <label class="" for="isInsuranceYes" style="padding-left:0px;">Yes</label>
+                                    @Html.RadioButtonFor(model => model.IsInsurance, false, new { @class = "form-check-input", id = "isInsuranceNo" })
+                                    <label class="" for="isInsuranceNo" style="padding-left:0px;">No</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-8" id="insuranceItemCodeContainer">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
-                </div>
-
-            </div>
-            <div class="col-md-3" id="insuranceItemCodeContainer">
-                <div class="form-group">
-                        @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
-
-                        @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
-                        @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
+                            @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
-            <div class="col-md-3">
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     @Html.LabelFor(model => model.InsuranceItemRate, htmlAttributes: new { @class = "control-label" })
 
@@ -361,7 +394,7 @@
 }
 <script type="text/javascript">
 
-    
+
 
     $(document).ready(function () {
 
