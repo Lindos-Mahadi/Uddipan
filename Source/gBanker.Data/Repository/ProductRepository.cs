@@ -14,6 +14,7 @@ namespace gBanker.Data.Repository
         //IEnumerable<ProcessDayEnd_Result> ProcessDayEnd(DateTime dayend, string user);
         IEnumerable<Product> GetProductDetailPaged(string filterColumnName, string filterValue, int startRowIndex, string jtSorting, int pageSize, out long totalCount, int? OrgID);
         IEnumerable<ProductMainCodeModel> GetProductMainCodeList();
+        
 
     }
     public class ProductRepository : RepositoryBaseCodeFirst<Product>, IProductRepository

@@ -13,4 +13,11 @@ namespace gBanker.Data.DBDetailModels
         public string MainProductCode { get; set; }      
         public string MainItemName { get; set; }
     }
+    public class ProductChildCodeModel
+    {
+        public string MainProductCode { get; set; }
+        public string ChildProduct { get; set; }
+
+
+    }
 }
