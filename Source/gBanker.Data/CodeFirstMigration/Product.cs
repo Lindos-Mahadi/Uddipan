@@ -76,7 +76,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "numeric")]
         public decimal? InsuranceItemRate { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         public string MainItemName { get; set; }
         public string SubMainCategory { get; set; }
@@ -105,15 +105,9 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
 
 
-
-
-
-
-
-
-
-
         public virtual Organization Organization { get; set; }
+        public virtual DurationTable DurationTable { get; set; }
+        public virtual ProductIdentification ProductIdentification { get; set; }
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual ICollection<LoanSummary> LoanSummaries { get; set; }
