@@ -104,8 +104,24 @@ namespace gBanker.Web.ViewModels
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
 
-      
+        public string IdentificationName { get; set; }
         public bool IsSelected { get; set; }
+
+        public bool? IsInsurance { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IEnumerable<SelectListItem> PInvestorListItems { get; set; }
         public IEnumerable<SelectListItem> PFrequencyListItems { get; set; }
@@ -114,6 +130,6 @@ namespace gBanker.Web.ViewModels
         public IEnumerable<SelectListItem> MainProductList { get; set; }
         public IEnumerable<SelectListItem> InsuranceItemList { get; set; }
         public IEnumerable<SelectListItem> DurationItemList { get; set; }
-        public IEnumerable<SelectListItem> ProductIdentificationList { get; set; }
+        public IEnumerable<SelectListItem> ProductIdentificationItemList { get; set; }
     }
 }

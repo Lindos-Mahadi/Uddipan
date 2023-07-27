@@ -98,8 +98,22 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "smalldatetime")]
         public DateTime CreateDate { get; set; }
         public byte DurationOverCollection { get; set; }
-        public virtual Organization Organization { get; set; }
 
+        public bool? IsInsurance { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public virtual Organization Organization { get; set; }
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual ICollection<LoanSummary> LoanSummaries { get; set; }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gBanker.Data.CodeFirstMigration
+namespace gBanker.Data.DBDetailModels
 {
-    public  class ProductIdentification
+    public class ProductIdentificationModel
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public string IdentificationName { get; set; }
-
     }
 }

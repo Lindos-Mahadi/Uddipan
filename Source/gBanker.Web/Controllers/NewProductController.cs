@@ -119,9 +119,9 @@ namespace gBanker.Web.Controllers
             frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W"  });
             frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
 
-            var insuranceList = new List<SelectListItem>();
-            insuranceList.Add(new SelectListItem() { Text = "Yes", Value = "Y", Selected = true });
-            insuranceList.Add(new SelectListItem() { Text = "No", Value = "No" });
+            //var insuranceList = new List<SelectListItem>();
+            //insuranceList.Add(new SelectListItem() { Text = "Yes", Value = "Y", Selected = true });
+            //insuranceList.Add(new SelectListItem() { Text = "No", Value = "No" });
 
             var calcList = new List<SelectListItem>();
             calcList.Add(new SelectListItem() { Text = "Flat", Value = "F" });
@@ -141,21 +141,19 @@ namespace gBanker.Web.Controllers
                 Value = t.MainItemName
             });
 
-            var productIdentificationList = 
-                productIdentificationService.getProductIdentificationList().AsEnumerable().Select(p => new SelectListItem
-            { 
-                    Text = p.Termdeposit,
-                    Value = p.ID.ToString(),
-                    
+            var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem { 
+                Text = p.IdentificationName,
+                Value = p.IdentificationName
             }).ToList();
+            productIdentificationList.Insert(0, new SelectListItem { Text = "Select Product Identification", Value = "", Selected = true });
+            model.ProductIdentificationItemList = productIdentificationList;
 
-            model.ProductIdentificationList = productIdentificationList;
             var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.Duration +" - "+ t.Frequency,
                 Value = t.ProductPaymentFrequency
             }).ToList();
-            durationList.Insert(0, new SelectListItem { Text = "Select One", Value = "", Selected=true });
+            durationList.Insert(0, new SelectListItem { Text = "Select Duration", Value = "", Selected=true });
 
             model.DurationItemList = durationList;
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
@@ -165,7 +163,7 @@ namespace gBanker.Web.Controllers
             model.PFrequencyListItems = frequency.AsEnumerable();
 
             model.MainProductList = mProductList;
-            model.InsuranceItemList = insuranceList.AsEnumerable();
+            //model.InsuranceItemList = insuranceList.AsEnumerable();
             model.MemberCategoryList = memberCategoryService.GetAll().Where(m => m.OrgID == LoggedInOrganizationID).Select(s => new SelectionViewModel() { Code = s.MemberCategoryCode, Id = s.MemberCategoryID, DisplayName = string.Format("{0} - {1}", s.MemberCategoryCode, s.CategoryName), IsSelected = false }).ToList();
         }
 

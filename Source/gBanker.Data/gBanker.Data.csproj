@@ -344,6 +344,7 @@
     <Compile Include="CodeFirstMigration\WriteOffHistory.cs" />
     <Compile Include="DBDetailModels\BasicDataModel.cs" />
     <Compile Include="DBDetailModels\DurationTableModel.cs" />
+    <Compile Include="DBDetailModels\ProductIdentificationModel.cs" />
     <Compile Include="DBDetailModels\ProductMainCodeModel.cs" />
     <Compile Include="DBDetailModels\InvStoreExistPriceViewModel.cs" />
     <Compile Include="DBDetailModels\InvStoreViewModel.cs" />
