@@ -189,6 +189,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public DbSet<LoanAccReschedule> LoanAccReschedule { get; set; }
         public DbSet<SavingsAccClose> SavingsAccClose { get; set; }
         public DbSet<DurationTable> DurationTable { get; set; }
+        public DbSet<ProductIdentification> ProductIdentification { get; set; }
 
 
         #region Inventory

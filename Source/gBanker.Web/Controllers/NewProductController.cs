@@ -13,6 +13,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI;
 using gBanker.Data.CodeFirstMigration.Db;
 using System.Security.Cryptography.Xml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using gBanker.Data.CodeFirstMigration;
 
 namespace gBanker.Web.Controllers
 {
@@ -23,14 +25,17 @@ namespace gBanker.Web.Controllers
         private readonly IMemberCategoryService memberCategoryService;
         private readonly IProductReportService productReportService;
         private readonly IDurationService durationService;
+        private readonly IProductIdentificationService productIdentificationService;
         public NewProductController(IProductService productService, IInvestorService investorService,
-            IMemberCategoryService memberCategoryService, IProductReportService productReportService, IDurationService durationService)
+            IMemberCategoryService memberCategoryService, IProductReportService productReportService,
+            IDurationService durationService, IProductIdentificationService productIdentificationService)
         {
             this.productService = productService;
             this.investorService = investorService;
             this.memberCategoryService = memberCategoryService;
             this.productReportService = productReportService;
             this.durationService = durationService;
+            this.productIdentificationService = productIdentificationService;
         }
         public ActionResult ExportData()
         {
@@ -110,7 +115,8 @@ namespace gBanker.Web.Controllers
         private void MapDropDownListCreate(ProductViewModel model)
         {
             var frequency = new List<SelectListItem>();
-            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W", Selected = true });
+            frequency.Add(new SelectListItem() { Text = "Select One", Value = "", Selected = true });
+            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W"  });
             frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
 
             var insuranceList = new List<SelectListItem>();
@@ -135,13 +141,21 @@ namespace gBanker.Web.Controllers
                 Value = t.MainItemName
             });
 
-            var asd = durationService.getDurationItemList();
+            var productIdentificationList = 
+                productIdentificationService.getProductIdentificationList().AsEnumerable().Select(p => new SelectListItem
+            { 
+                    Text = p.Termdeposit,
+                    Value = p.ID.ToString(),
+                    
+            }).ToList();
 
+            model.ProductIdentificationList = productIdentificationList;
             var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.Duration +" - "+ t.Frequency,
                 Value = t.ProductPaymentFrequency
-            });
+            }).ToList();
+            durationList.Insert(0, new SelectListItem { Text = "Select One", Value = "", Selected=true });
 
             model.DurationItemList = durationList;
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });

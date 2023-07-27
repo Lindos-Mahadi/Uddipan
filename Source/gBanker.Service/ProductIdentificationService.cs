@@ -7,12 +7,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Service
 {
     public interface IProductIdentificationService : IServiceBase<ProductIdentification>
     {
-
+        IEnumerable<ProductIdentification> getProductIdentificationList();
     }
     public class ProductIdentificationService : IProductIdentificationService
     {
@@ -74,6 +75,16 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
-
+        public IEnumerable<ProductIdentification> getProductIdentificationList()
+        {
+            try
+            {
+                return repository.getProductIdentificationList();
+            }
+            catch (Exception ex)
+            {
+                return new List<ProductIdentification>();
+            }
+        }
     }
 }
