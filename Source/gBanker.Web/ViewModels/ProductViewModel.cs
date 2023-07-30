@@ -126,7 +126,8 @@ namespace gBanker.Web.ViewModels
         [Display(Name ="Is Insurance")]
         public bool? IsInsurance { get; set; }
         public int? ProductIdentificationID { get; set; }
-        public int? DurationTableID { get; set; }
+        //public int? DurationTableID { get; set; }
+        //public string IdentificationName { get; set; }
 
 
 

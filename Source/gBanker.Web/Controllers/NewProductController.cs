@@ -157,7 +157,8 @@ namespace gBanker.Web.Controllers
             {
                 Text = t.MainProductCode + " - " + t.MainItemName,
                 Value = t.MainItemName
-            });
+            }).ToList();
+            mProductList.Insert(0, new SelectListItem { Text = "Select Main Product", Value = "", Selected = true });
 
             var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem
             {

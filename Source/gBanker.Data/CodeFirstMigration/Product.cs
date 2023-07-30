@@ -102,6 +102,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public int? ProductIdentificationID { get; set; }
         public int? DurationTableID { get; set; }
+        public string IdentificationName { get; set; }
 
 
 
