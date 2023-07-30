@@ -58,7 +58,8 @@ namespace gBanker.Web.ViewModels
         [Required(ErrorMessage = "Duration is required")]
         [GlobalizedDisplayName("Duration")]
         public Nullable<short> Duration { get; set; }
-        [GlobalizedDisplayName("MainProductCode")]
+        //[GlobalizedDisplayName("MainProduct")]
+        [Display(Name ="Main Product")]
         [Required(ErrorMessage = "Main ProductCode is required")]
         public string MainProductCode { get; set; }
 
@@ -108,7 +109,8 @@ namespace gBanker.Web.ViewModels
         public string PaymentFrequency { get; set; }
 
         //[Required(ErrorMessage = "Insurance ItemCode is required")]
-        [GlobalizedDisplayName("InsuranceItemCode")]
+        //[GlobalizedDisplayName("InsuranceItemCode")]
+        [Display(Name = "Insurance Item Code")]
         public string InsuranceItemCode { get; set; }
         [Required(ErrorMessage = "Insurance Rate is required")]
         [GlobalizedDisplayName("InsuranceItemRate")]
@@ -118,10 +120,10 @@ namespace gBanker.Web.ViewModels
         public int GracePeriod { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-
+        [Display(Name = "Identification Name")]
         public string IdentificationName { get; set; }
         public bool IsSelected { get; set; }
-
+        [Display(Name ="Is Insurance")]
         public bool? IsInsurance { get; set; }
         public int? ProductIdentificationID { get; set; }
         public int? DurationTableID { get; set; }
