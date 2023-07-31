@@ -17,6 +17,8 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using gBanker.Data.CodeFirstMigration;
 using System.Web.Http.Results;
 using gBanker.Data.DBDetailModels;
+using System.ComponentModel.DataAnnotations;
+using Elmah;
 
 namespace gBanker.Web.Controllers
 {
@@ -91,14 +93,15 @@ namespace gBanker.Web.Controllers
                 /*var allproduct = productService.GetProductMainCodeList().ToList();*/
                 
                 var allproductList = productService.GetAll();
-                var productCodeFirstPos = productCode[0];
-                var productCodeSecPos = productCode[1];
 
-                var getMainProduct = allproductList.Where(p => p.MainProductCode[0]== productCodeFirstPos && p.MainProductCode[1] == productCodeSecPos).ToList();
 
-                var maxProdCode= getMainProduct.Max(x=>x.ProductCode);
-                float maxProdCodeInFloat=float.Parse(maxProdCode)+0.01f;
-                string maxProdCodeStr=maxProdCodeInFloat.ToString();
+                var getMainProduct = allproductList.Where(p => p.MainProductCode== productCode).ToList();
+
+                float maxProdCode= getMainProduct.Max(x=>float.Parse(x.ProductCode));
+                float maxProdCodeInFloat=maxProdCode+0.01f;
+                string maxProdCodeStr= maxProdCodeInFloat.ToString("00.00");
+
+                
 
                 //var result = new { Result = "OK", Records = getMainProduct, TotalRecordCount = getMainProduct.Count() };
                 var json = new JsonResult() { Data = maxProdCodeStr, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -224,7 +227,8 @@ namespace gBanker.Web.Controllers
                         return GetSuccessMessageResult();
                     }
                     else
-                        return GetErrorMessageResult(errors);
+                        
+                    return GetErrorMessageResult(errors);
                 }
                 return GetErrorMessageResult();
 

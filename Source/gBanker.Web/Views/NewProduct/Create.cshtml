@@ -60,6 +60,14 @@
 
     function onpaymentFrequencyChanged() {
         let paymentFrequencyType = $("#PaymentFrequency option:selected").val();
+
+        if (paymentFrequencyType == "M" || paymentFrequencyType == "W") {
+            $("#duration").prop("disabled", false);
+        }
+        else {
+            $("#duration").prop("disabled", true);
+        }
+
         //alert('durationList');
         console.log("paymentFrequencyType ", paymentFrequencyType)
         var filteredDuration = [];
@@ -104,6 +112,7 @@
                 newProductCode = currentProducrsCode[currentProducrsCode.length - 1] + 0.01;
                 //newProductCode++;
                 console.log("newProductCode ", newProductCode);*/
+                
                 $("#ProductCode").val(data)
             },
             error: function () {
@@ -115,6 +124,7 @@
 
     }
 
+    
 
 </script>
 
@@ -149,6 +159,27 @@
             <div class="col-md-4">
                 <div class="form-group">
 
+                    @Html.LabelFor(model => model.PaymentFrequency, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { onchange = "onpaymentFrequencyChanged()", id = "PaymentFrequency", @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.PaymentFrequency, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DropDownListFor(model => model.Duration, duratoinList, new { id = "duration", onchange = "onDurationChanged()", @class = "form-control", disabled="disabled" })
+
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+
                     @Html.LabelFor(model => model.MainProductCode, htmlAttributes: new { @class = "control-label" })
 
                     @Html.DropDownListFor(model => model.MainProductCode, mProductCode, new { id = "MainProduct", onchange = "onMainProductChanged()", @class = "form-control" })
@@ -159,33 +190,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new {id= "ProductCode", @class = "form-control" } })
+                    @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { id = "ProductCode", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-
-                    @Html.LabelFor(model => model.PaymentFrequency, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.DropDownListFor(model => model.PaymentFrequency, frequency, new { onchange = "onpaymentFrequencyChanged()", id = "PaymentFrequency", @class = "form-control" })
-
-                    @Html.ValidationMessageFor(model => model.PaymentFrequency, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
-
-                        @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
-                        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })*@
-                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.DropDownListFor(model => model.Duration, duratoinList, new { id = "duration", onchange="onDurationChanged()", @class = "form-control" })
-
-                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -337,8 +343,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
-                            @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control", defaultValue = "0" } })
-                            @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control", defaultValue = "0", required="required" } })
+                            @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger", id="insuranceItemCodeValidationMsg" })
                         </div>
                     </div>
                 </div>
