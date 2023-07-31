@@ -91,17 +91,17 @@ namespace gBanker.Web.Controllers
             try
             {
                 /*var allproduct = productService.GetProductMainCodeList().ToList();*/
-                
+
                 var allproductList = productService.GetAll();
 
 
-                var getMainProduct = allproductList.Where(p => p.MainProductCode== productCode).ToList();
+                var getMainProduct = allproductList.Where(p => p.MainProductCode == productCode).ToList();
 
-                float maxProdCode= getMainProduct.Max(x=>float.Parse(x.ProductCode));
-                float maxProdCodeInFloat=maxProdCode+0.01f;
-                string maxProdCodeStr= maxProdCodeInFloat.ToString("00.00");
+                float maxProdCode = getMainProduct.Max(x => float.Parse(x.ProductCode));
+                float maxProdCodeInFloat = maxProdCode + 0.01f;
+                string maxProdCodeStr = maxProdCodeInFloat.ToString("00.00");
 
-                
+
 
                 //var result = new { Result = "OK", Records = getMainProduct, TotalRecordCount = getMainProduct.Count() };
                 var json = new JsonResult() { Data = maxProdCodeStr, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -207,6 +207,16 @@ namespace gBanker.Web.Controllers
         {
             try
             {
+
+                if (string.IsNullOrWhiteSpace(model.MainProductCode))
+                {
+                    string mainProductCode = model.ProductCode.Split('.')[0];
+                    model.MainProductCode = mainProductCode + ".00";
+                    model.MainItemName = model.ProductFullNameEng;
+                    model.ProductCode = mainProductCode;
+                }
+
+
                 // model.CreateDate = System.DateTime.Now;
                 model.IsActive = true;
                 //var selectedMemberCategory = model.MemberCategoryList.Where(w => w.IsSelected).ToList();
@@ -227,10 +237,13 @@ namespace gBanker.Web.Controllers
                         return GetSuccessMessageResult();
                     }
                     else
-                        
-                    return GetErrorMessageResult(errors);
+                    {
+                        ModelState.AddModelError("MainProductCode", "Duplicate Product Code");
+                        return GetErrorMessageResult(errors);
+                    }
                 }
-                return GetErrorMessageResult();
+                //return GetErrorMesreturn View(model);sageResult();
+                return View(model);
 
             }
             catch (Exception ex)

@@ -60,7 +60,7 @@ namespace gBanker.Web.ViewModels
         public Nullable<short> Duration { get; set; }
         //[GlobalizedDisplayName("MainProduct")]
         [Display(Name ="Main Product")]
-        [Required(ErrorMessage = "Main ProductCode is required")]
+        //[Required(ErrorMessage = "Main ProductCode is required")]
         public string MainProductCode { get; set; }
 
         //[GlobalizedDisplayName("MainProductName")]
