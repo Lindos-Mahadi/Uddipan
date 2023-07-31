@@ -16,6 +16,7 @@ using System.Security.Cryptography.Xml;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using gBanker.Data.CodeFirstMigration;
 using System.Web.Http.Results;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Web.Controllers
 {
@@ -83,14 +84,24 @@ namespace gBanker.Web.Controllers
 
 
         }
-        public ActionResult GetProductMainCodeList()
+        public ActionResult GetProductMainCodeList(string productCode)
         {
             try
             {
-                var allproduct = productService.GetProductMainCodeList().ToList();
-                //return Json(new { });
-                var result = new { Result = "OK", Records = allproduct, TotalRecordCount = allproduct.Count() };
-                var json = new JsonResult() { Data = result, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                /*var allproduct = productService.GetProductMainCodeList().ToList();*/
+                
+                var allproductList = productService.GetAll();
+                var productCodeFirstPos = productCode[0];
+                var productCodeSecPos = productCode[1];
+
+                var getMainProduct = allproductList.Where(p => p.MainProductCode[0]== productCodeFirstPos && p.MainProductCode[1] == productCodeSecPos).ToList();
+
+                var maxProdCode= getMainProduct.Max(x=>x.ProductCode);
+                float maxProdCodeInFloat=float.Parse(maxProdCode)+0.01f;
+                string maxProdCodeStr=maxProdCodeInFloat.ToString();
+
+                //var result = new { Result = "OK", Records = getMainProduct, TotalRecordCount = getMainProduct.Count() };
+                var json = new JsonResult() { Data = maxProdCodeStr, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 return json;
             }
             catch (Exception ex)
@@ -156,7 +167,7 @@ namespace gBanker.Web.Controllers
             var mProductList = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.MainProductCode + " - " + t.MainItemName,
-                Value = t.MainItemName
+                Value = t.MainProductCode
             }).ToList();
             mProductList.Insert(0, new SelectListItem { Text = "Select Main Product", Value = "", Selected = true });
 

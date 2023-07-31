@@ -28,6 +28,7 @@
 
     let durationList;
     $(document).ready(function () {
+        onMainProductChanged();
         gBankerDatePicker("CreateDate");
         durationList =@Html.Raw(Json.Encode(@duratoinList));
 
@@ -83,6 +84,7 @@
         
         //console.log($("#duration option:selected").val());
     }
+    
     function onMainProductChanged() {
         let mainProduct = $("#MainProduct option:selected").val();
         let newProductCode;
@@ -90,16 +92,19 @@
             url: '/NewProduct/GetProductMainCodeList',
             type: 'GET',
             dataType: 'json',
+            data: { productCode: mainProduct },
             success: function (data) {
-                let currentProducts = data.Records.filter(item => item.MainItemName == mainProduct);
+                debugger;
+                /*let currentProducts = data.Records.filter(item => item.MainItemName == mainProduct);
                 let currentProducrsCode = [];
                 currentProducts.map(item => {
                     currentProducrsCode.push(Number(item.MainProductCode));
                 });
                 currentProducrsCode.sort();
                 newProductCode = currentProducrsCode[currentProducrsCode.length - 1] + 0.01;
-                //console.log("newProductCode ", newProductCode);
-                $("#ProductCode").val(newProductCode)
+                //newProductCode++;
+                console.log("newProductCode ", newProductCode);*/
+                $("#ProductCode").val(data)
             },
             error: function () {
 
@@ -109,6 +114,8 @@
 
 
     }
+
+
 </script>
 
 @Html.ActionLink("Back to List", "Index", null, new { @class = "pull-right" })
@@ -392,15 +399,5 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/gbUtility")
 }
-<script type="text/javascript">
 
-
-
-    $(document).ready(function () {
-
-
-
-    });
-
-</script>
 
