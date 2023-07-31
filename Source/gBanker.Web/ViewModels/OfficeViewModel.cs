@@ -71,6 +71,9 @@ namespace gBanker.Web.ViewModels
         public string UnionCode { get; set; }
 
         public string txtParentCode { get; set; }
+        [Display(Name ="Is Project Office")]
+        public bool? IsProjectOffice { get; set; }
+
         public IEnumerable<SelectListItem> CountryList { get; set; }
         public IEnumerable<SelectListItem> DivisionList { get; set; }
         public IEnumerable<SelectListItem> DistrictList { get; set; }
