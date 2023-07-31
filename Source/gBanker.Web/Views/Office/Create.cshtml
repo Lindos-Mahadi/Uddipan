@@ -119,6 +119,19 @@
             </div>
         </div>
         <div class="row">
+         <div class="col-md-6">
+                <div class="form-group">
+                     @Html.LabelFor(model => model.IsProjectOffice, htmlAttributes: new { @class = "control-label" })
+                     <div>
+                        @Html.RadioButtonFor(model => model.IsProjectOffice, true, new { @class = "form-check-input" })
+                        <label class=""  style="padding-left:0px;">Yes</label>
+                        @Html.RadioButtonFor(model => model.IsProjectOffice, false, new { @class = "form-check-input" })
+                        <label class=""  style="padding-left:0px;">No</label>
+                     </div>
+                </div>
+           </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     @Html.LabelFor(model => model.OperationStartDate, htmlAttributes: new { @class = "control-label" })

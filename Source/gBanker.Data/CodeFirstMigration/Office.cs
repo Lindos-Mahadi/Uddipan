@@ -158,5 +158,6 @@ namespace gBanker.Data.CodeFirstMigration.Db
         //public byte? InvestorID { get; set; }
 
         public int? UnionID { get; set; }
+        public bool? IsProjectOffice { get; set; }
     }
 }
