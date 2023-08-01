@@ -59,6 +59,7 @@ namespace gBanker.Web.Controllers
                     SecondLevel = s.Field<string>("SecondLevel"),
                     ThirdLevel = s.Field<string>("ThirdLevel"),
                     FourthLevel = s.Field<string>("FourthLevel"),
+                    ProjectOffice = s.Field<string>("ProjectOffice"),
                     OperationStartDate = s.Field<DateTime>("OperationStartDate"),
                     OfficeAddress = s.Field<string>("OfficeAddress"),
                     PostCode = s.Field<string>("PostCode"),
@@ -117,6 +118,19 @@ namespace gBanker.Web.Controllers
             try
             {
                 var geoList = officeService.GetAll().Select(c => new { DisplayText = c.ThirdLevel, Value = c.ThirdLevel }).Distinct().OrderBy(s => s.DisplayText);
+                return Json(new { Result = "OK", Options = geoList });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        public JsonResult GetProjectOfficeLevel()
+        {
+
+            try
+            {
+                var geoList = officeService.GetAll().Select(c => new { DisplayText = c.ProjectOffice, Value = c.ProjectOffice }).Distinct().OrderBy(s => s.DisplayText);
                 return Json(new { Result = "OK", Options = geoList });
             }
             catch (Exception ex)
@@ -386,8 +400,16 @@ namespace gBanker.Web.Controllers
                                 if (model.ThirdLevel != null)
                                 {
                                     entity.ThirdLevel = model.ThirdLevel;
-                                    entity.FourthLevel = model.OfficeCode;
-                                    entity.OfficeLevel = 4;
+                                    if(model.FourthLevel != null)
+                                    {
+                                        entity.FourthLevel = model.FourthLevel;
+                                        entity.ProjectOffice = model.OfficeCode;
+                                        entity.OfficeLevel = 5;
+                                    }
+                                    else {
+                                        entity.FourthLevel = model.OfficeCode;
+                                        entity.OfficeLevel = 4;
+                                    }
                                 }
                                 else
                                 {
@@ -435,6 +457,8 @@ namespace gBanker.Web.Controllers
             var offcModel = Mapper.Map<Office, OfficeViewModel>(offc);
             var officeParent = new Office();
 
+            if (offc.OfficeLevel == 5)
+                officeParent = officeService.GetByOfficeCode(offc.FourthLevel);
             if(offc.OfficeLevel==4)
             officeParent = officeService.GetByOfficeCode(offc.ThirdLevel);
             if (offc.OfficeLevel == 3)

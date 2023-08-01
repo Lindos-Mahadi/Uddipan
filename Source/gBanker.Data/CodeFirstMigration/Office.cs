@@ -64,6 +64,8 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         [StringLength(10)]
         public string FourthLevel { get; set; }
+        [StringLength(10)]
+        public string ProjectOffice { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime OperationStartDate { get; set; }
