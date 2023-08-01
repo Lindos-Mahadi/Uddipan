@@ -60,7 +60,7 @@ namespace gBanker.Web.ViewModels
         public Nullable<short> Duration { get; set; }
         //[GlobalizedDisplayName("MainProduct")]
         [Display(Name ="Main Product")]
-        [Required(ErrorMessage = "Main ProductCode is required")]
+        //[Required(ErrorMessage = "Main ProductCode is required")]
         public string MainProductCode { get; set; }
 
         //[GlobalizedDisplayName("MainProductName")]
@@ -100,7 +100,7 @@ namespace gBanker.Web.ViewModels
         [GlobalizedDisplayName("MaxLimit")]
         public Nullable<decimal> MaxLimit { get; set; }
 
-        [Required(ErrorMessage = "Interest Calculation Method is required")]
+        //[Required(ErrorMessage = "Interest Calculation Method is required")]
         [GlobalizedDisplayName("InterestCalculationMethod")]
         public string InterestCalculationMethod { get; set; }
 
@@ -121,9 +121,12 @@ namespace gBanker.Web.ViewModels
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
         [Display(Name = "Identification Name")]
+
+        [Required(ErrorMessage = "Identification Name is required")]
         public string IdentificationName { get; set; }
         public bool IsSelected { get; set; }
         [Display(Name ="Is Insurance")]
+        //[Required(ErrorMessage = "Insurance Rate is required")]
         public bool? IsInsurance { get; set; }
         public int? ProductIdentificationID { get; set; }
         //public int? DurationTableID { get; set; }
