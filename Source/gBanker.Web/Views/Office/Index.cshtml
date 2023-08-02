@@ -6,6 +6,19 @@
     <link href="~/Content/jtable-custom.css" rel="stylesheet" />
 }
 
+<style type="text/css">
+    th {
+        height: 40px;
+        vertical-align: top;
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+
+    span.jtable-column-header-text {
+        margin-top: 0px !important;
+    }
+</style>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -68,6 +81,13 @@
                     title: 'Fourth',
                     width: '5%',
                     create: false,
+                    edit: false
+                },
+                ProjectOffice: {
+                    title: 'Project Office',
+                    width: '5%',
+                    create: false,
+                    options: '/Office/GetProjectOfficeLevel',
                     edit: false
                 },
                 OperationStartDate: {

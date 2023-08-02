@@ -16,6 +16,7 @@ namespace gBanker.Data.DBDetailModels
         public string SecondLevel { get; set; }
         public string ThirdLevel { get; set; }
         public string FourthLevel { get; set; }
+        public string ProjectOffice { get; set; }
         public System.DateTime OperationStartDate { get; set; }
         public string OfficeAddress { get; set; }
         public string PostCode { get; set; }
@@ -26,7 +27,8 @@ namespace gBanker.Data.DBDetailModels
 
         public int? UnionID { get; set; }
         public string UnionName { get; set; }
-        public int? InvestorID { get; set; } //  public byte? InvestorID { get; set; }
+        public int? InvestorID { get; set; } 
         public string InvestorName { get; set; }
+        public bool? IsProjectOffice { get; set; }
     }
 }

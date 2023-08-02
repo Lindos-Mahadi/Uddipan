@@ -41,6 +41,7 @@ namespace gBanker.Data.Repository
                     SecondLevel = s.SecondLevel,
                     ThirdLevel = s.ThirdLevel,
                     FourthLevel = s.FourthLevel,
+                    ProjectOffice = s.ProjectOffice,
                     OperationStartDate = s.OperationStartDate,
                     OfficeAddress = s.OfficeAddress,
                     PostCode = s.PostCode,
@@ -67,6 +68,7 @@ namespace gBanker.Data.Repository
                     SecondLevel = s.SecondLevel,
                     ThirdLevel = s.ThirdLevel,
                     FourthLevel = s.FourthLevel,
+                    ProjectOffice = s.ProjectOffice,
                     OperationStartDate = s.OperationStartDate,
                     OfficeAddress = s.OfficeAddress,
                     PostCode = s.PostCode,
@@ -91,6 +93,7 @@ namespace gBanker.Data.Repository
                     SecondLevel = s.SecondLevel,
                     ThirdLevel = s.ThirdLevel,
                     FourthLevel = s.FourthLevel,
+                    ProjectOffice = s.ProjectOffice,
                     OperationStartDate = s.OperationStartDate,
                     OfficeAddress = s.OfficeAddress,
                     PostCode = s.PostCode,
@@ -118,6 +121,7 @@ namespace gBanker.Data.Repository
                    SecondLevel = s.SecondLevel,
                    ThirdLevel = s.ThirdLevel,
                    FourthLevel = s.FourthLevel,
+                   ProjectOffice = s.ProjectOffice,
                    OperationStartDate = s.OperationStartDate,
                    OfficeAddress = s.OfficeAddress,
                    PostCode = s.PostCode,
@@ -142,6 +146,7 @@ namespace gBanker.Data.Repository
                        SecondLevel = s.SecondLevel,
                        ThirdLevel = s.ThirdLevel,
                        FourthLevel = s.FourthLevel,
+                       ProjectOffice = s.ProjectOffice,
                        OperationStartDate = s.OperationStartDate,
                        OfficeAddress = s.OfficeAddress,
                        PostCode = s.PostCode,
@@ -166,6 +171,7 @@ namespace gBanker.Data.Repository
                        SecondLevel = s.SecondLevel,
                        ThirdLevel = s.ThirdLevel,
                        FourthLevel = s.FourthLevel,
+                       ProjectOffice = s.ProjectOffice,
                        OperationStartDate = s.OperationStartDate,
                        OfficeAddress = s.OfficeAddress,
                        PostCode = s.PostCode,
@@ -190,6 +196,7 @@ namespace gBanker.Data.Repository
                       SecondLevel = s.SecondLevel,
                       ThirdLevel = s.ThirdLevel,
                       FourthLevel = s.FourthLevel,
+                      ProjectOffice = s.ProjectOffice,
                       OperationStartDate = s.OperationStartDate,
                       OfficeAddress = s.OfficeAddress,
                       PostCode = s.PostCode,
@@ -227,7 +234,7 @@ namespace gBanker.Data.Repository
 
         public int GetAllOfficeCount()
         {
-            return DataContext.Offices.Where(x => x.IsActive == true && x.OfficeLevel==4).Count();
+            return DataContext.Offices.Where(x => x.IsActive == true && x.OfficeLevel==5).Count();
         }
 
 
@@ -244,6 +251,7 @@ namespace gBanker.Data.Repository
                     SecondLevel = s.SecondLevel,
                     ThirdLevel = s.ThirdLevel,
                     FourthLevel = s.FourthLevel,
+                    ProjectOffice = s.ProjectOffice,
                     OperationStartDate = s.OperationStartDate,
                     OfficeAddress = s.OfficeAddress,
                     PostCode = s.PostCode,
