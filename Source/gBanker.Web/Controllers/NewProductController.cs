@@ -19,6 +19,7 @@ using System.Web.Http.Results;
 using gBanker.Data.DBDetailModels;
 using System.ComponentModel.DataAnnotations;
 using Elmah;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace gBanker.Web.Controllers
 {
@@ -41,6 +42,11 @@ namespace gBanker.Web.Controllers
             this.durationService = durationService;
             this.productIdentificationService = productIdentificationService;
         }
+        public ActionResult Index()
+
+        {
+            return View();
+        }
         public ActionResult ExportData()
         {
             GridView gv = new GridView();
@@ -61,11 +67,6 @@ namespace gBanker.Web.Controllers
             Response.End();
 
             return RedirectToAction("ProductDetails");
-        }
-        public ActionResult Index()
-
-        {
-            return View();
         }
         [HttpPost]
         public ActionResult GetProducts(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
@@ -245,7 +246,8 @@ namespace gBanker.Web.Controllers
                         //}
                         entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
                         productService.Create(entity);
-                        return GetSuccessMessageResult();
+                        //return GetSuccessMessageResult();
+                        return RedirectToAction("Index", "NewProduct");
                     }
                     else
                     {
