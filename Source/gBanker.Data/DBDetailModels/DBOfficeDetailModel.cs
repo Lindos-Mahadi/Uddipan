@@ -27,7 +27,8 @@ namespace gBanker.Data.DBDetailModels
 
         public int? UnionID { get; set; }
         public string UnionName { get; set; }
-        public int? InvestorID { get; set; } //  public byte? InvestorID { get; set; }
+        public int? InvestorID { get; set; } 
         public string InvestorName { get; set; }
+        public bool? IsProjectOffice { get; set; }
     }
 }
