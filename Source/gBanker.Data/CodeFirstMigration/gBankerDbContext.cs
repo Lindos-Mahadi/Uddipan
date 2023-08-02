@@ -188,7 +188,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public virtual DbSet<NomineeXPortalSavingSummary> NomineeXPortalSavingSummary { get; set; }
         public DbSet<LoanAccReschedule> LoanAccReschedule { get; set; }
         public DbSet<SavingsAccClose> SavingsAccClose { get; set; }
-        public DbSet<DurationTable> DurationTable { get; set; }
+        public DbSet<Duration> DurationTable { get; set; }
         public DbSet<ProductIdentification> ProductIdentification { get; set; }
 
 

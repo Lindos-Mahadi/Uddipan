@@ -24,7 +24,7 @@ namespace gBanker.Data.Repository
         {
             try
             {
-                var sqlCommand = "select IdentificationName from ProductIdentification";
+                var sqlCommand = "select ID, IdentificationName from ProductIdentification";
                 var results = DataContext.Database.SqlQuery<ProductIdentificationModel>(sqlCommand).ToList();
                 return results;
             }

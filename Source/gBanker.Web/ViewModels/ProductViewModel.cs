@@ -55,7 +55,7 @@ namespace gBanker.Web.ViewModels
         [GlobalizedDisplayName("InterestRate")]
         public Nullable<decimal> InterestRate { get; set; }
 
-        [Required(ErrorMessage = "Duration is required")]
+        //[Required(ErrorMessage = "Duration is required")]
         [GlobalizedDisplayName("Duration")]
         public Nullable<short> Duration { get; set; }
         //[GlobalizedDisplayName("MainProduct")]
@@ -63,7 +63,7 @@ namespace gBanker.Web.ViewModels
         //[Required(ErrorMessage = "Main ProductCode is required")]
         public string MainProductCode { get; set; }
 
-        //[GlobalizedDisplayName("MainProductName")]
+        [Display(Name = "Insurance Name")]
         public string MainItemName { get; set; }
 
         [StringLength(50)]
@@ -122,15 +122,17 @@ namespace gBanker.Web.ViewModels
         public Nullable<System.DateTime> InActiveDate { get; set; }
         [Display(Name = "Identification Name")]
 
-        [Required(ErrorMessage = "Identification Name is required")]
-        public string IdentificationName { get; set; }
+        //[Required(ErrorMessage = "Identification Name is required")]
+        //public string IdentificationName { get; set; }
         public bool IsSelected { get; set; }
         [Display(Name ="Is Insurance")]
         //[Required(ErrorMessage = "Insurance Rate is required")]
         public bool? IsInsurance { get; set; }
+        [Display(Name = "Product Identification")]
         public int? ProductIdentificationID { get; set; }
-        //public int? DurationTableID { get; set; }
-        //public string IdentificationName { get; set; }
+        [Display(Name = "Duration")]
+        public int? DurationID { get; set; }
+        //public string IdentificationName { get; set; } = "";
 
 
 
@@ -139,6 +141,7 @@ namespace gBanker.Web.ViewModels
         public IEnumerable<SelectListItem> PCalcuationMethodListItems { get; set; }
         public List<SelectionViewModel> MemberCategoryList { get; set; }
         public IEnumerable<SelectListItem> MainProductList { get; set; }
+        public IEnumerable<SelectListItem> MainProductInsuranceList { get; set; }
         public IEnumerable<SelectListItem> InsuranceItemList { get; set; }
         public IEnumerable<SelectListItem> DurationItemList { get; set; }
         public IEnumerable<SelectListItem> ProductIdentificationItemList { get; set; }

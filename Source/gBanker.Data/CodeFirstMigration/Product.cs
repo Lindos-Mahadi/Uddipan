@@ -100,15 +100,15 @@ namespace gBanker.Data.CodeFirstMigration.Db
 
         public bool? IsInsurance { get; set; }
 
-        //public int? ProductIdentificationID { get; set; }
-        //public int? DurationTableID { get; set; }
-        public string IdentificationName { get; set; }
+        public int? ProductIdentificationID { get; set; }
+        public int? DurationID { get; set; }
+        //public string IdentificationName { get; set; } = "";
 
 
 
         public virtual Organization Organization { get; set; }
-        //public virtual DurationTable DurationTable { get; set; }
-        //public virtual ProductIdentification ProductIdentification { get; set; }
+        public virtual Duration DurationTable { get; set; }
+        public virtual ProductIdentification ProductIdentification { get; set; }
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual ICollection<LoanSummary> LoanSummaries { get; set; }
