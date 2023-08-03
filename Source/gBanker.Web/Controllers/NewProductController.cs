@@ -19,6 +19,7 @@ using System.Web.Http.Results;
 using gBanker.Data.DBDetailModels;
 using System.ComponentModel.DataAnnotations;
 using Elmah;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace gBanker.Web.Controllers
 {
@@ -41,6 +42,11 @@ namespace gBanker.Web.Controllers
             this.durationService = durationService;
             this.productIdentificationService = productIdentificationService;
         }
+        public ActionResult Index()
+
+        {
+            return View();
+        }
         public ActionResult ExportData()
         {
             GridView gv = new GridView();
@@ -61,11 +67,6 @@ namespace gBanker.Web.Controllers
             Response.End();
 
             return RedirectToAction("ProductDetails");
-        }
-        public ActionResult Index()
-
-        {
-            return View();
         }
         [HttpPost]
         public ActionResult GetProducts(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
@@ -92,10 +93,10 @@ namespace gBanker.Web.Controllers
             {
                 /*var allproduct = productService.GetProductMainCodeList().ToList();*/
 
-                var allproductList = productService.GetAll();
+                List<Product> allproductList = productService.GetAll().ToList();
 
 
-                var getMainProduct = allproductList.Where(p => p.MainProductCode == productCode).ToList();
+                List<Product> getMainProduct = allproductList.Where(p => p.MainProductCode == productCode).ToList();
 
                 float maxProdCode = getMainProduct.Max(x => float.Parse(x.ProductCode));
                 float maxProdCodeInFloat = maxProdCode + 0.01f;
@@ -174,18 +175,29 @@ namespace gBanker.Web.Controllers
             }).ToList();
             mProductList.Insert(0, new SelectListItem { Text = "Select Main Product", Value = "", Selected = true });
 
+
+            var mainItemInsurance = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
+            {
+                Text = t.MainItemName,
+                Value = t.MainItemName
+            }).ToList();
+            mainItemInsurance.Insert(0, new SelectListItem { Text = "Select Item Name", Value = "", Selected = true });
+            model.MainProductInsuranceList = mainItemInsurance;
+
             var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem
             {
                 Text = p.IdentificationName,
-                Value = p.IdentificationName
+                Value = p.ID.ToString()
             }).ToList();
             productIdentificationList.Insert(0, new SelectListItem { Text = "Select Product Identification", Value = "", Selected = true });
             model.ProductIdentificationItemList = productIdentificationList;
 
+            model.MainProductList = mainItemInsurance;
+
             var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
             {
-                Text = t.ProductPaymentFrequency + " - " + t.Duration.ToString(),
-                Value = t.Duration.ToString()
+                Text = t.ProductPaymentFrequency + " - " + t.DurationName.ToString(),
+                Value = t.ID.ToString(),
             }).ToList();
             durationList.Insert(0, new SelectListItem { Text = "Select Duration", Value = "", Selected = true });
 
@@ -234,7 +246,8 @@ namespace gBanker.Web.Controllers
                         //}
                         entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
                         productService.Create(entity);
-                        return GetSuccessMessageResult();
+                        //return GetSuccessMessageResult();
+                        return RedirectToAction("Index", "NewProduct");
                     }
                     else
                     {

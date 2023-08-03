@@ -9,45 +9,45 @@ using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Data.Repository
 {
-    public interface IDurationRepository : IRepository<DurationTable>
+    public interface IDurationRepository : IRepository<Duration>
     {
-        IEnumerable<DurationTable> getDurationList();
-        IEnumerable<DurationTableModel> getDurationItemList();
+        IEnumerable<Duration> getDurationList();
+        IEnumerable<DurationModel> getDurationItemList();
 
     }
-    public class DurationRepository : RepositoryBaseCodeFirst<DurationTable>, IDurationRepository
+    public class DurationRepository : RepositoryBaseCodeFirst<Duration>, IDurationRepository
     {
         public DurationRepository(IDatabaseFactoryCodeFirst databaseFactory) : base(databaseFactory)
         {
         }
 
-        public IEnumerable<DurationTableModel> getDurationItemList()
+        public IEnumerable<DurationModel> getDurationItemList()
         {
             try
             {
-                var sqlCommand = "select Frequency, Duration, ProductPaymentFrequency from DurationTable ";
-                var results = DataContext.Database.SqlQuery<DurationTableModel>(sqlCommand).ToList();
+                var sqlCommand = "select ID, Frequency, DurationName, ProductPaymentFrequency from Duration ";
+                var results = DataContext.Database.SqlQuery<DurationModel>(sqlCommand).ToList();
 
                 return results;
             }
             catch (Exception ex)
             {
-                return new List<DurationTableModel>();
+                return new List<DurationModel>();
             }
         }
 
-        public IEnumerable<DurationTable> getDurationList()
+        public IEnumerable<Duration> getDurationList()
         {
             try
             {
-                var sqlCommand = "select Frequency, Duration, ProductPaymentFrequency from DurationTable ";
-                var results = DataContext.Database.SqlQuery<DurationTable>(sqlCommand).ToList();
+                var sqlCommand = "select Frequency, DurationName, ProductPaymentFrequency from Duration ";
+                var results = DataContext.Database.SqlQuery<Duration>(sqlCommand).ToList();
 
                 return results;
             }
             catch (Exception ex)
             {
-                return new List<DurationTable>();
+                return new List<Duration>();
             }
         }
     }
