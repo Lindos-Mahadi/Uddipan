@@ -176,6 +176,15 @@ namespace gBanker.Web.Controllers
             mProductList.Insert(0, new SelectListItem { Text = "Select Main Product", Value = "", Selected = true });
 
 
+            List<SelectListItem> insuranceItemCodeModels = productService.GetProductCodeByInsuranceList()
+                 .Where(item => item.IsInsurance == true).Select(t => new SelectListItem
+                 {
+                     Text = t.ProductCode,
+                     Value = t.ProductCode.ToString()
+                 }).ToList();
+
+            model.InsuranceItemCodeList = insuranceItemCodeModels;
+
             var mainItemInsurance = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
             {
                 Text = t.MainItemName,

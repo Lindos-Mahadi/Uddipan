@@ -136,6 +136,7 @@ namespace gBanker.Web.ViewModels
 
 
 
+        public IEnumerable<SelectListItem> InsuranceItemCodeList { get; set; }
         public IEnumerable<SelectListItem> PInvestorListItems { get; set; }
         public IEnumerable<SelectListItem> PFrequencyListItems { get; set; }
         public IEnumerable<SelectListItem> PCalcuationMethodListItems { get; set; }

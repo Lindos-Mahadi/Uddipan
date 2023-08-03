@@ -13,6 +13,7 @@
     var duratoinList = Model == null ? null : Model.DurationItemList;
     var productIdentificationList = Model == null ? null : Model.ProductIdentificationItemList;
     var mainProductInsuranceList = Model == null ? null : Model.MainProductInsuranceList;
+    var innsuranceItemCodeList = Model == null ? null : Model.InsuranceItemCodeList;
 }
 
 @{
@@ -350,10 +351,10 @@
         @Html.EditorFor(model => model.InsuranceItemCode, new { htmlAttributes = new { @class = "form-control", defaultValue = "0", required = "required" } })
         @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger", id = "insuranceItemCodeValidationMsg" })*@
 
-                            @Html.LabelFor(model => model.MainItemName, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.InsuranceItemCode, htmlAttributes: new { @class = "control-label" })
 
-                            @Html.DropDownListFor(model => model.MainItemName, mainProductInsuranceList, new { @class = "form-control",id= "InsuranceItemCode" })
-                            @Html.ValidationMessageFor(model => model.MainItemName, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.InsuranceItemCode, innsuranceItemCodeList, new { @class = "form-control",id= "InsuranceItemCode" })
+                            @Html.ValidationMessageFor(model => model.InsuranceItemCode, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

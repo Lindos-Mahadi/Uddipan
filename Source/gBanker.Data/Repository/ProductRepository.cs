@@ -14,7 +14,8 @@ namespace gBanker.Data.Repository
         //IEnumerable<ProcessDayEnd_Result> ProcessDayEnd(DateTime dayend, string user);
         IEnumerable<Product> GetProductDetailPaged(string filterColumnName, string filterValue, int startRowIndex, string jtSorting, int pageSize, out long totalCount, int? OrgID);
         IEnumerable<ProductMainCodeModel> GetProductMainCodeList();
-        
+        IEnumerable<InsuranceItemCodeModel> GetProductCodeByInsuranceList();
+
 
     }
     public class ProductRepository : RepositoryBaseCodeFirst<Product>, IProductRepository
@@ -24,6 +25,23 @@ namespace gBanker.Data.Repository
         {
 
         }
+
+        public IEnumerable<InsuranceItemCodeModel> GetProductCodeByInsuranceList()
+        {
+            try
+            {
+                var sqlCommand = "select ProductCode, IsInsurance from Product group by ProductCode, IsInsurance";
+
+                var results = DataContext.Database.SqlQuery<InsuranceItemCodeModel>(sqlCommand).ToList();
+
+                return results;
+            }
+            catch (Exception ex)
+            {
+                return new List<InsuranceItemCodeModel>();
+            }
+        }
+
         //public IEnumerable<ProcessDayEnd_Result> ProcessDayEnd(DateTime dayend, string user)
         //{
         //    return DataContext.ProcessDayEnd(dayend, user);

@@ -17,7 +17,11 @@ namespace gBanker.Data.DBDetailModels
     {
         public string MainProductCode { get; set; }
         public string ChildProduct { get; set; }
+    }
 
-
+    public class InsuranceItemCodeModel
+    {
+        public bool? IsInsurance { get; set; }
+        public string ProductCode { get; set; }
     }
 }
