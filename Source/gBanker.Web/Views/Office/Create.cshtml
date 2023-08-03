@@ -120,20 +120,34 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-         <div class="col-md-6">
-                <div class="form-group">
-                     @Html.LabelFor(model => model.IsProjectOffice, htmlAttributes: new { @class = "control-label" })
-                     <div>
-                        @Html.RadioButtonFor(model => model.IsProjectOffice, true, new { @class = "form-check-input" })
-                        <label class=""  style="padding-left:0px;">Yes</label>
-                        @Html.RadioButtonFor(model => model.IsProjectOffice, false, new { @class = "form-check-input" , @checked = "checked" })
-                        <label class=""  style="padding-left:0px;">No</label>
-                     </div>
-                </div>
-           </div>
+
+
+     <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsProjectOffice, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.RadioButtonFor(model => model.IsProjectOffice, true, new { @class = "form-check-input", id="IsProjectOfficeYes" })
+                <label class="" style="padding-left:0px;">Yes</label>
+                @Html.RadioButtonFor(model => model.IsProjectOffice, false, new { @class = "form-check-input", id="IsProjectOfficeNo", @checked = "checked" })
+                <label class="" style="padding-left:0px;">No</label>
+            </div>
         </div>
-        
+    </div>
+</div>
+
+<div class="row" id="projectOfficeCodeRow" style="display: none;">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectOffice, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ProjectOffice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+</div>
+
+
+      
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -219,6 +233,20 @@
                 $(".chosen").val('').trigger("liszt:updated");
                 jQuery(".chosen").chosen();
             }
+
+             function handleProjectOffice() {
+            if ($("#IsProjectOfficeYes").is(":checked")) {
+                $("#ProjectOffice").val($("#OfficeCode").val());
+            } else {
+                $("#ProjectOffice").val("");
+            }
+        }  
+        handleProjectOffice();
+        $("#IsProjectOfficeYes, #IsProjectOfficeNo").change(function () {
+            handleProjectOffice();
+        });
         })
+
     </script>
+
 }
