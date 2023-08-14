@@ -76,7 +76,7 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "numeric")]
         public decimal? InsuranceItemRate { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         public string MainItemName { get; set; }
         public string SubMainCategory { get; set; }
@@ -86,7 +86,6 @@ namespace gBanker.Data.CodeFirstMigration.Db
         public int OrgID { get; set; }
         public int GracePeriod { get; set; }
         public bool? IsActive { get; set; }
-        public string ChildProduct { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? InActiveDate { get; set; }
@@ -98,8 +97,18 @@ namespace gBanker.Data.CodeFirstMigration.Db
         [Column(TypeName = "smalldatetime")]
         public DateTime CreateDate { get; set; }
         public byte DurationOverCollection { get; set; }
-        public virtual Organization Organization { get; set; }
 
+        public bool? IsInsurance { get; set; }
+
+        public int? ProductIdentificationID { get; set; }
+        public int? DurationID { get; set; }
+        //public string IdentificationName { get; set; } = "";
+
+
+
+        public virtual Organization Organization { get; set; }
+        public virtual Duration DurationTable { get; set; }
+        public virtual ProductIdentification ProductIdentification { get; set; }
         public virtual ICollection<DailyLoanTrx> DailyLoanTrxes { get; set; }
 
         public virtual ICollection<LoanSummary> LoanSummaries { get; set; }

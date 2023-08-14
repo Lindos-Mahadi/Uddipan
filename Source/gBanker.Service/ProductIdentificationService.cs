@@ -7,17 +7,26 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Service
 {
     public interface IProductIdentificationService : IServiceBase<ProductIdentification>
     {
-
+        IEnumerable<ProductIdentification> getProductIdentificationList();
+        IEnumerable<ProductIdentificationModel> getProductIdentificationItemList();
     }
     public class ProductIdentificationService : IProductIdentificationService
     {
         private readonly IProductIdentificationRepository repository;
         private readonly IUnitOfWorkCodeFirst unitOfWork;
+
+        public ProductIdentificationService(IProductIdentificationRepository repository, IUnitOfWorkCodeFirst unitOfWork)
+        {
+            this.repository = repository;
+            this.unitOfWork = unitOfWork;
+        }
+
 
         public IEnumerable<ProductIdentification> GetAll()
         {
@@ -74,6 +83,22 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ProductIdentificationModel> getProductIdentificationItemList()
+        {
+            try
+            {
+                return repository.getProductIdentificationItemList();
+            }
+            catch (Exception ex)
+            {
+                return new List<ProductIdentificationModel>();
+            }
+        }
+
+        public IEnumerable<ProductIdentification> getProductIdentificationList()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

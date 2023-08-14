@@ -16,6 +16,7 @@ namespace gBanker.Service
     {
         //bool IsValidProduct(Product product);
         IEnumerable<ProductMainCodeModel> GetProductMainCodeList();
+        IEnumerable<InsuranceItemCodeModel> GetProductCodeByInsuranceList();
         IEnumerable<ValidationResult> IsValidProduct(Product product);
         IEnumerable<Product> SearchProduct(int Prodtype,int OrgID,string ItemType);
         IEnumerable<Product> SearchProductForLoanEligible(int Prodtype, int OrgID, string ItemType,int ProductID);
@@ -24,7 +25,7 @@ namespace gBanker.Service
         IEnumerable<Product> SearchAllProduct(int OrgID);
         IEnumerable<Product> GetProductDetailPaged(string filterColumnName, string filterValue, int startRowIndex, string jtSorting, int pageSize, out long totalCount, int? OrgID);
         //IEnumerable<ProcessDayEnd_Result> ProcessDayEnd(DateTime dayend, string user);
-       // bool IsContinued(int id);
+        // bool IsContinued(int id);
     }
     public  class ProductService : IProductService
     {
@@ -224,6 +225,18 @@ namespace gBanker.Service
         {
             var entities = repository.GetMany(where).Where(b => b.IsActive == true);
             return entities;
-        }       
+        }
+
+        public IEnumerable<InsuranceItemCodeModel> GetProductCodeByInsuranceList()
+        {
+            try
+            {
+                return repository.GetProductCodeByInsuranceList();
+            }
+            catch (Exception ex)
+            {
+                return new List<InsuranceItemCodeModel>();
+            }
+        }
     }
 }

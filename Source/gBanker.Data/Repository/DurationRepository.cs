@@ -5,32 +5,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Data.Repository
 {
-    public interface IDurationRepository : IRepository<DurationTable>
+    public interface IDurationRepository : IRepository<Duration>
     {
-        IEnumerable<DurationTable> getDurationList();
+        IEnumerable<Duration> getDurationList();
+        IEnumerable<DurationModel> getDurationItemList();
 
     }
-    public class DurationRepository : RepositoryBaseCodeFirst<DurationTable>, IDurationRepository
+    public class DurationRepository : RepositoryBaseCodeFirst<Duration>, IDurationRepository
     {
         public DurationRepository(IDatabaseFactoryCodeFirst databaseFactory) : base(databaseFactory)
         {
         }
 
-        public IEnumerable<DurationTable> getDurationList()
+        public IEnumerable<DurationModel> getDurationItemList()
         {
             try
             {
-                var sqlCommand = "select Frequency, Duration from DurationTable ";
-                var results = DataContext.Database.SqlQuery<DurationTable>(sqlCommand).ToList();
+                var sqlCommand = "select ID, Frequency, DurationName, ProductPaymentFrequency from Duration ";
+                var results = DataContext.Database.SqlQuery<DurationModel>(sqlCommand).ToList();
 
                 return results;
             }
             catch (Exception ex)
             {
-                return new List<DurationTable>();
+                return new List<DurationModel>();
+            }
+        }
+
+        public IEnumerable<Duration> getDurationList()
+        {
+            try
+            {
+                var sqlCommand = "select Frequency, DurationName, ProductPaymentFrequency from Duration ";
+                var results = DataContext.Database.SqlQuery<Duration>(sqlCommand).ToList();
+
+                return results;
+            }
+            catch (Exception ex)
+            {
+                return new List<Duration>();
             }
         }
     }

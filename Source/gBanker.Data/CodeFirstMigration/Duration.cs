@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace gBanker.Data.CodeFirstMigration
 {
-    public  class ProductIdentification
+    public class Duration
     {
         public int ID { get; set; }
-        public string IdentificationName { get; set; }
-
+        public string Frequency { get; set; }
+        public int DurationName { get; set; }
+        public string ProductPaymentFrequency { get; set; }
     }
 }

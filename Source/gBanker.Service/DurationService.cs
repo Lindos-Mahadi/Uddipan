@@ -7,12 +7,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using gBanker.Data.DBDetailModels;
 
 namespace gBanker.Service
 {
-    public interface IDurationService : IServiceBase<DurationTable>
+    public interface IDurationService : IServiceBase<Duration>
     {
-
+        IEnumerable<DurationModel> getDurationItemList();
     }
     public class DurationService : IDurationService
     {
@@ -24,23 +25,23 @@ namespace gBanker.Service
             this.repository = repository;
             this.unitOfWork = unitOfWork;
         }
-        public IEnumerable<DurationTable> GetAll()
+        public IEnumerable<Duration> GetAll()
         {
             var entities = repository.GetAll();
             return entities;
         }
-        public DurationTable GetById(int id)
+        public Duration GetById(int id)
         {
             var entity = repository.GetById(id);
             return entity;
         }
-        public DurationTable Create(DurationTable objectToCreate)
+        public Duration Create(Duration objectToCreate)
         {
             repository.Add(objectToCreate);
             Save();
             return objectToCreate;
         }
-        public void Update(DurationTable objectToUpdate)
+        public void Update(Duration objectToUpdate)
         {
             repository.Update(objectToUpdate);
             Save();
@@ -61,12 +62,12 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
-        public DurationTable GetByIdLong(long id)
+        public Duration GetByIdLong(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DurationTable> GetMany(Expression<Func<DurationTable, bool>> where)
+        public IEnumerable<Duration> GetMany(Expression<Func<Duration, bool>> where)
         {
             throw new NotImplementedException();
         }
@@ -76,6 +77,16 @@ namespace gBanker.Service
             throw new NotImplementedException();
         }
 
-
+        public IEnumerable<DurationModel> getDurationItemList()
+        {
+            try
+            {
+                return repository.getDurationItemList();
+            }
+            catch (Exception ex)
+            {
+                return new List<DurationModel>();
+            }
+        }
     }
 }

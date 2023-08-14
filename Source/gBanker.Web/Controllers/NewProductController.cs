@@ -13,6 +13,13 @@ using System.Web.UI.WebControls;
 using System.Web.UI;
 using gBanker.Data.CodeFirstMigration.Db;
 using System.Security.Cryptography.Xml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using gBanker.Data.CodeFirstMigration;
+using System.Web.Http.Results;
+using gBanker.Data.DBDetailModels;
+using System.ComponentModel.DataAnnotations;
+using Elmah;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace gBanker.Web.Controllers
 {
@@ -22,13 +29,23 @@ namespace gBanker.Web.Controllers
         private readonly IInvestorService investorService;
         private readonly IMemberCategoryService memberCategoryService;
         private readonly IProductReportService productReportService;
-        //private readonly 
-        public NewProductController(IProductService productService, IInvestorService investorService, IMemberCategoryService memberCategoryService, IProductReportService productReportService)
+        private readonly IDurationService durationService;
+        private readonly IProductIdentificationService productIdentificationService;
+        public NewProductController(IProductService productService, IInvestorService investorService,
+            IMemberCategoryService memberCategoryService, IProductReportService productReportService,
+            IDurationService durationService, IProductIdentificationService productIdentificationService)
         {
             this.productService = productService;
             this.investorService = investorService;
             this.memberCategoryService = memberCategoryService;
             this.productReportService = productReportService;
+            this.durationService = durationService;
+            this.productIdentificationService = productIdentificationService;
+        }
+        public ActionResult Index()
+
+        {
+            return View();
         }
         public ActionResult ExportData()
         {
@@ -51,11 +68,6 @@ namespace gBanker.Web.Controllers
 
             return RedirectToAction("ProductDetails");
         }
-        public ActionResult Index()
-
-        {
-            return View();
-        }
         [HttpPost]
         public ActionResult GetProducts(int jtStartIndex, int jtPageSize, string jtSorting, string filterColumn, string filterValue)
         {
@@ -67,6 +79,34 @@ namespace gBanker.Web.Controllers
                 var currentPageRecords = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(allproduct);
 
                 return Json(new { Result = "OK", Records = currentPageRecords, TotalRecordCount = totalCount });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+        public ActionResult GetProductMainCodeList(string productCode)
+        {
+            try
+            {
+                /*var allproduct = productService.GetProductMainCodeList().ToList();*/
+
+                List<Product> allproductList = productService.GetAll().ToList();
+
+
+                List<Product> getMainProduct = allproductList.Where(p => p.MainProductCode == productCode).ToList();
+
+                float maxProdCode = getMainProduct.Max(x => float.Parse(x.ProductCode));
+                float maxProdCodeInFloat = maxProdCode + 0.01f;
+                string maxProdCodeStr = maxProdCodeInFloat.ToString("00.00");
+
+
+
+                //var result = new { Result = "OK", Records = getMainProduct, TotalRecordCount = getMainProduct.Count() };
+                var json = new JsonResult() { Data = maxProdCodeStr, ContentType = "application/json", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return json;
             }
             catch (Exception ex)
             {
@@ -108,12 +148,13 @@ namespace gBanker.Web.Controllers
         private void MapDropDownListCreate(ProductViewModel model)
         {
             var frequency = new List<SelectListItem>();
-            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W", Selected = true });
+            frequency.Add(new SelectListItem() { Text = "Select One", Value = "", Selected = true });
+            frequency.Add(new SelectListItem() { Text = "Weekly", Value = "W" });
             frequency.Add(new SelectListItem() { Text = "Monthly", Value = "M" });
 
-            var insuranceList = new List<SelectListItem>();
-            insuranceList.Add(new SelectListItem() { Text = "Yes", Value = "Y", Selected = true });
-            insuranceList.Add(new SelectListItem() { Text = "No", Value = "No" });
+            //var insuranceList = new List<SelectListItem>();
+            //insuranceList.Add(new SelectListItem() { Text = "Yes", Value = "Y", Selected = true });
+            //insuranceList.Add(new SelectListItem() { Text = "No", Value = "No" });
 
             var calcList = new List<SelectListItem>();
             calcList.Add(new SelectListItem() { Text = "Flat", Value = "F" });
@@ -126,14 +167,50 @@ namespace gBanker.Web.Controllers
             prodType.Add(new SelectListItem() { Text = "Savings", Value = "0" });
             prodType.Add(new SelectListItem() { Text = "Loan", Value = "1", Selected = true });
 
-         
+
             var mProductList = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
             {
-                Text = t.MainProductCode,
-                Value = t.MainItemName
-            });
-            //var allinvestor = investorService.SearchInvestor();
+                Text = t.MainProductCode + " - " + t.MainItemName,
+                Value = t.MainProductCode
+            }).ToList();
+            mProductList.Insert(0, new SelectListItem { Text = "Select Main Product", Value = "", Selected = true });
 
+
+            List<SelectListItem> insuranceItemCodeModels = productService.GetProductCodeByInsuranceList()
+                 .Where(item => item.IsInsurance == true).Select(t => new SelectListItem
+                 {
+                     Text = t.ProductCode,
+                     Value = t.ProductCode.ToString()
+                 }).ToList();
+
+            model.InsuranceItemCodeList = insuranceItemCodeModels;
+
+            var mainItemInsurance = productService.GetProductMainCodeList().AsEnumerable().Select(t => new SelectListItem
+            {
+                Text = t.MainItemName,
+                Value = t.MainItemName
+            }).ToList();
+            mainItemInsurance.Insert(0, new SelectListItem { Text = "Select Item Name", Value = "", Selected = true });
+            model.MainProductInsuranceList = mainItemInsurance;
+
+            var productIdentificationList = productIdentificationService.getProductIdentificationItemList().AsEnumerable().Select(p => new SelectListItem
+            {
+                Text = p.IdentificationName,
+                Value = p.ID.ToString()
+            }).ToList();
+            productIdentificationList.Insert(0, new SelectListItem { Text = "Select Product Identification", Value = "", Selected = true });
+            model.ProductIdentificationItemList = productIdentificationList;
+
+            model.MainProductList = mainItemInsurance;
+
+            var durationList = durationService.getDurationItemList().AsEnumerable().Select(t => new SelectListItem
+            {
+                Text = t.ProductPaymentFrequency + " - " + t.DurationName.ToString(),
+                Value = t.ID.ToString(),
+            }).ToList();
+            durationList.Insert(0, new SelectListItem { Text = "Select Duration", Value = "", Selected = true });
+
+            model.DurationItemList = durationList;
             // var viewInvestor = allinvestor.Select(m => new SelectListItem() { Text = string.Format("{0} - {1}", m.InvestorCode, m.InvestorName), Value = m.InvestorID.ToString() });
 
             model.PInvestorListItems = prodType;
@@ -141,20 +218,31 @@ namespace gBanker.Web.Controllers
             model.PFrequencyListItems = frequency.AsEnumerable();
 
             model.MainProductList = mProductList;
-            model.InsuranceItemList = insuranceList.AsEnumerable();
+            //model.InsuranceItemList = insuranceList.AsEnumerable();
             model.MemberCategoryList = memberCategoryService.GetAll().Where(m => m.OrgID == LoggedInOrganizationID).Select(s => new SelectionViewModel() { Code = s.MemberCategoryCode, Id = s.MemberCategoryID, DisplayName = string.Format("{0} - {1}", s.MemberCategoryCode, s.CategoryName), IsSelected = false }).ToList();
         }
+
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(NewProductViewModel model)
+        public ActionResult Create(ProductViewModel model)
         {
             try
             {
+
+                if (string.IsNullOrWhiteSpace(model.MainProductCode))
+                {
+                    string mainProductCode = model.ProductCode.Split('.')[0];
+                    model.MainProductCode = mainProductCode + ".00";
+                    model.MainItemName = model.ProductFullNameEng;
+                    model.ProductCode = mainProductCode;
+                }
+
+
                 // model.CreateDate = System.DateTime.Now;
                 model.IsActive = true;
                 //var selectedMemberCategory = model.MemberCategoryList.Where(w => w.IsSelected).ToList();
 
-                var entity = Mapper.Map<NewProductViewModel, Product>(model);
+                var entity = Mapper.Map<ProductViewModel, Product>(model);
                 //Add Validlation Logic.
                 if (ModelState.IsValid)
                 {
@@ -167,12 +255,17 @@ namespace gBanker.Web.Controllers
                         //}
                         entity.OrgID = Convert.ToInt16(LoggedInOrganizationID);
                         productService.Create(entity);
-                        return GetSuccessMessageResult();
+                        //return GetSuccessMessageResult();
+                        return RedirectToAction("Index", "NewProduct");
                     }
                     else
+                    {
+                        ModelState.AddModelError("MainProductCode", "Duplicate Product Code");
                         return GetErrorMessageResult(errors);
+                    }
                 }
-                return GetErrorMessageResult();
+                //return GetErrorMesreturn View(model);sageResult();
+                return View(model);
 
             }
             catch (Exception ex)

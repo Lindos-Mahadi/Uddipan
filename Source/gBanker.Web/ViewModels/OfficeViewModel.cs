@@ -30,6 +30,9 @@ namespace gBanker.Web.ViewModels
         [Display(Name = "Fourth Level")]
         public string FourthLevel { get; set; }
 
+        [Display(Name = "Project Office")]
+        public string ProjectOffice { get; set; }
+
         [Display(Name = "Operation Start Date")]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime OperationStartDate { get; set; }
@@ -71,6 +74,9 @@ namespace gBanker.Web.ViewModels
         public string UnionCode { get; set; }
 
         public string txtParentCode { get; set; }
+        [Display(Name ="Is Project Office")]
+        public bool? IsProjectOffice { get; set; }
+
         public IEnumerable<SelectListItem> CountryList { get; set; }
         public IEnumerable<SelectListItem> DivisionList { get; set; }
         public IEnumerable<SelectListItem> DistrictList { get; set; }

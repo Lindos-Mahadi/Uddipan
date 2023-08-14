@@ -368,6 +368,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\LegalInfoController.cs" />
     <Compile Include="Controllers\NewMemberController.cs" />
+    <Compile Include="Controllers\NewProductController.cs" />
     <Compile Include="Controllers\POLoanXAccCodeMapController.cs" />
     <Compile Include="Controllers\PortalLoanAccResheduleController.cs" />
     <Compile Include="Controllers\ProductXEmploymentProductMappingController.cs" />
@@ -2587,6 +2588,7 @@
     <Compile Include="ViewModels\LoanAccRescheduleViewModel.cs" />
     <Compile Include="ViewModels\LoanCodeXAccCodeMappingViewModel.cs" />
     <Compile Include="ViewModels\ManageOrgViewModel.cs" />
+    <Compile Include="ViewModels\NewProductViewModel.cs" />
     <Compile Include="ViewModels\NominiSurveyViewModel.cs" />
     <Compile Include="ViewModels\PortalSavingSummaryViewModel.cs" />
     <Compile Include="ViewModels\ProductXEmploymentProductMappingViewModel.cs" />
@@ -5984,6 +5986,8 @@
     <Content Include="Views\SpecialSavingCollection\CreatePortalSavingsAccClose.cshtml" />
     <Content Include="Views\SpecialLoanCollection\PortalLoanAccResheduleIndex.cshtml" />
     <Content Include="Views\SpecialLoanCollection\CreatePortalLoanAccReshedule.cshtml" />
+    <Content Include="Views\NewProduct\Create.cshtml" />
+    <Content Include="Views\NewProduct\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
