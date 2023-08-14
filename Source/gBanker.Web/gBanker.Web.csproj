@@ -2873,7 +2873,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\charisma-master\blank.html" />
+    <Content Include="Content\charisma-master\blank..html" />
     <Content Include="Content\charisma-master\bower_components\bootstrap-tour\build\css\bootstrap-tour.css" />
     <Content Include="Content\charisma-master\bower_components\bootstrap-tour\build\css\bootstrap-tour.min.css" />
     <Content Include="Content\charisma-master\bower_components\bootstrap-tour\build\js\bootstrap-tour.js" />
@@ -4206,8 +4206,22 @@
     </Content>
     <Content Include="MobileAPP\gBankerMobileApp.apk" />
     <None Include="Properties\PublishProfiles\gBanker_Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - FTP2.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - FTP3.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - FTP4.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - Web Deploy2.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - Web Deploy3.pubxml" />
+    <None Include="Properties\PublishProfiles\gcmfiweb - Web Deploy4.pubxml" />
     <None Include="Properties\PublishProfiles\mfiweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mfiweb - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\pidimweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\pidimweb - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\pidimweb - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\pidimweb - Web Deploy1.pubxml" />
     <None Include="Reports\DataSets\LoanSummary.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

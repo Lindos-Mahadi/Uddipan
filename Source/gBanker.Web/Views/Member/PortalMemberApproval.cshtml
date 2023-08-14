@@ -1857,16 +1857,23 @@
         <div class="row">
             <fieldset>
                 <legend> Applicant’s Name </legend>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label class="control-label"> In English (According to ID)   </label> <span style="color:red; font-size:15px;"> * </span>
+                        <label class="control-label">First Name In English (According to ID)   </label> <span style="color:red; font-size:15px;"> * </span>
                         @*@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<span style="color:red; font-size:15px;"> * </span>*@
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                         @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Last Name In English (According to ID)   </label> <span style="color:red; font-size:15px;"> * </span>
+                        @*@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<span style="color:red; font-size:15px;"> * </span>*@
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label"> In (Unicode) </label> @*<span style="color:red; font-size:15px;"> * </span>*@
                         @*@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<span style="color:red; font-size:15px;"> * </span>*@
